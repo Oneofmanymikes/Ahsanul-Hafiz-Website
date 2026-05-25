@@ -1182,6 +1182,16 @@ header .header-inner {
   }
   var state = loadState();
 
+  // Per-browser session ID. Generated once, persisted in localStorage forever,
+  // included in every POST so the Apps Script can upsert (one row per supporter
+  // instead of one row per submission).
+  if (!state.session_id) {
+    state.session_id = (typeof crypto !== 'undefined' && crypto.randomUUID)
+      ? crypto.randomUUID()
+      : 'sid-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+    saveState();
+  }
+
   function post(formType, extra) {
     var payload = Object.assign({
       formType: formType,
