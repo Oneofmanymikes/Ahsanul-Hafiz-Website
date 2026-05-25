@@ -1,0 +1,14 @@
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Office / temp lock files
+~$*
+*.tmp
+
+# Local working scratch files
+_olp-donate.html
+_new_*.html
+_carousel_slides.html
+_new_wizard_js.txt
