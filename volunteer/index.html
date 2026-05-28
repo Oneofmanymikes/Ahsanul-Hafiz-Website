@@ -78,7 +78,7 @@
   <div class="frame-wrap">
     <iframe
       id="signup-frame"
-      src="https://script.google.com/macros/s/AKfycbzSK_126YWEumvmnJmxNmEZ37SfzuN-PrSCJioCRQtfAMnJqFSxoOrCaeF8co7XVESy/exec"
+      data-base="https://script.google.com/macros/s/AKfycbzSK_126YWEumvmnJmxNmEZ37SfzuN-PrSCJioCRQtfAMnJqFSxoOrCaeF8co7XVESy/exec"
       title="Volunteer with the Hafiz Campaign"
       loading="lazy"
       allow="forms">
@@ -90,13 +90,27 @@
     <a href="https://votehafiz.ca/">votehafiz.ca</a>
   </footer>
 
-  <!-- Optional auto-resize: if Signup.html posts a 'hafiz-signup-resize' height message,
-       the iframe grows to fit so there's no inner scrollbar. Harmless if it never fires. -->
   <script>
+    // Forward UTM / source tags from this page's URL into the embedded form,
+    // so votehafiz.ca/volunteer?utm_source=OYL attributes the signup to OYL.
+    (function () {
+      var f = document.getElementById('signup-frame');
+      var base = f.getAttribute('data-base');
+      var inParams = new URLSearchParams(window.location.search);
+      var fwd = new URLSearchParams();
+      inParams.forEach(function (val, key) {
+        if (/^utm_/i.test(key) || key === 'source' || key === 'src') fwd.append(key, val);
+      });
+      var qs = fwd.toString();
+      f.src = base + (qs ? ('?' + qs) : '');
+    })();
+
+    // Auto-resize: if Signup.html posts a 'hafiz-signup-resize' height message,
+    // the iframe grows to fit so there's no inner scrollbar. Harmless if it never fires.
     window.addEventListener('message', function (e) {
       if (e.data && e.data.type === 'hafiz-signup-resize' && e.data.height) {
-        var f = document.getElementById('signup-frame');
-        if (f) f.style.height = (e.data.height + 24) + 'px';
+        var ff = document.getElementById('signup-frame');
+        if (ff) ff.style.height = (e.data.height + 24) + 'px';
       }
     });
   </script>
