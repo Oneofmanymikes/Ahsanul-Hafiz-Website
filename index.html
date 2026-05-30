@@ -465,11 +465,11 @@
                 <button type="button" class="donate-card" data-amount="250"><span class="donate-amount">$250</span><span class="donate-desc">Print 5,000 pieces of literature</span></button>
                 <button type="button" class="donate-card" data-amount="500"><span class="donate-amount">$500</span><span class="donate-desc">Support a booth at a local event</span></button>
                 <button type="button" class="donate-card" data-amount="1000"><span class="donate-amount">$1,000</span><span class="donate-desc">Help pay rent at the campaign office</span></button>
-                <button type="button" class="donate-card" data-amount="3500"><span class="donate-amount">$3,500</span><span class="donate-desc">Pay for a riding-wide mailout</span></button>
+                <button type="button" class="donate-card" data-amount="3425"><span class="donate-amount">$3,425</span><span class="donate-desc">Maximum allowed donation — fund a riding-wide mailout</span></button>
               </div>
               <div class="field-group">
                 <label for="donate-custom">Or enter a custom amount (CAD)</label>
-                <input id="donate-custom" type="number" min="1" step="1" placeholder="$" aria-label="Custom donation amount"/>
+                <input id="donate-custom" type="number" min="1" max="3425" step="1" placeholder="$ (max $3,425)" aria-label="Custom donation amount"/>
               </div>
               <form id="donate-form" class="involved-form" data-shared-fields novalidate>
                 <p style="margin:0 0 0.4rem;color:var(--text-muted);font-size:0.92rem;">Your info — we'll save it so we can follow up if the OLP donation isn't completed:</p>
@@ -813,6 +813,7 @@
     if (customInput) {
       customInput.addEventListener('input', function() {
         var v = parseFloat(customInput.value);
+        if (v > 3425) { v = 3425; customInput.value = '3425'; }
         if (v > 0) setAmount(v, null);
         else { selectedAmount = null; if (continueBtn) continueBtn.disabled = true; }
       });
