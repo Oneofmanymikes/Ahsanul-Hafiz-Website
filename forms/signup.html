@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign Up for Updates — Ahsanul Hafiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --power-red: #E81E25;
+    --power-red-hover: #ad1b1e;
+    --heritage-navy: #6A0C0D;
+    --olp-tobermory: #5FD7DC;
+    --soft-white: #ffffff;
+    --text-dark: #1a1a1a;
+    --text-muted: #525252;
+    --border-light: rgba(106, 12, 13, 0.12);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+    color: var(--text-dark);
+    background: transparent;
+    line-height: 1.5;
+    padding: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .hafiz-form {
+    background: #fff;
+    border-radius: 1.25rem;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 12px 32px rgba(26, 43, 68, 0.08);
+    padding: 1.75rem;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .hafiz-form h2 {
+    font-size: 1.25rem; font-weight: 700;
+    color: var(--heritage-navy);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    margin: 0 0 0.4rem;
+  }
+  .hafiz-form .sub {
+    color: var(--text-muted); margin: 0 0 1.25rem; font-size: 0.95rem;
+  }
+  form { display: flex; flex-direction: column; gap: 0.7rem; }
+  input, button {
+    font: inherit;
+    width: 100%;
+  }
+  input[type="text"], input[type="email"] {
+    padding: 0.75rem 0.95rem;
+    border-radius: 0.55rem;
+    border: 1px solid rgba(26, 43, 68, 0.2);
+    background: #fff;
+    color: var(--text-dark);
+    font-size: 16px;
+  }
+  button[type="submit"] {
+    padding: 0.9rem 1.25rem;
+    border-radius: 0.55rem;
+    background: var(--power-red);
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  button[type="submit"]:hover:not(:disabled) { background: var(--power-red-hover); }
+  button[type="submit"]:disabled { opacity: 0.55; cursor: not-allowed; }
+  .success {
+    display: none;
+    margin-top: 1rem;
+    padding: 0.85rem 1rem;
+    background: rgba(95, 215, 220, 0.20);
+    border: 1px solid var(--olp-tobermory);
+    border-radius: 0.6rem;
+    color: var(--heritage-navy);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .success.show { display: block; }
+</style>
+</head>
+<body>
+  <div class="hafiz-form">
+    <h2>Sign up for updates</h2>
+    <p class="sub">Stay in the loop on the Ahsanul Hafiz campaign.</p>
+    <form id="signup-form" novalidate>
+      <input name="first_name" type="text" required placeholder="First name *" autocomplete="given-name" aria-label="First name">
+      <input name="email" type="email" required placeholder="Email address *" autocomplete="email" aria-label="Email">
+      <button type="submit">Sign me up</button>
+    </form>
+    <div id="success" class="success">Thanks! You're on the list — we'll be in touch.</div>
+  </div>
+
+<script>
+(function() {
+  var GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxJ-EHsohq-k2u2Vc2fmkoskfrDlyul8I0FV-S2PeMKsOeaGyfyhk-zud_egF8xaAcShw/exec';
+  var STORAGE_KEY = 'hafiz_supporter_v1';
+
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) {}
+  if (!state.session_id) {
+    state.session_id = (typeof crypto !== 'undefined' && crypto.randomUUID)
+      ? crypto.randomUUID()
+      : 'sid-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+  }
+  function save() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {} }
+  save();
+
+  function post(formType, extra) {
+    var payload = Object.assign({
+      formType: formType,
+      submittedAt: new Date().toISOString(),
+      userAgent: navigator.userAgent
+    }, state, extra || {});
+    var body = JSON.stringify(payload);
+    if (navigator.sendBeacon) {
+      try {
+        var blob = new Blob([body], { type: 'text/plain;charset=utf-8' });
+        if (navigator.sendBeacon(GAS_ENDPOINT, blob)) return;
+      } catch (e) {}
+    }
+    fetch(GAS_ENDPOINT, {
+      method: 'POST', mode: 'no-cors', keepalive: true,
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: body
+    }).catch(function(){});
+  }
+
+  // Pre-fill from any prior visit
+  var form = document.getElementById('signup-form');
+  if (state.first_name) form.querySelector('input[name="first_name"]').value = state.first_name;
+  if (state.email) form.querySelector('input[name="email"]').value = state.email;
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var fd = new FormData(form);
+    state.first_name = (fd.get('first_name') || '').trim();
+    state.email = (fd.get('email') || '').trim();
+    save();
+    post('updates_signup');
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true; btn.textContent = 'Subscribed';
+    document.getElementById('success').classList.add('show');
+  });
+
+  // Tell iframe parent how tall this form is, so it can auto-resize.
+  function postHeight() {
+    try { parent.postMessage({ hafizFormHeight: document.body.scrollHeight }, '*'); } catch (e) {}
+  }
+  window.addEventListener('load', postHeight);
+  new ResizeObserver(postHeight).observe(document.body);
+})();
+</script>
+</body>
+</html>

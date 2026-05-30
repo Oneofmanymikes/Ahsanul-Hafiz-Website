@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commit to Vote — Ahsanul Hafiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --power-red: #E81E25;
+    --power-red-hover: #ad1b1e;
+    --heritage-navy: #6A0C0D;
+    --olp-tobermory: #5FD7DC;
+    --text-dark: #1a1a1a;
+    --text-muted: #525252;
+    --border-light: rgba(106, 12, 13, 0.12);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+    color: var(--text-dark); background: transparent;
+    line-height: 1.5; padding: 16px; -webkit-font-smoothing: antialiased;
+  }
+  .hafiz-form {
+    background: #fff; border-radius: 1.25rem;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 12px 32px rgba(26, 43, 68, 0.08);
+    padding: 1.75rem; max-width: 560px; margin: 0 auto;
+  }
+  .hafiz-form h2 {
+    font-size: 1.25rem; font-weight: 700;
+    color: var(--heritage-navy);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    margin: 0 0 0.4rem;
+  }
+  .prompt { font-size: 1.02rem; color: var(--heritage-navy); font-weight: 600; margin: 0 0 0.9rem; }
+  .options { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 0.6rem; }
+  @media (min-width: 520px) { .options { flex-direction: row; flex-wrap: wrap; }
+    .options > button { flex: 1 1 auto; } }
+  .options button {
+    text-align: left; padding: 0.8rem 1rem; border-radius: 0.6rem;
+    background: #fff; border: 1.5px solid var(--border-light);
+    font: inherit; color: var(--text-dark);
+    cursor: pointer; transition: all 0.15s ease;
+    font-weight: 500;
+  }
+  .options button:hover:not(:disabled) {
+    border-color: var(--power-red); background: rgba(232, 30, 37, 0.05);
+  }
+  .options button.selected {
+    border-color: var(--power-red); background: rgba(232, 30, 37, 0.08);
+    color: var(--power-red); font-weight: 600;
+  }
+  form { display: flex; flex-direction: column; gap: 0.7rem; margin-top: 1rem; }
+  form p { margin: 0 0 0.4rem; color: var(--text-muted); font-size: 0.92rem; }
+  input { width: 100%; padding: 0.75rem 0.95rem; border-radius: 0.55rem;
+    border: 1px solid rgba(26, 43, 68, 0.2); background: #fff; color: var(--text-dark);
+    font: inherit; font-size: 16px; }
+  button[type="submit"] {
+    padding: 0.9rem 1.25rem; border-radius: 0.55rem;
+    background: var(--power-red); color: #fff; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.85rem;
+    border: none; cursor: pointer; transition: background 0.15s ease;
+  }
+  button[type="submit"]:hover { background: var(--power-red-hover); }
+  .is-hidden { display: none !important; }
+  .success {
+    display: none; margin-top: 1rem;
+    padding: 0.85rem 1rem;
+    background: rgba(95, 215, 220, 0.20);
+    border: 1px solid var(--olp-tobermory);
+    border-radius: 0.6rem;
+    color: var(--heritage-navy); font-weight: 600; font-size: 0.95rem;
+  }
+  .success.show { display: block; }
+</style>
+</head>
+<body>
+  <div class="hafiz-form">
+    <h2>Commit to Vote</h2>
+    <p class="prompt">Can Hafiz count on your support?</p>
+    <div class="options" id="options">
+      <button type="button" data-answer="yes">Yes — count me in</button>
+      <button type="button" data-answer="no">No</button>
+      <button type="button" data-answer="cant-vote">I don't live in the riding / can't vote</button>
+    </div>
+    <form id="pledge-form" class="is-hidden" novalidate>
+      <p>Great — record your pledge:</p>
+      <input name="first_name" type="text" required placeholder="First name *" autocomplete="given-name">
+      <input name="last_name" type="text" required placeholder="Last name *" autocomplete="family-name">
+      <input name="email" type="email" required placeholder="Email address *" autocomplete="email">
+      <input name="cell_phone" type="tel" required placeholder="Cell phone *" autocomplete="tel">
+      <input name="postal_code" type="text" required placeholder="Postal code *" autocomplete="postal-code"
+             pattern="[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d" maxlength="7" inputmode="text">
+      <button type="submit">Pledge to vote</button>
+    </form>
+    <div id="success" class="success"></div>
+  </div>
+
+<script>
+(function() {
+  var GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxJ-EHsohq-k2u2Vc2fmkoskfrDlyul8I0FV-S2PeMKsOeaGyfyhk-zud_egF8xaAcShw/exec';
+  var STORAGE_KEY = 'hafiz_supporter_v1';
+  var SHARED_FIELDS = ['first_name', 'last_name', 'email', 'cell_phone', 'postal_code'];
+
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) {}
+  if (!state.session_id) {
+    state.session_id = (typeof crypto !== 'undefined' && crypto.randomUUID)
+      ? crypto.randomUUID()
+      : 'sid-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+  }
+  function save() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {} }
+  save();
+
+  function formatPostal(v) {
+    var s = String(v || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
+    if (s.length > 3) s = s.slice(0, 3) + ' ' + s.slice(3);
+    return s;
+  }
+
+  function post(formType, extra) {
+    var payload = Object.assign({
+      formType: formType, submittedAt: new Date().toISOString(),
+      userAgent: navigator.userAgent
+    }, state, extra || {});
+    var body = JSON.stringify(payload);
+    if (navigator.sendBeacon) {
+      try {
+        var blob = new Blob([body], { type: 'text/plain;charset=utf-8' });
+        if (navigator.sendBeacon(GAS_ENDPOINT, blob)) return;
+      } catch (e) {}
+    }
+    fetch(GAS_ENDPOINT, {
+      method: 'POST', mode: 'no-cors', keepalive: true,
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: body
+    }).catch(function(){});
+  }
+
+  var pledgeForm = document.getElementById('pledge-form');
+  var success = document.getElementById('success');
+  var optBtns = document.querySelectorAll('#options button');
+
+  // Prefill known fields
+  SHARED_FIELDS.forEach(function(name) {
+    var input = pledgeForm.querySelector('input[name="' + name + '"]');
+    if (input && state[name]) {
+      input.value = (name === 'postal_code') ? formatPostal(state[name]) : state[name];
+    }
+  });
+
+  optBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      optBtns.forEach(function(b){ b.classList.remove('selected'); });
+      btn.classList.add('selected');
+      var answer = btn.getAttribute('data-answer');
+      state.commit_to_vote = answer; save();
+      if (answer === 'yes') {
+        pledgeForm.classList.remove('is-hidden');
+        success.classList.remove('show');
+      } else {
+        pledgeForm.classList.add('is-hidden');
+        post('commit_to_vote', { answer: answer });
+        success.textContent = answer === 'cant-vote'
+          ? 'Thanks for letting us know.'
+          : 'Recorded. Thanks for your response.';
+        success.classList.add('show');
+      }
+    });
+  });
+
+  pledgeForm.querySelector('input[name="postal_code"]').addEventListener('input', function() {
+    var input = this; var pos = input.selectionStart; var oldLen = input.value.length;
+    var newVal = formatPostal(input.value);
+    if (newVal !== input.value) {
+      input.value = newVal;
+      if (pos === 4 && newVal.length - oldLen === 1) pos = 5;
+      try { input.setSelectionRange(pos, pos); } catch (e) {}
+    }
+  });
+
+  pledgeForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var fd = new FormData(pledgeForm);
+    SHARED_FIELDS.forEach(function(name) {
+      var v = fd.get(name);
+      if (v != null) {
+        var clean = (v + '').trim();
+        if (name === 'postal_code') clean = formatPostal(clean);
+        state[name] = clean;
+      }
+    });
+    save();
+    post('commit_to_vote', { answer: 'yes' });
+    pledgeForm.classList.add('is-hidden');
+    success.textContent = 'Pledge recorded — thanks for your support!';
+    success.classList.add('show');
+  });
+
+  function postHeight() {
+    try { parent.postMessage({ hafizFormHeight: document.body.scrollHeight }, '*'); } catch (e) {}
+  }
+  window.addEventListener('load', postHeight);
+  new ResizeObserver(postHeight).observe(document.body);
+})();
+</script>
+</body>
+</html>
