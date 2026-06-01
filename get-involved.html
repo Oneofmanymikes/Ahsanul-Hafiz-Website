@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get Involved — Ahsanul Hafiz for Scarborough Southwest</title>
+<meta name="description" content="Join the campaign to elect Ahsanul Hafiz, Ontario Liberal Candidate for Scarborough Southwest. Sign up, pledge to vote, request a lawn sign, or donate.">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --olp-cardinal: #E81E25;
+    --olp-deep-maple: #6A0C0D;
+    --olp-tobermory: #5FD7DC;
+    --olp-steel: #EBEBEC;
+    --power-red: var(--olp-cardinal);
+    --heritage-navy: var(--olp-deep-maple);
+    --power-red-hover: #ad1b1e;
+    --soft-gray: var(--olp-steel);
+    --soft-white: #ffffff;
+    --text-dark: #1a1a1a;
+    --text-muted: #525252;
+    --border-light: rgba(106, 12, 13, 0.12);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: #fff;
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+  }
+
+  /* --- Splash hero (top) --- */
+  .splash-hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    color: #fff; padding: 32px 20px;
+    background: linear-gradient(160deg, var(--olp-cardinal) 0%, var(--olp-deep-maple) 100%);
+  }
+  .splash-hero .logo { width: 84px; height: auto; margin-bottom: 22px;
+                       background: #fff; border-radius: 14px; padding: 10px; }
+  .splash-hero h1 { font-family: Oswald, Inter, sans-serif; text-transform: uppercase;
+       letter-spacing: 1px; font-size: clamp(2rem, 6vw, 3.2rem); margin: 0; line-height: 1.05; }
+  .splash-hero .role { font-size: clamp(0.95rem, 2.4vw, 1.25rem); font-weight: 600;
+          letter-spacing: 0.08em; text-transform: uppercase; margin-top: 12px;
+          color: rgba(255,255,255,0.92); }
+  .splash-hero .divider { width: 200px; height: 5px; border-radius: 999px; margin: 24px auto;
+             background: rgba(255,255,255,0.55); }
+  .splash-hero .soon { font-size: clamp(1.05rem, 2.6vw, 1.4rem); font-weight: 500;
+          max-width: 540px; margin: 0 auto; color: rgba(255,255,255,0.95); }
+  .splash-hero .cta {
+    display: inline-block; margin-top: 30px; background: #fff; color: var(--olp-deep-maple);
+    text-decoration: none; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em;
+    font-size: 15px; padding: 16px 34px; border-radius: 999px;
+    box-shadow: 0 14px 35px rgba(0,0,0,0.25); transition: transform 0.1s, background 0.15s;
+  }
+  .splash-hero .cta:hover { background: #f3f3f3; transform: translateY(-1px); }
+  .splash-hero .cta-secondary {
+    display: inline-block; margin-top: 16px; color: #fff;
+    text-decoration: none; font-weight: 600; font-size: 14px;
+    letter-spacing: 0.04em; border-bottom: 1px solid rgba(255,255,255,0.55);
+    padding-bottom: 1px; opacity: 0.92;
+  }
+  .splash-hero .cta-secondary:hover { opacity: 1; border-bottom-color: #fff; }
+  .splash-hero .contact { margin-top: 34px; font-size: 14px; color: rgba(255,255,255,0.9);
+             display: flex; gap: 8px 22px; flex-wrap: wrap; justify-content: center; }
+  .splash-hero .contact a { color: #fff; text-decoration: none; font-weight: 600; }
+  .splash-hero .contact a:hover { text-decoration: underline; }
+  .splash-hero .social { margin-top: 20px; display: flex; gap: 16px; justify-content: center; }
+  .splash-hero .social a { color: #fff; opacity: 0.9; }
+  .splash-hero .social a:hover { opacity: 1; }
+  .splash-hero .social svg { width: 24px; height: 24px; fill: currentColor; }
+
+  /* --- Get Involved section wrapper --- */
+  .get-involved-section {
+    background: var(--soft-gray);
+    padding: 3rem 1rem 4rem;
+  }
+  @media (min-width: 768px) {
+    .get-involved-section { padding: 4rem 1.5rem; }
+  }
+  .get-involved-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .get-involved-h {
+    font-family: Oswald, Inter, sans-serif;
+    font-weight: 700;
+    color: var(--heritage-navy);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    text-align: center;
+    margin: 0 0 0.75rem;
+  }
+  .get-involved-sub {
+    color: var(--text-muted);
+    text-align: center;
+    margin: 0 0 2.5rem;
+    font-size: 1rem;
+    max-width: 640px;
+    margin-left: auto; margin-right: auto;
+  }
+
+  /* --- Wizard styles (matches home.html) --- */
+  .get-involved-wrapper {
+    display: flex; flex-direction: column; gap: 1.75rem;
+    max-width: 880px; margin: 0 auto;
+  }
+  .involved-section {
+    background: #fff;
+    border-radius: 1.25rem;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 16px 40px rgba(26, 43, 68, 0.08);
+    padding: 1.75rem;
+  }
+  @media (min-width: 768px) {
+    .involved-section { padding: 2.25rem; }
+  }
+  .involved-section .section-h {
+    font-size: 1.25rem; font-weight: 700;
+    color: var(--heritage-navy);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    margin: 0 0 0.4rem;
+  }
+  .involved-section .section-sub {
+    color: var(--text-muted); margin: 0 0 1.25rem; font-size: 0.95rem;
+  }
+  .involved-form {
+    display: flex; flex-direction: column; gap: 0.7rem; max-width: 480px;
+  }
+  .involved-form input,
+  .involved-form textarea,
+  .involved-form select {
+    width: 100%; padding: 0.7rem 0.9rem;
+    border-radius: 0.55rem;
+    border: 1px solid rgba(26, 43, 68, 0.2);
+    font: inherit; background: #fff; color: var(--text-dark);
+    font-size: 16px;
+  }
+  .involved-form textarea { min-height: 80px; resize: vertical; }
+  .btn-primary-inline {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    padding: 0.85rem 1.25rem; border-radius: 0.55rem;
+    background: var(--power-red); color: #fff;
+    font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    font-size: 0.85rem; border: none; cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .btn-primary-inline:hover:not(:disabled) { background: var(--power-red-hover); }
+  .btn-primary-inline:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  .signup-success {
+    display: none; margin-top: 1rem;
+    padding: 0.85rem 1rem;
+    background: rgba(95, 215, 220, 0.20);
+    border: 1px solid var(--olp-tobermory);
+    border-radius: 0.6rem;
+    color: var(--heritage-navy);
+    font-weight: 600; font-size: 0.95rem;
+  }
+  .signup-success.show { display: block; animation: fadeUp 0.45s ease; }
+
+  .next-step-section { display: block; }
+  .next-step-section.unlocked { animation: fadeUp 0.55s ease; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .next-step-greeting {
+    font-size: 1.05rem; color: var(--text-muted); margin: 0 0 1.5rem;
+  }
+  .next-step-greeting strong { color: var(--heritage-navy); }
+
+  .involved-step {
+    background: #fff; border-radius: 0.9rem;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 10px 24px rgba(26, 43, 68, 0.05);
+    margin-bottom: 0.85rem; overflow: hidden;
+  }
+  .involved-step > summary {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.05rem 1.2rem; cursor: pointer;
+    list-style: none; user-select: none;
+  }
+  .involved-step > summary::-webkit-details-marker { display: none; }
+  .involved-step .step-number {
+    display: grid; place-items: center;
+    width: 2.15rem; height: 2.15rem; border-radius: 999px;
+    background: var(--power-red); color: #fff;
+    font-weight: 700; font-size: 0.95rem; flex-shrink: 0;
+  }
+  .involved-step.complete .step-number {
+    background: var(--olp-tobermory); color: var(--heritage-navy);
+  }
+  .involved-step .step-title {
+    font-weight: 700; color: var(--heritage-navy);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    font-size: 0.95rem; flex: 1;
+  }
+  .involved-step .step-status {
+    color: var(--text-muted); font-size: 0.82rem; font-weight: 500;
+  }
+  .involved-step.complete .step-status {
+    color: var(--power-red); font-weight: 600;
+  }
+  .step-body {
+    padding: 1.1rem 1.2rem 1.4rem;
+    border-top: 1px solid var(--border-light);
+  }
+  .step-prompt {
+    font-size: 1.02rem; color: var(--heritage-navy);
+    font-weight: 600; margin: 0 0 0.9rem;
+  }
+  .option-buttons {
+    display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 0.6rem;
+  }
+  @media (min-width: 600px) {
+    .option-buttons.inline { flex-direction: row; flex-wrap: wrap; }
+    .option-buttons.inline > button { flex: 1 1 auto; }
+  }
+  .option-buttons button {
+    text-align: left; padding: 0.8rem 1rem;
+    border-radius: 0.6rem;
+    background: #fff;
+    border: 1.5px solid var(--border-light);
+    font: inherit; color: var(--text-dark);
+    cursor: pointer; transition: all 0.15s ease;
+    font-weight: 500;
+  }
+  .option-buttons button:hover:not(:disabled) {
+    border-color: var(--power-red);
+    background: rgba(232, 30, 37, 0.05);
+  }
+  .option-buttons button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .option-buttons button.selected {
+    border-color: var(--power-red);
+    background: rgba(232, 30, 37, 0.08);
+    color: var(--power-red);
+    font-weight: 600;
+  }
+
+  .disclaimer-box {
+    background: rgba(95, 215, 220, 0.12);
+    border: 1px solid rgba(95, 215, 220, 0.45);
+    border-radius: 0.6rem;
+    padding: 0.85rem 1rem;
+    font-size: 0.92rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    line-height: 1.55;
+  }
+  .disclaimer-box label {
+    display: flex; align-items: flex-start; gap: 0.5rem;
+    margin-top: 0.6rem; font-weight: 600; cursor: pointer;
+  }
+  .disclaimer-box label input { margin-top: 0.25rem; }
+
+  .sign-size-group { display: flex; gap: 0.65rem; }
+  .radio-card {
+    flex: 1; display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 0.9rem;
+    border: 1.5px solid var(--border-light);
+    border-radius: 0.55rem;
+    cursor: pointer; font-weight: 500; background: #fff;
+  }
+  .radio-card input { margin: 0; }
+  .radio-card:hover { border-color: var(--power-red); }
+  .radio-card.selected,
+  .radio-card:has(input:checked) {
+    border-color: var(--power-red);
+    background: rgba(232, 30, 37, 0.06);
+    color: var(--power-red);
+  }
+
+  .donate-grid {
+    display: grid; grid-template-columns: 1fr; gap: 0.7rem; margin-bottom: 1rem;
+  }
+  @media (min-width: 600px) { .donate-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 900px) { .donate-grid { grid-template-columns: repeat(3, 1fr); } }
+  .donate-card {
+    text-align: left; padding: 0.95rem 1rem;
+    border-radius: 0.7rem; background: #fff;
+    border: 1.5px solid var(--border-light);
+    cursor: pointer; transition: all 0.15s ease;
+    font: inherit; color: inherit;
+  }
+  .donate-card:hover { border-color: var(--power-red); transform: translateY(-1px); }
+  .donate-card.selected {
+    border-color: var(--power-red);
+    background: rgba(232, 30, 37, 0.06);
+  }
+  .donate-amount {
+    font-size: 1.45rem; font-weight: 700;
+    color: var(--power-red); display: block;
+  }
+  .donate-desc {
+    display: block; margin-top: 0.25rem;
+    font-size: 0.86rem; color: var(--text-muted); line-height: 1.45;
+  }
+
+  .field-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.6rem; }
+  .field-group > label {
+    font-size: 0.82rem; font-weight: 600;
+    color: var(--heritage-navy);
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .is-hidden { display: none !important; }
+  .step-confirm {
+    background: rgba(95, 215, 220, 0.20);
+    border: 1px solid var(--olp-tobermory);
+    border-radius: 0.6rem;
+    padding: 0.85rem 1rem; margin-top: 0.9rem;
+    color: var(--heritage-navy);
+    font-weight: 600; font-size: 0.95rem;
+  }
+  .donate-handoff-note {
+    font-size: 0.85rem; color: var(--text-muted);
+    margin: 0.75rem 0 0.6rem; line-height: 1.55;
+  }
+
+  /* --- Footer --- */
+  .splash-footer {
+    background: var(--olp-deep-maple); color: #fff;
+    padding: 24px 20px; text-align: center;
+    font-size: 13px;
+  }
+  .splash-footer a { color: #fff; text-decoration: none; font-weight: 600; }
+  .splash-footer a:hover { text-decoration: underline; }
+  .splash-footer .row { margin-bottom: 8px; display: flex; gap: 6px 18px;
+                       justify-content: center; flex-wrap: wrap; }
+  .splash-footer .legal { color: rgba(255,255,255,0.7); font-size: 11px; }
+</style>
+</head>
+<body>
+
+  <section class="splash-hero">
+    <img class="logo" src="images/OLP_Logo_Bilingual_Red.png" alt="Ontario Liberal Party logo">
+    <h1>Ahsanul Hafiz</h1>
+    <div class="role">Ontario Liberal Candidate · Scarborough Southwest</div>
+    <div class="divider"></div>
+    <p class="soon">Join the team working to send Ahsanul to Queen's Park. Every minute helps — sign up, pledge to vote, take a sign, or donate below.</p>
+
+    <a class="cta" href="#get-involved">Get Involved &darr;</a>
+    <a class="cta-secondary" href="/">Visit the full website &rarr;</a>
+
+    <div class="contact">
+      <a href="tel:+16473132506">647-313-2506</a>
+      <a href="mailto:info@votehafiz.ca">info@votehafiz.ca</a>
+      <a href="https://maps.google.com/?q=2500+Kingston+Rd,+Scarborough,+ON+M1N+1V3" target="_blank" rel="noopener">2500 Kingston Rd, Scarborough, ON</a>
+    </div>
+
+    <div class="social">
+      <a href="https://x.com/AhsanulHafizOLP" target="_blank" rel="noopener" aria-label="X">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zM17.083 19.77h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://facebook.com/AhsanulHafizOLP" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+      </a>
+      <a href="https://instagram.com/AhsanulHafizOLP" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.505" y2="6.5"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="get-involved-section" aria-label="Get involved" id="get-involved">
+    <div class="get-involved-inner">
+      <h2 class="get-involved-h">Get Involved</h2>
+      <p class="get-involved-sub">Sign up first — then take any (or all) of the next steps to help send Ahsanul to Queen's Park.</p>
+
+      <div class="get-involved-wrapper">
+        <div class="involved-section" id="signup-section">
+          <h3 class="section-h">Sign up for updates</h3>
+          <p class="section-sub">Stay in the loop on the campaign and how you can help.</p>
+          <form id="signup-updates-form" class="involved-form" novalidate>
+            <input name="first_name" type="text" required placeholder="First name *" autocomplete="given-name" aria-label="First name"/>
+            <input name="email" type="email" required placeholder="Email address *" autocomplete="email" aria-label="Email address"/>
+            <button type="submit" class="btn-primary-inline">Sign me up</button>
+          </form>
+          <div id="signup-success" class="signup-success">Thanks! Now let's take the next step — keep scrolling.</div>
+        </div>
+
+        <div class="involved-section next-step-section" id="next-step-section">
+          <h3 class="section-h">Take the next step</h3>
+          <p id="next-step-greeting" class="next-step-greeting">Hi <strong>friend</strong> — pick any step below. Anything you enter carries over automatically, so you only fill out your contact info once.</p>
+
+          <details class="involved-step" id="step-commit-to-vote">
+            <summary><span class="step-number">1</span><span class="step-title">Commit to Vote</span><span class="step-status"></span></summary>
+            <div class="step-body">
+              <p class="step-prompt">Can Hafiz count on your support?</p>
+              <div class="option-buttons inline" data-role="ctv-options">
+                <button type="button" data-answer="yes">Yes — count me in</button>
+                <button type="button" data-answer="no">No</button>
+                <button type="button" data-answer="cant-vote">I don't live in the riding / can't vote</button>
+              </div>
+              <form id="commit-to-vote-form" class="involved-form is-hidden" data-shared-fields novalidate>
+                <p style="margin:0 0 0.4rem;color:var(--text-muted);font-size:0.92rem;">Great — record your pledge:</p>
+                <input name="first_name" type="text" required placeholder="First name *" autocomplete="given-name" aria-label="First name"/>
+                <input name="last_name" type="text" required placeholder="Last name *" autocomplete="family-name" aria-label="Last name"/>
+                <input name="email" type="email" required placeholder="Email address *" autocomplete="email" aria-label="Email"/>
+                <input name="cell_phone" type="tel" required placeholder="Cell phone *" autocomplete="tel" aria-label="Cell phone"/>
+                <input name="postal_code" type="text" required placeholder="Postal code *" autocomplete="postal-code" aria-label="Postal code" pattern="[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d" maxlength="7" inputmode="text"/>
+                <button type="submit" class="btn-primary-inline">Pledge to vote</button>
+              </form>
+            </div>
+          </details>
+
+          <details class="involved-step" id="step-volunteer">
+            <summary><span class="step-number">2</span><span class="step-title">Volunteer</span><span class="step-status"></span></summary>
+            <div class="step-body">
+              <p class="step-prompt">Can you volunteer to help Hafiz?</p>
+              <div class="option-buttons" data-role="vol-options">
+                <button type="button" data-answer="yes">Yes — sign me up</button>
+                <button type="button" data-answer="support-only">No, but I still want to support him</button>
+                <button type="button" data-answer="ask-later">Not at this time — please ask again later</button>
+              </div>
+              <form id="volunteer-form" class="involved-form is-hidden" data-shared-fields novalidate>
+                <p style="margin:0 0 0.4rem;color:var(--text-muted);font-size:0.92rem;">Quick info so the campaign can reach out:</p>
+                <input name="first_name" type="text" required placeholder="First name *" autocomplete="given-name" aria-label="First name"/>
+                <input name="last_name" type="text" required placeholder="Last name *" autocomplete="family-name" aria-label="Last name"/>
+                <input name="email" type="email" required placeholder="Email address *" autocomplete="email" aria-label="Email"/>
+                <input name="cell_phone" type="tel" required placeholder="Cell phone *" autocomplete="tel" aria-label="Cell phone"/>
+                <button type="submit" class="btn-primary-inline">Sign me up to volunteer</button>
+              </form>
+              <div class="step-confirm is-hidden" data-role="vol-confirm"></div>
+            </div>
+          </details>
+
+          <details class="involved-step" id="step-sign">
+            <summary><span class="step-number">3</span><span class="step-title">Take a Sign</span><span class="step-status"></span></summary>
+            <div class="step-body">
+              <p class="step-prompt">Show your support and build momentum in the riding.</p>
+              <div class="disclaimer-box">
+                <strong>Heads up:</strong> Signs only go up once the election is officially called, and we cannot place signs at apartment buildings at this time.
+                <label><input type="checkbox" id="sign-ack"/> I understand.</label>
+              </div>
+              <div class="option-buttons inline" data-role="sign-options">
+                <button type="button" data-answer="yes" disabled>Yes — I'll take a sign</button>
+                <button type="button" data-answer="no" disabled>Not at this time</button>
+              </div>
+              <form id="sign-form" class="involved-form is-hidden" data-shared-fields novalidate>
+                <input name="first_name" type="text" required placeholder="First name *" autocomplete="given-name" aria-label="First name"/>
+                <input name="last_name" type="text" required placeholder="Last name *" autocomplete="family-name" aria-label="Last name"/>
+                <input name="email" type="email" required placeholder="Email address *" autocomplete="email" aria-label="Email"/>
+                <input name="cell_phone" type="tel" required placeholder="Cell phone *" autocomplete="tel" aria-label="Cell phone"/>
+                <div class="field-group">
+                  <label>Sign size *</label>
+                  <div class="sign-size-group">
+                    <label class="radio-card"><input type="radio" name="sign_size" value="big" required/> <span>Big sign</span></label>
+                    <label class="radio-card"><input type="radio" name="sign_size" value="small"/> <span>Small sign</span></label>
+                  </div>
+                </div>
+                <input name="sign_address" type="text" required placeholder="Street address for sign placement *" autocomplete="street-address" aria-label="Street address"/>
+                <textarea name="sign_notes" placeholder="Installation notes — e.g. corner lot (request two signs), please avoid the garden on the left side, leave at the side door, etc." aria-label="Installation notes"></textarea>
+                <button type="submit" class="btn-primary-inline">Request a sign</button>
+              </form>
+            </div>
+          </details>
+
+          <details class="involved-step" id="step-donate">
+            <summary><span class="step-number">4</span><span class="step-title">Donate</span><span class="step-status"></span></summary>
+            <div class="step-body">
+              <p class="step-prompt">Can you support the campaign with a donation? Every dollar helps put Ahsanul in Queen's Park.</p>
+              <div class="donate-grid">
+                <button type="button" class="donate-card" data-amount="50"><span class="donate-amount">$50</span><span class="donate-desc">Buy lunch for the office</span></button>
+                <button type="button" class="donate-card" data-amount="100"><span class="donate-amount">$100</span><span class="donate-desc">Buy 20 signs</span></button>
+                <button type="button" class="donate-card" data-amount="250"><span class="donate-amount">$250</span><span class="donate-desc">Print 5,000 pieces of literature</span></button>
+                <button type="button" class="donate-card" data-amount="500"><span class="donate-amount">$500</span><span class="donate-desc">Support a booth at a local event</span></button>
+                <button type="button" class="donate-card" data-amount="1000"><span class="donate-amount">$1,000</span><span class="donate-desc">Help pay rent at the campaign office</span></button>
+                <button type="button" class="donate-card" data-amount="3425"><span class="donate-amount">$3,425</span><span class="donate-desc">Maximum allowed donation — fund a riding-wide mailout</span></button>
+              </div>
+              <div class="field-group">
+                <label for="donate-custom">Or enter a custom amount (CAD)</label>
+                <input id="donate-custom" type="number" min="1" max="3425" step="1" placeholder="$ (max $3,425)" aria-label="Custom donation amount"/>
+              </div>
+              <form id="donate-form" class="involved-form" data-shared-fields novalidate>
+                <p style="margin:0 0 0.4rem;color:var(--text-muted);font-size:0.92rem;">Your info — we'll save it so we can follow up if the OLP donation isn't completed:</p>
+                <input name="first_name" type="text" required placeholder="First name *" autocomplete="given-name" aria-label="First name"/>
+                <input name="last_name" type="text" required placeholder="Last name *" autocomplete="family-name" aria-label="Last name"/>
+                <input name="email" type="email" required placeholder="Email address *" autocomplete="email" aria-label="Email"/>
+                <input name="cell_phone" type="tel" required placeholder="Cell phone *" autocomplete="tel" aria-label="Cell phone"/>
+                <input name="postal_code" type="text" required placeholder="Postal code *" autocomplete="postal-code" aria-label="Postal code" pattern="[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d" maxlength="7" inputmode="text"/>
+              </form>
+              <p class="donate-handoff-note">You'll be taken to the OLP secure donation page with your <strong>amount pre-filled</strong>. The OLP form currently only supports amount pre-fill via URL, so you'll need to re-enter contact info on their page. Your info above is saved on this side so the campaign can follow up if you don't complete the donation.</p>
+              <button type="button" id="donate-continue" class="btn-primary-inline" disabled>Continue to secure donation page</button>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="splash-footer">
+    <div class="row">
+      <a href="tel:+16473132506">647-313-2506</a>
+      <a href="mailto:info@votehafiz.ca">info@votehafiz.ca</a>
+      <a href="https://maps.google.com/?q=2500+Kingston+Rd,+Scarborough,+ON+M1N+1V3" target="_blank" rel="noopener">2500 Kingston Rd, Scarborough, ON M1N 1V3</a>
+      <a href="https://ontarioliberal.ca/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+    </div>
+    <div class="legal">Authorized by the CFO of the Ahsanul Hafiz Campaign. © 2026</div>
+  </footer>
+
+<script>
+/* === Get Involved wizard ===
+   Same code as home.html — kept in sync manually. */
+(function() {
+  'use strict';
+
+  var GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxJ-EHsohq-k2u2Vc2fmkoskfrDlyul8I0FV-S2PeMKsOeaGyfyhk-zud_egF8xaAcShw/exec';
+
+  var OLP_DONATE_BASE = 'https://ontarioliberal.ca/donate/';
+  var OLP_DONATE_PLA = '98';
+
+  var STORAGE_KEY = 'hafiz_supporter_v1';
+  var SHARED_FIELDS = ['first_name', 'last_name', 'email', 'cell_phone', 'postal_code'];
+
+  function $(sel, root) { return (root || document).querySelector(sel); }
+  function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+
+  function loadState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+    catch (e) { return {}; }
+  }
+  function saveState() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  var state = loadState();
+
+  if (!state.session_id) {
+    state.session_id = (typeof crypto !== 'undefined' && crypto.randomUUID)
+      ? crypto.randomUUID()
+      : 'sid-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+    saveState();
+  }
+
+  function formatPostal(v) {
+    var s = String(v || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
+    if (s.length > 3) s = s.slice(0, 3) + ' ' + s.slice(3);
+    return s;
+  }
+
+  function post(formType, extra) {
+    var payload = Object.assign({
+      formType: formType,
+      submittedAt: new Date().toISOString(),
+      userAgent: navigator.userAgent
+    }, state, extra || {});
+    if (!GAS_ENDPOINT) return Promise.resolve();
+    var body = JSON.stringify(payload);
+    if (navigator.sendBeacon) {
+      try {
+        var blob = new Blob([body], { type: 'text/plain;charset=utf-8' });
+        if (navigator.sendBeacon(GAS_ENDPOINT, blob)) return Promise.resolve();
+      } catch (e) { /* fall through */ }
+    }
+    return fetch(GAS_ENDPOINT, {
+      method: 'POST', mode: 'no-cors', keepalive: true,
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: body
+    }).catch(function(err) { console.error('[GetInvolved] Submit failed:', err); });
+  }
+
+  function prefillSharedFields(formEl) {
+    if (!formEl) return;
+    SHARED_FIELDS.forEach(function(name) {
+      var input = formEl.querySelector('input[name="' + name + '"]');
+      if (input && state[name] && !input.value) {
+        input.value = (name === 'postal_code') ? formatPostal(state[name]) : state[name];
+      }
+    });
+  }
+
+  function captureSharedFields(formEl) {
+    if (!formEl) return;
+    var fd = new FormData(formEl);
+    SHARED_FIELDS.forEach(function(name) {
+      var v = fd.get(name);
+      if (v != null) {
+        var clean = (v + '').trim();
+        if (name === 'postal_code') clean = formatPostal(clean);
+        state[name] = clean;
+      }
+    });
+  }
+
+  $$('input[name="postal_code"]').forEach(function(input) {
+    input.addEventListener('input', function() {
+      var pos = input.selectionStart;
+      var oldLen = input.value.length;
+      var newVal = formatPostal(input.value);
+      if (newVal !== input.value) {
+        input.value = newVal;
+        if (pos === 4 && newVal.length - oldLen === 1) pos = 5;
+        try { input.setSelectionRange(pos, pos); } catch (e) {}
+      }
+    });
+  });
+
+  function markStepComplete(stepEl, statusText) {
+    if (!stepEl) return;
+    stepEl.classList.add('complete');
+    var status = $('.step-status', stepEl);
+    if (status) status.textContent = statusText || 'Done';
+  }
+
+  function openNext(stepEl) {
+    var next = stepEl.nextElementSibling;
+    while (next && !next.matches('.involved-step')) next = next.nextElementSibling;
+    if (next) {
+      stepEl.removeAttribute('open');
+      next.setAttribute('open', '');
+      setTimeout(function() {
+        next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 220);
+    } else {
+      stepEl.removeAttribute('open');
+    }
+  }
+
+  $$('.involved-step').forEach(function(stepEl) {
+    stepEl.addEventListener('toggle', function() {
+      if (stepEl.open) {
+        $$('form[data-shared-fields]', stepEl).forEach(prefillSharedFields);
+      }
+    });
+  });
+
+  // Sign up
+  var signupForm = $('#signup-updates-form');
+  if (signupForm) {
+    if (state.first_name) {
+      var fn = signupForm.querySelector('input[name="first_name"]');
+      if (fn) fn.value = state.first_name;
+    }
+    if (state.email) {
+      var em = signupForm.querySelector('input[name="email"]');
+      if (em) em.value = state.email;
+    }
+    signupForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var fd = new FormData(signupForm);
+      state.first_name = (fd.get('first_name') || '').trim();
+      state.email = (fd.get('email') || '').trim();
+      saveState();
+      post('updates_signup');
+      var btn = signupForm.querySelector('button[type="submit"]');
+      if (btn) { btn.disabled = true; btn.textContent = 'Subscribed'; }
+      var success = $('#signup-success');
+      if (success) success.classList.add('show');
+      var sec2 = $('#next-step-section');
+      if (sec2) {
+        sec2.classList.add('unlocked');
+        var greet = $('#next-step-greeting strong');
+        if (greet) greet.textContent = state.first_name || 'friend';
+        setTimeout(function() { sec2.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 280);
+      }
+      $$('form[data-shared-fields]').forEach(prefillSharedFields);
+    });
+  }
+
+  // Step 1: Commit to Vote
+  var stepCtv = $('#step-commit-to-vote');
+  if (stepCtv) {
+    var ctvForm = $('#commit-to-vote-form', stepCtv);
+    var ctvOpts = $$('[data-role="ctv-options"] button', stepCtv);
+    ctvOpts.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        ctvOpts.forEach(function(b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        var answer = btn.getAttribute('data-answer');
+        state.commit_to_vote = answer;
+        saveState();
+        if (answer === 'yes') {
+          ctvForm.classList.remove('is-hidden');
+          prefillSharedFields(ctvForm);
+        } else {
+          ctvForm.classList.add('is-hidden');
+          post('commit_to_vote', { answer: answer });
+          markStepComplete(stepCtv, answer === 'cant-vote' ? 'Thanks for letting us know' : 'Recorded');
+          openNext(stepCtv);
+        }
+      });
+    });
+    ctvForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      captureSharedFields(ctvForm);
+      saveState();
+      post('commit_to_vote', { answer: 'yes' });
+      markStepComplete(stepCtv, 'Pledged');
+      openNext(stepCtv);
+    });
+  }
+
+  // Step 2: Volunteer
+  var stepVol = $('#step-volunteer');
+  if (stepVol) {
+    var volForm = $('#volunteer-form', stepVol);
+    var volOpts = $$('[data-role="vol-options"] button', stepVol);
+    var volConfirm = $('[data-role="vol-confirm"]', stepVol);
+    var volMessages = {
+      'yes': 'Thanks! Someone from the campaign will reach out about volunteer opportunities.',
+      'support-only': 'Got it — thank you for your support.',
+      'ask-later': "No problem — we'll check in again later."
+    };
+    volOpts.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        volOpts.forEach(function(b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        var answer = btn.getAttribute('data-answer');
+        state.volunteer = answer;
+        saveState();
+        if (answer === 'yes') {
+          volForm.classList.remove('is-hidden');
+          prefillSharedFields(volForm);
+        } else {
+          volForm.classList.add('is-hidden');
+          post('volunteer', { answer: answer });
+          if (volConfirm) {
+            volConfirm.textContent = volMessages[answer] || '';
+            volConfirm.classList.remove('is-hidden');
+          }
+          setTimeout(function() {
+            markStepComplete(stepVol, 'Recorded');
+            openNext(stepVol);
+          }, 1400);
+        }
+      });
+    });
+    if (volForm) {
+      volForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        captureSharedFields(volForm);
+        saveState();
+        post('volunteer', { answer: 'yes' });
+        if (volConfirm) {
+          volConfirm.textContent = volMessages['yes'];
+          volConfirm.classList.remove('is-hidden');
+        }
+        markStepComplete(stepVol, 'Signed up to volunteer');
+        openNext(stepVol);
+      });
+    }
+  }
+
+  // Step 3: Sign
+  var stepSign = $('#step-sign');
+  if (stepSign) {
+    var signForm = $('#sign-form', stepSign);
+    var signOpts = $$('[data-role="sign-options"] button', stepSign);
+    var signYes = stepSign.querySelector('[data-role="sign-options"] button[data-answer="yes"]');
+    var signNo  = stepSign.querySelector('[data-role="sign-options"] button[data-answer="no"]');
+    var ack = $('#sign-ack', stepSign);
+    function syncSignButtons() {
+      var on = ack && ack.checked;
+      if (signYes) signYes.disabled = !on;
+      if (signNo)  signNo.disabled = !on;
+    }
+    if (ack) ack.addEventListener('change', syncSignButtons);
+    syncSignButtons();
+    signOpts.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (btn.disabled) return;
+        signOpts.forEach(function(b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        var answer = btn.getAttribute('data-answer');
+        state.sign_request = answer;
+        saveState();
+        if (answer === 'yes') {
+          signForm.classList.remove('is-hidden');
+          prefillSharedFields(signForm);
+        } else {
+          signForm.classList.add('is-hidden');
+          post('sign_request', { answer: 'no' });
+          markStepComplete(stepSign, 'Recorded');
+          openNext(stepSign);
+        }
+      });
+    });
+    if (signForm) {
+      signForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        captureSharedFields(signForm);
+        var fd = new FormData(signForm);
+        state.sign_size = fd.get('sign_size');
+        state.sign_address = (fd.get('sign_address') || '').trim();
+        state.sign_notes = (fd.get('sign_notes') || '').trim();
+        saveState();
+        post('sign_request', { answer: 'yes' });
+        markStepComplete(stepSign, 'Requested');
+        openNext(stepSign);
+      });
+    }
+  }
+
+  // Step 4: Donate
+  var stepDonate = $('#step-donate');
+  if (stepDonate) {
+    var donateForm = $('#donate-form', stepDonate);
+    var selectedAmount = null;
+    var donateCards = $$('.donate-card', stepDonate);
+    var customInput = $('#donate-custom', stepDonate);
+    var continueBtn = $('#donate-continue', stepDonate);
+    prefillSharedFields(donateForm);
+    function setAmount(amt, fromCard) {
+      selectedAmount = String(amt);
+      if (continueBtn) continueBtn.disabled = !(parseFloat(selectedAmount) > 0);
+      donateCards.forEach(function(c) { c.classList.remove('selected'); });
+      if (fromCard) fromCard.classList.add('selected');
+    }
+    donateCards.forEach(function(card) {
+      card.addEventListener('click', function() {
+        if (customInput) customInput.value = '';
+        setAmount(card.getAttribute('data-amount'), card);
+      });
+    });
+    if (customInput) {
+      customInput.addEventListener('input', function() {
+        var v = parseFloat(customInput.value);
+        if (v > 3425) { v = 3425; customInput.value = '3425'; }
+        if (v > 0) setAmount(v, null);
+        else { selectedAmount = null; if (continueBtn) continueBtn.disabled = true; }
+      });
+    }
+    if (continueBtn) {
+      continueBtn.addEventListener('click', function() {
+        if (!selectedAmount) return;
+        if (donateForm && !donateForm.reportValidity()) return;
+        captureSharedFields(donateForm);
+        state.donate_amount = selectedAmount;
+        saveState();
+        post('donate_intent', { amount: selectedAmount });
+        var params = new URLSearchParams();
+        params.set('pla', OLP_DONATE_PLA);
+        params.set('a', selectedAmount);
+        var url = OLP_DONATE_BASE + '?' + params.toString();
+        window.open(url, '_blank', 'noopener');
+        markStepComplete(stepDonate, 'Continuing to donate');
+      });
+    }
+  }
+
+  $$('form[data-shared-fields]').forEach(prefillSharedFields);
+
+  if (state.first_name && state.email && signupForm) {
+    var signupBtn = signupForm.querySelector('button[type="submit"]');
+    if (signupBtn) { signupBtn.disabled = true; signupBtn.textContent = 'Subscribed'; }
+    signupForm.querySelectorAll('input').forEach(function(i) { i.disabled = true; });
+    var greetR = $('#next-step-greeting strong');
+    if (greetR) greetR.textContent = state.first_name;
+  }
+})();
+</script>
+</body>
+</html>
