@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ontario Young Liberals — Volunteer with Ahsanul Hafiz</title>
+<meta name="description" content="Ontario Young Liberals: sign up to volunteer with the Ahsanul Hafiz campaign in Scarborough Southwest. Join us Saturday, June 6 at 1 PM — canvassing and phone banking.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --olp-cardinal: #E81E25;
+    --olp-deep-maple: #6A0C0D;
+    --power-red: var(--olp-cardinal);
+    --power-red-hover: #ad1b1e;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    display: flex; flex-direction: column; min-height: 100vh;
+    font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+    color: #1a1a1a; background: #f7f7f7;
+    -webkit-font-smoothing: antialiased;
+  }
+  header {
+    background: var(--power-red); color: #fff;
+    border-bottom: 4px solid var(--power-red-hover);
+    padding: 14px 20px; display: flex; align-items: center;
+    justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  header .brand { display: flex; flex-direction: column; }
+  header .brand .name {
+    font-family: Oswald, Inter, sans-serif; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.5px; font-size: 20px; line-height: 1.1;
+  }
+  header .brand .sub {
+    font-size: 10px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.9); margin-top: 3px;
+  }
+  header a.back {
+    color: #fff; text-decoration: none; font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    border: 1.5px solid rgba(255,255,255,0.5); border-radius: 999px; padding: 8px 16px;
+    transition: background 0.15s;
+  }
+  header a.back:hover { background: rgba(255,255,255,0.15); }
+  .intro { max-width: 720px; margin: 0 auto; padding: 20px 16px 4px; text-align: center; }
+  .oyl-tag {
+    display: inline-block; font-family: Oswald, Inter, sans-serif; font-weight: 600;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #fff;
+    background: var(--olp-deep-maple); padding: 5px 14px; border-radius: 999px; margin-bottom: 12px;
+  }
+  .intro h1 {
+    font-family: Oswald, Inter, sans-serif; text-transform: uppercase;
+    color: var(--olp-deep-maple); font-size: 26px; margin: 0 0 6px;
+  }
+  .intro p { color: #525252; margin: 0 0 4px; font-size: 15px; }
+  .intro .shift-call { color: var(--power-red); font-weight: 700; }
+  .frame-wrap { flex: 1; max-width: 720px; width: 100%; margin: 8px auto 0; padding: 0 8px 24px; }
+  iframe {
+    width: 100%; height: 1100px; border: none; border-radius: 14px;
+    box-shadow: 0 20px 50px rgba(26,43,68,0.10); background: #fff;
+  }
+  footer { text-align: center; padding: 16px; font-size: 11px; color: #8a8a8a; }
+  footer a { color: var(--olp-deep-maple); }
+</style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="name">Ahsanul Hafiz</span>
+      <span class="sub">Scarborough Southwest</span>
+    </div>
+    <a class="back" href="https://votehafiz.ca/">&larr; Back to votehafiz.ca</a>
+  </header>
+
+  <div class="intro">
+    <span class="oyl-tag">Ontario Young Liberals</span>
+    <h1>OYL, Let's Knock Some Doors</h1>
+    <p>Join the Hafiz campaign in Scarborough Southwest — canvassing and phone banking with your fellow Young Liberals.</p>
+    <p class="shift-call">We've pre-selected Saturday, June 6 at 1 PM for you — keep it or pick another shift below.</p>
+  </div>
+
+  <div class="frame-wrap">
+    <iframe
+      id="signup-frame"
+      data-base="https://script.google.com/macros/s/AKfycbzSK_126YWEumvmnJmxNmEZ37SfzuN-PrSCJioCRQtfAMnJqFSxoOrCaeF8co7XVESy/exec"
+      title="Volunteer with the Hafiz Campaign — Ontario Young Liberals"
+      loading="lazy"
+      allow="forms">
+    </iframe>
+  </div>
+
+  <footer>
+    Authorized by the CFO for the Ahsanul Hafiz campaign &middot;
+    <a href="https://votehafiz.ca/">votehafiz.ca</a>
+  </footer>
+
+  <script>
+    // OYL page: pre-tag every signup as source=OYL and feature the Sat Jun 6, 1 PM
+    // shift. Any utm_source/source/src in THIS page's URL overrides the default
+    // (e.g. /volunteerOYL?utm_source=OYL_IG for finer attribution).
+    (function () {
+      var f = document.getElementById('signup-frame');
+      var base = f.getAttribute('data-base');
+      var fwd = new URLSearchParams();
+      fwd.set('utm_source', 'OYL');                       // default attribution
+      fwd.set('shift', '2026-06-06_1300_canvass');        // featured: Sat Jun 6, 1 PM
+      var inParams = new URLSearchParams(window.location.search);
+      inParams.forEach(function (val, key) {
+        if (/^utm_/i.test(key) || key === 'source' || key === 'src' ||
+            key === 'shift' || key === 'featured') {
+          fwd.set(key === 'source' || key === 'src' ? 'utm_source' : key, val);
+        }
+      });
+      f.src = base + '?' + fwd.toString();
+    })();
+
+    // Auto-resize: if Signup.html posts a 'hafiz-signup-resize' height message,
+    // the iframe grows to fit so there's no inner scrollbar. Harmless if it never fires.
+    window.addEventListener('message', function (e) {
+      if (e.data && e.data.type === 'hafiz-signup-resize' && e.data.height) {
+        var ff = document.getElementById('signup-frame');
+        if (ff) ff.style.height = (e.data.height + 24) + 'px';
+      }
+    });
+  </script>
+</body>
+</html>
