@@ -57,6 +57,12 @@
   }
   .intro p { color: #525252; margin: 0 0 4px; font-size: 15px; }
   .intro .shift-call { color: var(--power-red); font-weight: 700; }
+  .other-shifts {
+    display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 700;
+    color: var(--olp-deep-maple); text-decoration: none;
+    border-bottom: 2px solid rgba(106,12,13,0.25); padding-bottom: 1px;
+  }
+  .other-shifts:hover { border-bottom-color: var(--olp-deep-maple); }
   .frame-wrap { flex: 1; max-width: 720px; width: 100%; margin: 8px auto 0; padding: 0 8px 24px; }
   iframe {
     width: 100%; height: 1100px; border: none; border-radius: 14px;
@@ -79,7 +85,8 @@
     <span class="oyl-tag">Ontario Young Liberals</span>
     <h1>OYL, Let's Knock Some Doors</h1>
     <p>Join the Hafiz campaign in Scarborough Southwest — canvassing and phone banking with your fellow Young Liberals.</p>
-    <p class="shift-call">We've pre-selected Saturday, June 6 at 1 PM for you — keep it or pick another shift below.</p>
+    <p class="shift-call">Our OYL shift is Saturday, June 6 at 1 PM. Sign up below in 30 seconds.</p>
+    <a class="other-shifts" href="https://votehafiz.ca/volunteer">Can't make June 6? See all other shifts &rarr;</a>
   </div>
 
   <div class="frame-wrap">
@@ -107,6 +114,7 @@
       var fwd = new URLSearchParams();
       fwd.set('utm_source', 'OYL');                       // default attribution
       fwd.set('shift', '2026-06-06_1300_canvass');        // featured: Sat Jun 6, 1 PM
+      fwd.set('only', '1');                               // lock: show ONLY that shift
       var inParams = new URLSearchParams(window.location.search);
       inParams.forEach(function (val, key) {
         if (/^utm_/i.test(key) || key === 'source' || key === 'src' ||
