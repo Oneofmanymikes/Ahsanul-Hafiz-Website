@@ -671,6 +671,7 @@ src="https://www.facebook.com/tr?id=1758143748388633&ev=PageView&noscript=1"
     }
     signupForm.addEventListener('submit', function(e) {
       e.preventDefault();
+      if (!signupForm.reportValidity()) return;  // block submit until required fields are filled
       var fd = new FormData(signupForm);
       state.first_name = (fd.get('first_name') || '').trim();
       state.email = (fd.get('email') || '').trim();
@@ -716,6 +717,7 @@ src="https://www.facebook.com/tr?id=1758143748388633&ev=PageView&noscript=1"
     });
     ctvForm.addEventListener('submit', function(e) {
       e.preventDefault();
+      if (!ctvForm.reportValidity()) return;  // block submit until required fields are filled
       captureSharedFields(ctvForm);
       saveState();
       post('commit_to_vote', { answer: 'yes' });
@@ -762,6 +764,7 @@ src="https://www.facebook.com/tr?id=1758143748388633&ev=PageView&noscript=1"
     if (volForm) {
       volForm.addEventListener('submit', function(e) {
         e.preventDefault();
+        if (!volForm.reportValidity()) return;  // block submit until required fields are filled
         captureSharedFields(volForm);
         saveState();
         post('volunteer', { answer: 'yes' });
@@ -812,6 +815,7 @@ src="https://www.facebook.com/tr?id=1758143748388633&ev=PageView&noscript=1"
     if (signForm) {
       signForm.addEventListener('submit', function(e) {
         e.preventDefault();
+        if (!signForm.reportValidity()) return;  // block submit until all required fields (incl. address) are filled
         captureSharedFields(signForm);
         var fd = new FormData(signForm);
         state.sign_size = fd.get('sign_size');

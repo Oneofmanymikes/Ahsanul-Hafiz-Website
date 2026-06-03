@@ -1330,6 +1330,7 @@ footer .text-white\/75 { color: rgba(255,255,255,0.9) !important; }
     }
     signupForm.addEventListener('submit', function(e) {
       e.preventDefault();
+      if (!signupForm.reportValidity()) return;  // block submit until required fields are filled
       var fd = new FormData(signupForm);
       state.first_name = (fd.get('first_name') || '').trim();
       state.email = (fd.get('email') || '').trim();
@@ -1376,6 +1377,7 @@ footer .text-white\/75 { color: rgba(255,255,255,0.9) !important; }
     });
     ctvForm.addEventListener('submit', function(e) {
       e.preventDefault();
+      if (!ctvForm.reportValidity()) return;  // block submit until required fields are filled
       captureSharedFields(ctvForm);
       saveState();
       post('commit_to_vote', { answer: 'yes' });
@@ -1422,6 +1424,7 @@ footer .text-white\/75 { color: rgba(255,255,255,0.9) !important; }
     if (volForm) {
       volForm.addEventListener('submit', function(e) {
         e.preventDefault();
+        if (!volForm.reportValidity()) return;  // block submit until required fields are filled
         captureSharedFields(volForm);
         saveState();
         post('volunteer', { answer: 'yes' });
@@ -1472,6 +1475,7 @@ footer .text-white\/75 { color: rgba(255,255,255,0.9) !important; }
     if (signForm) {
       signForm.addEventListener('submit', function(e) {
         e.preventDefault();
+        if (!signForm.reportValidity()) return;  // block submit until all required fields (incl. address) are filled
         captureSharedFields(signForm);
         var fd = new FormData(signForm);
         state.sign_size = fd.get('sign_size');
