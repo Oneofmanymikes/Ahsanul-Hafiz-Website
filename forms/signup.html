@@ -167,6 +167,7 @@ src="https://www.facebook.com/tr?id=1758143748388633&ev=PageView&noscript=1"
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
+    if (!form.reportValidity()) return;  // block submit until required fields are filled
     var fd = new FormData(form);
     state.first_name = (fd.get('first_name') || '').trim();
     state.email = (fd.get('email') || '').trim();

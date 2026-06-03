@@ -231,6 +231,7 @@ src="https://www.facebook.com/tr?id=1758143748388633&ev=PageView&noscript=1"
 
   signForm.addEventListener('submit', function(e) {
     e.preventDefault();
+    if (!signForm.reportValidity()) return;  // block submit until all required fields (incl. address) are filled
     var fd = new FormData(signForm);
     SHARED_FIELDS.forEach(function(name) {
       var v = fd.get(name);

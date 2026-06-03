@@ -210,6 +210,7 @@ src="https://www.facebook.com/tr?id=1758143748388633&ev=PageView&noscript=1"
 
   pledgeForm.addEventListener('submit', function(e) {
     e.preventDefault();
+    if (!pledgeForm.reportValidity()) return;  // block submit until all required fields are filled
     var fd = new FormData(pledgeForm);
     SHARED_FIELDS.forEach(function(name) {
       var v = fd.get(name);
