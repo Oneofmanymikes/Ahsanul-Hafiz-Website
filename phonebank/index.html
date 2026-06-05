@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ND35MPH216"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ND35MPH216');
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phone Bank — Ahsanul Hafiz Campaign</title>
+<link rel="icon" href="../icon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="apple-touch-icon" href="../apple-icon.png">
+<meta name="robots" content="noindex">
+<meta name="description" content="Volunteer phone bank for the Ahsanul Hafiz campaign — start making calls or open the operator dashboard.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --olp-cardinal: #E81E25;
+    --olp-deep-maple: #6A0C0D;
+    --power-red: var(--olp-cardinal);
+    --power-red-hover: #ad1b1e;
+    --ink: #1a1a1a;
+    --mut: #525252;
+    --line: #e3e3e3;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+    color: var(--ink); background: #f7f7f7;
+    -webkit-font-smoothing: antialiased; line-height: 1.5;
+  }
+  header {
+    background: var(--power-red); color: #fff;
+    border-bottom: 4px solid var(--power-red-hover);
+    padding: 14px 20px; display: flex; align-items: center;
+    justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  header .brand { display: flex; flex-direction: column; }
+  header .brand .name {
+    font-family: Oswald, Inter, sans-serif; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.5px; font-size: 20px; line-height: 1.1;
+  }
+  header .brand .sub {
+    font-size: 10px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.9); margin-top: 3px;
+  }
+  header a.back {
+    color: #fff; text-decoration: none; font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    border: 1.5px solid rgba(255,255,255,0.5); border-radius: 999px; padding: 8px 16px;
+    transition: background 0.15s;
+  }
+  header a.back:hover { background: rgba(255,255,255,0.15); }
+
+  main { max-width: 760px; margin: 0 auto; padding: 26px 16px 40px; }
+  .intro { text-align: center; margin-bottom: 22px; }
+  .intro h1 {
+    font-family: Oswald, Inter, sans-serif; text-transform: uppercase;
+    color: var(--olp-deep-maple); font-size: 30px; margin: 0 0 8px;
+  }
+  .intro p { color: var(--mut); margin: 0 auto; max-width: 560px; font-size: 16px; }
+
+  .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 22px 0 8px; }
+  @media (max-width: 560px){ .actions { grid-template-columns: 1fr; } }
+  .btn {
+    display: block; text-decoration: none; border-radius: 16px; padding: 22px 20px;
+    text-align: center; transition: transform .12s, box-shadow .12s; border: 1px solid var(--line);
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(26,43,68,.12); }
+  .btn .ico { font-size: 30px; display: block; margin-bottom: 8px; }
+  .btn .t { font-family: Oswald, Inter, sans-serif; text-transform: uppercase; letter-spacing: .5px; font-size: 19px; font-weight: 600; }
+  .btn .d { font-size: 13px; margin-top: 4px; }
+  .btn.primary { background: var(--power-red); color: #fff; border-color: var(--power-red-hover); }
+  .btn.primary .d { color: rgba(255,255,255,.9); }
+  .btn.secondary { background: #fff; color: var(--olp-deep-maple); }
+  .btn.secondary .d { color: var(--mut); }
+
+  .card {
+    background: #fff; border: 1px solid var(--line); border-radius: 16px;
+    padding: 20px 22px; margin-top: 22px;
+  }
+  .card h2 {
+    font-family: Oswald, Inter, sans-serif; text-transform: uppercase; letter-spacing: .5px;
+    color: var(--olp-deep-maple); font-size: 17px; margin: 0 0 12px;
+  }
+  ol.steps { margin: 0; padding-left: 0; list-style: none; counter-reset: s; }
+  ol.steps li { position: relative; padding: 0 0 14px 44px; counter-increment: s; }
+  ol.steps li:last-child { padding-bottom: 0; }
+  ol.steps li::before {
+    content: counter(s); position: absolute; left: 0; top: 0;
+    width: 30px; height: 30px; border-radius: 50%; background: var(--power-red); color: #fff;
+    font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 15px;
+  }
+  ol.steps li b { color: var(--ink); }
+  ol.steps li .sub { color: var(--mut); font-size: 14px; }
+
+  .tips { list-style: none; margin: 0; padding: 0; }
+  .tips li { padding: 7px 0 7px 26px; position: relative; color: var(--mut); font-size: 14.5px; border-bottom: 1px dashed var(--line); }
+  .tips li:last-child { border-bottom: 0; }
+  .tips li::before { content: "✓"; position: absolute; left: 0; color: var(--power-red); font-weight: 800; }
+
+  .note { background: #fff7f7; border: 1px solid #f3d2d3; border-radius: 12px; padding: 12px 14px; font-size: 13.5px; color: #7a2a2c; margin-top: 16px; }
+  footer { text-align: center; padding: 18px; font-size: 11px; color: #8a8a8a; }
+  footer a { color: var(--olp-deep-maple); }
+</style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="name">Ahsanul Hafiz</span>
+      <span class="sub">Phone Bank</span>
+    </div>
+    <a class="back" href="https://votehafiz.ca/">&larr; Back to votehafiz.ca</a>
+  </header>
+
+  <main>
+    <div class="intro">
+      <h1>Campaign Phone Bank</h1>
+      <p>Thanks for helping reach voters! Pick an option below. Most volunteers want <b>Start Calling</b>.</p>
+    </div>
+
+    <div class="actions">
+      <a class="btn primary" href="https://predictive-dialer-6fpozuklzq-nn.a.run.app/">
+        <span class="ico">📞</span>
+        <span class="t">Start Calling</span>
+        <span class="d">For volunteers — make voter calls</span>
+      </a>
+      <a class="btn secondary" href="https://predictive-dialer-6fpozuklzq-nn.a.run.app/dashboard">
+        <span class="ico">📊</span>
+        <span class="t">Operator Dashboard</span>
+        <span class="d">Staff only — password required</span>
+      </a>
+    </div>
+
+    <div class="card">
+      <h2>How it works (volunteers)</h2>
+      <ol class="steps">
+        <li><b>Sign in.</b> <span class="sub">Open <b>Start Calling</b>, enter your name, and choose how you want to talk: <b>computer audio</b> (use a headset) or <b>your phone</b> (we call you and you stay on the line).</span></li>
+        <li><b>Pick a community.</b> <span class="sub">Choose the cultural community you'll be calling from the dropdown.</span></li>
+        <li><b>Press Start.</b> <span class="sub">Nothing dials until you're ready. When you press Start, the system finds a voter and connects them to you automatically — usually in a few seconds.</span></li>
+        <li><b>Greet by name &amp; follow the script.</b> <span class="sub">The voter's name is shown big at the top. If more than one person lives at that number, you'll see a card for each one.</span></li>
+        <li><b>Record the results.</b> <span class="sub">For each person you speak with, tap their Support ID, volunteer interest, sign request, and any notes. Anyone you don't reach is saved as "Not Home."</span></li>
+        <li><b>End &amp; choose a disposition.</b> <span class="sub">Hit the red End button, pick what happened (Spoke / Voicemail / Wrong number / etc.) — this is required — then press <b>Save &amp; Next</b> to get your next call.</span></li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>Good to know</h2>
+      <ul class="tips">
+        <li>You control the pace — calls only come when you press <b>Save &amp; Next</b>, so take your time writing notes.</li>
+        <li>Need a breather? Use <b>Save &amp; Break</b> and you'll stop receiving calls until you resume.</li>
+        <li>If everyone in your community has been reached, you'll be prompted to switch to another community.</li>
+        <li>Missed-call voters who call the number back are forwarded to the campaign line automatically.</li>
+        <li>Use a quiet room and a headset if you can — it makes you much easier to hear.</li>
+      </ul>
+    </div>
+
+    <div class="note">
+      <b>Operators:</b> the dashboard is password-protected. Use it to Start/Stop the run, watch the live funnel and per-community counts, monitor caller-ID health, and reset between practice runs. Full step-by-step instructions are on the dashboard itself.
+    </div>
+  </main>
+
+  <footer>
+    Authorized by the CFO for the Ahsanul Hafiz campaign &middot;
+    <a href="https://votehafiz.ca/">votehafiz.ca</a>
+  </footer>
+</body>
+</html>
