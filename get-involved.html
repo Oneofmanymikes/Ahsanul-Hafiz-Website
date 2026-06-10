@@ -566,6 +566,23 @@ src="https://www.facebook.com/tr?id=1758143748388633&ev=PageView&noscript=1"
     saveState();
   }
 
+  // Campaign UTM attribution — capture once (first-touch) so the source/medium/
+  // campaign that brought someone in rides along on every post() for this session.
+  (function captureUTMs() {
+    try {
+      var q = new URLSearchParams(location.search);
+      var changed = false;
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (f) {
+        var v = q.get(f) || (f === 'utm_source' ? (q.get('source') || q.get('src')) : '');
+        if (v && !state[f]) {
+          state[f] = String(v).replace(/[^A-Za-z0-9_\- ]/g, '').slice(0, 80);
+          changed = true;
+        }
+      });
+      if (changed) saveState();
+    } catch (e) {}
+  })();
+
   function formatPostal(v) {
     var s = String(v || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
     if (s.length > 3) s = s.slice(0, 3) + ' ' + s.slice(3);

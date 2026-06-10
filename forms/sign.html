@@ -176,6 +176,16 @@ src="https://www.facebook.com/tr?id=1758143748388633&ev=PageView&noscript=1"
       : 'sid-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
   }
   function save() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {} }
+  // Campaign UTM attribution — capture once (first-touch), rides along on every post().
+  (function captureUTMs() {
+    try {
+      var q = new URLSearchParams(location.search);
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (f) {
+        var v = q.get(f) || (f === 'utm_source' ? (q.get('source') || q.get('src')) : '');
+        if (v && !state[f]) state[f] = String(v).replace(/[^A-Za-z0-9_\- ]/g, '').slice(0, 80);
+      });
+    } catch (e) {}
+  })();
   save();
 
   function post(formType, extra) {
