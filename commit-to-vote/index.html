@@ -77,6 +77,8 @@ input{width:100%;padding:.75rem .95rem;border-radius:.55rem;border:1px solid rgb
 button[type="submit"]{padding:.9rem 1.25rem;border-radius:.55rem;background:var(--power-red);color:#fff;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.85rem;border:none;cursor:pointer;transition:background .15s ease;}
 button[type="submit"]:hover{background:var(--power-red-hover);}
 .is-hidden{display:none !important;}
+.optin{display:flex;align-items:flex-start;gap:.6rem;margin:.1rem 0 .2rem;color:var(--text-muted);font-size:.95rem;line-height:1.4;cursor:pointer;}
+.optin input[type="checkbox"]{width:1.15rem;height:1.15rem;flex:0 0 auto;margin-top:.15rem;accent-color:var(--power-red);cursor:pointer;}
 .success{display:none;margin-top:1rem;padding:.85rem 1rem;background:rgba(95,215,220,.20);border:1px solid var(--olp-tobermory);border-radius:.6rem;color:var(--heritage-navy);font-weight:600;font-size:.98rem;}
 .success.show{display:block;}
 
@@ -116,20 +118,15 @@ footer .links a:hover{text-decoration:underline;}
   <div class="wrap">
     <div class="hafiz-form">
       <h2>Commit to Vote</h2>
-      <p class="prompt">Can Hafiz count on your support?</p>
-      <div class="options" id="options">
-        <button type="button" data-answer="yes">Yes &#8212; count me in</button>
-        <button type="button" data-answer="no">No</button>
-        <button type="button" data-answer="cant-vote">I don&#8217;t live in the riding / can&#8217;t vote</button>
-      </div>
-      <form id="pledge-form" class="is-hidden" novalidate>
-        <p>Great &#8212; record your pledge:</p>
+      <p class="prompt">Add your name and pledge your support for Ahsanul Hafiz.</p>
+      <form id="pledge-form" novalidate>
         <input name="first_name" type="text" required placeholder="First name *" autocomplete="given-name"/>
         <input name="last_name" type="text" required placeholder="Last name *" autocomplete="family-name"/>
         <input name="email" type="email" required placeholder="Email address *" autocomplete="email"/>
         <input name="cell_phone" type="tel" required placeholder="Cell phone *" autocomplete="tel"/>
         <input name="postal_code" type="text" required placeholder="Postal code *" autocomplete="postal-code"
                pattern="[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d" maxlength="7" inputmode="text"/>
+        <label class="optin"><input type="checkbox" name="email_optin" checked/> <span>Add me to the campaign email list to receive updates.</span></label>
         <button type="submit">Pledge to vote</button>
       </form>
       <div id="success" class="success"></div>
@@ -208,7 +205,7 @@ footer .links a:hover{text-decoration:underline;}
 
   var pledgeForm = document.getElementById('pledge-form');
   var success = document.getElementById('success');
-  var optBtns = document.querySelectorAll('#options button');
+  var optIn = pledgeForm.querySelector('input[name="email_optin"]');
 
   // Prefill known fields
   SHARED_FIELDS.forEach(function(name) {
@@ -217,26 +214,8 @@ footer .links a:hover{text-decoration:underline;}
       input.value = (name === 'postal_code') ? formatPostal(state[name]) : state[name];
     }
   });
-
-  optBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      optBtns.forEach(function(b){ b.classList.remove('selected'); });
-      btn.classList.add('selected');
-      var answer = btn.getAttribute('data-answer');
-      state.commit_to_vote = answer; save();
-      if (answer === 'yes') {
-        pledgeForm.classList.remove('is-hidden');
-        success.classList.remove('show');
-      } else {
-        pledgeForm.classList.add('is-hidden');
-        post('commit_to_vote', { answer: answer });
-        success.textContent = answer === 'cant-vote'
-          ? 'Thanks for letting us know.'
-          : 'Recorded. Thanks for your response.';
-        success.classList.add('show');
-      }
-    });
-  });
+  // Reflect a previously chosen email-list preference, if any.
+  if (optIn && state.email_optin === false) optIn.checked = false;
 
   pledgeForm.querySelector('input[name="postal_code"]').addEventListener('input', function() {
     var input = this; var pos = input.selectionStart; var oldLen = input.value.length;
@@ -260,10 +239,18 @@ footer .links a:hover{text-decoration:underline;}
         state[name] = clean;
       }
     });
+    var wantsEmail = !optIn || optIn.checked;
+    state.commit_to_vote = 'yes';
+    state.email_optin = wantsEmail;
     save();
+    // Record the pledge (same format as the main-page Commit to Vote step).
     post('commit_to_vote', { answer: 'yes' });
+    // If opted in, register to the email list exactly like the main-page signup.
+    if (wantsEmail) post('updates_signup');
     pledgeForm.classList.add('is-hidden');
-    success.textContent = 'Pledge recorded — thanks for your support! Take the next step below.';
+    success.textContent = wantsEmail
+      ? 'Pledge recorded — thanks for your support! You’re on the list for updates. Take the next step below.'
+      : 'Pledge recorded — thanks for your support! Take the next step below.';
     success.classList.add('show');
   });
 })();
