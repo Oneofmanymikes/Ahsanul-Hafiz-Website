@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Upcoming Events &#8226; Ahsanul Hafiz for Scarborough Southwest</title>
+<meta name="description" content="Upcoming events with the Ahsanul Hafiz campaign in Scarborough Southwest — join a super canvass, come to a backyard BBQ, and help us paint the riding red."/>
+<link rel="icon" href="../favicon.png"/>
+<link rel="apple-touch-icon" href="../apple-icon.png"/>
+<meta property="og:title" content="Upcoming Events — Ahsanul Hafiz for Scarborough Southwest"/>
+<meta property="og:description" content="Join us at an upcoming event across Scarborough Southwest."/>
+<meta property="og:image" content="../images/meeting-on-canada-day.jpg"/>
+<style>
+:root{
+  --olp-cardinal:#E81E25;--olp-deep-maple:#6A0C0D;--olp-sumac:#641432;--olp-steel:#EBEBEC;--olp-tobermory:#5FD7DC;
+  --power-red:var(--olp-cardinal);--heritage-navy:var(--olp-deep-maple);--soft-gray:var(--olp-steel);
+  --text-dark:#1a1a1a;--text-muted:#525252;--border-light:rgba(106,12,13,.12);
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;min-height:100vh;font-family:Inter,"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text-dark);background:linear-gradient(180deg,#fff 0%,#f7f7f7 100%);line-height:1.6;}
+img{display:block;max-width:100%;height:auto;}
+a{color:inherit;text-decoration:none;}
+
+header{position:sticky;top:0;z-index:50;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08);}
+.header-inner{max-width:80rem;margin:0 auto;padding:.6rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.header-logo{display:flex;align-items:center;gap:.65rem;}
+.header-logo img{height:48px;width:auto;}
+.header-logo .name{font-weight:800;color:var(--power-red);font-size:1.35rem;text-transform:uppercase;letter-spacing:-.01em;line-height:1;}
+.header-logo .sub{display:block;color:var(--heritage-navy);font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:2px;}
+.back-link{color:var(--power-red);font-weight:700;font-size:.95rem;display:inline-flex;align-items:center;gap:.35rem;}
+.back-link:hover{text-decoration:underline;}
+
+.page-head{max-width:80rem;margin:0 auto;padding:2.5rem 1rem 1rem;text-align:center;}
+.page-head h1{font-weight:800;color:var(--heritage-navy);font-size:clamp(2rem,5vw,3rem);text-transform:uppercase;letter-spacing:-.02em;margin:0 0 .4rem;}
+.page-head p{color:var(--text-muted);max-width:44rem;margin:0 auto;font-size:1.05rem;}
+.accent-bar{width:64px;height:5px;border-radius:999px;background:var(--power-red);margin:1rem auto 0;}
+
+.events{max-width:52rem;margin:0 auto;padding:2rem 1rem 1rem;display:flex;flex-direction:column;gap:1.75rem;}
+
+.event{background:#fff;border:1px solid var(--border-light);border-radius:16px;overflow:hidden;box-shadow:0 8px 22px rgba(26,43,68,.10);}
+.event-top{display:flex;gap:0;align-items:stretch;}
+.event-date{flex:0 0 auto;width:104px;background:var(--power-red);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.25rem .5rem;}
+.event-date .dow{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.92;}
+.event-date .day{font-size:2.6rem;font-weight:800;line-height:1;margin:.15rem 0;}
+.event-date .mon{font-size:.85rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;}
+.event-body{flex:1;padding:1.4rem 1.5rem;min-width:0;}
+.event-tag{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .6rem;border-radius:999px;margin-bottom:.6rem;}
+.event-tag.free{background:rgba(232,30,37,.1);color:var(--power-red);}
+.event-tag.paid{background:var(--heritage-navy);color:#fff;}
+.event h2{margin:0 0 .5rem;font-size:1.4rem;font-weight:800;color:var(--heritage-navy);letter-spacing:-.01em;line-height:1.2;}
+.event-meta{color:var(--text-muted);font-size:.95rem;line-height:1.5;margin-bottom:.9rem;}
+.event-meta .when{color:var(--power-red);font-weight:700;}
+.event-body p{margin:0 0 .8rem;font-size:1rem;color:var(--text-dark);}
+.event-photo{margin:.2rem 0 1rem;border-radius:12px;overflow:hidden;}
+.event-photo img{width:100%;height:auto;display:block;}
+.event-btn{display:inline-block;background:var(--power-red);color:#fff;font-weight:700;text-transform:uppercase;letter-spacing:.03em;font-size:.95rem;padding:.8rem 1.6rem;border-radius:999px;box-shadow:0 8px 20px rgba(232,30,37,.28);transition:transform .15s,box-shadow .15s;}
+.event-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(232,30,37,.36);}
+.event-note{padding:0 1.5rem 1.3rem;font-size:.78rem;line-height:1.5;color:#8a8a8a;}
+@media(max-width:560px){
+  .event-top{flex-direction:column;}
+  .event-date{width:100%;flex-direction:row;gap:.5rem;padding:.7rem 1rem;justify-content:flex-start;}
+  .event-date .day{font-size:1.6rem;margin:0;}
+  .event-date .mon,.event-date .dow{font-size:.8rem;}
+}
+
+.cta{text-align:center;padding:1.5rem 1rem 4rem;}
+.cta p{color:var(--text-muted);margin:0 0 1rem;}
+.cta a.btn{display:inline-block;background:var(--power-red);color:#fff;font-weight:700;text-transform:uppercase;letter-spacing:.03em;padding:.85rem 1.8rem;border-radius:999px;box-shadow:0 8px 20px rgba(232,30,37,.3);transition:transform .15s,box-shadow .15s;}
+.cta a.btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(232,30,37,.38);}
+
+footer{background:var(--power-red);padding:2rem 1rem;text-align:center;color:#fff;}
+footer a{color:#fff;}
+footer .name{font-weight:800;text-transform:uppercase;letter-spacing:-.01em;}
+footer .links{margin-top:.6rem;display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;font-size:.9rem;}
+footer .links a:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a class="header-logo" href="../" aria-label="Ahsanul Hafiz for Scarborough Southwest">
+      <img src="../images/OLP_Logo_Bilingual_Red.png" alt="Ontario Liberal Party logo" width="213" height="48"/>
+      <span><span class="name">Ahsanul Hafiz</span><span class="sub">Scarborough Southwest</span></span>
+    </a>
+    <a class="back-link" href="../">&#8592; Back to home</a>
+  </div>
+</header>
+
+<main>
+  <div class="page-head">
+    <h1>Upcoming Events</h1>
+    <p>Our team has been busy at the doors across Scarborough Southwest &#8212; and we&#8217;re building real momentum. Here are two events we&#8217;d love for you to be part of.</p>
+    <div class="accent-bar" aria-hidden="true"></div>
+  </div>
+
+  <div class="events">
+
+    <!-- Event 1: Super Canvass -->
+    <article class="event">
+      <div class="event-top">
+        <div class="event-date" aria-hidden="true">
+          <span class="dow">Thu</span>
+          <span class="day">9</span>
+          <span class="mon">Jul</span>
+        </div>
+        <div class="event-body">
+          <span class="event-tag free">Free &#183; Everyone welcome</span>
+          <h2>Paint the Riding Red Super Canvass</h2>
+          <div class="event-meta">
+            <span class="when">Thursday, July 9, 2026 &#183; 5:30 PM</span><br/>
+            2500 Kingston Rd, Scarborough, ON M1N 1V3
+          </div>
+          <p>Join the Scarborough Southwest Provincial Liberal Association for our Paint the Riding Red Super Canvass. As the PCs hold their nomination meeting that evening, we&#8217;re hitting the doors to show that Ontario Liberals are out talking with residents and building momentum here in Scarborough Southwest.</p>
+          <p>Whether you&#8217;re an experienced canvasser or joining us for the first time, everyone is welcome. Come out, meet fellow volunteers, and help us paint the riding red!</p>
+          <div class="event-photo">
+            <img src="../images/Canvass Photo - Office.jpg" alt="Volunteers gathered at the campaign office before canvassing in Scarborough Southwest" loading="lazy" decoding="async"/>
+          </div>
+          <a class="event-btn" href="https://ontarioliberal.ca/events/scarborough-southwest-pla-paint-the-riding-red-super-canvass/" target="_blank" rel="noopener noreferrer">&#128682; Register &#8212; it&#8217;s free</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Event 2: Backyard BBQ Fundraiser -->
+    <article class="event">
+      <div class="event-top">
+        <div class="event-date" aria-hidden="true">
+          <span class="dow">Sat</span>
+          <span class="day">11</span>
+          <span class="mon">Jul</span>
+        </div>
+        <div class="event-body">
+          <span class="event-tag paid">$125 / person</span>
+          <h2>Backyard BBQ Fundraiser</h2>
+          <div class="event-meta">
+            <span class="when">Saturday, July 11, 2026 &#183; 6:00 PM</span><br/>
+            Scarborough &#160;(location shared following registration)
+          </div>
+          <p>You&#8217;re invited to an intimate backyard BBQ fundraiser in support of the Scarborough Southwest Provincial Liberal Association. Come enjoy great food and good company while supporting our campaign. <strong>Halal and vegetarian options will be available.</strong></p>
+          <p>Tickets are <strong>$125 per person</strong>. The exact location will be shared with you following registration.</p>
+          <a class="event-btn" href="https://ontarioliberal.ca/event-registration/?ZXZlbnRJRD0zMjU5MiZwbGE9OTgmbGFiZWw9VGlja2V0JnByaWNlPTEyNQ==" target="_blank" rel="noopener noreferrer">&#127903; Get your ticket</a>
+        </div>
+      </div>
+      <div class="event-note">
+        A portion of each BBQ ticket may be eligible for a tax receipt. The receiptable amount is equal to the ticket price less the cost of attendance, in accordance with Elections Ontario guidelines. For example, contributors receive a 75% tax credit on the first $100 of eligible contributions, reducing the after-tax cost of supporting the Ontario Liberal Party. Authorized by the CFO of the Scarborough Southwest Provincial Liberal Association.
+      </div>
+    </article>
+
+  </div>
+
+  <div class="cta">
+    <p>As always, there are more ways to get involved.</p>
+    <a class="btn" href="../#get-involved">See all the ways to help</a>
+  </div>
+</main>
+
+<footer>
+  <p class="name">Ahsanul Hafiz</p>
+  <p>Ontario Liberal Candidate &#8226; Scarborough Southwest</p>
+  <div class="links">
+    <a href="tel:+16473132506">647-313-2506</a>
+    <a href="mailto:info@votehafiz.ca">info@votehafiz.ca</a>
+    <a href="../">votehafiz.ca</a>
+  </div>
+</footer>
+</body>
+</html>
