@@ -30,11 +30,11 @@ src="https://www.facebook.com/tr?id=1758143748388633&ev=PageView&noscript=1"
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Volunteer with Ahsanul Hafiz — Scarborough Southwest</title>
+<title>The Big Walk — Ahsanul Hafiz</title>
 <link rel="icon" href="../icon.svg" type="image/svg+xml">
 <link rel="icon" type="image/png" href="../favicon.png">
 <link rel="apple-touch-icon" href="../apple-icon.png">
-<meta name="description" content="Join the Ahsanul Hafiz campaign in Scarborough Southwest. Sign up to volunteer — canvassing, phone banking, and more.">
+<meta name="description" content="Register for The Big Walk, the biggest canvass of the Scarborough Southwest campaign. Saturday, August 22 at 12:00 PM, 2500 Kingston Rd.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
@@ -100,9 +100,9 @@ src="https://www.facebook.com/tr?id=1758143748388633&ev=PageView&noscript=1"
   </header>
 
   <div class="intro">
-    <h1>Volunteer With Us</h1>
-    <p>Lend a hand in Scarborough Southwest — canvassing, phone banking, events, and more.</p>
-    <p>Pick a shift below and we'll be in touch.</p>
+    <h1>The Big Walk</h1>
+    <p><strong>Saturday, August 22 at 12:00 PM &nbsp;&middot;&nbsp; Campaign office, 2500 Kingston Rd</strong></p>
+    <p>The biggest canvass of the campaign, with MPPs and Liberals from across Toronto. No experience needed &mdash; training, materials and food provided.</p>
   </div>
 
   <div class="frame-wrap">
@@ -128,10 +128,16 @@ src="https://www.facebook.com/tr?id=1758143748388633&ev=PageView&noscript=1"
       var base = f.getAttribute('data-base');
       var inParams = new URLSearchParams(window.location.search);
       var fwd = new URLSearchParams();
+      // Dedicated registration page for one event: the shift is fixed here,
+      // so the public URL stays short enough to put in a text message.
+      fwd.append('shift', '2026-08-22_1200_bigwalk');
+      fwd.append('only', '1');
       inParams.forEach(function (val, key) {
-        if (/^utm_/i.test(key) || key === 'source' || key === 'src'
-            || key === 'shift' || key === 'featured' || key === 'only') fwd.append(key, val);
+        if (/^utm_/i.test(key) || key === 'source' || key === 'src') fwd.append(key, val);
       });
+      if (!inParams.has('utm_source') && !inParams.has('source') && !inParams.has('src')) {
+        fwd.append('utm_source', 'bigwalk');
+      }
       var qs = fwd.toString();
       f.src = base + (qs ? ('?' + qs) : '');
     })();
