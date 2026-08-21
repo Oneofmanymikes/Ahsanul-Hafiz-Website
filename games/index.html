@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Campaign Trivia — Ahsanul Hafiz for Scarborough Southwest</title>
-<meta name="description" content="A 15-question trivia game for volunteers on the Ahsanul Hafiz campaign. Real numbers from our own canvass and call records.">
+<meta name="description" content="A trivia game for volunteers on the Ahsanul Hafiz campaign. Real numbers from our own canvass and call records.">
 <meta name="robots" content="noindex">
 <meta property="og:title" content="Campaign Trivia — Scarborough Southwest">
 <meta property="og:description" content="How well do you know this campaign? 15 questions, live leaderboard.">
@@ -51,6 +51,9 @@
   .box.right::after,.box.wrong::after{content:""; position:absolute; inset:2px; background-image:linear-gradient(45deg,transparent 42%,currentColor 42%,currentColor 58%,transparent 58%),linear-gradient(-45deg,transparent 42%,currentColor 42%,currentColor 58%,transparent 58%)}
   .box.right{border-color:var(--ok); color:var(--ok)}
   .box.wrong{border-color:var(--no); color:var(--no)}
+  .box.part{border-color:var(--gold); color:var(--gold)}
+  .box.part::after{content:""; position:absolute; inset:2px;
+    background-image:linear-gradient(45deg,transparent 42%,currentColor 42%,currentColor 58%,transparent 58%)}
   .box.now{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
 
   .card{background:var(--card); border:1px solid var(--line); border-radius:4px;
@@ -99,6 +102,8 @@
     letter-spacing:.16em; text-transform:uppercase; display:block; margin-bottom:5px}
   .fact.yes{border-left-color:var(--ok); background:var(--ok-soft)}
   .fact.no{border-left-color:var(--no); background:var(--no-soft)}
+  .fact.part{border-left-color:var(--gold); background:var(--accent-soft)}
+  .fact.part .verdict{color:var(--gold)}
   .fact.yes .verdict{color:var(--ok)} .fact.no .verdict{color:var(--no)}
   .num{font-family:"IBM Plex Mono",monospace; font-weight:600; font-variant-numeric:tabular-nums}
 
@@ -142,7 +147,7 @@
   <header class="head">
     <span class="eyebrow">Ahsanul Hafiz Campaign &middot; Volunteer Night</span>
     <h1>How well do you know <em>this campaign?</em></h1>
-    <p class="sub">Fifteen questions on Scarborough Southwest, Ontario politics, and the candidate
+    <p class="sub"><span id="countWord">Eighteen</span> questions on Scarborough Southwest, Ontario politics, and the candidate
       you have been knocking on doors for. Every number is real, pulled from our own call logs
       and canvass records.</p>
   </header>
@@ -152,7 +157,7 @@
   <main class="card">
     <!-- NAME -->
     <section id="start">
-      <p class="qmeta"><span>15 questions</span><span>Live leaderboard</span></p>
+      <p class="qmeta"><span><span id="countA">18</span> questions</span><span><span id="countD">34</span> points</span></p>
       <div>
         <label class="fld" for="name">Your name for the leaderboard</label>
         <input type="text" id="name" maxlength="24" autocomplete="given-name"
@@ -160,27 +165,37 @@
       </div>
       <p class="note">First name and last initial is plenty. Your score goes on the board for
         tonight — nothing else is saved.</p>
+      <p class="note" id="nameMsg" style="color:var(--no)"></p>
       <button class="btn" id="go" disabled>Start the count</button>
-      <p class="note">Tap an answer, or press <b>1</b>&ndash;<b>4</b> on a keyboard.</p>
+      <p class="note">Tap an answer, or press <b>1</b>&ndash;<b>4</b> on a keyboard.
+        <b>One try each</b> — pick your answers carefully.</p>
     </section>
 
     <!-- QUIZ -->
     <section id="quiz" class="hide">
-      <p class="qmeta"><span>Question <b id="qn">1</b> of 15</span><span id="topic"></span></p>
+      <p class="qmeta"><span>Question <b id="qn">1</b> of <span id="countB">18</span></span><span id="topic"></span></p>
       <h2 class="q" id="qtext"></h2>
       <ul class="opts" id="opts"></ul>
       <div id="reveal"></div>
       <button class="btn hide" id="next">Next question</button>
     </section>
 
+    <!-- ALREADY PLAYED -->
+    <section id="already" class="hide">
+      <p class="qmeta"><span>Already played</span><span id="prevStamp"></span></p>
+      <h2 class="q">One try each</h2>
+      <p class="note" id="prevLine"></p>
+      <p class="note">Check the board below to see where you landed.</p>
+    </section>
+
     <!-- RESULT -->
     <section id="done" class="hide">
       <p class="qmeta"><span>Results declared</span><span id="stamp"></span></p>
-      <p class="score"><span id="final">0</span><small>/15</small></p>
+      <p class="score"><span id="final">0</span><small>/<span id="countC">18</span></small></p>
       <h2 class="rank" id="rank"></h2>
       <p class="note" id="rankline"></p>
       <p class="note" id="saved"></p>
-      <button class="btn ghost" id="again">Play again</button>
+      <button class="btn ghost" id="again">Hand to the next player</button>
     </section>
   </main>
 
@@ -201,16 +216,64 @@
    stays local to this device. */
 var ENDPOINT = "https://script.google.com/macros/s/AKfycbyoL82v08epacnE1amV5Zl48UmET7afbhq-SreOk49PVhNrpHuGxvPygD-S_UvrvcQvHg/exec";
 
-var QUESTIONS = [
- {topic:"Riding history",q:"Since 1999, how many times have the Liberals won Scarborough Southwest provincially?",
-  opts:["Once","Twice","Four times","Never"],a:2,
-  fact:"<b>Four in a row.</b> Lorenzo Berardinetti took it for the Liberals in <span class='num'>2003, 2007, 2011 and 2014</span> — fifteen straight years. Doly Begum then won it for the NDP in 2018 and held it until this year."},
- {topic:"Why we are here",q:"Why is there a by-election in Scarborough Southwest at all?",
+var QUESTIONS = [ {topic:"Why we are here",q:"Why is there a by-election in Scarborough Southwest at all?",
   opts:["The MPP retired","Doly Begum resigned after winning the federal seat","The result was overturned","Boundaries were redrawn"],a:1,
   fact:"<b>Doly Begum resigned.</b> She won the federal seat here in the April 2026 by-election — as a Liberal — which opened up her provincial seat. Ford called the by-election on August 5."},
  {topic:"The ballot",q:"How many candidates is Ahsanul Hafiz running against on September 3?",
   opts:["One","Two","Three","Five"],a:2,
   fact:"<b>Three.</b> Fatima Shaban for the NDP, Dr. Noor Tarun for the PCs, and Mark Bekkering for the Greens."},
+ {topic:"Ontario politics",q:"Who is the Premier of Ontario?",
+  opts:["Doug Ford","Bonnie Crombie","Kathleen Wynne","Marit Stiles"],a:0,
+  fact:"<b>Doug Ford</b>, PC, premier since 2018. Every door you knock in this by-election is a chance to change the arithmetic at Queen's Park."},
+ {topic:"Ontario politics",q:"Who is the Prime Minister of Canada?",
+  opts:["Mark Carney","Justin Trudeau","Pierre Poilievre","Chrystia Freeland"],a:0,
+  fact:"<b>Mark Carney</b>, Liberal, prime minister since March 2025. Doly Begum's win here in April 2026 helped secure his majority."},
+ {topic:"Ontario politics",q:"Who leads the Ontario Liberal Party right now?",
+  opts:["Bonnie Crombie","John Fraser","Steven Del Duca","Kathleen Wynne"],a:1,
+  fact:"<b>John Fraser, as interim leader.</b> Bonnie Crombie resigned in January 2026 after a difficult leadership review. Members choose a permanent leader in November."},
+ {topic:"Ontario politics",q:"Who led the Ontario Liberal Party before the current leader?",
+  opts:["Bonnie Crombie","Steven Del Duca","Kathleen Wynne","Dalton McGuinty"],a:0,
+  fact:"<b>Bonnie Crombie</b>, the former mayor of Mississauga. She led the party from December 2023 until she resigned in January 2026, and John Fraser took over as interim leader."},
+ {topic:"Ontario politics",q:"Who was the last Liberal Premier of Ontario?",
+  opts:["Dalton McGuinty","Kathleen Wynne","David Peterson","Bonnie Crombie"],a:1,
+  fact:"<b>Kathleen Wynne</b>, premier from 2013 to 2018, and the first woman to hold the job in Ontario. Doug Ford has held it ever since."},
+ {topic:"Ontario politics",q:"How many ridings are there in Ontario?",
+  opts:["87","107","124","338"],a:2,
+  fact:"<b>124.</b> Each one sends a single MPP to Queen's Park. Scarborough Southwest is one of them, and on September 3 this riding picks who fills it."},
+ {topic:"Ontario politics",q:"What was voter turnout in the 2025 Ontario election?",
+  opts:["About 25%","About 45%","About 62%","About 80%"],a:1,
+  fact:"<b>About 45% province-wide</b> — and lower here: neighbouring Scarborough ridings came in around 38%. More than half of eligible voters stayed home. That is the whole reason we knock and dial."},
+ {topic:"Riding history",q:"Since 1999, how many times have the Liberals won Scarborough Southwest provincially?",
+  opts:["Once","Twice","Four times","Never"],a:2,
+  fact:"<b>Four in a row.</b> Lorenzo Berardinetti took it for the Liberals in <span class='num'>2003, 2007, 2011 and 2014</span> — fifteen straight years. Doly Begum then won it for the NDP in 2018 and held it until this year."},
+ {topic:"Riding history",q:"Which former Toronto police chief held this seat federally before Doly Begum?",
+  opts:["Bill Blair","Mark Saunders","Julian Fantino","John Tory"],a:0,
+  fact:"<b>Bill Blair.</b> Toronto's police chief from 2005 to 2015, then the Liberal MP here. Doly Begum won the seat federally in the April 2026 by-election."},
+ {type:"multi",topic:"Know your riding",q:"Pick the THREE ridings that border Scarborough Southwest.",
+  opts:["Beaches—East York","Scarborough Centre","Scarborough—Guildwood","Don Valley East","Etobicoke North","Scarborough North"],
+  correct:[0,1,2],
+  fact:"The riding runs from <b>Victoria Park Avenue</b> in the west to <b>Markham Road</b> in the east, <b>Eglinton</b> in the north down to <b>Lake Ontario</b>. That puts Beaches—East York to the west, Scarborough Centre to the north and Scarborough—Guildwood to the east. The lake is the fourth border."},
+ {topic:"Know your riding",q:"By the census, what is the largest community in Scarborough Southwest outside those of Western European background?",
+  opts:["South Asian","Filipino","Chinese","Black"],a:0,
+  fact:"<b>South Asian, at 24.8%</b> of the riding in the 2021 census, then Black at 12.3%, Filipino at 8.6% and Chinese at 5.1%. Visible-minority communities are a majority of Scarborough Southwest. (Statistics Canada, 2021.)"},
+ {topic:"Our doors",q:"Roughly how many front doors are there in Scarborough Southwest?",
+  opts:["About 8,000","About 24,000","About 60,000","About 150,000"],a:1,
+  fact:"<b>Just under 24,000</b> residential addresses on the city's register. We have made 82,863 door attempts, so on average every door in the riding has been approached about three times."},
+ {type:"multi",topic:"Three levels",q:"Pick the THREE things your CITY government is responsible for.",
+  opts:["Garbage collection","The TTC","Public libraries","Hospitals","Passports","Public schools"],
+  correct:[0,1,2],
+  fact:"City hall runs <b>garbage, transit and libraries</b> — plus parks, snow clearing and water. Hospitals and schools are provincial; passports are federal."},
+ {type:"multi",topic:"Three levels",q:"Pick the THREE things the PROVINCE is responsible for.",
+  opts:["Hospitals and health care","Public schools","Driver's licences","National defence","Garbage collection","Immigration"],
+  correct:[0,1,2],
+  fact:"Queen's Park runs <b>health care, education and the roads you drive on</b> — which is exactly why this by-election matters. Defence and immigration are federal; garbage is the city."},
+ {type:"multi",topic:"Three levels",q:"Pick the THREE things the FEDERAL government is responsible for.",
+  opts:["Passports","Immigration and citizenship","The Canadian Armed Forces","Public libraries","Provincial highways","Elementary schools"],
+  correct:[0,1,2],
+  fact:"Ottawa handles <b>passports, immigration and the military</b> — plus criminal law and employment insurance. Libraries are city; highways and schools are provincial."},
+ {topic:"Our phones",q:"How many phone numbers are loaded in the dialer to call?",
+  opts:["About 3,000","About 9,000","About 21,000","About 90,000"],a:2,
+  fact:"<b>About 21,000 numbers</b>, and we have already reached 19,394 of them at least once. There is not much left that has never rung."},
  {topic:"Our phones",q:"How many calls has this campaign's dialer made?",
   opts:["About 4,000","About 12,000","About 40,000","About 200,000"],a:2,
   fact:"<b><span class='num'>40,644</span> dial attempts</b>, reaching <span class='num'>19,394</span> different phone numbers across <span class='num'>60</span> days of dialling."},
@@ -220,21 +283,12 @@ var QUESTIONS = [
  {topic:"Our doors",q:"How many real conversations have we had at the doors?",
   opts:["About 1,400","About 5,000","About 14,000","About 50,000"],a:2,
   fact:"<b><span class='num'>13,991</span> conversations</b> out of <span class='num'>82,863</span> door attempts. Most of canvassing is nobody being home — about one door in six opens."},
+ {topic:"Our signs",q:"How many lawn signs have we actually got in the ground?",
+  opts:["About 200","About 400","About 700","About 1,500"],a:2,
+  fact:"<b>715 signs installed</b> — 535 small, 174 big and 6 medium. Every one of them was carried, hammered in and logged by a volunteer."},
  {topic:"Our people",q:"How many volunteers have done canvassing or phone work for this campaign?",
   opts:["43","134","433","1,020"],a:2,
   fact:"<b><span class='num'>433</span> people.</b> <span class='num'>345</span> have signed up for a shift, and between them they have taken <span class='num'>993</span> shifts."},
- {topic:"Ontario politics",q:"How many seats are there in the Ontario Legislature?",
-  opts:["87","107","124","338"],a:2,
-  fact:"<b>124 seats</b> at Queen's Park. Scarborough Southwest is one of them — and on September 3 this riding picks who fills it."},
- {topic:"Ontario politics",q:"Who is the Premier of Ontario?",
-  opts:["Doug Ford","Bonnie Crombie","Kathleen Wynne","Marit Stiles"],a:0,
-  fact:"<b>Doug Ford</b>, PC, premier since 2018. Every door you knock in this by-election is a chance to change the arithmetic at Queen's Park."},
- {topic:"Ontario politics",q:"Who leads the Ontario Liberal Party right now?",
-  opts:["Bonnie Crombie","John Fraser","Steven Del Duca","Kathleen Wynne"],a:1,
-  fact:"<b>John Fraser, as interim leader.</b> Bonnie Crombie resigned in January 2026 after a difficult leadership review. Members choose a permanent leader in November."},
- {topic:"Ontario politics",q:"Who was the last Liberal Premier of Ontario?",
-  opts:["Dalton McGuinty","Kathleen Wynne","David Peterson","Bonnie Crombie"],a:1,
-  fact:"<b>Kathleen Wynne</b>, premier from 2013 to 2018, and the first woman to hold the job in Ontario. Doug Ford has held it ever since."},
  {topic:"The candidate",q:"How long ago did Ahsanul Hafiz come to Canada?",
   opts:["About 5 years","About 12 years","More than 25 years","He was born here"],a:2,
   fact:"<b>More than 25 years ago.</b> He settled in Scarborough and never left — he lives in this riding with his wife and two sons."},
@@ -244,21 +298,41 @@ var QUESTIONS = [
  {topic:"The candidate",q:"What did Ahsanul Hafiz get his degree in?",
   opts:["Law","Mathematics","Business","Engineering"],a:1,
   fact:"<b>Mathematics.</b> He now owns and runs several small businesses and has hired a lot of young people across Ontario."},
+ {topic:"The candidate",q:"How many children does Ahsanul Hafiz have?",
+  opts:["None","One","Two","Four"],a:2,
+  fact:"<b>Two sons.</b> He and his wife have raised them right here in Scarborough Southwest."},
+ {topic:"The candidate",q:"How many stores does Ahsanul Hafiz own?",
+  opts:["3","12","32","60"],a:2,
+  fact:"<b>32.</b> He started as a delivery driver on minimum wage and now runs 32 stores, hiring young people across Ontario."},
+ {topic:"Know your team",q:"How old is Michael Fontein, the campaign manager?",
+  opts:["27","33","41","52"],a:1,
+  fact:"<b>33.</b> Which, for the number of hours he has been in that office, seems generous."},
  {topic:"Know your office",q:"What street is the campaign office on?",
   opts:["Danforth Ave","Kingston Rd","Eglinton Ave E","Midland Ave"],a:1,
   fact:"<b>2500 Kingston Rd.</b> If you have ever eaten a slice of pizza standing up at 8pm surrounded by call sheets, you know it."}
 ];
 
 var RANKS = [
- {min:15,t:"Campaign Manager",l:"Perfect. Genuinely, how?"},
- {min:13,t:"Field Director",l:"You have been paying attention out there."},
- {min:10,t:"Shift Captain",l:"Solid. You know this campaign well."},
- {min:7,t:"Regular Volunteer",l:"Respectable. A few more shifts and you'll have it."},
- {min:4,t:"First-Timer",l:"You showed up, and that counts for more than trivia."},
- {min:0,t:"Here for the Pizza",l:"Honestly? Also a valid reason to come out."}
+ {pct:1.00,t:"Campaign Manager",l:"Perfect. Genuinely, how?"},
+ {pct:0.88,t:"Field Director",l:"You have been paying attention out there."},
+ {pct:0.66,t:"Shift Captain",l:"Solid. You know this campaign well."},
+ {pct:0.44,t:"Regular Volunteer",l:"Respectable. A few more shifts and you'll have it."},
+ {pct:0.25,t:"First-Timer",l:"You showed up, and that counts for more than trivia."},
+ {pct:0.00,t:"Here for the Pizza",l:"Honestly? Also a valid reason to come out."}
 ];
+QUESTIONS.forEach(function(q){ q.points = (q.type === "multi") ? q.correct.length : 1; });
+var TOTAL = QUESTIONS.reduce(function(n,q){ return n + q.points; }, 0);
+var NQ = QUESTIONS.length;
+var WORDS = {15:"Fifteen",16:"Sixteen",17:"Seventeen",18:"Eighteen",19:"Nineteen",20:"Twenty"};
 
 var i=0, score=0, locked=false, started=0, player="", results=[];
+var PLAYED_KEY = "hafizTriviaPlayed";
+function played(){
+  try { return JSON.parse(localStorage.getItem(PLAYED_KEY) || "null"); } catch(e){ return null; }
+}
+function markPlayed(rec){
+  try { localStorage.setItem(PLAYED_KEY, JSON.stringify(rec)); } catch(e){}
+}
 var $ = function(id){ return document.getElementById(id); };
 var esc = function(s){ return String(s).replace(/[<>&"]/g, function(c){
   return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]; }); };
@@ -269,8 +343,9 @@ function buildTally(){
 function paintTally(){
   var b = $("tally").children;
   for (var n=0; n<b.length; n++){
+    var part = (results[n] === false && gotPer[n] > 0);
     b[n].className = "box" +
-      (results[n]===true ? " right" : results[n]===false ? " wrong" : "") +
+      (results[n]===true ? " right" : part ? " part" : results[n]===false ? " wrong" : "") +
       (n===i && results[n]===undefined ? " now" : "");
   }
 }
@@ -281,13 +356,55 @@ function render(){
   $("qtext").textContent = q.q;
   $("reveal").innerHTML = "";
   $("next").classList.add("hide");
+  picks = [];
   $("opts").innerHTML = q.opts.map(function(o,n){
     return '<li><button class="opt" data-n="'+n+'"><span class="tick"></span><span>'+
       esc(o)+'</span><span class="key">'+(n+1)+'</span></button></li>'; }).join("");
   Array.prototype.forEach.call(document.querySelectorAll(".opt"), function(b){
-    b.addEventListener("click", function(){ choose(+b.dataset.n); }); });
+    b.addEventListener("click", function(){
+      if (q.type === "multi") toggle(+b.dataset.n); else choose(+b.dataset.n);
+    });
+  });
+  if (q.type === "multi"){
+    $("qtext").insertAdjacentHTML("afterend",
+      '<p class="note" id="pickHint">Choose ' + q.correct.length +
+      '. One point for each right answer.</p>');
+  }
   paintTally();
 }
+var picks = [];
+function toggle(n){
+  if (locked) return;
+  var q = QUESTIONS[i], at = picks.indexOf(n);
+  if (at > -1) picks.splice(at, 1);
+  else if (picks.length < q.correct.length) picks.push(n);
+  Array.prototype.forEach.call(document.querySelectorAll(".opt"), function(b){
+    b.classList.toggle("picked", picks.indexOf(+b.dataset.n) > -1);
+  });
+  if (picks.length === q.correct.length) gradeMulti();
+}
+function gradeMulti(){
+  locked = true;
+  var q = QUESTIONS[i];
+  var got = picks.filter(function(n){ return q.correct.indexOf(n) > -1; }).length;
+  score += got;
+  results[i] = (got === q.correct.length);
+  gotPer[i] = got;
+  Array.prototype.forEach.call(document.querySelectorAll(".opt"), function(b){
+    var bn = +b.dataset.n; b.disabled = true;
+    if (q.correct.indexOf(bn) > -1) b.classList.add("answer");
+    else if (picks.indexOf(bn) > -1) b.classList.add("miss");
+  });
+  var hint = $("pickHint"); if (hint) hint.remove();
+  $("reveal").innerHTML = '<div class="fact ' + (got === q.correct.length ? "yes" : got ? "part" : "no") +
+    '"><span class="verdict">' + got + ' of ' + q.correct.length + ' right &middot; +' + got +
+    (got === 1 ? " point" : " points") + '</span>' + q.fact + '</div>';
+  $("next").textContent = (i === QUESTIONS.length-1) ? "See the results" : "Next question";
+  $("next").classList.remove("hide");
+  $("next").focus();
+  paintTally();
+}
+var gotPer = [];
 function choose(n){
   if (locked) return;
   locked = true;
@@ -313,15 +430,16 @@ function finish(){
   $("quiz").classList.add("hide");
   $("done").classList.remove("hide");
   $("final").textContent = score;
-  var r = RANKS.filter(function(x){ return score >= x.min; })[0];
+  var r = RANKS.filter(function(x){ return score >= Math.ceil(x.pct * TOTAL); })[0];
   $("rank").textContent = r.t;
   $("rankline").textContent = r.l;
-  $("stamp").textContent = score+" of "+QUESTIONS.length;
+  $("stamp").textContent = score+" of "+TOTAL;
+  markPlayed({name:player, score:score, seconds:secs});
   saveLocal(player, score, secs);
   if (!ENDPOINT){ $("saved").textContent = "Saved to this device."; paintBoard(localBoard()); paintTally(); return; }
   $("saved").textContent = "Posting your score…";
   fetch(ENDPOINT, {method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"},
-    body: JSON.stringify({name:player, score:score, seconds:secs,
+    body: JSON.stringify({name:player, score:score, outOf:TOTAL, seconds:secs,
                           device:(navigator.userAgent||"").slice(0,60)})})
     .then(function(){ $("saved").textContent = "Score posted. You are on the board."; })
     .catch(function(){ $("saved").textContent = "Could not reach the leaderboard — your score is saved on this device."; })
@@ -369,7 +487,7 @@ function paintBoard(rows){
     return '<li class="'+(n===0?"top1 ":"")+(me?"me":"")+'">'+
       '<span class="pos">'+(n+1)+'</span>'+
       '<span class="who">'+esc(r.name)+'</span>'+
-      '<span class="pts">'+r.score+'/15</span>'+
+      '<span class="pts">'+r.score+'/'+TOTAL+'</span>'+
       '<span class="tm">'+mmss(r.seconds)+'</span></li>';
   }).join("");
 }
@@ -396,26 +514,65 @@ $("name").addEventListener("input", function(){
 $("name").addEventListener("keydown", function(e){
   if (e.key === "Enter" && !$("go").disabled) $("go").click();
 });
-$("go").addEventListener("click", function(){
-  player = $("name").value.trim().replace(/\s+/g," ").slice(0,24);
-  started = Date.now();
+function beginWith(nm){
+  player = nm; started = Date.now();
   $("start").classList.add("hide");
   $("quiz").classList.remove("hide");
   render();
+}
+$("go").addEventListener("click", function(){
+  var nm = $("name").value.trim().replace(/\s+/g," ").slice(0,24);
+  $("nameMsg").textContent = "";
+  if (!ENDPOINT){ beginWith(nm); return; }
+  // Ask the sheet whether this name already has a score, so nobody plays
+  // eighteen questions only to be turned away at the end.
+  $("go").disabled = true; $("go").textContent = "Checking…";
+  var cb = "nc"+Date.now(), sc = document.createElement("script"), done = false;
+  var give = function(taken){
+    if (done) return; done = true;
+    $("go").disabled = false; $("go").textContent = "Start the count";
+    delete window[cb]; if (sc.parentNode) sc.remove();
+    if (taken){
+      $("nameMsg").textContent = '"'+nm+'" has already played. Add a last initial and try again.';
+    } else beginWith(nm);
+  };
+  window[cb] = function(d){ give(!!(d && d.taken)); };
+  sc.onerror = function(){ give(false); };
+  sc.src = ENDPOINT + "?check=" + encodeURIComponent(nm) + "&callback=" + cb;
+  document.body.appendChild(sc);
+  setTimeout(function(){ give(false); }, 6000);
 });
 $("next").addEventListener("click", next);
 $("again").addEventListener("click", function(){
-  i=0; score=0; results.length=0; started=Date.now();
-  $("done").classList.add("hide");
-  $("quiz").classList.remove("hide");
-  render();
+  // Kept for the office tablet: ?reset=1 in the URL clears the lock for the next person.
+  location.href = location.pathname + "?reset=1";
 });
 $("refresh").addEventListener("click", loadBoard);
 document.addEventListener("keydown", function(e){
   if ($("quiz").classList.contains("hide")) return;
-  if (e.key >= "1" && e.key <= "4" && !locked) choose(+e.key - 1);
+  if (e.key >= "1" && e.key <= "6" && !locked){
+    var q = QUESTIONS[i], n = +e.key - 1;
+    if (n < q.opts.length){ if (q.type === "multi") toggle(n); else choose(n); }
+  }
   else if ((e.key === "Enter" || e.key === " ") && locked){ e.preventDefault(); next(); }
 });
+if (/[?&]reset=1/.test(location.search)){
+  try { localStorage.removeItem(PLAYED_KEY); } catch(e){}
+}
+var prev = played();
+if (prev){
+  $("start").classList.add("hide");
+  $("already").classList.remove("hide");
+  player = prev.name || "";
+  $("prevStamp").textContent = (prev.score != null ? prev.score + " of " + TOTAL : "");
+  $("prevLine").textContent = (prev.name || "You") + ", you have already had your go" +
+    (prev.score != null ? " and scored " + prev.score + " out of " + TOTAL + "." : ".");
+}
+[["countA",NQ],["countB",NQ],["countC",TOTAL]].forEach(function(pair){
+  var el = $(pair[0]); if (el) el.textContent = pair[1];
+});
+if ($("countWord")) $("countWord").textContent = WORDS[NQ] || NQ;
+if ($("countD")) $("countD").textContent = TOTAL;
 buildTally();
 loadBoard();
 </script>
