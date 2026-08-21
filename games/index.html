@@ -321,6 +321,35 @@ var RANKS = [
  {pct:0.00,t:"Here for the Pizza",l:"Honestly? Also a valid reason to come out."}
 ];
 QUESTIONS.forEach(function(q){ q.points = (q.type === "multi") ? q.correct.length : 1; });
+
+/* Shuffle answer positions.
+   Written because every pick-three had its answers in slots 1-3, and across the
+   single-answer questions the right answer was never the last option — both are
+   patterns a sharp player spots within a few questions.
+   Numeric ladders ("About 4,000 / 12,000 / 40,000") keep their ascending order,
+   since scrambling those just makes them hard to read. */
+function isLadder(q){
+  return q.opts.every(function(o){ return /^(About\s+)?[\d.,]+%?$/.test(String(o).trim()); });
+}
+function shuffleOpts(q){
+  var order = q.opts.map(function(_, n){ return n; });
+  for (var k = order.length - 1; k > 0; k--){
+    var j = Math.floor(Math.random() * (k + 1)), t = order[k]; order[k] = order[j]; order[j] = t;
+  }
+  var oldOpts = q.opts.slice();
+  q.opts = order.map(function(oldIdx){ return oldOpts[oldIdx]; });
+  if (q.type === "multi"){
+    var oldCorrect = q.correct.slice();
+    q.correct = [];
+    order.forEach(function(oldIdx, newIdx){
+      if (oldCorrect.indexOf(oldIdx) > -1) q.correct.push(newIdx);
+    });
+    q.correct.sort(function(a,b){ return a - b; });
+  } else {
+    q.a = order.indexOf(q.a);
+  }
+}
+QUESTIONS.forEach(function(q){ if (q.type === "multi" || !isLadder(q)) shuffleOpts(q); });
 var TOTAL = QUESTIONS.reduce(function(n,q){ return n + q.points; }, 0);
 var NQ = QUESTIONS.length;
 var WORDS = {15:"Fifteen",16:"Sixteen",17:"Seventeen",18:"Eighteen",19:"Nineteen",20:"Twenty"};
