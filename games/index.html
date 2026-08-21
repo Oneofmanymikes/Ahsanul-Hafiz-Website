@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Campaign Trivia — Ahsanul Hafiz for Scarborough Southwest</title>
+<meta name="description" content="A 15-question trivia game for volunteers on the Ahsanul Hafiz campaign. Real numbers from our own canvass and call records.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Campaign Trivia — Scarborough Southwest">
+<meta property="og:description" content="How well do you know this campaign? 15 questions, live leaderboard.">
+<link rel="icon" href="/apple-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@500;600&family=Public+Sans:wght@400;600;800&display=swap">
+<style>
+  :root{
+    --paper:#EDECE8; --card:#FFFFFF; --ink:#16171B; --mut:#63666E;
+    --line:#D6D4CE; --accent:#C81E27; --accent-soft:#F6E4E4;
+    --ok:#1F6F43; --ok-soft:#E3F0E7; --no:#A8232B; --no-soft:#F8E6E6;
+    --gold:#8A6D1F; --shadow:0 14px 34px rgba(20,16,16,.10);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#0F1014; --card:#191B21; --ink:#EDEEF1; --mut:#9AA0AB;
+      --line:#2C2F38; --accent:#FF4A52; --accent-soft:#2A1A1C;
+      --ok:#5FD08A; --ok-soft:#16281E; --no:#FF7078; --no-soft:#2A1618;
+      --gold:#E3C46A; --shadow:0 14px 34px rgba(0,0,0,.5);
+    }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Public Sans",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased;
+    display:flex; justify-content:center; padding:22px 16px 56px;
+  }
+  .wrap{width:100%; max-width:660px; display:flex; flex-direction:column; gap:18px}
+  .head{display:flex; flex-direction:column; gap:6px}
+  .eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px; font-weight:600;
+           letter-spacing:.19em; text-transform:uppercase; color:var(--accent)}
+  h1{font-family:Anton,"Public Sans",Impact,sans-serif; font-weight:400;
+     font-size:clamp(36px,9.5vw,60px); line-height:.94; margin:0;
+     text-transform:uppercase; text-wrap:balance}
+  h1 em{font-style:normal; color:var(--accent)}
+  .sub{color:var(--mut); font-size:15.5px; max-width:46ch; margin:2px 0 0}
+
+  .tally{display:flex; flex-wrap:wrap; gap:5px}
+  .box{width:19px; height:19px; border:1.5px solid var(--line); border-radius:2px;
+       background:var(--card); position:relative}
+  .box.right::after,.box.wrong::after{content:""; position:absolute; inset:2px; background-image:linear-gradient(45deg,transparent 42%,currentColor 42%,currentColor 58%,transparent 58%),linear-gradient(-45deg,transparent 42%,currentColor 42%,currentColor 58%,transparent 58%)}
+  .box.right{border-color:var(--ok); color:var(--ok)}
+  .box.wrong{border-color:var(--no); color:var(--no)}
+  .box.now{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+
+  .card{background:var(--card); border:1px solid var(--line); border-radius:4px;
+        box-shadow:var(--shadow); padding:26px 24px 24px;
+        display:flex; flex-direction:column; gap:16px}
+  .qmeta{display:flex; justify-content:space-between; align-items:baseline; gap:12px;
+         font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:600;
+         letter-spacing:.15em; text-transform:uppercase; color:var(--mut);
+         border-bottom:1px solid var(--line); padding-bottom:12px; margin:0}
+  .qmeta b{color:var(--accent); font-weight:600}
+  .q{font-family:Anton,sans-serif; font-weight:400; text-transform:uppercase;
+     font-size:clamp(23px,5.2vw,31px); line-height:1.08; margin:0; text-wrap:balance}
+
+  label.fld{font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:600;
+            letter-spacing:.15em; text-transform:uppercase; color:var(--mut); display:block; margin-bottom:7px}
+  input[type=text]{width:100%; font:inherit; font-size:19px; padding:14px 15px; color:var(--ink);
+    background:var(--paper); border:1.5px solid var(--line); border-radius:3px}
+  input[type=text]:focus{outline:3px solid var(--accent); outline-offset:1px; border-color:var(--accent)}
+
+  .opts{display:flex; flex-direction:column; gap:9px; list-style:none; margin:0; padding:0}
+  .opt{display:flex; align-items:flex-start; gap:13px; width:100%; text-align:left;
+    font:inherit; font-size:16.5px; color:var(--ink); cursor:pointer; background:var(--card);
+    border:1.5px solid var(--line); border-radius:3px; padding:13px 15px;
+    transition:border-color .13s, background .13s, transform .08s}
+  .opt:hover:not(:disabled){border-color:var(--accent); transform:translateX(2px)}
+  .opt:disabled{cursor:default}
+  .opt:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  .tick{flex:0 0 auto; width:23px; height:23px; margin-top:1px; border:1.5px solid var(--line);
+        border-radius:2px; position:relative}
+  .opt .key{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--mut);
+            margin-left:auto; padding-left:10px; align-self:center}
+  .opt.picked .tick::after,.opt.answer .tick::after{content:""; position:absolute; inset:3px; color:var(--accent); animation:stamp .16s ease-out; background-image:linear-gradient(45deg,transparent 42%,currentColor 42%,currentColor 58%,transparent 58%),linear-gradient(-45deg,transparent 42%,currentColor 42%,currentColor 58%,transparent 58%)}
+  @keyframes stamp{from{transform:scale(2.1) rotate(-14deg); opacity:0} to{transform:none; opacity:1}}
+  .opt.answer{border-color:var(--ok); background:var(--ok-soft)}
+  .opt.answer .tick{border-color:var(--ok)}
+  .opt.answer .tick::after{color:var(--ok)}
+  .opt.answer.picked .tick::after{color:var(--ok)}
+  .opt.miss{border-color:var(--no); background:var(--no-soft)}
+  .opt.miss .tick{border-color:var(--no)}
+  .opt.miss .tick::after{color:var(--no)}
+
+  .fact{border-left:3px solid var(--accent); background:var(--accent-soft); padding:14px 16px;
+        border-radius:0 3px 3px 0; font-size:15.5px; animation:rise .2s ease-out}
+  @keyframes rise{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+  .fact .verdict{font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:600;
+    letter-spacing:.16em; text-transform:uppercase; display:block; margin-bottom:5px}
+  .fact.yes{border-left-color:var(--ok); background:var(--ok-soft)}
+  .fact.no{border-left-color:var(--no); background:var(--no-soft)}
+  .fact.yes .verdict{color:var(--ok)} .fact.no .verdict{color:var(--no)}
+  .num{font-family:"IBM Plex Mono",monospace; font-weight:600; font-variant-numeric:tabular-nums}
+
+  .btn{font:inherit; font-weight:800; font-size:16px; background:var(--accent); color:#fff;
+    border:0; border-radius:3px; padding:15px 26px; cursor:pointer; align-self:flex-start;
+    transition:filter .13s, transform .08s}
+  .btn:hover{filter:brightness(1.08)} .btn:active{transform:translateY(1px)}
+  .btn:focus-visible{outline:3px solid var(--ink); outline-offset:2px}
+  .btn[disabled]{opacity:.45; cursor:not-allowed}
+  .btn.ghost{background:transparent; color:var(--ink); border:1.5px solid var(--line)}
+
+  .score{font-family:Anton,sans-serif; font-size:clamp(58px,17vw,104px); line-height:.86;
+         color:var(--accent); font-variant-numeric:tabular-nums; margin:0}
+  .score small{font-size:.32em; color:var(--mut)}
+  .rank{font-family:Anton,sans-serif; text-transform:uppercase;
+        font-size:clamp(21px,4.6vw,27px); line-height:1.1; margin:0}
+
+  .lb{list-style:none; margin:0; padding:0; display:flex; flex-direction:column}
+  .lb li{display:flex; align-items:center; gap:12px; padding:9px 0;
+         border-bottom:1px solid var(--line); font-size:15.5px}
+  .lb li:last-child{border-bottom:0}
+  .lb .pos{font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--mut);
+           width:26px; flex:0 0 auto; font-variant-numeric:tabular-nums}
+  .lb .who{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .lb .pts{font-family:"IBM Plex Mono",monospace; font-weight:600; font-variant-numeric:tabular-nums}
+  .lb .tm{font-family:"IBM Plex Mono",monospace; font-size:12.5px; color:var(--mut);
+          width:56px; text-align:right; flex:0 0 auto}
+  .lb li.top1 .pos,.lb li.top1 .pts{color:var(--gold)}
+  .lb li.me{background:var(--accent-soft); margin:0 -10px; padding:9px 10px; border-radius:3px}
+  .lb li.me .who{font-weight:800}
+
+  .foot{color:var(--mut); font-size:13px; text-align:center}
+  .foot a{color:var(--accent)}
+  .note{font-size:13.5px; color:var(--mut); margin:0}
+  .hide{display:none !important}
+  @media (prefers-reduced-motion:reduce){*{animation:none !important; transition:none !important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <span class="eyebrow">Ahsanul Hafiz Campaign &middot; Volunteer Night</span>
+    <h1>How well do you know <em>this campaign?</em></h1>
+    <p class="sub">Fifteen questions on Scarborough Southwest, Ontario politics, and the candidate
+      you have been knocking on doors for. Every number is real, pulled from our own call logs
+      and canvass records.</p>
+  </header>
+
+  <div class="tally" id="tally" aria-hidden="true"></div>
+
+  <main class="card">
+    <!-- NAME -->
+    <section id="start">
+      <p class="qmeta"><span>15 questions</span><span>Live leaderboard</span></p>
+      <div>
+        <label class="fld" for="name">Your name for the leaderboard</label>
+        <input type="text" id="name" maxlength="24" autocomplete="given-name"
+               placeholder="e.g. Ayman M" spellcheck="false">
+      </div>
+      <p class="note">First name and last initial is plenty. Your score goes on the board for
+        tonight — nothing else is saved.</p>
+      <button class="btn" id="go" disabled>Start the count</button>
+      <p class="note">Tap an answer, or press <b>1</b>&ndash;<b>4</b> on a keyboard.</p>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="hide">
+      <p class="qmeta"><span>Question <b id="qn">1</b> of 15</span><span id="topic"></span></p>
+      <h2 class="q" id="qtext"></h2>
+      <ul class="opts" id="opts"></ul>
+      <div id="reveal"></div>
+      <button class="btn hide" id="next">Next question</button>
+    </section>
+
+    <!-- RESULT -->
+    <section id="done" class="hide">
+      <p class="qmeta"><span>Results declared</span><span id="stamp"></span></p>
+      <p class="score"><span id="final">0</span><small>/15</small></p>
+      <h2 class="rank" id="rank"></h2>
+      <p class="note" id="rankline"></p>
+      <p class="note" id="saved"></p>
+      <button class="btn ghost" id="again">Play again</button>
+    </section>
+  </main>
+
+  <!-- LEADERBOARD -->
+  <section class="card" id="boardCard">
+    <p class="qmeta"><span>Tonight's leaderboard</span><span id="players"></span></p>
+    <ol class="lb" id="board"><li><span class="who" style="color:var(--mut)">Loading…</span></li></ol>
+    <button class="btn ghost" id="refresh" style="padding:10px 18px; font-size:14px">Refresh</button>
+  </section>
+
+  <p class="foot">Election day is Thursday, September 3, 2026. Advance polls open August 26.<br>
+    <a href="/">votehafiz.ca</a></p>
+</div>
+
+<script>
+/* Apps Script leaderboard endpoint. Paste the /exec URL here after deploying
+   Web Apps/trivia-backend. Leave blank and the game still plays — the board just
+   stays local to this device. */
+var ENDPOINT = "https://script.google.com/macros/s/AKfycbyoL82v08epacnE1amV5Zl48UmET7afbhq-SreOk49PVhNrpHuGxvPygD-S_UvrvcQvHg/exec";
+
+var QUESTIONS = [
+ {topic:"Riding history",q:"Since 1999, how many times have the Liberals won Scarborough Southwest provincially?",
+  opts:["Once","Twice","Four times","Never"],a:2,
+  fact:"<b>Four in a row.</b> Lorenzo Berardinetti took it for the Liberals in <span class='num'>2003, 2007, 2011 and 2014</span> — fifteen straight years. Doly Begum then won it for the NDP in 2018 and held it until this year."},
+ {topic:"Why we are here",q:"Why is there a by-election in Scarborough Southwest at all?",
+  opts:["The MPP retired","Doly Begum resigned after winning the federal seat","The result was overturned","Boundaries were redrawn"],a:1,
+  fact:"<b>Doly Begum resigned.</b> She won the federal seat here in the April 2026 by-election — as a Liberal — which opened up her provincial seat. Ford called the by-election on August 5."},
+ {topic:"The ballot",q:"How many candidates is Ahsanul Hafiz running against on September 3?",
+  opts:["One","Two","Three","Five"],a:2,
+  fact:"<b>Three.</b> Fatima Shaban for the NDP, Dr. Noor Tarun for the PCs, and Mark Bekkering for the Greens."},
+ {topic:"Our phones",q:"How many calls has this campaign's dialer made?",
+  opts:["About 4,000","About 12,000","About 40,000","About 200,000"],a:2,
+  fact:"<b><span class='num'>40,644</span> dial attempts</b>, reaching <span class='num'>19,394</span> different phone numbers across <span class='num'>60</span> days of dialling."},
+ {topic:"Our phones",q:"On our busiest single day, how many calls went out?",
+  opts:["412","1,105","2,853","6,200"],a:2,
+  fact:"<b><span class='num'>2,853</span> calls on July 14, 2026.</b> One day. At ninety seconds a call that is nearly three days of talking, crammed into one."},
+ {topic:"Our doors",q:"How many real conversations have we had at the doors?",
+  opts:["About 1,400","About 5,000","About 14,000","About 50,000"],a:2,
+  fact:"<b><span class='num'>13,991</span> conversations</b> out of <span class='num'>82,863</span> door attempts. Most of canvassing is nobody being home — about one door in six opens."},
+ {topic:"Our people",q:"How many volunteers have done canvassing or phone work for this campaign?",
+  opts:["43","134","433","1,020"],a:2,
+  fact:"<b><span class='num'>433</span> people.</b> <span class='num'>345</span> have signed up for a shift, and between them they have taken <span class='num'>993</span> shifts."},
+ {topic:"Our people",q:"What is the most common language spoken by volunteers in our database?",
+  opts:["English","Bengali","Tamil","Tagalog"],a:1,
+  fact:"<b>Bengali</b>, by a mile — <span class='num'>465</span> volunteers, against 87 for English. Urdu, Arabic and Tagalog follow."},
+ {topic:"Voter ID",q:"Of the voters we have identified by phone, which answer came up most often?",
+  opts:["Liberal","Undecided","Not Liberal","Won't say"],a:1,
+  fact:"<b>Undecided</b> — <span class='num'>650</span> of them, just ahead of <span class='num'>585</span> Liberals. Undecided voters are not a dead end; they are the whole reason we knock twice."},
+ {topic:"Ontario politics",q:"Who leads the Ontario Liberal Party right now?",
+  opts:["Bonnie Crombie","John Fraser","Steven Del Duca","Kathleen Wynne"],a:1,
+  fact:"<b>John Fraser, as interim leader.</b> Bonnie Crombie resigned in January 2026 after a difficult leadership review. Members choose a permanent leader in November."},
+ {topic:"Ontario politics",q:"Who was the last Liberal Premier of Ontario?",
+  opts:["Dalton McGuinty","Kathleen Wynne","David Peterson","Bonnie Crombie"],a:1,
+  fact:"<b>Kathleen Wynne</b>, premier from 2013 to 2018, and the first woman to hold the job in Ontario. Doug Ford has held it ever since."},
+ {topic:"The candidate",q:"How long ago did Ahsanul Hafiz come to Canada?",
+  opts:["About 5 years","About 12 years","More than 25 years","He was born here"],a:2,
+  fact:"<b>More than 25 years ago.</b> He settled in Scarborough and never left — he lives in this riding with his wife and two sons."},
+ {topic:"The candidate",q:"What was his first job in Canada?",
+  opts:["Delivery driver","Teacher","Bank teller","Taxi dispatcher"],a:0,
+  fact:"<b>A delivery driver on minimum wage</b>, while he was still studying. Worth remembering when someone at the door says politicians have no idea what it costs to live."},
+ {topic:"The candidate",q:"What did Ahsanul Hafiz get his degree in?",
+  opts:["Law","Mathematics","Business","Engineering"],a:1,
+  fact:"<b>Mathematics.</b> He now owns and runs several small businesses and has hired a lot of young people across Ontario."},
+ {topic:"Know your office",q:"What street is the campaign office on?",
+  opts:["Danforth Ave","Kingston Rd","Eglinton Ave E","Midland Ave"],a:1,
+  fact:"<b>2500 Kingston Rd.</b> If you have ever eaten a slice of pizza standing up at 8pm surrounded by call sheets, you know it."}
+];
+
+var RANKS = [
+ {min:15,t:"Campaign Manager",l:"Perfect. Genuinely, how?"},
+ {min:13,t:"Field Director",l:"You have been paying attention out there."},
+ {min:10,t:"Shift Captain",l:"Solid. You know this campaign well."},
+ {min:7,t:"Regular Volunteer",l:"Respectable. A few more shifts and you'll have it."},
+ {min:4,t:"First-Timer",l:"You showed up, and that counts for more than trivia."},
+ {min:0,t:"Here for the Pizza",l:"Honestly? Also a valid reason to come out."}
+];
+
+var i=0, score=0, locked=false, started=0, player="", results=[];
+var $ = function(id){ return document.getElementById(id); };
+var esc = function(s){ return String(s).replace(/[<>&"]/g, function(c){
+  return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]; }); };
+
+function buildTally(){
+  $("tally").innerHTML = QUESTIONS.map(function(){ return '<span class="box"></span>'; }).join("");
+}
+function paintTally(){
+  var b = $("tally").children;
+  for (var n=0; n<b.length; n++){
+    b[n].className = "box" +
+      (results[n]===true ? " right" : results[n]===false ? " wrong" : "") +
+      (n===i && results[n]===undefined ? " now" : "");
+  }
+}
+function render(){
+  var q = QUESTIONS[i]; locked = false;
+  $("qn").textContent = i+1;
+  $("topic").textContent = q.topic;
+  $("qtext").textContent = q.q;
+  $("reveal").innerHTML = "";
+  $("next").classList.add("hide");
+  $("opts").innerHTML = q.opts.map(function(o,n){
+    return '<li><button class="opt" data-n="'+n+'"><span class="tick"></span><span>'+
+      esc(o)+'</span><span class="key">'+(n+1)+'</span></button></li>'; }).join("");
+  Array.prototype.forEach.call(document.querySelectorAll(".opt"), function(b){
+    b.addEventListener("click", function(){ choose(+b.dataset.n); }); });
+  paintTally();
+}
+function choose(n){
+  if (locked) return;
+  locked = true;
+  var q = QUESTIONS[i], right = (n === q.a);
+  results[i] = right;
+  if (right) score++;
+  Array.prototype.forEach.call(document.querySelectorAll(".opt"), function(b){
+    var bn = +b.dataset.n; b.disabled = true;
+    if (bn === q.a) b.classList.add("answer");
+    if (bn === n){ b.classList.add("picked"); if (!right) b.classList.add("miss"); }
+  });
+  $("reveal").innerHTML = '<div class="fact '+(right?"yes":"no")+'"><span class="verdict">'+
+    (right?"Correct":"Not quite")+'</span>'+q.fact+'</div>';
+  $("next").textContent = (i === QUESTIONS.length-1) ? "See the results" : "Next question";
+  $("next").classList.remove("hide");
+  $("next").focus();
+  paintTally();
+}
+function next(){ if (i < QUESTIONS.length-1){ i++; render(); } else finish(); }
+
+function finish(){
+  var secs = Math.round((Date.now()-started)/1000);
+  $("quiz").classList.add("hide");
+  $("done").classList.remove("hide");
+  $("final").textContent = score;
+  var r = RANKS.filter(function(x){ return score >= x.min; })[0];
+  $("rank").textContent = r.t;
+  $("rankline").textContent = r.l;
+  $("stamp").textContent = score+" of "+QUESTIONS.length;
+  saveLocal(player, score, secs);
+  if (!ENDPOINT){ $("saved").textContent = "Saved to this device."; paintBoard(localBoard()); paintTally(); return; }
+  $("saved").textContent = "Posting your score…";
+  fetch(ENDPOINT, {method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"},
+    body: JSON.stringify({name:player, score:score, seconds:secs,
+                          device:(navigator.userAgent||"").slice(0,60)})})
+    .then(function(){ $("saved").textContent = "Score posted. You are on the board."; })
+    .catch(function(){ $("saved").textContent = "Could not reach the leaderboard — your score is saved on this device."; })
+    .then(function(){ setTimeout(loadBoard, 900); });
+  paintTally();
+}
+
+/* ---- leaderboard ---- */
+function localBoard(){
+  try {
+    var raw = localStorage.getItem("hafizTrivia");
+    var all = raw ? JSON.parse(raw) : [];
+    var best = {};
+    all.forEach(function(r){
+      var k = (r.name||"").toLowerCase();
+      if (!best[k] || r.score > best[k].score ||
+          (r.score === best[k].score && r.seconds < best[k].seconds)) best[k] = r;
+    });
+    return Object.keys(best).map(function(k){ return best[k]; })
+      .sort(function(a,b){ return b.score-a.score || a.seconds-b.seconds; }).slice(0,25);
+  } catch(e){ return []; }
+}
+function saveLocal(name, sc, secs){
+  try {
+    var raw = localStorage.getItem("hafizTrivia");
+    var all = raw ? JSON.parse(raw) : [];
+    all.push({name:name, score:sc, seconds:secs});
+    localStorage.setItem("hafizTrivia", JSON.stringify(all.slice(-200)));
+  } catch(e){}
+}
+function mmss(s){
+  s = Math.max(0, Math.round(s||0));
+  return Math.floor(s/60)+":"+("0"+(s%60)).slice(-2);
+}
+function paintBoard(rows){
+  if (!rows || !rows.length){
+    $("board").innerHTML = '<li><span class="who" style="color:var(--mut)">'+
+      'No scores yet. Be the first.</span></li>';
+    $("players").textContent = "";
+    return;
+  }
+  $("players").textContent = rows.length + (rows.length === 1 ? " player" : " players");
+  $("board").innerHTML = rows.map(function(r, n){
+    var me = player && r.name && r.name.toLowerCase() === player.toLowerCase();
+    return '<li class="'+(n===0?"top1 ":"")+(me?"me":"")+'">'+
+      '<span class="pos">'+(n+1)+'</span>'+
+      '<span class="who">'+esc(r.name)+'</span>'+
+      '<span class="pts">'+r.score+'/15</span>'+
+      '<span class="tm">'+mmss(r.seconds)+'</span></li>';
+  }).join("");
+}
+function loadBoard(){
+  if (!ENDPOINT){ paintBoard(localBoard()); return; }
+  var cb = "cb"+Date.now();
+  var s = document.createElement("script");
+  var done = false;
+  window[cb] = function(d){
+    done = true;
+    paintBoard((d && d.board) || []);
+    delete window[cb]; s.remove();
+  };
+  s.src = ENDPOINT + (ENDPOINT.indexOf("?")>-1 ? "&" : "?") + "callback=" + cb;
+  s.onerror = function(){ paintBoard(localBoard()); delete window[cb]; s.remove(); };
+  document.body.appendChild(s);
+  setTimeout(function(){ if (!done) paintBoard(localBoard()); }, 6000);
+}
+
+/* ---- wiring ---- */
+$("name").addEventListener("input", function(){
+  $("go").disabled = this.value.trim().length < 2;
+});
+$("name").addEventListener("keydown", function(e){
+  if (e.key === "Enter" && !$("go").disabled) $("go").click();
+});
+$("go").addEventListener("click", function(){
+  player = $("name").value.trim().replace(/\s+/g," ").slice(0,24);
+  started = Date.now();
+  $("start").classList.add("hide");
+  $("quiz").classList.remove("hide");
+  render();
+});
+$("next").addEventListener("click", next);
+$("again").addEventListener("click", function(){
+  i=0; score=0; results.length=0; started=Date.now();
+  $("done").classList.add("hide");
+  $("quiz").classList.remove("hide");
+  render();
+});
+$("refresh").addEventListener("click", loadBoard);
+document.addEventListener("keydown", function(e){
+  if ($("quiz").classList.contains("hide")) return;
+  if (e.key >= "1" && e.key <= "4" && !locked) choose(+e.key - 1);
+  else if ((e.key === "Enter" || e.key === " ") && locked){ e.preventDefault(); next(); }
+});
+buildTally();
+loadBoard();
+</script>
+</body>
+</html>
