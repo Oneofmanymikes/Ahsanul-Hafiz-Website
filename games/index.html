@@ -52,6 +52,7 @@
   .box.right{border-color:var(--ok); color:var(--ok)}
   .box.wrong{border-color:var(--no); color:var(--no)}
   .box.part{border-color:var(--gold); color:var(--gold)}
+  .box.asked{border-color:var(--mut); background:var(--paper)}
   .box.part::after{content:""; position:absolute; inset:2px;
     background-image:linear-gradient(45deg,transparent 42%,currentColor 42%,currentColor 58%,transparent 58%)}
   .box.now{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
@@ -104,6 +105,8 @@
   .fact.no{border-left-color:var(--no); background:var(--no-soft)}
   .fact.part{border-left-color:var(--gold); background:var(--accent-soft)}
   .fact.part .verdict{color:var(--gold)}
+  .fact.guess{border-left-color:var(--mut); background:var(--paper)}
+  .fact.guess .verdict{color:var(--mut)}
   .fact.yes .verdict{color:var(--ok)} .fact.no .verdict{color:var(--no)}
   .num{font-family:"IBM Plex Mono",monospace; font-weight:600; font-variant-numeric:tabular-nums}
 
@@ -328,7 +331,13 @@ var QUESTIONS = [ {topic:"Why we are here",q:"Why is there a by-election in Scar
   fact:"<b>33.</b> Which, for the number of hours he has been in that office, seems generous."},
  {topic:"Know your office",q:"What street is the campaign office on?",
   opts:["Danforth Ave","Kingston Rd","Eglinton Ave E","Midland Ave"],a:1,
-  fact:"<b>2500 Kingston Rd.</b> If you have ever eaten a slice of pizza standing up at 8pm surrounded by call sheets, you know it."}
+  fact:"<b>2500 Kingston Rd.</b> If you have ever eaten a slice of pizza standing up at 8pm surrounded by call sheets, you know it."},
+ {type:"guess",topic:"Just for fun",q:"How old do you think Galiba is?",
+  opts:["19","23","27","Old enough to out-canvass you"],
+  fact:"<b>No points either way.</b> She knocked more doors than every other intern on this campaign, so the only number that matters is that one."},
+ {type:"guess",topic:"Just for fun",q:"And how old do you think Ahsanul Hafiz is?",
+  opts:["38","45","52","Younger than he looks after this campaign"],
+  fact:"<b>Still no points.</b> He came to Canada more than 25 years ago, started as a delivery driver and now runs 32 stores &mdash; do the arithmetic yourself, then go ask him."}
 ];
 
 var RANKS = [
@@ -339,7 +348,9 @@ var RANKS = [
  {pct:0.25,t:"First-Timer",l:"You showed up, and that counts for more than trivia."},
  {pct:0.00,t:"Here for the Pizza",l:"Honestly? Also a valid reason to come out."}
 ];
-QUESTIONS.forEach(function(q){ q.points = (q.type === "multi") ? q.correct.length : 1; });
+QUESTIONS.forEach(function(q){
+  q.points = (q.type === "multi") ? q.correct.length : (q.type === "guess" ? 0 : 1);
+});
 
 /* Shuffle answer positions.
    Written because every pick-three had its answers in slots 1-3, and across the
@@ -368,7 +379,10 @@ function shuffleOpts(q){
     q.a = order.indexOf(q.a);
   }
 }
-QUESTIONS.forEach(function(q){ if (q.type === "multi" || !isLadder(q)) shuffleOpts(q); });
+QUESTIONS.forEach(function(q){
+  if (q.type === "guess") return;
+  if (q.type === "multi" || !isLadder(q)) shuffleOpts(q);
+});
 var TOTAL = QUESTIONS.reduce(function(n,q){ return n + q.points; }, 0);
 var NQ = QUESTIONS.length;
 var WORDS = {15:"Fifteen",16:"Sixteen",17:"Seventeen",18:"Eighteen",19:"Nineteen",20:"Twenty"};
@@ -392,8 +406,10 @@ function paintTally(){
   var b = $("tally").children;
   for (var n=0; n<b.length; n++){
     var part = (results[n] === false && gotPer[n] > 0);
+    var guessed = (results[n] === null);
     b[n].className = "box" +
-      (results[n]===true ? " right" : part ? " part" : results[n]===false ? " wrong" : "") +
+      (guessed ? " asked" : results[n]===true ? " right" : part ? " part" :
+       results[n]===false ? " wrong" : "") +
       (n===i && results[n]===undefined ? " now" : "");
   }
 }
@@ -453,10 +469,27 @@ function gradeMulti(){
   paintTally();
 }
 var gotPer = [];
+function gradeGuess(n){
+  locked = true;
+  var q = QUESTIONS[i];
+  results[i] = null;                       // neither right nor wrong
+  Array.prototype.forEach.call(document.querySelectorAll(".opt"), function(b){
+    b.disabled = true;
+    if (+b.dataset.n === n) b.classList.add("picked");
+  });
+  $("reveal").innerHTML = '<div class="fact guess"><span class="verdict">Just for fun</span>' +
+    q.fact + '</div>';
+  $("next").textContent = (i === QUESTIONS.length-1) ? "See the results" : "Next question";
+  $("next").classList.remove("hide");
+  $("next").focus();
+  paintTally();
+}
 function choose(n){
   if (locked) return;
+  var q = QUESTIONS[i];
+  if (q.type === "guess"){ gradeGuess(n); return; }
   locked = true;
-  var q = QUESTIONS[i], right = (n === q.a);
+  var right = (n === q.a);
   results[i] = right;
   if (right) score++;
   Array.prototype.forEach.call(document.querySelectorAll(".opt"), function(b){
