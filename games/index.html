@@ -225,33 +225,15 @@ var QUESTIONS = [ {topic:"Why we are here",q:"Why is there a by-election in Scar
  {topic:"The ballot",q:"How many candidates is Ahsanul Hafiz running against on September 3?",
   opts:["Three","Four","Six","Nine"],a:2,
   fact:"<b>Six.</b> Fatima Shaban (NDP), Noor Tarun (PC), Mark Bekkering (Green), Chris Rees (New Blue), Gord Elliott (Ontario Party) and Michael Perdelwitz (Independent). Seven names on the ballot in total &mdash; which is exactly why every identified vote has to actually turn up."},
- {topic:"Ontario politics",q:"Who is the Premier of Ontario?",
-  opts:["Doug Ford","Bonnie Crombie","Kathleen Wynne","Marit Stiles"],a:0,
-  fact:"<b>Doug Ford</b>, PC, premier since 2018. Every door you knock in this by-election is a chance to change the arithmetic at Queen's Park."},
- {topic:"Ontario politics",q:"Who is the Prime Minister of Canada?",
-  opts:["Mark Carney","Justin Trudeau","Pierre Poilievre","Chrystia Freeland"],a:0,
-  fact:"<b>Mark Carney</b>, Liberal, prime minister since March 2025. Doly Begum's win here in April 2026 helped secure his majority."},
- {topic:"Ontario politics",q:"Who leads the Ontario Liberal Party right now?",
-  opts:["Bonnie Crombie","John Fraser","Steven Del Duca","Kathleen Wynne"],a:1,
-  fact:"<b>John Fraser, as interim leader.</b> Bonnie Crombie resigned in January 2026 after a difficult leadership review. Members choose a permanent leader in November."},
- {topic:"Ontario politics",q:"Who led the Ontario Liberal Party before the current leader?",
-  opts:["Bonnie Crombie","Steven Del Duca","Kathleen Wynne","Dalton McGuinty"],a:0,
-  fact:"<b>Bonnie Crombie</b>, the former mayor of Mississauga. She led the party from December 2023 until she resigned in January 2026, and John Fraser took over as interim leader."},
  {topic:"Ontario politics",q:"If the Ontario Liberals won the most seats, who would become Premier?",
   opts:["The party leader","Whoever won the most votes province-wide","The longest-serving MPP","The Lieutenant Governor decides"],a:0,
   fact:"<b>The party leader.</b> Here is the thing most people never get told: <b>you cannot vote for the Premier.</b> You vote for one MPP in your own riding. The leader of whichever party wins the most seats is invited to form government and becomes Premier. So a vote for Ahsanul Hafiz here is a vote for who runs Ontario."},
  {topic:"Ontario politics",q:"What is a party leader actually responsible for?",
   opts:["Leading the party's MPPs and setting what it stands for","Running Elections Ontario","Counting the ballots","Drawing the riding boundaries"],a:0,
   fact:"<b>They lead the team and set the direction.</b> A leader heads the MPPs at Queen's Park, decides the platform the party runs on, speaks for it publicly, and becomes Premier if the party wins. Elections Ontario runs the vote and draws boundaries — deliberately kept away from any party."},
- {topic:"Ontario politics",q:"How many people are running to be the next Ontario Liberal leader?",
-  opts:["Two","Five","Nine","Fourteen"],a:1,
-  fact:"<b>Five:</b> Navdeep Bains, Stephanie Bowman, Lee Fairclough, Eric Lombardi and Dylan Marando. Members vote November 9-20 and the winner is announced on the 21st."},
  {topic:"Ontario politics",q:"Who gets to vote for the next Ontario Liberal leader?",
   opts:["Party members","Every voter in Ontario","Only sitting MPPs","The outgoing leader picks"],a:0,
   fact:"<b>Party members — including you, if you sign up.</b> Anyone who joins the party before the cutoff gets a vote on who leads it. That is a much smaller room than a general election, so one membership counts for a lot more than one ballot."},
- {topic:"Ontario politics",q:"Who was the last Liberal Premier of Ontario?",
-  opts:["Dalton McGuinty","Kathleen Wynne","David Peterson","Bonnie Crombie"],a:1,
-  fact:"<b>Kathleen Wynne</b>, premier from 2013 to 2018, and the first woman to hold the job in Ontario. Doug Ford has held it ever since."},
  {topic:"Ontario politics",q:"How many ridings are there in Ontario?",
   opts:["87","107","124","338"],a:2,
   fact:"<b>124.</b> Each one sends a single MPP to Queen's Park. Scarborough Southwest is one of them, and on September 3 this riding picks who fills it."},
@@ -460,6 +442,9 @@ function gradeMulti(){
     else if (picks.indexOf(bn) > -1) b.classList.add("miss");
   });
   var hint = $("pickHint"); if (hint) hint.remove();
+  answerLog.push({ n: i + 1, q: q.q,
+                   a: picks.map(function(x){ return q.opts[x]; }).join(" + "),
+                   ok: (got === q.correct.length) });
   $("reveal").innerHTML = '<div class="fact ' + (got === q.correct.length ? "yes" : got ? "part" : "no") +
     '"><span class="verdict">' + got + ' of ' + q.correct.length + ' right &middot; +' + got +
     (got === 1 ? " point" : " points") + '</span>' + q.fact + '</div>';
@@ -468,7 +453,7 @@ function gradeMulti(){
   $("next").focus();
   paintTally();
 }
-var gotPer = [];
+var gotPer = [], answerLog = [];
 function gradeGuess(n){
   locked = true;
   var q = QUESTIONS[i];
@@ -497,6 +482,7 @@ function choose(n){
     if (bn === q.a) b.classList.add("answer");
     if (bn === n){ b.classList.add("picked"); if (!right) b.classList.add("miss"); }
   });
+  answerLog.push({ n: i + 1, q: q.q, a: q.opts[n], ok: right });
   $("reveal").innerHTML = '<div class="fact '+(right?"yes":"no")+'"><span class="verdict">'+
     (right?"Correct":"Not quite")+'</span>'+q.fact+'</div>';
   $("next").textContent = (i === QUESTIONS.length-1) ? "See the results" : "Next question";
@@ -520,7 +506,7 @@ function finish(){
   if (!ENDPOINT){ $("saved").textContent = "Saved to this device."; paintBoard(localBoard()); paintTally(); return; }
   $("saved").textContent = "Posting your score…";
   fetch(ENDPOINT, {method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"},
-    body: JSON.stringify({name:player, score:score, outOf:TOTAL, seconds:secs,
+    body: JSON.stringify({name:player, score:score, outOf:TOTAL, seconds:secs, answers:answerLog,
                           device:(navigator.userAgent||"").slice(0,60)})})
     .then(function(){ $("saved").textContent = "Score posted. You are on the board."; })
     .catch(function(){ $("saved").textContent = "Could not reach the leaderboard — your score is saved on this device."; })
