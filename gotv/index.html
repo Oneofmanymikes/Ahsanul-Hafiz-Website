@@ -84,7 +84,27 @@
            color:var(--mut); cursor:pointer; padding:0 6px; min-height:44px; min-width:44px}
   .sheet-x:hover{color:var(--ink)}
   .sheet-x:focus-visible{outline:3px solid var(--brand); outline-offset:2px}
-  .sheet iframe{flex:1; width:100%; min-height:60vh; border:0; background:#fff}
+  .sheet-body{padding:18px; overflow-y:auto}
+  .fld{display:block; font-size:13px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+       color:var(--mut); margin:14px 0 6px}
+  .sheet-body input{width:100%; font:inherit; font-size:17px; padding:13px 14px; color:var(--ink);
+       background:#fff; border:1.5px solid var(--line); border-radius:10px}
+  .sheet-body input:focus{outline:3px solid var(--brand); outline-offset:1px; border-color:var(--brand)}
+  .hint{color:var(--mut); font-size:15px; margin:8px 0 0}
+  .err{color:#b3261e; background:#fce8e6; border-radius:10px; padding:10px 12px; font-size:15px; margin:12px 0 0}
+  .done{color:var(--ok); font-weight:700; font-size:19px; margin:0 0 4px}
+  .go.big{width:100%; margin-top:16px; padding:15px 20px; font-size:17px}
+  .toggles{display:flex; flex-direction:column; gap:10px; margin-top:14px}
+  .tog{display:flex; align-items:center; gap:12px; width:100%; text-align:left; font:inherit;
+       font-size:17px; cursor:pointer; background:#fff; color:var(--ink);
+       border:1.5px solid var(--line); border-radius:12px; padding:14px 16px; min-height:56px}
+  .tog .box{flex:0 0 auto; width:26px; height:26px; border:2px solid var(--line); border-radius:7px;
+            position:relative; background:#fff}
+  .tog[aria-pressed="true"]{border-color:var(--brand); background:#fdf1f1}
+  .tog[aria-pressed="true"] .box{border-color:var(--brand); background:var(--brand)}
+  .tog[aria-pressed="true"] .box::after{content:""; position:absolute; left:8px; top:3px; width:7px;
+       height:13px; border:solid #fff; border-width:0 3px 3px 0; transform:rotate(45deg)}
+  .tog:focus-visible{outline:3px solid var(--brand); outline-offset:2px}
   .sheet-foot{margin:0; padding:10px 18px 16px; font-size:14px; color:var(--mut);
               border-top:1px solid var(--line)}
   .sheet-foot a{color:var(--brand); font-weight:600}
@@ -218,11 +238,49 @@
       </div>
       <button class="sheet-x" type="button" onclick="closeSheet()" aria-label="Close">&times;</button>
     </div>
-    <iframe id="sheet-frame" title="Volunteer sign-up form" src="about:blank"></iframe>
+
+    <div class="sheet-body">
+      <div id="step-phone">
+        <label class="fld" for="q-phone"><span data-en>Your mobile number</span><span data-bn>আপনার মোবাইল নম্বর</span></label>
+        <input id="q-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(416) 555-1234">
+        <p class="hint"><span data-en>That's it. If you've volunteered before we'll find you and sign you up straight away.</span><span data-bn>এটুকুই। আগে স্বেচ্ছাসেবক থাকলে আমরা আপনাকে খুঁজে সঙ্গে সঙ্গে সাইন আপ করে দেব।</span></p>
+        <div id="q-name-wrap" hidden>
+          <label class="fld" for="q-first"><span data-en>First name (you're not on file yet)</span><span data-bn>নামের প্রথম অংশ (আপনি এখনো তালিকায় নেই)</span></label>
+          <input id="q-first" type="text" autocomplete="given-name">
+        </div>
+        <p class="err" id="q-err" hidden></p>
+        <button class="go big" id="q-go" type="button" onclick="quickSignup()"><span data-en>Sign me up</span><span data-bn>আমাকে সাইন আপ করুন</span></button>
+      </div>
+
+      <div id="step-extras" hidden>
+        <p class="done">&#10003; <span data-en>You're signed up.</span><span data-bn>আপনি সাইন আপ হয়ে গেছেন।</span></p>
+        <p class="hint"><span data-en>Two quick questions. Tap any that apply, then save.</span><span data-bn>দুটি ছোট প্রশ্ন। যেটি প্রযোজ্য চাপুন, তারপর সেভ করুন।</span></p>
+        <div class="toggles">
+          <button class="tog" id="tog-car" type="button" onclick="tog('tog-car')"><span class="box" aria-hidden="true"></span><span data-en>I have a car</span><span data-bn>আমার গাড়ি আছে</span></button>
+          <button class="tog" id="tog-hs" type="button" onclick="tog('tog-hs'); syncParent()"><span class="box" aria-hidden="true"></span><span data-en>I'm a high school student</span><span data-bn>আমি হাই স্কুলের ছাত্র/ছাত্রী</span></button>
+        </div>
+        <div id="parent-wrap" hidden>
+          <p class="hint" style="margin-top:12px"><span data-en>Under 18, so we need a parent or guardian we can reach. We pair you with an adult.</span><span data-bn>১৮ বছরের কম, তাই একজন অভিভাবকের যোগাযোগ দরকার। আমরা আপনাকে একজন প্রাপ্তবয়স্কের সঙ্গে রাখব।</span></p>
+          <label class="fld" for="q-pname"><span data-en>Parent/guardian name</span><span data-bn>অভিভাবকের নাম</span></label>
+          <input id="q-pname" type="text">
+          <label class="fld" for="q-pphone"><span data-en>Parent/guardian phone</span><span data-bn>অভিভাবকের ফোন</span></label>
+          <input id="q-pphone" type="tel" inputmode="tel">
+        </div>
+        <p class="err" id="q-err2" hidden></p>
+        <button class="go big" id="q-save" type="button" onclick="quickSave()"><span data-en>Save</span><span data-bn>সেভ করুন</span></button>
+        <button class="go alt big" type="button" onclick="closeSheet()"><span data-en>No thanks, I'm done</span><span data-bn>ধন্যবাদ, শেষ</span></button>
+      </div>
+
+      <div id="step-done" hidden>
+        <p class="done">&#10003; <span data-en>All set. Thank you!</span><span data-bn>সব ঠিক আছে। ধন্যবাদ!</span></p>
+        <p class="hint"><span data-en>We'll text you the time and address before your shift.</span><span data-bn>শিফটের আগে আমরা সময় ও ঠিকানা এসএমএস করব।</span></p>
+        <button class="go big" type="button" onclick="closeSheet()"><span data-en>Done</span><span data-bn>সম্পন্ন</span></button>
+      </div>
+    </div>
+
     <p class="sheet-foot">
-      <span data-en>Form not loading? </span><span data-bn>ফর্ম খুলছে না? </span>
-      <a id="sheet-newtab" href="#" target="_blank" rel="noopener">
-        <span data-en>Open it in a new tab</span><span data-bn>নতুন ট্যাবে খুলুন</span></a>
+      <span data-en>Rather use the full form? </span><span data-bn>পূর্ণ ফর্ম ব্যবহার করবেন? </span>
+      <a id="sheet-newtab" href="#" target="_blank" rel="noopener"><span data-en>Open it here</span><span data-bn>এখানে খুলুন</span></a>
     </p>
   </div>
 </div>
@@ -307,43 +365,156 @@
   });
 
   // ---- sign up without leaving the page ----
-  // The sign-up app sets XFrameOptionsMode.ALLOWALL, so it can be embedded. The
-  // new-tab link stays as a fallback if a browser blocks the frame anyway.
+  // The sign-up app exposes a JSONP API (?action=...&callback=fn), so the whole flow
+  // runs right here: no iframe, no second page, no CORS.
+  var API = FORM, curShift = null, curPhone = "";
+  function $(id){ return document.getElementById(id); }
+  function bn(){ return document.body.classList.contains("bn"); }
+
+  function api(params, done, fail){
+    var cb = "cb" + Math.floor(Date.now() + Math.random() * 1000);
+    var sc = document.createElement("script"), fired = false;
+    function cleanup(){ try { delete window[cb]; } catch(e){ window[cb] = undefined; }
+                        if (sc.parentNode) sc.remove(); }
+    window[cb] = function(d){ fired = true; cleanup(); done(d); };
+    sc.onerror = function(){ if (!fired){ cleanup(); if (fail) fail(); } };
+    var qs = Object.keys(params).map(function(k){
+      return encodeURIComponent(k) + "=" + encodeURIComponent(params[k]);
+    }).join("&");
+    sc.src = API + "?" + qs + "&callback=" + cb;
+    document.body.appendChild(sc);
+    setTimeout(function(){ if (!fired){ cleanup(); if (fail) fail(); } }, 15000);
+  }
+
+  function showErr(id, msg){ var e = $(id); e.textContent = msg; e.hidden = false; }
+  function setBtn(id, working, en, bnTxt){
+    var b = $(id); b.disabled = working;
+    b.innerHTML = working ? (bn() ? "\u0985\u09aa\u09c7\u0995\u09cd\u09b7\u09be..." : "Working...")
+                          : '<span data-en>' + en + '</span><span data-bn>' + bnTxt + '</span>';
+  }
+  function step(id){
+    ["step-phone","step-extras","step-done"].forEach(function(x){ $(x).hidden = (x !== id); });
+  }
+
+  function quickSignup(){
+    $("q-err").hidden = true;
+    var raw = $("q-phone").value.replace(/\D/g, "");
+    if (raw.length < 10){
+      showErr("q-err", bn() ? "\u09e7\u09e6 \u09b8\u0982\u0996\u09cd\u09af\u09be\u09b0 \u09ae\u09cb\u09ac\u09be\u0987\u09b2 \u09a8\u09ae\u09cd\u09ac\u09b0 \u09a6\u09bf\u09a8\u0964"
+                          : "Please enter a 10-digit mobile number.");
+      return;
+    }
+    curPhone = raw;
+    var first = $("q-first").value.trim();
+    setBtn("q-go", true);
+    var onDone = function(r){
+      setBtn("q-go", false, "Sign me up", "\u0986\u09ae\u09be\u0995\u09c7 \u09b8\u09be\u0987\u09a8 \u0986\u09aa \u0995\u09b0\u09c1\u09a8");
+      if (r && r.ok === false){ showErr("q-err", r.error || "Something went wrong."); return; }
+      step("step-extras");
+    };
+    api({action:"lookup", q:raw}, function(d){
+      var res = d && d.result;
+      if (res && res.found){
+        api({action:"submitExisting", rowIndex:res.rowIndex,
+             shifts: JSON.stringify([{shiftId:curShift.id, activity:curShift.activity}]),
+             source:"gotv"}, onDone, netFail);
+        return;
+      }
+      if (!first){                       // the server needs a name to create a record
+        setBtn("q-go", false, "Sign me up", "\u0986\u09ae\u09be\u0995\u09c7 \u09b8\u09be\u0987\u09a8 \u0986\u09aa \u0995\u09b0\u09c1\u09a8");
+        $("q-name-wrap").hidden = false;
+        $("q-first").focus();
+        showErr("q-err", bn() ? "\u0986\u09aa\u09a8\u09be\u0995\u09c7 \u0996\u09c1\u0981\u099c\u09c7 \u09aa\u09be\u0987\u09a8\u09bf - \u09a8\u09be\u09ae\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a5\u09ae \u0985\u0982\u09b6 \u09a6\u09bf\u09a8\u0964"
+                             : "We couldn't find you - just add your first name.");
+        return;
+      }
+      api({action:"submit", payload: JSON.stringify({
+             firstName:first, cell:raw, source:"gotv",
+             shifts:[{shiftId:curShift.id, activity:curShift.activity}],
+             session_id:"gotv-" + raw.slice(-4), formType:"signup"})}, onDone, netFail);
+    }, netFail);
+  }
+
+  function netFail(){
+    setBtn("q-go", false, "Sign me up", "\u0986\u09ae\u09be\u0995\u09c7 \u09b8\u09be\u0987\u09a8 \u0986\u09aa \u0995\u09b0\u09c1\u09a8");
+    showErr("q-err", bn() ? "\u09b8\u0982\u09af\u09cb\u0997\u09c7 \u09b8\u09ae\u09b8\u09cd\u09af\u09be\u0964 \u09a8\u09bf\u099a\u09c7\u09b0 \u09aa\u09c2\u09b0\u09cd\u09a3 \u09ab\u09b0\u09cd\u09ae \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0 \u0995\u09b0\u09c1\u09a8\u0964"
+                        : "Connection problem - please use the full form link below.");
+  }
+
+  function tog(id){
+    var b = $(id);
+    b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") === "true" ? "false" : "true");
+  }
+  function syncParent(){
+    $("parent-wrap").hidden = $("tog-hs").getAttribute("aria-pressed") !== "true";
+  }
+
+  function quickSave(){
+    $("q-err2").hidden = true;
+    var car = $("tog-car").getAttribute("aria-pressed") === "true";
+    var hs  = $("tog-hs").getAttribute("aria-pressed") === "true";
+    if (!car && !hs){ step("step-done"); return; }
+    var updates = {};
+    if (car) updates.hasCar = true;
+    if (hs){
+      var pn = $("q-pname").value.trim(), pp = $("q-pphone").value.replace(/\D/g, "");
+      if (!pn || pp.length < 10){
+        showErr("q-err2", bn() ? "\u0985\u09ad\u09bf\u09ad\u09be\u09ac\u0995\u09c7\u09b0 \u09a8\u09be\u09ae \u0993 \u09b8\u09a0\u09bf\u0995 \u09ab\u09cb\u09a8 \u09a8\u09ae\u09cd\u09ac\u09b0 \u09a6\u09bf\u09a8\u0964"
+                              : "Please add a parent/guardian name and a valid phone number.");
+        return;
+      }
+      updates.highSchool = true; updates.parentName = pn; updates.parentPhone = pp;
+    }
+    setBtn("q-save", true);
+    api({action:"updateProfile", q:curPhone, updates: JSON.stringify(updates)}, function(r){
+      setBtn("q-save", false, "Save", "\u09b8\u09c7\u09ad \u0995\u09b0\u09c1\u09a8");
+      if (r && r.ok === false){ showErr("q-err2", r.error || "Could not save."); return; }
+      step("step-done");
+    }, function(){
+      setBtn("q-save", false, "Save", "\u09b8\u09c7\u09ad \u0995\u09b0\u09c1\u09a8");
+      showErr("q-err2", bn() ? "\u09b8\u0982\u09af\u09cb\u0997\u09c7 \u09b8\u09ae\u09b8\u09cd\u09af\u09be\u0964" : "Connection problem - please try again.");
+    });
+  }
+
   var lastFocus = null;
-  function openSheet(id, dayHtml, kindHtml){
+  function openSheet(id, activity, dayHtml, kindHtml){
     lastFocus = document.activeElement;
-    document.getElementById("sheet-eyebrow").innerHTML = dayHtml;
-    document.getElementById("sheet-title").innerHTML = kindHtml;
-    document.getElementById("sheet-frame").src = shiftUrl(id);
-    document.getElementById("sheet-newtab").href = shiftUrl(id);
-    document.getElementById("sheet").hidden = false;
+    curShift = {id:id, activity:activity};
+    $("sheet-eyebrow").innerHTML = dayHtml;
+    $("sheet-title").innerHTML = kindHtml;
+    $("sheet-newtab").href = shiftUrl(id);
+    $("q-phone").value = ""; $("q-first").value = "";
+    $("q-pname").value = ""; $("q-pphone").value = "";
+    $("q-name-wrap").hidden = true; $("q-err").hidden = true; $("q-err2").hidden = true;
+    ["tog-car","tog-hs"].forEach(function(t){ $(t).setAttribute("aria-pressed", "false"); });
+    $("parent-wrap").hidden = true;
+    step("step-phone");
+    $("sheet").hidden = false;
     document.body.style.overflow = "hidden";
-    document.querySelector(".sheet-x").focus();
+    setTimeout(function(){ $("q-phone").focus(); }, 60);
   }
   function closeSheet(){
-    document.getElementById("sheet").hidden = true;
-    document.getElementById("sheet-frame").src = "about:blank";
+    $("sheet").hidden = true;
     document.body.style.overflow = "";
     if (lastFocus) lastFocus.focus();
   }
   document.addEventListener("keydown", function(e){
-    if (e.key === "Escape" && !document.getElementById("sheet").hidden) closeSheet();
+    if (e.key === "Escape" && !$("sheet").hidden) closeSheet();
   });
-  document.getElementById("sheet").addEventListener("click", function(e){
-    if (e.target === this) closeSheet();
-  });
+  $("sheet").addEventListener("click", function(e){ if (e.target === this) closeSheet(); });
 
   Array.prototype.forEach.call(document.querySelectorAll("[data-shift]"), function(a){
     var id = a.getAttribute("data-shift");
-    a.href = shiftUrl(id);                        // real link: middle-click still works
+    a.href = shiftUrl(id);
     a.addEventListener("click", function(e){
       e.preventDefault();
       var card = a.closest(".card");
-      var day = card ? card.querySelector(".when").innerHTML : "";
+      var day  = card ? card.querySelector(".when").innerHTML : "";
       var kind = card ? card.querySelector("h2").innerHTML : "";
       var slotEl = a.closest(".slot");
       var time = slotEl ? slotEl.querySelector(".time").innerHTML : "";
-      openSheet(id, day, kind + ' &middot; ' + time);
+      var activity = /phonebank/.test(id) ? "PhoneBank" : (/flyers/.test(id) ? "Flyers" : "Canvass");
+      openSheet(id, activity, day, kind + " &middot; " + time);
     });
   });
 
