@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to vote &mdash; Scarborough Southwest by-election, September 3</title>
+<meta name="description" content="Everything you need to vote in the Scarborough Southwest provincial by-election: advance voting August 26, 27 and 28, election day September 3, all polling locations, hours and ID.">
+<link rel="icon" href="/favicon.png">
+<meta property="og:title" content="How to vote — Scarborough Southwest">
+<meta property="og:description" content="Advance voting Aug 26, 27, 28. Election day Sept 3. Find your polling place, hours and what ID to bring.">
+<style>
+:root{
+  --brand:#E81E25; --brand-hover:#ad1b1e; --accent:#6A0C0D;
+  --ink:#1a1a1a; --mut:#525252; --line:#e3e3e3; --bg:#f7f7f7; --card:#fff;
+  --ok:#137333; --okbg:#e6f4ea; --warn-bg:#fef7e0; --warn:#8a6d00;
+  --blue:#0a58ca; --bluebg:#e8f0fe;
+  --radius:12px; --radius-lg:16px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+body{margin:0; background:var(--bg); color:var(--ink);
+  font-family:Inter,"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  font-size:17px; line-height:1.5; -webkit-font-smoothing:antialiased}
+header.top{background:var(--brand); color:#fff; border-bottom:4px solid var(--brand-hover);
+  padding:12px 20px; display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+header.top .name{font-weight:800; font-size:19px}
+header.top .spacer{flex:1}
+header.top a{color:#fff; text-decoration:none; font-weight:700; font-size:15px;
+  border:1.5px solid rgba(255,255,255,.55); border-radius:999px; padding:7px 16px}
+header.top a:hover{background:rgba(255,255,255,.2)}
+main{max-width:760px; margin:0 auto; padding:20px 16px 72px}
+h1{font-size:clamp(27px,6vw,36px); line-height:1.15; color:var(--accent); margin:6px 0 10px; text-wrap:balance}
+h2{font-size:22px; color:var(--accent); margin:0 0 6px}
+h3{font-size:18px; margin:0 0 2px}
+p{margin:0 0 12px}
+.lede{font-size:18.5px; color:var(--mut)}
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius-lg);
+  padding:18px; box-shadow:0 8px 24px rgba(26,43,68,.06); margin-bottom:16px}
+.daycard{border-left:5px solid var(--line)}
+.daycard.now{border-left-color:var(--ok)}
+.daycard.advance{border-left-color:var(--brand)}
+.daycard.eday{border-left-color:var(--blue)}
+.when{font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--mut); margin:0 0 4px}
+.big{font-size:clamp(21px,4.6vw,26px); font-weight:800; line-height:1.2; margin:0 0 4px}
+.hours{display:inline-block; font-weight:700; background:var(--okbg); color:var(--ok);
+  border-radius:999px; padding:4px 13px; font-size:15px; margin:2px 0 10px}
+.hours.b{background:var(--bluebg); color:var(--blue)}
+.hours.r{background:#fdecec; color:var(--brand-hover)}
+ul.places{list-style:none; margin:12px 0 0; padding:0; display:flex; flex-direction:column; gap:9px}
+ul.places li{border:1px solid var(--line); border-radius:var(--radius); padding:11px 13px; background:#fcfcfc}
+ul.places .pn{font-weight:700}
+ul.places .pa{color:var(--mut); font-size:15.5px}
+ul.places a{color:var(--brand-hover); font-weight:700; font-size:15px; text-decoration:none; white-space:nowrap}
+ul.places a:hover{text-decoration:underline}
+.note{background:var(--warn-bg); border-left:4px solid var(--warn); border-radius:8px;
+  padding:11px 13px; font-size:16px; margin:12px 0 0}
+.note.good{background:var(--okbg); border-left-color:var(--ok)}
+.lookup{margin-top:14px}
+.lookup label{display:block; font-weight:700; margin-bottom:6px}
+.row{display:flex; gap:9px; flex-wrap:wrap}
+input[type=text]{font:inherit; font-size:19px; padding:12px 14px; border:2px solid var(--line);
+  border-radius:var(--radius); flex:1; min-width:150px; text-transform:uppercase; letter-spacing:1px}
+input[type=text]:focus{outline:none; border-color:var(--brand)}
+button{font:inherit; font-weight:700; font-size:17px; cursor:pointer; background:var(--brand);
+  color:#fff; border:0; border-radius:var(--radius); padding:12px 24px; min-height:48px}
+button:hover{background:var(--brand-hover)}
+button:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+#res{margin-top:14px}
+#res .hit{border:2px solid var(--blue); background:var(--bluebg); border-radius:var(--radius); padding:14px}
+#res .miss{border:2px solid var(--warn); background:var(--warn-bg); border-radius:var(--radius); padding:14px}
+#res .pl{font-size:20px; font-weight:800; margin:4px 0 2px}
+.idlist{margin:8px 0 0; padding-left:22px}
+.idlist li{margin-bottom:5px}
+.cta{display:block; text-align:center; background:var(--brand); color:#fff; font-weight:800;
+  font-size:19px; text-decoration:none; border-radius:var(--radius); padding:16px; margin-top:6px}
+.cta:hover{background:var(--brand-hover)}
+.cta.alt{background:#fff; color:var(--brand-hover); border:2px solid var(--brand)}
+.cta.alt:hover{background:#fdecec}
+footer{border-top:1px solid var(--line); margin-top:8px; padding:18px 16px 40px;
+  color:var(--mut); font-size:14.5px; max-width:760px; margin-left:auto; margin-right:auto}
+footer a{color:var(--brand-hover)}
+.toc{display:flex; gap:8px; flex-wrap:wrap; margin:0 0 18px}
+.toc a{font-size:15px; font-weight:700; text-decoration:none; color:var(--accent);
+  border:1.5px solid var(--line); background:#fff; border-radius:999px; padding:8px 15px}
+.toc a:hover{border-color:var(--brand); color:var(--brand-hover)}
+@media print{ body{background:#fff} .card{box-shadow:none; break-inside:avoid} header.top{background:#fff; color:#000; border-bottom:2px solid #000} header.top a{display:none} .cta{border:1px solid #000; color:#000; background:#fff} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <span class="name">Ahsanul Hafiz</span>
+  <span class="spacer"></span>
+  <a href="/">Home</a>
+</header>
+
+<main>
+  <p class="when" style="margin-bottom:2px">Scarborough Southwest provincial by-election</p>
+  <h1>How to vote</h1>
+  <p class="lede">Election day is <strong>Thursday, September&nbsp;3</strong>. You do not have to wait
+  &mdash; you can vote right now, and there are three advance voting days before then.</p>
+
+  <div class="toc">
+    <a href="#advance">Advance voting</a>
+    <a href="#office">Vote today</a>
+    <a href="#eday">Election day</a>
+    <a href="#find">Find my polling place</a>
+    <a href="#id">What to bring</a>
+    <a href="#ride">Get a ride</a>
+  </div>
+
+  <!-- ADVANCE -->
+  <section class="card daycard advance" id="advance">
+    <p class="when">Advance voting</p>
+    <p class="big">Wednesday Aug&nbsp;26, Thursday Aug&nbsp;27, Friday Aug&nbsp;28</p>
+    <span class="hours r">10:00 a.m. to 8:00 p.m. all three days</span>
+    <p style="margin-bottom:0"><strong>You can vote at any one of these five locations.</strong>
+    On advance voting days you are not tied to a particular polling place, so pick whichever is
+    easiest for you to get to.</p>
+    <ul class="places" id="advlist"></ul>
+    <div class="note good"><strong>This is the easiest way to vote.</strong> Lines are shorter than
+    on election day, and once you have voted you are done.</div>
+  </section>
+
+  <!-- ELECTION OFFICE -->
+  <section class="card daycard now" id="office">
+    <p class="when">Vote today, any day</p>
+    <p class="big">Scarborough Southwest election office</p>
+    <span class="hours">Open now, through Wednesday Sept&nbsp;2</span>
+    <ul class="places">
+      <li>
+        <div class="pn">Elections Ontario returning office</div>
+        <div class="pa">2685 Kingston Rd, M1M 1M2 &mdash; at the southwest corner of Brimley Rd S</div>
+        <div style="margin-top:6px"><a href="https://www.google.com/maps/search/?api=1&query=2685+Kingston+Rd+Scarborough+ON+M1M+1M2" target="_blank" rel="noopener">Open in maps &rarr;</a></div>
+      </li>
+    </ul>
+    <p style="margin-top:12px; margin-bottom:0">Monday to Saturday <strong>10:00 a.m. to 8:00 p.m.</strong>,
+    Sunday <strong>noon to 5:00 p.m.</strong></p>
+    <div class="note"><strong>Last chance is Wednesday, September&nbsp;2 at 6:00 p.m.</strong>
+    The office closes earlier than usual on its final day.</div>
+  </section>
+
+  <!-- ELECTION DAY -->
+  <section class="card daycard eday" id="eday">
+    <p class="when">Election day</p>
+    <p class="big">Thursday, September&nbsp;3</p>
+    <span class="hours b">9:00 a.m. to 9:00 p.m.</span>
+    <p style="margin-bottom:0">On election day, unlike the advance days, you must vote at the one
+    polling place assigned to your home address. Look it up below.</p>
+  </section>
+
+  <!-- LOOKUP -->
+  <section class="card" id="find">
+    <h2>Find my election day polling place</h2>
+    <p>Enter your postal code. This covers the Scarborough Southwest riding only.</p>
+    <div class="lookup">
+      <label for="pc">Your postal code</label>
+      <div class="row">
+        <input type="text" id="pc" inputmode="text" autocomplete="postal-code"
+               placeholder="M1M 1M2" maxlength="7" aria-describedby="res">
+        <button id="go" type="button">Find it</button>
+      </div>
+      <div id="res" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ID -->
+  <section class="card" id="id">
+    <h2>What to bring</h2>
+    <p><strong>One piece of ID showing your name.</strong> If you are already on the voters list,
+    that is all you need. If you are not on the list, your ID needs to show your
+    <strong>name and your home address</strong>.</p>
+    <p style="margin-bottom:4px">Almost anything ordinary works:</p>
+    <ul class="idlist">
+      <li>Driver's licence or Ontario photo card</li>
+      <li>Health card</li>
+      <li>A utility, phone or cable bill</li>
+      <li>Bank or credit card statement</li>
+      <li>Student card, transcript or report card</li>
+      <li>Most documents from the Government of Canada, the Government of Ontario, or a municipality</li>
+    </ul>
+    <div class="note"><strong>You do not need photo ID</strong>, and if you do show photo ID your
+    appearance does not have to match the photo. An electronic copy on your phone is accepted.
+    Permanent resident cards and international ID are not accepted.</div>
+    <p style="margin-top:12px; margin-bottom:0">Bring your voter information card if you received one
+    in the mail. It makes things faster, but you can vote without it.</p>
+  </section>
+
+  <!-- WHO CAN VOTE -->
+  <section class="card">
+    <h2>Who can vote</h2>
+    <p style="margin-bottom:0">You can vote if you are a <strong>Canadian citizen</strong>,
+    <strong>18 or older on September&nbsp;3</strong>, and you <strong>live in Scarborough Southwest</strong>.
+    You do not need to be registered in advance. You can register right at the polling place when you
+    go to vote.</p>
+  </section>
+
+  <!-- RIDE -->
+  <section class="card" id="ride">
+    <h2>Need a ride, or have a question?</h2>
+    <p>Our campaign will drive you to vote, free, on any advance day or on election day. If you cannot
+    get there on your own, tell us and we will sort it out.</p>
+    <a class="cta" href="tel:+16473132506">Call 647-313-2506</a>
+    <a class="cta alt" href="mailto:info@votehafiz.ca">Email info@votehafiz.ca</a>
+  </section>
+
+  <section class="card">
+    <h2>Official information</h2>
+    <p style="margin-bottom:0">Everything on this page comes from Elections Ontario. To confirm your
+    registration, find your assigned polling place from the official source, or check anything else,
+    visit <a href="https://voterinformationservice.elections.on.ca" target="_blank" rel="noopener">voterinformationservice.elections.on.ca</a>
+    or call Elections Ontario at <a href="tel:+18886688683">1-888-668-8683</a>
+    (TTY 1-888-292-2312). This page is published by the Ahsanul Hafiz campaign, not by Elections Ontario.</p>
+  </section>
+</main>
+
+<footer>
+  <p style="margin-bottom:4px">Authorized by the CFO for the Ahsanul Hafiz campaign.</p>
+  <p style="margin-bottom:0">Polling place data verified against Elections Ontario, August 2026.
+  If something here looks wrong, please tell us at
+  <a href="mailto:info@votehafiz.ca">info@votehafiz.ca</a> so we can fix it.</p>
+</footer>
+
+<script>
+var DATA = {"p":{"M1J0A2":"704","M1J0B2":"019","M1J0B3":"019","M1J1A5":"019","M1J1A6":"019","M1J1K4":"019","M1J1K5":"019","M1J1K6":"019","M1J1K7":"019","M1J1K8":"019","M1J2E1":"019","M1J2G1":"024","M1J2G3":"024","M1J2G4":"024","M1J2G5":"024","M1J2G6":"024","M1J2G7":"024","M1J2G8":"024","M1J2G9":"024","M1J3N2":"022","M1J3N3":"022","M1J3P4":"705","M1K0A1":"018","M1K0A4":"009","M1K0A9":"018","M1K1A1":"011","M1K1A4":"011","M1K1A5":"011","M1K1A7":"011","M1K1B1":"011","M1K1B3":"011","M1K1B4":"011","M1K1B5":"011","M1K1B6":"011","M1K1B9":"012","M1K1C1":"012","M1K1C2":"012","M1K1C3":"012","M1K1C4":"012","M1K1C5":"012","M1K1C6":"011","M1K1C7":"011","M1K1C8":"011","M1K1C9":"011","M1K1E1":"011","M1K1E2":"012","M1K1E3":"012","M1K1E4":"012","M1K1E5":"012","M1K1E6":"012","M1K1E7":"012","M1K1E8":"012","M1K1G1":"012","M1K1G2":"012","M1K1G3":"018","M1K1G4":"018","M1K1G5":"018","M1K1G6":"018","M1K1G7":"017","M1K1G8":"017","M1K1G9":"018","M1K1H1":"018","M1K1H3":"018","M1K1H4":"017","M1K1H5":"019","M1K1H7":"019","M1K1H8":"019","M1K1H9":"021","M1K1J1":"021","M1K1J2":"019","M1K1J3":"019","M1K1J4":"021","M1K1J5":"019","M1K1J6":"021","M1K1J7":"019","M1K1J8":"019","M1K1J9":"011","M1K1K1":"011","M1K1K2":"011","M1K1K3":"011","M1K1K4":"011","M1K1K5":"011","M1K1K6":"011","M1K1K7":"011","M1K1K8":"011","M1K1K9":"011","M1K1L1":"011","M1K1L2":"011","M1K1L3":"011","M1K1L4":"012","M1K1L5":"012","M1K1L6":"012","M1K1L8":"012","M1K1M2":"018","M1K1M6":"011","M1K1N3":"011","M1K1N7":"011","M1K1N8":"010","M1K1N9":"011","M1K1P1":"011","M1K1P2":"010","M1K1P3":"010","M1K1P4":"009","M1K1P5":"009","M1K1P6":"009","M1K1P7":"009","M1K1P8":"011","M1K1P9":"013","M1K1R1":"013","M1K1R2":"013","M1K1R3":"013","M1K1R6":"014","M1K1R7":"014","M1K1R8":"014","M1K1R9":"014","M1K1S8":"011","M1K1S9":"011","M1K1T1":"011","M1K1T2":"011","M1K1T3":"011","M1K1T4":"011","M1K1T5":"011","M1K1T6":"011","M1K1T7":"011","M1K1T8":"011","M1K1T9":"011","M1K1V1":"011","M1K1V2":"011","M1K1V3":"011","M1K1V4":"011","M1K1V5":"011","M1K1V6":"011","M1K1V7":"011","M1K1V8":"011","M1K1V9":"011","M1K1W1":"011","M1K1W2":"011","M1K1W3":"011","M1K1W4":"011","M1K1W5":"012","M1K1W6":"011","M1K1W7":"012","M1K1W8":"012","M1K1W9":"012","M1K1X1":"012","M1K1X2":"011","M1K1X3":"012","M1K1X4":"011","M1K1X5":"012","M1K1X6":"012","M1K1X7":"012","M1K1X8":"012","M1K1X9":"012","M1K1Y1":"012","M1K1Y2":"012","M1K1Y3":"012","M1K1Y4":"012","M1K1Y5":"012","M1K1Y6":"012","M1K1Y7":"012","M1K1Y8":"012","M1K1Y9":"012","M1K1Z1":"012","M1K1Z2":"012","M1K1Z3":"012","M1K1Z4":"012","M1K1Z5":"012","M1K1Z6":"012","M1K1Z7":"012","M1K1Z8":"012","M1K2A5":"012","M1K2A6":"012","M1K2B1":"018","M1K2B2":"017","M1K2B4":"015","M1K2B5":"015","M1K2B6":"015","M1K2B7":"016","M1K2B9":"017","M1K2C1":"016","M1K2C2":"016","M1K2C3":"016","M1K2C5":"015","M1K2G4":"015","M1K2G5":"013","M1K2G6":"015","M1K2G7":"015","M1K2G8":"013","M1K2G9":"013","M1K2H1":"015","M1K2H2":"013","M1K2H3":"015","M1K2H4":"015","M1K2H5":"013","M1K2H6":"013","M1K2H7":"013","M1K2H8":"015","M1K2H9":"015","M1K2J1":"013","M1K2J2":"013","M1K2J3":"013","M1K2J4":"013","M1K2J5":"015","M1K2J6":"015","M1K2J7":"013","M1K2J8":"015","M1K2J9":"013","M1K2K1":"015","M1K2K2":"015","M1K2K3":"015","M1K2K4":"015","M1K2K5":"014","M1K2K6":"014","M1K2K7":"014","M1K2K8":"014","M1K2K9":"014","M1K2L1":"014","M1K2L2":"014","M1K2L3":"014","M1K2L4":"014","M1K2L5":"014","M1K2L6":"014","M1K2L7":"014","M1K2L8":"014","M1K2L9":"014","M1K2M1":"014","M1K2M5":"015","M1K2M6":"014","M1K2M7":"014","M1K2M8":"014","M1K2M9":"014","M1K2N1":"014","M1K2N2":"014","M1K2N3":"014","M1K2N4":"014","M1K2N5":"014","M1K2N6":"014","M1K2N7":"015","M1K2S2":"021","M1K3C2":"018","M1K3C3":"018","M1K3C4":"018","M1K3C5":"018","M1K3C6":"018","M1K3C7":"017","M1K3C8":"017","M1K3C9":"018","M1K3E1":"017","M1K3E2":"017","M1K3E3":"018","M1K3E4":"018","M1K3E5":"017","M1K3E6":"017","M1K3E7":"018","M1K3E8":"017","M1K3E9":"017","M1K3G1":"017","M1K3G3":"017","M1K3G4":"017","M1K3G5":"018","M1K3G6":"018","M1K3G7":"017","M1K3G8":"017","M1K3G9":"017","M1K3H1":"018","M1K3H2":"018","M1K3H3":"017","M1K3H4":"017","M1K3H5":"018","M1K3H6":"018","M1K3H7":"018","M1K3H8":"017","M1K3H9":"017","M1K3J1":"017","M1K3J2":"018","M1K3J3":"018","M1K3J4":"018","M1K3J5":"018","M1K3J6":"017","M1K3J7":"017","M1K3J8":"017","M1K3J9":"017","M1K3K1":"018","M1K3K2":"018","M1K3K3":"018","M1K3K4":"018","M1K3K5":"017","M1K3K6":"017","M1K3K7":"017","M1K3K8":"017","M1K3K9":"018","M1K3L2":"018","M1K3L3":"017","M1K3L4":"017","M1K3L5":"018","M1K3L6":"018","M1K3L7":"019","M1K3L8":"019","M1K3L9":"019","M1K3M1":"019","M1K3M2":"019","M1K3M3":"019","M1K3M4":"019","M1K3M5":"016","M1K3M6":"016","M1K3M7":"016","M1K3M8":"016","M1K3M9":"016","M1K3N1":"016","M1K3N2":"016","M1K3N3":"016","M1K3N4":"016","M1K3N5":"016","M1K3N6":"016","M1K3N7":"016","M1K3N8":"016","M1K3N9":"016","M1K3P1":"020","M1K3P2":"020","M1K3P3":"020","M1K3P4":"020","M1K3P5":"020","M1K3P6":"020","M1K3P7":"020","M1K3P8":"020","M1K3P9":"020","M1K3R1":"020","M1K3R2":"020","M1K3R3":"020","M1K3R4":"020","M1K3R5":"020","M1K3R6":"020","M1K3R7":"020","M1K3R8":"020","M1K3R9":"020","M1K3S1":"020","M1K3S2":"020","M1K3S3":"020","M1K4C6":"019","M1K4C7":"019","M1K4C8":"020","M1K4E1":"020","M1K4E2":"020","M1K4E3":"019","M1K4E4":"019","M1K4E5":"021","M1K4E6":"020","M1K4E7":"020","M1K4E8":"020","M1K4H6":"019","M1K4H7":"019","M1K4H8":"019","M1K4H9":"019","M1K4J1":"021","M1K4J2":"021","M1K4J3":"021","M1K4J4":"021","M1K4J5":"021","M1K4J6":"021","M1K4J7":"021","M1K4J8":"019","M1K4J9":"019","M1K4K1":"021","M1K4K2":"019","M1K4K3":"021","M1K4K4":"021","M1K4K5":"021","M1K4K6":"021","M1K4K7":"019","M1K4K8":"019","M1K4K9":"021","M1K4L1":"021","M1K4L2":"021","M1K4L3":"021","M1K4L4":"021","M1K4L5":"021","M1K4L6":"021","M1K4L7":"019","M1K4L8":"021","M1K4L9":"021","M1K4M1":"021","M1K4M2":"021","M1K4M3":"021","M1K4M4":"021","M1K4M5":"021","M1K4M6":"021","M1K4M8":"021","M1K4M9":"021","M1K4N1":"021","M1K4N2":"019","M1K4N3":"019","M1K4N4":"019","M1K4N5":"019","M1K4N6":"019","M1K4N7":"019","M1K4N8":"019","M1K4N9":"019","M1K4P1":"019","M1K4P2":"019","M1K4P3":"019","M1K4P4":"019","M1K5E2":"017","M1K5G6":"020","M1K5H2":"003","M1K5H6":"020","M1K5J3":"019","M1K5J4":"019","M1K5J5":"019","M1K5K1":"014","M1K5L7":"020","M1K5M4":"018","M1L0A1":"008","M1L0A2":"010","M1L0A3":"010","M1L0A4":"010","M1L0A5":"010","M1L0A6":"010","M1L0A7":"010","M1L0A8":"010","M1L0A9":"010","M1L0B1":"010","M1L0B2":"010","M1L0B3":"010","M1L0B4":"010","M1L0B5":"010","M1L0B6":"010","M1L0B7":"010","M1L0B8":"003","M1L0B9":"003","M1L0C1":"003","M1L0C2":"003","M1L0C3":"003","M1L0C4":"003","M1L0C5":"003","M1L0C6":"003","M1L0C7":"003","M1L0C8":"003","M1L0C9":"003","M1L0E1":"002","M1L0E2":"702","M1L0E3":"005","M1L0E4":"004","M1L0E5":"004","M1L0E7":"008","M1L0E8":"008","M1L0E9":"008","M1L0G1":"008","M1L0G2":"008","M1L0G3":"008","M1L0G4":"008","M1L0G5":"008","M1L0G6":"003","M1L0G7":"003","M1L0G8":"003","M1L0G9":"003","M1L0H1":"007","M1L0H2":"002","M1L0H3":"008","M1L0H4":"008","M1L0J2":"002","M1L0J3":"003","M1L0J4":"003","M1L0J6":"007","M1L1A1":"007","M1L1A2":"007","M1L1A3":"007","M1L1A5":"007","M1L1A7":"007","M1L1A9":"007","M1L1B1":"006","M1L1B7":"006","M1L1B8":"007","M1L1C1":"007","M1L1C2":"007","M1L1C3":"007","M1L1C4":"007","M1L1C7":"007","M1L1E1":"007","M1L1E3":"703","M1L1E5":"008","M1L1E9":"007","M1L1G1":"007","M1L1G2":"008","M1L1G5":"007","M1L1G6":"007","M1L1G7":"008","M1L1G8":"008","M1L1G9":"008","M1L1H1":"008","M1L1H2":"008","M1L1H3":"008","M1L1H4":"008","M1L1H5":"008","M1L1H6":"008","M1L1H7":"008","M1L1H8":"007","M1L1H9":"007","M1L1J1":"007","M1L1J2":"007","M1L1J3":"007","M1L1J4":"007","M1L1J5":"007","M1L1J6":"006","M1L1J7":"008","M1L1J8":"008","M1L1J9":"008","M1L1K5":"007","M1L1K6":"007","M1L1K7":"007","M1L1K8":"007","M1L1K9":"006","M1L1L1":"006","M1L1L2":"006","M1L1L3":"006","M1L1L4":"007","M1L1L5":"007","M1L1L6":"007","M1L1L7":"007","M1L1L8":"007","M1L1L9":"008","M1L1M1":"008","M1L1M2":"008","M1L1M3":"008","M1L1M4":"008","M1L1M5":"008","M1L1M9":"008","M1L1N4":"005","M1L1N5":"005","M1L1N6":"008","M1L1N7":"008","M1L1N8":"008","M1L1N9":"008","M1L1P1":"008","M1L1P2":"008","M1L1P3":"005","M1L1P4":"005","M1L1P5":"005","M1L1P6":"005","M1L1P7":"005","M1L1P8":"005","M1L1P9":"005","M1L1R1":"005","M1L1R2":"005","M1L1R3":"005","M1L1R4":"005","M1L1R5":"005","M1L1R6":"005","M1L1R7":"005","M1L1R8":"005","M1L1R9":"010","M1L1S1":"010","M1L1S2":"010","M1L1S3":"010","M1L1S4":"009","M1L1S5":"009","M1L1S6":"009","M1L1S7":"009","M1L1S8":"009","M1L1S9":"009","M1L1T1":"009","M1L1T2":"009","M1L1T3":"009","M1L1T4":"004","M1L1T5":"009","M1L1T6":"009","M1L1T7":"004","M1L1T8":"004","M1L1T9":"004","M1L1V1":"004","M1L1V2":"004","M1L1V3":"005","M1L1V4":"005","M1L1V5":"005","M1L1V6":"004","M1L1V7":"004","M1L1V8":"004","M1L1V9":"004","M1L1W1":"701","M1L1W3":"009","M1L1W4":"009","M1L1W5":"009","M1L1W6":"009","M1L1W7":"004","M1L1W8":"004","M1L1W9":"004","M1L1X1":"004","M1L1X2":"004","M1L1X3":"004","M1L1X4":"004","M1L1X5":"004","M1L1X6":"004","M1L1X7":"004","M1L1X8":"004","M1L1X9":"013","M1L1Y1":"013","M1L1Y2":"013","M1L1Y3":"013","M1L1Y4":"013","M1L1Y5":"013","M1L1Y6":"013","M1L1Y7":"004","M1L1Y8":"004","M1L1Y9":"002","M1L1Z1":"002","M1L1Z2":"001","M1L1Z3":"001","M1L1Z4":"002","M1L1Z5":"002","M1L1Z6":"002","M1L1Z7":"700","M1L1Z8":"002","M1L1Z9":"002","M1L2A2":"001","M1L2A3":"001","M1L2A4":"002","M1L2A5":"002","M1L2A6":"002","M1L2A7":"002","M1L2A8":"001","M1L2A9":"001","M1L2B1":"001","M1L2B2":"001","M1L2B3":"001","M1L2B4":"001","M1L2B5":"002","M1L2B6":"002","M1L2B7":"002","M1L2B8":"003","M1L2C2":"002","M1L2C3":"002","M1L2C4":"002","M1L2C5":"002","M1L2E4":"003","M1L2E5":"001","M1L2E6":"001","M1L2E7":"001","M1L2E8":"001","M1L2E9":"001","M1L2G1":"001","M1L2G2":"001","M1L2G3":"001","M1L2G4":"001","M1L2G5":"001","M1L2H7":"001","M1L2H8":"001","M1L2H9":"001","M1L2J1":"001","M1L2J2":"001","M1L2J3":"001","M1L2J4":"001","M1L2J5":"001","M1L2J6":"001","M1L2J7":"001","M1L2J8":"001","M1L2P7":"007","M1L2P8":"007","M1L2P9":"007","M1L2R1":"005","M1L2R2":"005","M1L2R3":"005","M1L2R4":"005","M1L2R5":"005","M1L2R6":"005","M1L2R7":"004","M1L2R8":"004","M1L2R9":"004","M1L2S1":"001","M1L2S2":"004","M1L2S3":"001","M1L2S4":"001","M1L2S5":"001","M1L2S6":"001","M1L2S7":"001","M1L2S8":"001","M1L2S9":"001","M1L2T1":"001","M1L2T6":"006","M1L2V1":"007","M1L2V2":"006","M1L2V3":"006","M1L2V4":"006","M1L2V5":"006","M1L2V6":"005","M1L2V7":"005","M1L2V8":"005","M1L2V9":"005","M1L2W1":"005","M1L2W2":"005","M1L2W3":"005","M1L2W4":"004","M1L2W5":"004","M1L2W6":"004","M1L2W7":"004","M1L2W8":"001","M1L2W9":"001","M1L2X2":"007","M1L2X3":"007","M1L2X4":"006","M1L2X5":"006","M1L2X6":"006","M1L2X7":"006","M1L2X8":"005","M1L2X9":"005","M1L2Y1":"005","M1L2Y2":"005","M1L2Y3":"005","M1L2Y4":"005","M1L2Y5":"005","M1L2Y6":"005","M1L2Y7":"004","M1L2Y8":"004","M1L2Y9":"004","M1L2Z1":"004","M1L2Z2":"004","M1L2Z3":"004","M1L2Z4":"001","M1L2Z5":"001","M1L2Z6":"001","M1L2Z7":"001","M1L2Z8":"001","M1L2Z9":"001","M1L3A1":"001","M1L3A2":"001","M1L3A3":"001","M1L3A4":"001","M1L3A5":"001","M1L3A6":"001","M1L3A7":"001","M1L3A8":"001","M1L3B1":"007","M1L3B2":"007","M1L3B3":"005","M1L3B4":"005","M1L3B5":"005","M1L3B6":"005","M1L3B7":"005","M1L3B8":"005","M1L3B9":"005","M1L3C1":"005","M1L3C2":"004","M1L3C3":"004","M1L3C4":"004","M1L3C5":"004","M1L3C6":"004","M1L3C7":"004","M1L3C8":"004","M1L3C9":"001","M1L3E1":"001","M1L3E2":"001","M1L3E3":"007","M1L3E5":"006","M1L3E6":"007","M1L3E7":"005","M1L3E8":"005","M1L3E9":"005","M1L3G1":"005","M1L3G2":"005","M1L3G3":"005","M1L3G4":"005","M1L3G5":"005","M1L3G6":"005","M1L3G7":"005","M1L3G8":"005","M1L3G9":"004","M1L3H1":"005","M1L3H2":"004","M1L3H4":"004","M1L3H5":"004","M1L3H6":"004","M1L3H7":"004","M1L3H8":"004","M1L3H9":"004","M1L3J1":"002","M1L3J2":"001","M1L3J3":"002","M1L3J4":"002","M1L3J5":"001","M1L3J6":"001","M1L3J9":"001","M1L3K1":"001","M1L3K2":"002","M1L3L1":"007","M1L3L2":"007","M1L3L3":"007","M1L3L4":"007","M1L3L5":"007","M1L3L6":"007","M1L3L7":"005","M1L3L8":"005","M1L3L9":"005","M1L3M1":"005","M1L3M2":"005","M1L3M3":"005","M1L3M4":"005","M1L3M5":"005","M1L3M6":"002","M1L3M7":"002","M1L3M8":"007","M1L3M9":"007","M1L3N1":"007","M1L3N2":"007","M1L3N3":"007","M1L3N4":"007","M1L3N5":"007","M1L3N6":"007","M1L3N7":"007","M1L3N8":"007","M1L3N9":"007","M1L3P2":"007","M1L3P3":"007","M1L3P4":"005","M1L3P5":"005","M1L3P6":"005","M1L3P7":"005","M1L3P8":"005","M1L3P9":"005","M1L3R1":"005","M1L3R2":"005","M1L3R3":"005","M1L3R4":"004","M1L3R5":"004","M1L3R6":"004","M1L3R7":"004","M1L3R8":"004","M1L3R9":"002","M1L3S1":"002","M1L3S2":"002","M1L3S3":"002","M1L3S5":"002","M1L3S6":"002","M1L3S7":"007","M1L3S8":"007","M1L3S9":"007","M1L3T1":"007","M1L3T2":"007","M1L3T3":"007","M1L3T4":"007","M1L3T5":"007","M1L3T7":"007","M1L3T8":"007","M1L3T9":"007","M1L3V1":"007","M1L3V2":"007","M1L3V3":"007","M1L3V4":"007","M1L3V5":"007","M1L3V6":"007","M1L3V7":"005","M1L3W1":"007","M1L3W2":"007","M1L3W5":"007","M1L3W7":"008","M1L3W8":"008","M1L3W9":"008","M1L3X1":"008","M1L3X2":"008","M1L3Y1":"007","M1L3Y2":"007","M1L3Y3":"007","M1L3Y4":"007","M1L3Y5":"007","M1L3Y6":"007","M1L3Y7":"008","M1L3Y8":"007","M1L3Y9":"008","M1L3Z1":"007","M1L3Z2":"008","M1L3Z3":"008","M1L3Z4":"008","M1L3Z5":"008","M1L3Z9":"008","M1L4A8":"003","M1L4E4":"008","M1L4E5":"008","M1L4E6":"008","M1L4E7":"008","M1L4E8":"008","M1L4E9":"008","M1L4G1":"008","M1L4G2":"008","M1L4G3":"008","M1L4G4":"008","M1L4G5":"008","M1L4G6":"008","M1L4G7":"008","M1L4G8":"008","M1L4G9":"008","M1L4H1":"008","M1L4H2":"008","M1L4H3":"010","M1L4H5":"010","M1L4H6":"009","M1L4H7":"009","M1L4H8":"009","M1L4J7":"003","M1L4K1":"008","M1L4K2":"008","M1L4K3":"008","M1L4K4":"008","M1L4K5":"008","M1L4K6":"008","M1L4K7":"009","M1L4K8":"009","M1L4K9":"009","M1L4L1":"010","M1L4L2":"010","M1L4L3":"009","M1L4L4":"009","M1L4L5":"009","M1L4L6":"009","M1L4L7":"009","M1L4L8":"009","M1L4L9":"009","M1L4M1":"013","M1L4M2":"013","M1L4M3":"013","M1L4M4":"013","M1L4M5":"013","M1L4N5":"008","M1L4P2":"006","M1L4P9":"401","M1L4R3":"008","M1L4R4":"006","M1L4R8":"007","M1L4S5":"008","M1L4T1":"007","M1L4T9":"005","M1L4V1":"005","M1L4V2":"005","M1L4V3":"005","M1L4V4":"005","M1L4V5":"005","M1L4V6":"002","M1L4V7":"002","M1L4W4":"002","M1L4W7":"008","M1M0A1":"028","M1M0A2":"033","M1M0A3":"033","M1M0A4":"033","M1M0A5":"033","M1M0A6":"033","M1M0A7":"033","M1M0A8":"033","M1M0A9":"033","M1M0B1":"033","M1M0B2":"033","M1M0B3":"033","M1M0B4":"033","M1M0B5":"033","M1M0B6":"033","M1M0B7":"029","M1M0B8":"033","M1M0B9":"033","M1M0C1":"033","M1M0C2":"033","M1M0C3":"033","M1M0C4":"033","M1M0C5":"033","M1M0C6":"024","M1M0C8":"029","M1M0E3":"030","M1M1A1":"031","M1M1A2":"031","M1M1A3":"031","M1M1A5":"031","M1M1A6":"031","M1M1A7":"031","M1M1A8":"031","M1M1A9":"031","M1M1B1":"031","M1M1B2":"031","M1M1B3":"031","M1M1B4":"030","M1M1B5":"030","M1M1B6":"030","M1M1B7":"030","M1M1B8":"030","M1M1B9":"030","M1M1C1":"030","M1M1C2":"030","M1M1C3":"027","M1M1C4":"027","M1M1C5":"027","M1M1C6":"030","M1M1C7":"027","M1M1C8":"027","M1M1C9":"027","M1M1E1":"027","M1M1E3":"027","M1M1E4":"027","M1M1E5":"027","M1M1E6":"027","M1M1E7":"027","M1M1E8":"027","M1M1E9":"027","M1M1G1":"027","M1M1G2":"027","M1M1G3":"027","M1M1G4":"027","M1M1G5":"027","M1M1G6":"027","M1M1G8":"027","M1M1G9":"027","M1M1H1":"027","M1M1H2":"025","M1M1H3":"025","M1M1H4":"025","M1M1H5":"025","M1M1H6":"025","M1M1H7":"025","M1M1H9":"025","M1M1L7":"032","M1M1L8":"032","M1M1L9":"032","M1M1M1":"031","M1M1M2":"030","M1M1M3":"031","M1M1M8":"030","M1M1M9":"030","M1M1N2":"030","M1M1N3":"027","M1M1N5":"028","M1M1N6":"027","M1M1N7":"027","M1M1N8":"028","M1M1N9":"027","M1M1P1":"027","M1M1P2":"026","M1M1P3":"027","M1M1P5":"025","M1M1P6":"027","M1M1P8":"025","M1M1P9":"025","M1M1R1":"025","M1M1R2":"024","M1M1R5":"023","M1M1S4":"032","M1M1S5":"032","M1M1S6":"032","M1M1S7":"032","M1M1S8":"032","M1M1S9":"032","M1M1T1":"033","M1M1T2":"033","M1M1T3":"033","M1M1T4":"029","M1M1T5":"033","M1M1T6":"029","M1M1T7":"029","M1M1T8":"029","M1M1T9":"029","M1M1V1":"029","M1M1V2":"029","M1M1V3":"028","M1M1V4":"033","M1M1V5":"029","M1M1V6":"029","M1M1V7":"029","M1M1V8":"029","M1M1V9":"029","M1M1W1":"029","M1M1W2":"029","M1M1W3":"028","M1M1W4":"029","M1M1W5":"028","M1M1W6":"028","M1M1W7":"028","M1M1W8":"028","M1M1W9":"028","M1M1X1":"028","M1M1X2":"028","M1M1X3":"028","M1M1X5":"028","M1M1X6":"028","M1M1X7":"028","M1M1X8":"028","M1M1X9":"026","M1M1Y1":"028","M1M1Y2":"028","M1M1Y3":"026","M1M1Y4":"026","M1M1Y5":"026","M1M1Y6":"026","M1M1Y7":"026","M1M1Y8":"026","M1M1Y9":"026","M1M1Z1":"026","M1M1Z2":"028","M1M1Z3":"026","M1M1Z4":"026","M1M1Z5":"026","M1M1Z6":"026","M1M1Z7":"026","M1M1Z8":"025","M1M1Z9":"025","M1M2A1":"025","M1M2A2":"025","M1M2A3":"028","M1M2A4":"028","M1M2A5":"028","M1M2A6":"028","M1M2A7":"028","M1M2A8":"026","M1M2A9":"026","M1M2B1":"026","M1M2B2":"026","M1M2B3":"025","M1M2B4":"025","M1M2B5":"025","M1M2B6":"026","M1M2B7":"026","M1M2B8":"026","M1M2B9":"025","M1M2C1":"025","M1M2C2":"026","M1M2C3":"026","M1M2C4":"025","M1M2C5":"025","M1M2C6":"025","M1M2C7":"025","M1M2C8":"025","M1M2C9":"025","M1M2E1":"025","M1M2E2":"025","M1M2E3":"025","M1M2E4":"025","M1M2E5":"025","M1M2E6":"025","M1M2E7":"025","M1M2E8":"024","M1M2E9":"023","M1M2G1":"025","M1M2G2":"025","M1M2G3":"025","M1M2G4":"024","M1M2G5":"024","M1M2G6":"024","M1M2G7":"024","M1M2G8":"023","M1M2G9":"023","M1M2H1":"023","M1M2H2":"023","M1M2H3":"023","M1M2H4":"023","M1M2H5":"023","M1M2H6":"023","M1M2H7":"023","M1M2H8":"023","M1M2H9":"023","M1M2J1":"023","M1M2J2":"031","M1M2J3":"031","M1M2J4":"031","M1M2J5":"031","M1M2J6":"031","M1M2J7":"031","M1M2J8":"031","M1M2K1":"031","M1M2K2":"031","M1M2K3":"031","M1M2K4":"031","M1M2K5":"031","M1M2K6":"031","M1M2K7":"031","M1M2K8":"031","M1M2K9":"031","M1M2L1":"031","M1M2L2":"032","M1M2L3":"032","M1M2L4":"032","M1M2L5":"032","M1M2L6":"032","M1M2L7":"032","M1M2L8":"032","M1M2L9":"032","M1M2M2":"030","M1M2M3":"030","M1M2M4":"030","M1M2M5":"030","M1M2M6":"030","M1M2M7":"030","M1M2M8":"030","M1M2M9":"030","M1M2N1":"030","M1M2N2":"030","M1M2N3":"030","M1M2N4":"030","M1M2N6":"030","M1M2N7":"030","M1M2N8":"030","M1M2N9":"030","M1M2P1":"030","M1M2P2":"030","M1M2P3":"030","M1M2P4":"030","M1M2P5":"027","M1M2P6":"030","M1M2P7":"027","M1M2P8":"027","M1M2P9":"030","M1M2R1":"027","M1M2R2":"027","M1M2R3":"027","M1M2R4":"027","M1M2R5":"028","M1M2R6":"028","M1M2R7":"028","M1M2R8":"028","M1M2R9":"028","M1M2S1":"028","M1M2S2":"027","M1M2S3":"027","M1M2S4":"027","M1M2S5":"027","M1M2S6":"027","M1M2S7":"027","M1M2S8":"027","M1M2S9":"027","M1M2T1":"027","M1M2T2":"028","M1M2T3":"028","M1M2T4":"028","M1M2T5":"028","M1M2T6":"027","M1M2T7":"027","M1M2T8":"027","M1M2T9":"027","M1M2V1":"027","M1M2V2":"027","M1M2V3":"027","M1M2V4":"027","M1M2V5":"027","M1M2V6":"027","M1M2V7":"027","M1M2V8":"027","M1M2V9":"027","M1M2W1":"027","M1M2W2":"027","M1M2W3":"027","M1M2W4":"027","M1M2W5":"027","M1M2W6":"027","M1M2W7":"027","M1M2W8":"027","M1M2W9":"027","M1M2X1":"027","M1M2X2":"027","M1M2X3":"027","M1M2X4":"027","M1M2X5":"027","M1M2X6":"027","M1M2X7":"027","M1M2X8":"027","M1M2X9":"027","M1M2Y1":"027","M1M2Y2":"027","M1M2Y3":"025","M1M2Y4":"025","M1M2Y5":"025","M1M2Y6":"025","M1M2Y7":"025","M1M2Y8":"025","M1M2Y9":"025","M1M2Z1":"025","M1M2Z2":"023","M1M2Z3":"023","M1M2Z4":"023","M1M2Z8":"706","M1M2Z9":"023","M1M3C7":"032","M1M3C8":"032","M1M3C9":"032","M1M3E1":"032","M1M3E2":"032","M1M3E3":"032","M1M3E4":"032","M1M3E5":"032","M1M3E6":"032","M1M3E7":"032","M1M3E8":"032","M1M3E9":"033","M1M3G1":"033","M1M3G2":"033","M1M3G3":"033","M1M3G4":"029","M1M3G5":"029","M1M3G6":"029","M1M3G7":"029","M1M3G8":"029","M1M3G9":"029","M1M3H1":"029","M1M3H2":"029","M1M3H3":"029","M1M3H4":"029","M1M3H5":"029","M1M3H6":"029","M1M3H7":"028","M1M3H9":"028","M1M3J1":"028","M1M3J3":"028","M1M3J4":"028","M1M3J5":"028","M1M3J6":"028","M1M3J7":"028","M1M3J8":"028","M1M3J9":"028","M1M3K1":"028","M1M3K2":"028","M1M3K3":"028","M1M3K4":"028","M1M3K5":"028","M1M3K6":"028","M1M3K7":"028","M1M3K8":"028","M1M3K9":"028","M1M3L1":"028","M1M3L2":"026","M1M3L3":"028","M1M3L4":"026","M1M3L5":"028","M1M3L6":"028","M1M3L7":"026","M1M3L8":"028","M1M3L9":"026","M1M3M1":"026","M1M3M2":"026","M1M3M3":"026","M1M3M4":"028","M1M3M5":"026","M1M3M6":"028","M1M3M7":"026","M1M3M8":"026","M1M3M9":"026","M1M3N1":"026","M1M3N2":"025","M1M3N3":"026","M1M3N4":"026","M1M3N5":"025","M1M3N6":"025","M1M3N8":"025","M1M3N9":"025","M1M3P1":"025","M1M3P2":"025","M1M3P3":"025","M1M3P4":"025","M1M3P5":"025","M1M3P6":"024","M1M3P7":"025","M1M3P8":"025","M1M3P9":"024","M1M3R1":"024","M1M3R2":"024","M1M3R3":"023","M1M3R4":"023","M1M3R6":"023","M1M3R7":"023","M1M3R8":"023","M1M3R9":"023","M1M3S1":"023","M1M3S2":"023","M1M3S4":"029","M1M3S5":"023","M1M3S6":"023","M1M3S7":"024","M1M3S8":"024","M1M3S9":"024","M1M3T1":"028","M1M3T2":"028","M1M3T3":"028","M1M3T4":"026","M1M3T6":"025","M1M3T8":"029","M1M3V2":"024","M1M3V3":"028","M1M3V4":"030","M1M3V5":"024","M1M3V6":"030","M1M3V7":"030","M1M3W2":"029","M1M3W3":"030","M1M3W5":"024","M1M3W6":"024","M1M3W7":"024","M1M3W8":"026","M1M3W9":"026","M1M3X1":"026","M1M3X2":"026","M1M3X3":"026","M1M3X5":"025","M1M3X6":"025","M1M3X7":"027","M1M3X8":"027","M1N0A1":"038","M1N0A2":"034","M1N0A3":"039","M1N0A5":"033","M1N0A8":"036","M1N0B3":"038","M1N0B4":"035","M1N0B7":"037","M1N0B8":"032","M1N0C2":"037","M1N0C3":"035","M1N0C5":"034","M1N0C6":"038","M1N1A1":"039","M1N1A2":"039","M1N1A3":"039","M1N1A4":"039","M1N1A5":"039","M1N1A6":"039","M1N1A7":"039","M1N1A8":"039","M1N1A9":"039","M1N1B1":"039","M1N1B2":"039","M1N1B3":"039","M1N1B4":"039","M1N1B5":"039","M1N1B6":"039","M1N1B7":"039","M1N1B8":"039","M1N1B9":"039","M1N1C1":"039","M1N1C2":"039","M1N1C3":"039","M1N1C4":"039","M1N1C5":"039","M1N1C6":"039","M1N1C7":"039","M1N1C8":"039","M1N1C9":"037","M1N1E1":"037","M1N1E2":"037","M1N1E3":"037","M1N1E4":"037","M1N1E5":"037","M1N1E6":"037","M1N1E7":"037","M1N1E8":"037","M1N1E9":"037","M1N1G1":"037","M1N1G2":"037","M1N1G3":"037","M1N1G4":"037","M1N1G5":"037","M1N1G6":"037","M1N1G7":"037","M1N1G8":"037","M1N1G9":"035","M1N1H1":"035","M1N1H2":"035","M1N1H3":"031","M1N1H4":"035","M1N1H5":"031","M1N1H6":"035","M1N1H7":"035","M1N1H8":"035","M1N1H9":"035","M1N1J1":"035","M1N1J2":"035","M1N1J3":"035","M1N1J4":"035","M1N1J5":"035","M1N1J6":"035","M1N1J7":"031","M1N1J8":"031","M1N1J9":"031","M1N1K1":"031","M1N1K2":"031","M1N1K3":"031","M1N1K4":"031","M1N1K5":"031","M1N1K6":"031","M1N1K7":"035","M1N1K8":"035","M1N1K9":"035","M1N1L1":"035","M1N1L2":"035","M1N1L3":"035","M1N1L4":"035","M1N1L5":"035","M1N1L6":"035","M1N1L7":"035","M1N1L8":"035","M1N1L9":"035","M1N1M1":"035","M1N1M2":"035","M1N1M3":"035","M1N1M4":"031","M1N1M5":"035","M1N1M7":"031","M1N1M8":"031","M1N1M9":"031","M1N1N1":"035","M1N1N4":"038","M1N1N5":"038","M1N1N8":"038","M1N1N9":"038","M1N1P1":"038","M1N1P2":"039","M1N1P3":"038","M1N1P4":"039","M1N1P5":"038","M1N1P6":"037","M1N1R1":"039","M1N1R2":"037","M1N1R3":"037","M1N1R4":"037","M1N1R5":"037","M1N1R6":"037","M1N1R7":"037","M1N1R8":"037","M1N1R9":"037","M1N1S1":"037","M1N1S4":"037","M1N1S5":"037","M1N1S6":"037","M1N1S8":"037","M1N1S9":"037","M1N1T1":"033","M1N1T3":"037","M1N1T4":"037","M1N1T5":"709","M1N1T6":"036","M1N1T9":"034","M1N1V1":"035","M1N1V2":"034","M1N1V3":"034","M1N1V5":"038","M1N1V6":"038","M1N1V7":"038","M1N1V8":"038","M1N1V9":"038","M1N1W1":"038","M1N1W2":"038","M1N1W3":"038","M1N1W4":"038","M1N1W5":"038","M1N1W6":"038","M1N1W7":"038","M1N1W9":"038","M1N1X4":"038","M1N1X5":"038","M1N1X6":"038","M1N1X7":"038","M1N1X8":"038","M1N1X9":"038","M1N1Y1":"037","M1N1Y2":"037","M1N1Y3":"037","M1N1Y4":"037","M1N1Y5":"038","M1N1Y6":"038","M1N1Y7":"038","M1N1Y8":"038","M1N1Y9":"038","M1N1Z1":"038","M1N1Z2":"038","M1N1Z3":"038","M1N1Z4":"038","M1N1Z5":"038","M1N1Z6":"038","M1N1Z7":"038","M1N1Z8":"038","M1N1Z9":"037","M1N2A1":"037","M1N2A2":"037","M1N2A3":"037","M1N2A4":"037","M1N2A5":"037","M1N2A6":"037","M1N2A7":"037","M1N2A8":"037","M1N2A9":"037","M1N2B1":"037","M1N2B2":"037","M1N2B3":"037","M1N2B4":"037","M1N2B5":"037","M1N2B6":"037","M1N2B7":"037","M1N2B8":"037","M1N2B9":"037","M1N2C1":"037","M1N2C2":"037","M1N2C3":"037","M1N2C4":"037","M1N2C5":"037","M1N2C6":"037","M1N2C7":"037","M1N2C8":"037","M1N2C9":"037","M1N2E1":"037","M1N2E2":"037","M1N2E3":"033","M1N2E4":"037","M1N2G3":"036","M1N2G4":"036","M1N2G5":"036","M1N2G6":"036","M1N2G7":"036","M1N2G8":"036","M1N2G9":"036","M1N2H2":"036","M1N2H3":"036","M1N2H4":"036","M1N2H5":"036","M1N2H6":"036","M1N2H7":"036","M1N2H8":"036","M1N2H9":"036","M1N2J2":"036","M1N2J3":"036","M1N2J4":"036","M1N2J5":"036","M1N2J6":"036","M1N2J7":"036","M1N2J8":"036","M1N2J9":"036","M1N2K1":"036","M1N2K2":"036","M1N2K3":"036","M1N2K4":"036","M1N2K5":"034","M1N2K6":"034","M1N2K7":"036","M1N2K8":"036","M1N2K9":"036","M1N2L1":"036","M1N2L2":"036","M1N2L3":"036","M1N2L4":"036","M1N2L6":"036","M1N2L7":"036","M1N2L8":"036","M1N2L9":"036","M1N2M1":"034","M1N2M2":"036","M1N2M3":"034","M1N2M4":"036","M1N2M5":"034","M1N2M6":"034","M1N2M7":"708","M1N2M8":"034","M1N2M9":"034","M1N2N1":"034","M1N2N2":"034","M1N2N3":"034","M1N2N4":"034","M1N2N5":"034","M1N2N6":"034","M1N2N7":"034","M1N2N8":"034","M1N2N9":"034","M1N2P1":"034","M1N2P2":"034","M1N2P3":"034","M1N2P4":"034","M1N2P5":"034","M1N2P6":"034","M1N2P7":"034","M1N2P8":"034","M1N2P9":"032","M1N2R1":"033","M1N2R3":"039","M1N2R4":"039","M1N2R5":"039","M1N2R6":"039","M1N2R7":"038","M1N2R8":"038","M1N2R9":"038","M1N2S1":"038","M1N2S2":"038","M1N2S3":"038","M1N2S5":"038","M1N2S6":"038","M1N2S7":"038","M1N2S8":"039","M1N2S9":"039","M1N2T1":"039","M1N2T2":"039","M1N2T4":"039","M1N2T5":"039","M1N2T6":"039","M1N2T7":"039","M1N2T8":"039","M1N2T9":"039","M1N2V1":"039","M1N2V3":"038","M1N2V4":"038","M1N2V5":"038","M1N2V6":"039","M1N2V7":"039","M1N2V8":"039","M1N2V9":"039","M1N2W1":"037","M1N2W2":"037","M1N2W3":"038","M1N2W4":"038","M1N2W5":"038","M1N2W6":"038","M1N2W7":"038","M1N2W8":"038","M1N2W9":"038","M1N2X1":"038","M1N2X2":"038","M1N2X3":"038","M1N2X4":"038","M1N2X5":"038","M1N2X6":"038","M1N2X7":"037","M1N2X8":"037","M1N2X9":"037","M1N2Y1":"037","M1N2Y2":"037","M1N2Y3":"037","M1N2Y4":"037","M1N2Y5":"037","M1N2Y6":"037","M1N2Y7":"037","M1N2Y8":"037","M1N2Y9":"037","M1N2Z1":"037","M1N2Z2":"037","M1N2Z3":"037","M1N2Z4":"037","M1N2Z5":"037","M1N2Z6":"037","M1N2Z7":"037","M1N2Z8":"037","M1N2Z9":"037","M1N3A1":"037","M1N3A2":"037","M1N3A3":"037","M1N3A4":"037","M1N3A5":"037","M1N3A6":"037","M1N3A7":"037","M1N3A8":"037","M1N3A9":"037","M1N3B1":"037","M1N3B2":"037","M1N3B3":"037","M1N3B4":"037","M1N3B5":"037","M1N3B6":"037","M1N3B7":"037","M1N3B8":"037","M1N3B9":"037","M1N3C1":"037","M1N3C2":"037","M1N3C3":"037","M1N3C4":"037","M1N3C5":"037","M1N3C6":"037","M1N3C7":"037","M1N3C8":"037","M1N3C9":"037","M1N3E1":"037","M1N3E2":"037","M1N3E3":"037","M1N3E4":"037","M1N3E5":"037","M1N3E6":"037","M1N3E7":"037","M1N3E8":"037","M1N3E9":"037","M1N3G1":"037","M1N3G2":"037","M1N3G3":"037","M1N3G4":"037","M1N3G5":"037","M1N3G6":"037","M1N3G7":"037","M1N3G8":"037","M1N3G9":"037","M1N3H1":"037","M1N3H2":"037","M1N3H3":"037","M1N3H4":"037","M1N3H5":"037","M1N3H6":"037","M1N3H7":"037","M1N3H8":"037","M1N3H9":"037","M1N3J1":"037","M1N3J2":"037","M1N3J3":"037","M1N3J4":"037","M1N3J5":"037","M1N3J6":"037","M1N3J7":"037","M1N3J8":"037","M1N3J9":"036","M1N3K1":"036","M1N3K2":"036","M1N3K3":"035","M1N3K4":"036","M1N3K5":"036","M1N3K6":"036","M1N3K7":"036","M1N3K8":"036","M1N3K9":"036","M1N3L1":"036","M1N3L2":"036","M1N3L3":"036","M1N3L4":"036","M1N3L5":"036","M1N3L6":"036","M1N3L7":"036","M1N3L8":"036","M1N3L9":"036","M1N3M1":"036","M1N3M2":"036","M1N3M3":"036","M1N3M4":"036","M1N3M5":"036","M1N3M6":"036","M1N3M7":"036","M1N3M8":"036","M1N3M9":"036","M1N3N1":"036","M1N3N2":"036","M1N3N3":"036","M1N3N4":"036","M1N3N5":"036","M1N3N6":"036","M1N3N7":"036","M1N3N8":"036","M1N3N9":"036","M1N3P1":"036","M1N3P2":"036","M1N3P3":"036","M1N3P4":"034","M1N3P5":"036","M1N3P6":"034","M1N3P7":"036","M1N3P8":"036","M1N3P9":"036","M1N3R1":"034","M1N3R2":"034","M1N3R3":"034","M1N3R4":"034","M1N3R5":"034","M1N3R6":"034","M1N3R7":"036","M1N3R8":"036","M1N3R9":"034","M1N3S1":"034","M1N3S2":"034","M1N3S3":"034","M1N3S4":"034","M1N3S5":"034","M1N3S6":"034","M1N3S7":"034","M1N3S8":"034","M1N3S9":"034","M1N3T1":"034","M1N3T2":"034","M1N3T3":"034","M1N3T4":"034","M1N3T5":"034","M1N3T6":"034","M1N3T7":"034","M1N3T8":"034","M1N3T9":"034","M1N3V1":"034","M1N3V2":"034","M1N3V3":"034","M1N3V4":"034","M1N3V5":"034","M1N3V6":"034","M1N3V7":"034","M1N3V8":"034","M1N3V9":"034","M1N3W1":"034","M1N3W2":"034","M1N3W3":"034","M1N3W4":"034","M1N3W5":"034","M1N3W6":"033","M1N3W7":"033","M1N3W8":"034","M1N3W9":"034","M1N3X1":"034","M1N3X2":"034","M1N3X3":"034","M1N3X4":"033","M1N3X5":"033","M1N3X6":"034","M1N3X7":"034","M1N3X8":"032","M1N3X9":"032","M1N3Y1":"033","M1N3Y2":"033","M1N3Y3":"036","M1N3Y4":"036","M1N3Y5":"036","M1N3Y6":"034","M1N3Y7":"034","M1N3Y8":"034","M1N3Y9":"034","M1N3Z1":"034","M1N3Z2":"034","M1N3Z3":"034","M1N3Z4":"034","M1N3Z5":"031","M1N3Z6":"031","M1N3Z7":"031","M1N3Z8":"031","M1N3Z9":"031","M1N4A1":"031","M1N4A2":"031","M1N4A4":"031","M1N4A5":"032","M1N4A6":"032","M1N4A7":"032","M1N4A9":"034","M1N4B3":"034","M1N4B4":"034","M1N4B5":"038","M1N4B6":"038","M1N4B7":"038","M1N4B8":"038","M1N4B9":"038","M1N4C1":"038","M1N4C2":"038","M1N4C7":"033","M1N4C8":"033","M1N4C9":"037","M1N4E1":"037","M1N4E2":"400","M1N4E5":"400","M1N4E6":"707","M1N4E8":"033","M4A2L5":"001","M4A2L6":"001","M4A2L7":"001","M4A2L9":"001","M4B2J1":"005","M4B2J2":"005","M4B2J4":"005","M4B2J7":"005","M4B2J8":"005","M4B2K2":"004","M4B2K5":"004","M4B2K9":"004","M4B2L3":"001","M4B2L5":"001","M4C5H1":"007","M4C5H2":"007","M4C5N8":"006","M4E3S1":"039","M4E3S2":"039","M4E3S3":"038","M4E3S4":"038","M4E3S5":"038","M4E3S6":"038","M4E3S7":"038","M4E3S9":"038","M4E3T1":"038"},"l":{"001":{"n":"Clairlea Public School","a":"25 Rosalind Cres, M1L 2X1"},"002":{"n":"SATEC @ W.A Porter Collegiate Institute","a":"40 Fairfax Cres, M1L 1Z9"},"003":{"n":"Warden Hilltop Community Centre","a":"25 Mendelssohn St, M1L 0G6"},"004":{"n":"Our Lady of Fatima Catholic School","a":"3176 St Clair Ave E, M1L 1V6"},"005":{"n":"West Scarborough Neighbourhood C.C.","a":"313 Pharmacy Ave, M1L 3E7"},"006":{"n":"Oakridge Community Recreation Centre","a":"63 Pharmacy Ave, M1L 4S9"},"007":{"n":"Oakridge Jr. P.S.","a":"110 Byng Ave, M1L 3P1"},"008":{"n":"Taylor Creek Public School","a":"644 Warden Ave, M1L 3Z3"},"009":{"n":"St. Joachim Catholic School","a":"3395 St Clair Ave E, M1L 1W3"},"010":{"n":"Danforth Gardens Public School","a":"20 Santamonica Blvd, M1L 4H4"},"011":{"n":"J.G. Workman Public School","a":"487 Birchmount Rd, M1K 1N7"},"012":{"n":"Konko Church of Toronto","a":"398 Kennedy Rd, M1K 2A6"},"013":{"n":"General Brock Public School","a":"140 Chestnut Cres, M1L 1Y5"},"014":{"n":"Walton Place","a":"835 Birchmount Rd, M1K 5K1"},"015":{"n":"Grace Church Scarborough","a":"700 Kennedy Rd, M1K 2B5"},"016":{"n":"St. Maria Goretti C.S.","a":"21 Kenmark Blvd, M1K 3N8"},"017":{"n":"Corvette Junior Public School","a":"30 Corvette Ave, M1K 3G2"},"018":{"n":"Norman Cook Junior Public School","a":"725 Danforth Rd, M1K 1G4"},"019":{"n":"Robert Service Senior Public School","a":"945 Danforth Rd, M1K 1J2"},"020":{"n":"Don Montgomery Comm. Rec. Ctr.","a":"2467 Eglinton Ave E, M1K 2R1"},"021":{"n":"Walter Perry Junior Public School","a":"45 Falmouth Ave, M1K 4M7"},"022":{"n":"Bic Fortune/Sterling Club Rec. Cen.","a":"320 Mccowan Rd, M1J 3N2"},"023":{"n":"St. Boniface Catholic School","a":"20 Markanna Dr, M1M 2J1"},"024":{"n":"Mason Road Junior Public School","a":"78 Mason Rd, M1M 3R2"},"025":{"n":"Bliss Carman Senior Public School","a":"10 Bellamy Rd S, M1M 3N8"},"026":{"n":"H.A. Halbert Junior Public School","a":"25 Halbert Pl, M1M 0E1"},"027":{"n":"St. Agatha Catholic School","a":"49 Cathedral Bluffs Dr, M1M 2T6"},"028":{"n":"Anson Park Public School","a":"30 Macduff Cres, M1M 1X5"},"029":{"n":"St. Georges Manor","a":"17 Brimley Rd, M1M 3T8"},"030":{"n":"St. John Henry Newman Catholic H.S.","a":"100 Brimley Rd S, M1M 3X4"},"031":{"n":"Chine Drive Public School","a":"51 Chine Dr, M1M 2K8"},"032":{"n":"John A. Leslie Public School","a":"459 Midland Ave, M1N 4A7"},"033":{"n":"Highway Gospel Church","a":"530 Midland Ave, M1N 1T1"},"034":{"n":"St. Paul's United Church","a":"200 Mcintosh St, M1N 3Z3"},"035":{"n":"Cliffside Public School","a":"27 East Haven Dr, M1N 1M1"},"036":{"n":"Birch Cliff Heights Public School","a":"120 Highview Ave, M1N 2J1"},"037":{"n":"Birchmount Community Centre","a":"93 Birchmount Rd, M1N 3J7"},"038":{"n":"Blantyre Public School","a":"290 Blantyre Ave, M1N 2S4"},"039":{"n":"Courcelette Public School","a":"100 Fallingbrook Rd, M1N 2T6"},"400":{"n":"Henley Gardens","a":"1091 Kingston Rd, M1N 4E5"},"401":{"n":"Byng Towers","a":"3330 Danforth Ave, M1L 4P9"},"700":{"n":"Presentation Manor","a":"61 Fairfax Cres, M1L 1Z7"},"701":{"n":"Cardinal Ambrozic Houses of Providence","a":"3276 St Clair Ave E, M1L 1W1"},"702":{"n":"Ina Grafton Gage Home","a":"40 Bell Estate Rd, M1L 0E2"},"703":{"n":"Chester Village","a":"3555 Danforth Ave, M1L 1E3"},"704":{"n":"McCowan Retirement Residence","a":"2881 Eglinton Ave E, M1J 0A2"},"705":{"n":"Agecare Trilogy","a":"340 Mccowan Rd, M1J 3P4"},"706":{"n":"Scarborough Retirement Residence","a":"148 Markham Rd, M1M 2Z8"},"707":{"n":"Midland Gardens Care Community","a":"130 Midland Ave, M1N 4E6"},"708":{"n":"Craiglee Nursing Home","a":"102 Craiglee Dr, M1N 2M7"},"709":{"n":"Retirement Suites by the Lake","a":"2121 Kingston Rd, M1N 1T5"}},"adv":[{"n":"2685 Kingston Rd","a":"2685 Kingston Rd, M1M 1M2","lat":43.716848,"lng":-79.240913},{"n":"Don Montgomery Comm. Rec. Ctr.","a":"2467 Eglinton Ave E, M1K 2R1","lat":43.7326575,"lng":-79.261697},{"n":"Birchmount Community Centre","a":"93 Birchmount Rd, M1N 3J7","lat":43.69542,"lng":-79.26233},{"n":"Cliffcrest Public Library","a":"3017 Kingston Rd, M1M 1P1","lat":43.72527,"lng":-79.23078},{"n":"West Scarborough Neighbourhood","a":"313 Pharmacy Ave, M1L 3E7","lat":43.701293,"lng":-79.2846943}],"f":["M1K1P2","M1K1P7","M1K2G4","M1K2H1","M1K3H8","M1K4C8","M1L1E3","M1L3Y7","M1L4H5","M1M1H9","M1M1M2","M1M1R1","M1M1V4","M1M2G7","M1M2L6","M1M3E8","M1M3P3","M1M3S4","M1M3S8","M1M3S9","M1N1H3","M1N1X9","M1N2M7","M1N3Y7","M4B2J7","M4B2K9"]};
+
+(function(){
+  var adv = DATA.adv || [], ul = document.getElementById('advlist');
+  ul.innerHTML = adv.map(function(a){
+    var q = encodeURIComponent(a.a.replace(/,$/,'') + ', Scarborough, ON');
+    return '<li><div class="pn">' + esc(a.n) + '</div>' +
+           '<div class="pa">' + esc(a.a) + '</div>' +
+           '<div style="margin-top:6px"><a href="https://www.google.com/maps/search/?api=1&query=' + q +
+           '" target="_blank" rel="noopener">Open in maps &rarr;</a></div></li>';
+  }).join('');
+
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+  var fuzzy = {};
+  (DATA.f || []).forEach(function(p){ fuzzy[p] = 1; });
+
+  function lookup(){
+    var raw = (document.getElementById('pc').value || '').toUpperCase().replace(/[^A-Z0-9]/g,'');
+    var out = document.getElementById('res');
+    if (raw.length < 6){
+      out.innerHTML = '<div class="miss">Please enter a full six character postal code, for example M1M 1M2.</div>';
+      return;
+    }
+    var poll = DATA.p[raw];
+    if (!poll){
+      out.innerHTML = '<div class="miss"><strong>We do not have that postal code.</strong>' +
+        ' It may be outside Scarborough Southwest, or it may be new. Check the official lookup at ' +
+        '<a href="https://voterinformationservice.elections.on.ca" target="_blank" rel="noopener">voterinformationservice.elections.on.ca</a>,' +
+        ' or call us at <a href="tel:+16473132506">647-313-2506</a> and we will look it up for you.</div>';
+      return;
+    }
+    var L = DATA.l[poll];
+    var q = encodeURIComponent(L.a.replace(/,$/,'') + ', Scarborough, ON');
+    var warn = fuzzy[raw]
+      ? '<p style="margin:10px 0 0;font-size:15.5px"><strong>Please double check this one.</strong> ' +
+        'Your postal code sits across more than one poll, so confirm on your voter information card ' +
+        'or at the official lookup before you travel.</p>'
+      : '<p style="margin:10px 0 0;font-size:15.5px">Bring ID showing your name. ' +
+        'Polls are open 9:00 a.m. to 9:00 p.m.</p>';
+    out.innerHTML = '<div class="hit">' +
+      '<div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#525252">' +
+      'Your election day polling place &middot; poll ' + esc(poll) + '</div>' +
+      '<div class="pl">' + esc(L.n) + '</div>' +
+      '<div style="color:#525252">' + esc(L.a) + '</div>' +
+      '<div style="margin-top:8px"><a href="https://www.google.com/maps/search/?api=1&query=' + q +
+      '" target="_blank" rel="noopener" style="color:#0a58ca;font-weight:700">Open in maps &rarr;</a></div>' +
+      warn +
+      '<p style="margin:10px 0 0;font-size:15.5px">Do not want to wait? You can vote at ' +
+      '<a href="#advance">any advance location</a> on Aug 26, 27 or 28, or at the ' +
+      '<a href="#office">election office</a> today.</p>' +
+      '</div>';
+  }
+
+  document.getElementById('go').addEventListener('click', lookup);
+  document.getElementById('pc').addEventListener('keydown', function(e){
+    if (e.key === 'Enter'){ e.preventDefault(); lookup(); }
+  });
+})();
+</script>
+</body>
+</html>
