@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sign up for a GOTV shift — Ahsanul Hafiz</title>
+<meta name="description" content="Sign up to help get out the vote in Scarborough Southwest: flyer night Aug 25, advance polls Aug 26-28, and election day Sept 3.">
+<link rel="icon" href="/apple-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+Bengali:wght@400;600;700&display=swap">
+<style>
+  :root{
+    --brand:#E81E25; --brand-hover:#ad1b1e; --accent:#6A0C0D;
+    --ink:#1a1a1a; --mut:#525252; --line:#e3e3e3; --bg:#f7f7f7; --card:#fff;
+    --ok:#137333; --okbg:#e6f4ea; --warn-bg:#fef7e0; --warn:#8a6d00;
+    --radius:12px; --radius-lg:16px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0; background:var(--bg); color:var(--ink);
+       font-family:Inter,"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+       font-size:17px; line-height:1.5; -webkit-font-smoothing:antialiased}
+  body.bn{font-family:"Noto Sans Bengali",Inter,"Segoe UI",system-ui,Arial,sans-serif; line-height:1.75}
+  header.top{background:var(--brand); color:#fff; border-bottom:4px solid var(--brand-hover);
+             padding:12px 20px; display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+  header.top .name{font-weight:800; font-size:19px}
+  header.top .spacer{flex:1}
+  .langbtn{font:inherit; font-weight:700; font-size:15px; cursor:pointer;
+           background:rgba(255,255,255,.15); color:#fff; border:1.5px solid rgba(255,255,255,.55);
+           border-radius:999px; padding:7px 16px; min-height:40px}
+  .langbtn:hover{background:rgba(255,255,255,.28)}
+  .langbtn:focus-visible{outline:3px solid #fff; outline-offset:2px}
+  main{max-width:760px; margin:0 auto; padding:20px 16px 64px}
+  h1{font-size:clamp(27px,6vw,36px); line-height:1.15; color:var(--accent); margin:6px 0 10px; text-wrap:balance}
+  h2{font-size:22px; color:var(--accent); margin:0 0 4px}
+  h3{font-size:18px; margin:0 0 2px}
+  p{margin:0 0 12px}
+  .lede{font-size:18.5px}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius-lg);
+        padding:18px; box-shadow:0 8px 24px rgba(26,43,68,.06); margin-bottom:16px}
+  .steps{list-style:none; margin:10px 0 0; padding:0; display:flex; flex-direction:column; gap:14px}
+  .steps li{display:flex; gap:14px; align-items:flex-start}
+  .num{flex:0 0 auto; width:34px; height:34px; border-radius:999px; background:var(--brand);
+       color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:16px}
+  .daycard{border-left:5px solid var(--brand)}
+  .daycard.advance{border-left-color:var(--accent)}
+  .daycard.eday{border-left-color:#0a58ca}
+  .when{font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+        color:var(--mut); margin:0 0 2px}
+  .slots{display:flex; flex-direction:column; gap:10px; margin-top:14px}
+  .slot{display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+        border:1px solid var(--line); border-radius:var(--radius); padding:12px 14px; background:#fcfcfc}
+  .slot .time{font-weight:700; min-width:132px}
+  .slot .note{color:var(--mut); font-size:15px; flex:1; min-width:150px}
+  .go{display:inline-flex; align-items:center; justify-content:center; gap:6px;
+      font-weight:700; font-size:15px; text-decoration:none; border-radius:10px;
+      padding:11px 18px; min-height:44px; background:var(--brand); color:#fff; white-space:nowrap}
+  .go:hover{background:var(--brand-hover)}
+  .go:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+  .go.alt{background:#fff; color:var(--accent); border:1.5px solid var(--line)}
+  .go.alt:hover{background:#f2f2f2}
+  .callout{background:var(--warn-bg); border:1px solid #f0d98a; border-radius:var(--radius);
+           padding:14px 16px; margin-top:14px}
+  .callout.ok{background:var(--okbg); border-color:#bcdfc8}
+  .callout h3{color:var(--accent)}
+  .foot{color:var(--mut); font-size:15px; text-align:center; margin-top:26px}
+  .foot a{color:var(--brand)}
+  [data-bn]{display:none}
+  body.bn [data-en]{display:none}
+  body.bn [data-bn]{display:revert}
+  @media (max-width:520px){
+    .slot{gap:8px}
+    .slot .time{min-width:100%}
+    .slot .note{min-width:100%; margin-bottom:2px}
+    .slot .go{flex:1 1 0; min-width:0}      /* two buttons share the row, not one each */
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <span class="name">Ahsanul Hafiz</span>
+  <span class="spacer"></span>
+  <button class="langbtn" id="lang" type="button" onclick="toggleLang()">
+    <span data-en>বাংলায় দেখুন</span><span data-bn>View in English</span>
+  </button>
+</header>
+
+<main>
+  <h1><span data-en>Help get out the vote</span><span data-bn>ভোট আনতে সাহায্য করুন</span></h1>
+
+  <p class="lede">
+    <span data-en>Voting has already started. Between now and September 3 we need people on doors
+      and on phones — and every shift below is one you can sign up for in about a minute.</span>
+    <span data-bn>ভোট ইতিমধ্যেই শুরু হয়েছে। এখন থেকে ৩ সেপ্টেম্বর পর্যন্ত আমাদের দরজায় দরজায় এবং ফোনে
+      মানুষ দরকার — নিচের প্রতিটি শিফটে আপনি এক মিনিটেই সাইন আপ করতে পারবেন।</span>
+  </p>
+
+  <!-- HOW IT WORKS -->
+  <section class="card">
+    <h2><span data-en>How signing up works</span><span data-bn>সাইন আপ কীভাবে করবেন</span></h2>
+    <ol class="steps">
+      <li><span class="num">1</span><div>
+        <h3><span data-en>Pick a shift below</span><span data-bn>নিচে একটি শিফট বেছে নিন</span></h3>
+        <p><span data-en>Tap the button next to the day and time that works for you. It opens a short form.</span>
+           <span data-bn>আপনার সুবিধামতো দিন ও সময়ের পাশে বাটনে চাপ দিন। একটি ছোট ফর্ম খুলবে।</span></p></div></li>
+      <li><span class="num">2</span><div>
+        <h3><span data-en>Fill in your details</span><span data-bn>আপনার তথ্য দিন</span></h3>
+        <p><span data-en>Name, mobile number and email. If you have volunteered before, use the same
+          number and we'll find your record — nothing gets duplicated.</span>
+           <span data-bn>নাম, মোবাইল নম্বর ও ইমেইল। আগে স্বেচ্ছাসেবক থাকলে একই নম্বর ব্যবহার করুন,
+          আমরা আপনার তথ্য খুঁজে নেব — কিছুই দুবার হবে না।</span></p></div></li>
+      <li><span class="num">3</span><div>
+        <h3><span data-en>We text you the details</span><span data-bn>আমরা আপনাকে বিস্তারিত এসএমএস করব</span></h3>
+        <p><span data-en>You'll get a message with the time and the address before your shift. Reply
+          CONFIRM and you're set. Everything starts at the campaign office, 2500 Kingston Rd.</span>
+           <span data-bn>শিফটের আগে সময় ও ঠিকানা সহ একটি মেসেজ পাবেন। CONFIRM লিখে উত্তর দিলেই হবে।
+          সবকিছু শুরু হবে ক্যাম্পেইন অফিস, ২৫০০ কিংস্টন রোড থেকে।</span></p></div></li>
+    </ol>
+    <div class="callout">
+      <h3><span data-en>Under 18? You are very welcome</span><span data-bn>১৮ বছরের কম বয়স? আপনাকে স্বাগতম</span></h3>
+      <p style="margin:0"><span data-en>Tick <b>"I'm a high school volunteer"</b> on the form and add a
+        parent or guardian's name and phone number. We pair every volunteer under 18 with an adult,
+        and you get hours toward your community service.</span>
+        <span data-bn>ফর্মে <b>"I'm a high school volunteer"</b> টিক দিন এবং অভিভাবকের নাম ও ফোন নম্বর দিন।
+        ১৮ বছরের কম বয়সী প্রত্যেককে আমরা একজন প্রাপ্তবয়স্কের সঙ্গে জুড়ে দিই, এবং আপনি কমিউনিটি সার্ভিস
+        আওয়ার পাবেন।</span></p>
+    </div>
+  </section>
+
+  <!-- TUESDAY -->
+  <section class="card daycard">
+    <p class="when"><span data-en>Tuesday 25 August &middot; the night before voting opens</span>
+       <span data-bn>মঙ্গলবার ২৫ আগস্ট &middot; ভোট শুরুর আগের রাত</span></p>
+    <h2><span data-en>Flyer night</span><span data-bn>লিফলেট বিতরণের রাত</span></h2>
+    <p style="margin:0"><span data-en>We put a reminder on every door before advance voting opens the
+      next morning. Bring comfortable shoes; we go out in pairs.</span>
+      <span data-bn>পরদিন সকালে আগাম ভোট শুরুর আগে আমরা প্রতিটি দরজায় একটি রিমাইন্ডার পৌঁছে দিই।
+      আরামদায়ক জুতা পরে আসুন; আমরা জোড়ায় জোড়ায় যাই।</span></p>
+    <div class="slots">
+      <div class="slot">
+        <span class="time">8:00 – 10:30 pm</span>
+        <span class="note"><span data-en>Late shift — flyers on doors</span><span data-bn>রাতের শিফট — দরজায় লিফলেট</span></span>
+        <a class="go" href="#" data-shift="2026-08-25_2000_flyers"><span data-en>Sign up</span><span data-bn>সাইন আপ</span></a>
+      </div>
+      <div class="slot">
+        <span class="time">5:30 – 8:00 pm</span>
+        <span class="note"><span data-en>Earlier canvass, if the late shift is too late</span><span data-bn>রাতের শিফট দেরি হলে, আগের ক্যানভাস</span></span>
+        <a class="go alt" href="#" data-shift="2026-08-25_1730_canvass"><span data-en>Sign up</span><span data-bn>সাইন আপ</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADVANCE POLLS -->
+  <section class="card daycard advance">
+    <p class="when"><span data-en>Wednesday 26 &middot; Thursday 27 &middot; Friday 28 August</span>
+       <span data-bn>বুধবার ২৬ &middot; বৃহস্পতিবার ২৭ &middot; শুক্রবার ২৮ আগস্ট</span></p>
+    <h2><span data-en>Advance voting days</span><span data-bn>আগাম ভোটের দিন</span></h2>
+    <p><span data-en>Polls are open 10am–8pm at 2685 Kingston Rd. Our job is to reach our supporters
+      and get them there early, so nothing is left to election day. Pick doors or phones — both matter.</span>
+      <span data-bn>২৬৮৫ কিংস্টন রোডে সকাল ১০টা থেকে রাত ৮টা পর্যন্ত ভোট চলবে। আমাদের কাজ সমর্থকদের
+      কাছে পৌঁছে তাড়াতাড়ি ভোট দেওয়ানো, যাতে নির্বাচনের দিনের জন্য কিছু বাকি না থাকে। দরজা বা ফোন —
+      দুটোই গুরুত্বপূর্ণ।</span></p>
+    <div class="slots" id="advance-slots"></div>
+  </section>
+
+  <!-- ELECTION DAY -->
+  <section class="card daycard eday">
+    <p class="when"><span data-en>Thursday 3 September &middot; election day</span>
+       <span data-bn>বৃহস্পতিবার ৩ সেপ্টেম্বর &middot; নির্বাচনের দিন</span></p>
+    <h2><span data-en>Election day</span><span data-bn>নির্বাচনের দিন</span></h2>
+    <p><span data-en>The big one. <b>Come in as early as you can and stay to the end</b> — polls close
+      at 9pm and the last hour is when we knock on every door that hasn't voted yet. Choose the time
+      you can start; every shift runs through to close.</span>
+      <span data-bn>সবচেয়ে বড় দিন। <b>যত তাড়াতাড়ি পারেন আসুন এবং শেষ পর্যন্ত থাকুন</b> — রাত ৯টায় ভোট
+      বন্ধ হয়, আর শেষ ঘণ্টায় আমরা প্রতিটি অভোট দরজায় যাই। কখন শুরু করতে পারবেন বেছে নিন; প্রতিটি
+      শিফট শেষ পর্যন্ত চলে।</span></p>
+    <div class="slots" id="eday-slots"></div>
+    <div class="callout ok">
+      <h3><span data-en>Have a car?</span><span data-bn>গাড়ি আছে?</span></h3>
+      <p style="margin:0"><span data-en>Please say so in the <b>"Anything else we should know"</b> box
+        on the form — drivers get people to the polls all day, and it is one of the most valuable
+        things you can offer.</span>
+        <span data-bn>ফর্মের <b>"Anything else we should know"</b> ঘরে লিখে জানান — চালকেরা সারাদিন
+        মানুষকে ভোটকেন্দ্রে পৌঁছে দেন, এটি সবচেয়ে মূল্যবান সাহায্যগুলোর একটি।</span></p>
+    </div>
+  </section>
+
+  <p class="foot">
+    <span data-en>Questions? Call the campaign office on <a href="tel:+16473132506">647-313-2506</a>
+      or just come by 2500 Kingston Rd.</span>
+    <span data-bn>প্রশ্ন আছে? ক্যাম্পেইন অফিসে ফোন করুন <a href="tel:+16473132506">647-313-2506</a>
+      অথবা ২৫০০ কিংস্টন রোডে চলে আসুন।</span><br>
+    <a href="/">votehafiz.ca</a>
+  </p>
+</main>
+
+<script>
+  // The public sign-up form. `only=1` pins it to the one shift the person picked.
+  var FORM = "https://script.google.com/macros/s/AKfycbzSK_126YWEumvmnJmxNmEZ37SfzuN-PrSCJioCRQtfAMnJqFSxoOrCaeF8co7XVESy/exec";
+  function shiftUrl(id){
+    return FORM + "?shift=" + encodeURIComponent(id) + "&only=1&source=gotv";
+  }
+
+  var ADVANCE = [
+    {date:"2026-08-26", day_en:"Wednesday 26", day_bn:"বুধবার ২৬"},
+    {date:"2026-08-27", day_en:"Thursday 27",  day_bn:"বৃহস্পতিবার ২৭"},
+    {date:"2026-08-28", day_en:"Friday 28",    day_bn:"শুক্রবার ২৮"}
+  ];
+  var BLOCKS = [
+    {t:"1100", label:"11:00 am – 1:00 pm"},
+    {t:"1300", label:"1:00 – 3:00 pm"},
+    {t:"1730", label:"5:30 – 8:00 pm"}
+  ];
+  var EDAY = [
+    {t:"0800", start_en:"Start 8:00 am", start_bn:"শুরু সকাল ৮টা",  note_en:"Full day — the best shift you can give us", note_bn:"সারাদিন — সবচেয়ে বড় সাহায্য"},
+    {t:"1100", start_en:"Start 11:00 am", start_bn:"শুরু সকাল ১১টা", note_en:"Through to close",  note_bn:"শেষ পর্যন্ত"},
+    {t:"1200", start_en:"Start 12:00 pm", start_bn:"শুরু দুপুর ১২টা", note_en:"Through to close",  note_bn:"শেষ পর্যন্ত"},
+    {t:"1600", start_en:"Start 4:00 pm",  start_bn:"শুরু বিকাল ৪টা",  note_en:"After work — the busiest stretch", note_bn:"কাজের পরে — সবচেয়ে ব্যস্ত সময়"},
+    {t:"1800", start_en:"Start 6:00 pm",  start_bn:"শুরু সন্ধ্যা ৬টা", note_en:"Final push to 9pm close", note_bn:"রাত ৯টা পর্যন্ত শেষ ধাপ"}
+  ];
+
+  function slot(timeHtml, noteHtml, doorsId, phonesId){
+    var el = document.createElement("div");
+    el.className = "slot";
+    el.innerHTML =
+      '<span class="time">' + timeHtml + '</span>' +
+      '<span class="note">' + noteHtml + '</span>' +
+      '<a class="go" data-shift="' + doorsId + '" href="#"><span data-en>Doors</span><span data-bn>দরজা</span></a>' +
+      '<a class="go alt" data-shift="' + phonesId + '" href="#"><span data-en>Phones</span><span data-bn>ফোন</span></a>';
+    return el;
+  }
+
+  var adv = document.getElementById("advance-slots");
+  ADVANCE.forEach(function(d){
+    BLOCKS.forEach(function(b, n){
+      var when = '<span data-en>' + d.day_en + '</span><span data-bn>' + d.day_bn + '</span>';
+      adv.appendChild(slot(when + '<br>' + b.label, n === 2
+        ? '<span data-en>Evening — best time to catch people in</span><span data-bn>সন্ধ্যা — মানুষকে বাসায় পাওয়ার সেরা সময়</span>'
+        : '<span data-en>&nbsp;</span><span data-bn>&nbsp;</span>',
+        d.date + "_" + b.t + "_canvass", d.date + "_" + b.t + "_phonebank"));
+    });
+  });
+
+  var ed = document.getElementById("eday-slots");
+  EDAY.forEach(function(s){
+    ed.appendChild(slot(
+      '<span data-en>' + s.start_en + '</span><span data-bn>' + s.start_bn + '</span>' +
+        '<br><span style="font-weight:400;color:var(--mut)">' +
+        '<span data-en>to 9:00 pm close</span><span data-bn>রাত ৯টা পর্যন্ত</span></span>',
+      '<span data-en>' + s.note_en + '</span><span data-bn>' + s.note_bn + '</span>',
+      "2026-09-03_" + s.t + "_canvass", "2026-09-03_" + s.t + "_phonebank"));
+  });
+
+  // Every sign-up link resolves to the form for its own shift.
+  Array.prototype.forEach.call(document.querySelectorAll("[data-shift]"), function(a){
+    a.href = shiftUrl(a.getAttribute("data-shift"));
+    a.target = "_blank";
+    a.rel = "noopener";
+  });
+
+  // Language choice sticks per device.
+  function applyLang(bn){
+    document.body.classList.toggle("bn", bn);
+    document.documentElement.lang = bn ? "bn" : "en";
+    try { localStorage.setItem("hafizGotvLang", bn ? "bn" : "en"); } catch(e){}
+  }
+  function toggleLang(){ applyLang(!document.body.classList.contains("bn")); }
+  try { if (localStorage.getItem("hafizGotvLang") === "bn") applyLang(true); } catch(e){}
+</script>
+</body>
+</html>
