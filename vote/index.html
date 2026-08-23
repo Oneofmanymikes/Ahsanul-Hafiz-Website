@@ -21,17 +21,31 @@ html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
 body{margin:0; background:var(--bg); color:var(--ink);
   font-family:Inter,"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
   font-size:17px; line-height:1.5; -webkit-font-smoothing:antialiased}
+/* Scripts that need a taller line and a font stack that actually exists on Windows,
+   Android, iOS and ChromeOS. */
+body[data-lang="bn"]{font-family:"Noto Sans Bengali","Nirmala UI","Shonar Bangla",Vrinda,Inter,system-ui,Arial,sans-serif; line-height:1.8}
+body[data-lang="ur"]{font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq","Urdu Typesetting","Noto Naskh Arabic","Segoe UI",Tahoma,Arial,sans-serif; line-height:2.05}
+body[data-lang="zh"]{font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC","Hiragino Sans GB","Heiti SC",Inter,system-ui,Arial,sans-serif; line-height:1.72}
+body[dir="rtl"] .idlist, body[dir="rtl"] ul.places{padding-right:22px; padding-left:0}
+body[dir="rtl"] .note{border-left:0; border-right:4px solid var(--warn)}
+body[dir="rtl"] .note.good{border-right-color:var(--ok)}
+body[dir="rtl"] .daycard{border-left:0; border-right:5px solid var(--line)}
+body[dir="rtl"] .daycard.now{border-right-color:var(--ok)}
+body[dir="rtl"] .daycard.advance{border-right-color:var(--brand)}
+body[dir="rtl"] .daycard.eday{border-right-color:var(--blue)}
 header.top{background:var(--brand); color:#fff; border-bottom:4px solid var(--brand-hover);
-  padding:12px 20px; display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+  padding:12px 20px; display:flex; align-items:center; gap:12px; flex-wrap:wrap}
 header.top .name{font-weight:800; font-size:19px}
 header.top .spacer{flex:1}
 header.top a{color:#fff; text-decoration:none; font-weight:700; font-size:15px;
   border:1.5px solid rgba(255,255,255,.55); border-radius:999px; padding:7px 16px}
 header.top a:hover{background:rgba(255,255,255,.2)}
+#lang{font:inherit; font-size:15px; font-weight:700; border-radius:999px; padding:7px 12px;
+  border:1.5px solid rgba(255,255,255,.55); background:rgba(255,255,255,.15); color:#fff; cursor:pointer}
+#lang option{color:#1a1a1a; background:#fff}
 main{max-width:760px; margin:0 auto; padding:20px 16px 72px}
-h1{font-size:clamp(27px,6vw,36px); line-height:1.15; color:var(--accent); margin:6px 0 10px; text-wrap:balance}
+h1{font-size:clamp(27px,6vw,36px); line-height:1.2; color:var(--accent); margin:6px 0 10px; text-wrap:balance}
 h2{font-size:22px; color:var(--accent); margin:0 0 6px}
-h3{font-size:18px; margin:0 0 2px}
 p{margin:0 0 12px}
 .lede{font-size:18.5px; color:var(--mut)}
 .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius-lg);
@@ -42,7 +56,7 @@ p{margin:0 0 12px}
 .daycard.eday{border-left-color:var(--blue)}
 .when{font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
   color:var(--mut); margin:0 0 4px}
-.big{font-size:clamp(21px,4.6vw,26px); font-weight:800; line-height:1.2; margin:0 0 4px}
+.big{font-size:clamp(21px,4.6vw,26px); font-weight:800; line-height:1.25; margin:0 0 4px}
 .hours{display:inline-block; font-weight:700; background:var(--okbg); color:var(--ok);
   border-radius:999px; padding:4px 13px; font-size:15px; margin:2px 0 10px}
 .hours.b{background:var(--bluebg); color:var(--blue)}
@@ -50,8 +64,8 @@ p{margin:0 0 12px}
 ul.places{list-style:none; margin:12px 0 0; padding:0; display:flex; flex-direction:column; gap:9px}
 ul.places li{border:1px solid var(--line); border-radius:var(--radius); padding:11px 13px; background:#fcfcfc}
 ul.places .pn{font-weight:700}
-ul.places .pa{color:var(--mut); font-size:15.5px}
-ul.places a{color:var(--brand-hover); font-weight:700; font-size:15px; text-decoration:none; white-space:nowrap}
+ul.places .pa{color:var(--mut); font-size:15.5px; direction:ltr; unicode-bidi:embed}
+ul.places a{color:var(--brand-hover); font-weight:700; font-size:15px; text-decoration:none}
 ul.places a:hover{text-decoration:underline}
 .note{background:var(--warn-bg); border-left:4px solid var(--warn); border-radius:8px;
   padding:11px 13px; font-size:16px; margin:12px 0 0}
@@ -60,7 +74,8 @@ ul.places a:hover{text-decoration:underline}
 .lookup label{display:block; font-weight:700; margin-bottom:6px}
 .row{display:flex; gap:9px; flex-wrap:wrap}
 input[type=text]{font:inherit; font-size:19px; padding:12px 14px; border:2px solid var(--line);
-  border-radius:var(--radius); flex:1; min-width:150px; text-transform:uppercase; letter-spacing:1px}
+  border-radius:var(--radius); flex:1; min-width:150px; text-transform:uppercase; letter-spacing:1px;
+  direction:ltr}
 input[type=text]:focus{outline:none; border-color:var(--brand)}
 button{font:inherit; font-weight:700; font-size:17px; cursor:pointer; background:var(--brand);
   color:#fff; border:0; border-radius:var(--radius); padding:12px 24px; min-height:48px}
@@ -75,8 +90,6 @@ button:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
 .cta{display:block; text-align:center; background:var(--brand); color:#fff; font-weight:800;
   font-size:19px; text-decoration:none; border-radius:var(--radius); padding:16px; margin-top:6px}
 .cta:hover{background:var(--brand-hover)}
-.cta.alt{background:#fff; color:var(--brand-hover); border:2px solid var(--brand)}
-.cta.alt:hover{background:#fdecec}
 footer{border-top:1px solid var(--line); margin-top:8px; padding:18px 16px 40px;
   color:var(--mut); font-size:14.5px; max-width:760px; margin-left:auto; margin-right:auto}
 footer a{color:var(--brand-hover)}
@@ -84,236 +97,234 @@ footer a{color:var(--brand-hover)}
 .toc a{font-size:15px; font-weight:700; text-decoration:none; color:var(--accent);
   border:1.5px solid var(--line); background:#fff; border-radius:999px; padding:8px 15px}
 .toc a:hover{border-color:var(--brand); color:var(--brand-hover)}
-@media print{ body{background:#fff} .card{box-shadow:none; break-inside:avoid} header.top{background:#fff; color:#000; border-bottom:2px solid #000} header.top a{display:none} .cta{border:1px solid #000; color:#000; background:#fff} }
+/* AI-translation disclaimer. Shown only for a non-English language, and it always carries
+   the English text as well as the translated text. */
+#xlate{display:none; background:#fff; border:2px solid var(--warn); border-radius:var(--radius);
+  padding:13px 15px; margin:0 0 18px; font-size:15.5px; line-height:1.55}
+#xlate.on{display:block}
+#xlate .x1{font-weight:700; margin:0 0 8px}
+#xlate .x2{margin:0; padding-top:8px; border-top:1px solid var(--line); color:var(--mut);
+  direction:ltr; text-align:left; font-family:Inter,"Segoe UI",system-ui,Arial,sans-serif;
+  line-height:1.5; font-size:15px}
+#xlate a{color:var(--brand-hover); font-weight:700}
+@media print{ body{background:#fff} .card{box-shadow:none; break-inside:avoid}
+  header.top{background:#fff; color:#000; border-bottom:2px solid #000} header.top a,#lang{display:none}
+  .cta{border:1px solid #000; color:#000; background:#fff} }
 </style>
 </head>
-<body>
+<body data-lang="en">
 
 <header class="top">
   <span class="name">Ahsanul Hafiz</span>
   <span class="spacer"></span>
-  <a href="/">Home</a>
+  <select id="lang" aria-label="Choose language">
+    <option value="en">English</option>
+    <option value="bn">বাংলা</option>
+    <option value="ur">اردو</option>
+    <option value="zh">中文</option>
+    <option value="tl">Tagalog</option>
+  </select>
+  <a href="/" data-i18n="nav_home">Home</a>
 </header>
 
 <main>
-  <p class="when" style="margin-bottom:2px">Scarborough Southwest provincial by-election</p>
-  <h1>How to vote</h1>
-  <p class="lede">Election day is <strong>Thursday, September&nbsp;3</strong>. You do not have to wait
-  &mdash; you can vote right now, and there are three advance voting days before then.</p>
+  <p class="when" style="margin-bottom:2px" data-i18n="kicker">Scarborough Southwest provincial by-election</p>
+  <h1 data-i18n="h1">How to vote</h1>
+  <p class="lede" data-i18n="lede">Election day is <strong>Thursday, September&nbsp;3</strong>. You do not have to wait, you can vote right now, and there are three advance voting days before then.</p>
 
-  <div class="toc">
-    <a href="#advance">Advance voting</a>
-    <a href="#office">Vote today</a>
-    <a href="#eday">Election day</a>
-    <a href="#find">Find my polling place</a>
-    <a href="#id">What to bring</a>
-    <a href="#ride">Get a ride</a>
+  <div id="xlate" role="note">
+    <p class="x1"></p>
+    <p class="x2">This page was translated quickly using AI. It may contain mistakes. The
+      <a href="#" id="x_en">English version</a> is the official one. If anything is unclear,
+      call us at <a href="tel:+16473132506">647-313-2506</a> or check
+      <a href="https://elections.on.ca" target="_blank" rel="noopener">elections.on.ca</a>.</p>
   </div>
 
-  <!-- ADVANCE -->
+  <div class="toc">
+    <a href="#advance" data-i18n="toc_adv">Advance voting</a>
+    <a href="#office" data-i18n="toc_office">Vote today</a>
+    <a href="#eday" data-i18n="toc_eday">Election day</a>
+    <a href="#find" data-i18n="toc_find">Find my polling place</a>
+    <a href="#id" data-i18n="toc_id">What to bring</a>
+    <a href="#ride" data-i18n="toc_ride">Get a ride</a>
+  </div>
+
   <section class="card daycard advance" id="advance">
-    <p class="when">Advance voting</p>
-    <p class="big">Wednesday Aug&nbsp;26, Thursday Aug&nbsp;27, Friday Aug&nbsp;28</p>
-    <span class="hours r">10:00 a.m. to 8:00 p.m. all three days</span>
-    <p style="margin-bottom:0"><strong>You can vote at any one of these five locations.</strong>
-    On advance voting days you are not tied to a particular polling place, so pick whichever is
-    easiest for you to get to.</p>
+    <p class="when" data-i18n="adv_k">Advance voting</p>
+    <p class="big" data-i18n="adv_days">Wednesday Aug&nbsp;26, Thursday Aug&nbsp;27, Friday Aug&nbsp;28</p>
+    <span class="hours r" data-i18n="adv_hours">10:00 a.m. to 8:00 p.m. all three days</span>
+    <p style="margin-bottom:0" data-i18n="adv_any"><strong>You can vote at any one of these five locations.</strong> On advance voting days you are not tied to a particular polling place, so pick whichever is easiest for you to get to.</p>
     <ul class="places" id="advlist"></ul>
-    <div class="note good"><strong>This is the easiest way to vote.</strong> Lines are shorter than
-    on election day, and once you have voted you are done.</div>
+    <div class="note good" data-i18n="adv_note"><strong>This is the easiest way to vote.</strong> Lines are shorter than on election day, and once you have voted you are done.</div>
   </section>
 
-  <!-- ELECTION OFFICE -->
   <section class="card daycard now" id="office">
-    <p class="when">Vote today, any day</p>
-    <p class="big">Scarborough Southwest election office</p>
-    <span class="hours">Open now, through Wednesday Sept&nbsp;2</span>
+    <p class="when" data-i18n="off_k">Vote today, any day</p>
+    <p class="big" data-i18n="off_h">Scarborough Southwest election office</p>
+    <span class="hours" data-i18n="off_open">Open now, through Wednesday Sept&nbsp;2</span>
     <ul class="places">
       <li>
-        <div class="pn">Elections Ontario returning office</div>
-        <div class="pa">2685 Kingston Rd, M1M 1M2 &mdash; at the southwest corner of Brimley Rd S</div>
-        <div style="margin-top:6px"><a href="https://www.google.com/maps/search/?api=1&query=2685+Kingston+Rd+Scarborough+ON+M1M+1M2" target="_blank" rel="noopener">Open in maps &rarr;</a></div>
+        <div class="pn" data-i18n="off_ro">Elections Ontario returning office</div>
+        <div class="pa">2685 Kingston Rd, M1M 1M2</div>
+        <div style="margin-top:6px"><a href="https://www.google.com/maps/search/?api=1&query=2685+Kingston+Rd+Scarborough+ON+M1M+1M2" target="_blank" rel="noopener" data-i18n="maps">Open in maps &rarr;</a></div>
       </li>
     </ul>
-    <p style="margin-top:12px; margin-bottom:0">Monday to Saturday <strong>10:00 a.m. to 8:00 p.m.</strong>,
-    Sunday <strong>noon to 5:00 p.m.</strong></p>
-    <div class="note"><strong>Last chance is Wednesday, September&nbsp;2 at 6:00 p.m.</strong>
-    The office closes earlier than usual on its final day.</div>
+    <p style="margin-top:12px; margin-bottom:0" data-i18n="off_hours">Monday to Saturday <strong>10:00 a.m. to 8:00 p.m.</strong>, Sunday <strong>noon to 5:00 p.m.</strong></p>
+    <div class="note" data-i18n="off_last"><strong>Last chance is Wednesday, September&nbsp;2 at 6:00 p.m.</strong> The office closes earlier than usual on its final day.</div>
   </section>
 
-  <!-- ELECTION DAY -->
   <section class="card daycard eday" id="eday">
-    <p class="when">Election day</p>
-    <p class="big">Thursday, September&nbsp;3</p>
-    <span class="hours b">9:00 a.m. to 9:00 p.m.</span>
-    <p style="margin-bottom:0">On election day, unlike the advance days, you must vote at the one
-    polling place assigned to your home address. Look it up below.</p>
+    <p class="when" data-i18n="ed_k">Election day</p>
+    <p class="big" data-i18n="ed_d">Thursday, September&nbsp;3</p>
+    <span class="hours b" data-i18n="ed_hours">9:00 a.m. to 9:00 p.m.</span>
+    <p style="margin-bottom:0" data-i18n="ed_note">On election day, unlike the advance days, you must vote at the one polling place assigned to your home address. Look it up below.</p>
   </section>
 
-  <!-- LOOKUP -->
   <section class="card" id="find">
-    <h2>Find my election day polling place</h2>
-    <p>Enter your postal code. This covers the Scarborough Southwest riding only.</p>
+    <h2 data-i18n="find_h">Find my election day polling place</h2>
+    <p data-i18n="find_p">Enter your postal code. This covers the Scarborough Southwest riding only.</p>
     <div class="lookup">
-      <label for="pc">Your postal code</label>
+      <label for="pc" data-i18n="find_l">Your postal code</label>
       <div class="row">
-        <input type="text" id="pc" inputmode="text" autocomplete="postal-code"
-               placeholder="M1M 1M2" maxlength="7" aria-describedby="res">
-        <button id="go" type="button">Find it</button>
+        <input type="text" id="pc" inputmode="text" autocomplete="postal-code" placeholder="M1M 1M2" maxlength="7" aria-describedby="res">
+        <button id="go" type="button" data-i18n="find_btn">Find it</button>
       </div>
       <div id="res" role="status" aria-live="polite"></div>
     </div>
   </section>
 
-  <!-- ID -->
   <section class="card" id="id">
-    <h2>What to bring</h2>
-    <p><strong>Not sure what counts? Use the checklist.</strong> Tick what is already in your
-    wallet and it tells you in ten seconds whether you are ready.</p>
-    <a class="cta" href="/id/">Check my ID &rarr;</a>
-
-    <p style="margin-top:16px"><strong>The short version.</strong> It depends on one thing: whether
-    you got a voter information card in the mail.</p>
-
-    <div class="note good" style="margin-bottom:12px">
-      <strong>If you have your voter information card:</strong> bring it, plus any one piece of ID
-      showing your <strong>name</strong>. A health card, passport, credit or debit card, student
-      card, union card, even a blood donor card.
-    </div>
-
-    <div class="note" style="margin-bottom:14px">
-      <strong>If you did not get one, or cannot find it:</strong> bring any one document showing
-      your <strong>name and your current address</strong>. Just one, not two.
-    </div>
-
-    <p style="margin-bottom:4px">Plenty of ordinary things show name and address:</p>
+    <h2 data-i18n="id_h">What to bring</h2>
+    <p data-i18n="id_p1"><strong>Not sure what counts? Use the checklist.</strong> Tick what is already in your wallet and it tells you in ten seconds whether you are ready.</p>
+    <a class="cta" href="/id/" data-i18n="id_cta">Check my ID &rarr;</a>
+    <p style="margin-top:16px" data-i18n="id_p2"><strong>The short version.</strong> It depends on one thing: whether you got a voter information card in the mail.</p>
+    <div class="note good" data-i18n="id_vic"><strong>If you have your voter information card:</strong> bring it, plus any one piece of ID showing your <strong>name</strong>. A health card, passport, credit or debit card, student card, union card, even a blood donor card.</div>
+    <div class="note" style="margin-bottom:14px" data-i18n="id_novic"><strong>If you did not get one, or cannot find it:</strong> bring any one document showing your <strong>name and your current address</strong>. Just one, not two.</div>
+    <p style="margin-bottom:4px" data-i18n="id_list_h">Plenty of ordinary things show name and address:</p>
     <ul class="idlist">
-      <li>Driver&rsquo;s licence, Ontario Photo Card or vehicle permit</li>
-      <li>Utility bill: hydro, water, gas, phone or cable TV</li>
-      <li>Bank account or credit card statement</li>
-      <li>Pay stub, cheque stub or T4 from your employer</li>
-      <li>Lease, rental or mortgage statement</li>
-      <li>Insurance statement</li>
-      <li>Income tax assessment, Child Tax Benefit, Old Age Security or EI statement</li>
-      <li>Tuition bill, transcript, report card or school admission letter</li>
-      <li>Property tax bill or MPAC assessment notice</li>
-      <li>CNIB card, or a long-term care home residence document</li>
-      <li>Letter of confirmation of residence</li>
+      <li data-i18n="id_1">Driver&rsquo;s licence, Ontario Photo Card or vehicle permit</li>
+      <li data-i18n="id_2">Utility bill: hydro, water, gas, phone or cable TV</li>
+      <li data-i18n="id_3">Bank account or credit card statement</li>
+      <li data-i18n="id_4">Pay stub, cheque stub or T4 from your employer</li>
+      <li data-i18n="id_5">Lease, rental or mortgage statement</li>
+      <li data-i18n="id_6">Insurance statement</li>
+      <li data-i18n="id_7">Income tax assessment, Child Tax Benefit, Old Age Security or EI statement</li>
+      <li data-i18n="id_8">Tuition bill, transcript, report card or school admission letter</li>
+      <li data-i18n="id_9">Property tax bill or MPAC assessment notice</li>
+      <li data-i18n="id_10">CNIB card, or a long-term care home residence document</li>
+      <li data-i18n="id_11">Letter of confirmation of residence</li>
     </ul>
-
-    <div class="note"><strong>Do not let ID stop you from going.</strong> You do not need photo ID,
-    and if you do show photo ID your appearance does not have to match it. An electronic copy on
-    your phone is accepted. If you are not sure what you have, call us at
-    <a href="tel:+16473132506">647-313-2506</a> and we will work it out with you.
-    Permanent resident cards and international ID are not accepted.</div>
+    <div class="note" data-i18n="id_foot"><strong>Do not let ID stop you from going.</strong> You do not need photo ID, and if you do show photo ID your appearance does not have to match it. An electronic copy on your phone is accepted. If you are not sure what you have, call us at <a href="tel:+16473132506">647-313-2506</a> and we will work it out with you. Permanent resident cards and international ID are not accepted.</div>
   </section>
 
-  <!-- WHO CAN VOTE -->
   <section class="card">
-    <h2>Who can vote</h2>
-    <p style="margin-bottom:0">You can vote if you are a <strong>Canadian citizen</strong>,
-    <strong>18 or older on September&nbsp;3</strong>, and you <strong>live in Scarborough Southwest</strong>.
-    You do not need to be registered in advance. You can register right at the polling place when you
-    go to vote.</p>
+    <h2 data-i18n="who_h">Who can vote</h2>
+    <p style="margin-bottom:0" data-i18n="who_p">You can vote if you are a <strong>Canadian citizen</strong>, <strong>18 or older on September&nbsp;3</strong>, and you <strong>live in Scarborough Southwest</strong>. You do not need to be registered in advance. You can register right at the polling place when you go to vote.</p>
   </section>
 
-  <!-- RIDE -->
   <section class="card" id="ride">
-    <h2>Need a ride, or have a question?</h2>
-    <p>Our campaign will drive you to vote, free, on any advance day or on election day. If you cannot
-    get there on your own, tell us and we will sort it out.</p>
-    <a class="cta" href="tel:+16473132506">Call 647-313-2506</a>
-    <a class="cta alt" href="mailto:info@votehafiz.ca">Email info@votehafiz.ca</a>
+    <h2 data-i18n="ride_h">Need a ride, or have a question?</h2>
+    <p data-i18n="ride_p">Our campaign will drive you to vote, free, on any advance day or on election day. If you cannot get there on your own, tell us and we will sort it out.</p>
+    <a class="cta" href="tel:+16473132506" data-i18n="ride_call">Call 647-313-2506</a>
   </section>
 
   <section class="card">
-    <h2>Official information</h2>
-    <p style="margin-bottom:0">Everything on this page comes from Elections Ontario. To confirm your
-    registration, find your assigned polling place from the official source, or check anything else,
-    visit <a href="https://voterinformationservice.elections.on.ca" target="_blank" rel="noopener">voterinformationservice.elections.on.ca</a>
-    or call Elections Ontario at <a href="tel:+18886688683">1-888-668-8683</a>
-    (TTY 1-888-292-2312). This page is published by the Ahsanul Hafiz campaign, not by Elections Ontario.</p>
+    <h2 data-i18n="oi_h">Official information</h2>
+    <p style="margin-bottom:0" data-i18n="oi_p">Everything on this page comes from Elections Ontario. To confirm your registration, find your assigned polling place from the official source, or check anything else, visit <a href="https://voterinformationservice.elections.on.ca" target="_blank" rel="noopener">voterinformationservice.elections.on.ca</a> or call Elections Ontario at <a href="tel:+18886688683">1-888-668-8683</a>. This page is published by the Ahsanul Hafiz campaign, not by Elections Ontario.</p>
   </section>
 </main>
 
 <footer>
-  <p style="margin-bottom:4px">Authorized by the CFO for the Ahsanul Hafiz campaign.</p>
-  <p style="margin-bottom:0">Polling place data verified against Elections Ontario, August 2026.
-  If something here looks wrong, please tell us at
-  <a href="mailto:info@votehafiz.ca">info@votehafiz.ca</a> so we can fix it.</p>
+  <p style="margin-bottom:4px" data-i18n="f1">Authorized by the CFO for the Ahsanul Hafiz campaign.</p>
+  <p style="margin-bottom:0" data-i18n="f2">Polling place data verified against Elections Ontario, August 2026. If something here looks wrong, please tell us at <a href="mailto:info@votehafiz.ca">info@votehafiz.ca</a> so we can fix it.</p>
 </footer>
 
 <script>
 var DATA = {"p":{"M1J0A2":"704","M1J0B2":"019","M1J0B3":"019","M1J1A5":"019","M1J1A6":"019","M1J1K4":"019","M1J1K5":"019","M1J1K6":"019","M1J1K7":"019","M1J1K8":"019","M1J2E1":"019","M1J2G1":"024","M1J2G3":"024","M1J2G4":"024","M1J2G5":"024","M1J2G6":"024","M1J2G7":"024","M1J2G8":"024","M1J2G9":"024","M1J3N2":"022","M1J3N3":"022","M1J3P4":"705","M1K0A1":"018","M1K0A4":"009","M1K0A9":"018","M1K1A1":"011","M1K1A4":"011","M1K1A5":"011","M1K1A7":"011","M1K1B1":"011","M1K1B3":"011","M1K1B4":"011","M1K1B5":"011","M1K1B6":"011","M1K1B9":"012","M1K1C1":"012","M1K1C2":"012","M1K1C3":"012","M1K1C4":"012","M1K1C5":"012","M1K1C6":"011","M1K1C7":"011","M1K1C8":"011","M1K1C9":"011","M1K1E1":"011","M1K1E2":"012","M1K1E3":"012","M1K1E4":"012","M1K1E5":"012","M1K1E6":"012","M1K1E7":"012","M1K1E8":"012","M1K1G1":"012","M1K1G2":"012","M1K1G3":"018","M1K1G4":"018","M1K1G5":"018","M1K1G6":"018","M1K1G7":"017","M1K1G8":"017","M1K1G9":"018","M1K1H1":"018","M1K1H3":"018","M1K1H4":"017","M1K1H5":"019","M1K1H7":"019","M1K1H8":"019","M1K1H9":"021","M1K1J1":"021","M1K1J2":"019","M1K1J3":"019","M1K1J4":"021","M1K1J5":"019","M1K1J6":"021","M1K1J7":"019","M1K1J8":"019","M1K1J9":"011","M1K1K1":"011","M1K1K2":"011","M1K1K3":"011","M1K1K4":"011","M1K1K5":"011","M1K1K6":"011","M1K1K7":"011","M1K1K8":"011","M1K1K9":"011","M1K1L1":"011","M1K1L2":"011","M1K1L3":"011","M1K1L4":"012","M1K1L5":"012","M1K1L6":"012","M1K1L8":"012","M1K1M2":"018","M1K1M6":"011","M1K1N3":"011","M1K1N7":"011","M1K1N8":"010","M1K1N9":"011","M1K1P1":"011","M1K1P2":"010","M1K1P3":"010","M1K1P4":"009","M1K1P5":"009","M1K1P6":"009","M1K1P7":"009","M1K1P8":"011","M1K1P9":"013","M1K1R1":"013","M1K1R2":"013","M1K1R3":"013","M1K1R6":"014","M1K1R7":"014","M1K1R8":"014","M1K1R9":"014","M1K1S8":"011","M1K1S9":"011","M1K1T1":"011","M1K1T2":"011","M1K1T3":"011","M1K1T4":"011","M1K1T5":"011","M1K1T6":"011","M1K1T7":"011","M1K1T8":"011","M1K1T9":"011","M1K1V1":"011","M1K1V2":"011","M1K1V3":"011","M1K1V4":"011","M1K1V5":"011","M1K1V6":"011","M1K1V7":"011","M1K1V8":"011","M1K1V9":"011","M1K1W1":"011","M1K1W2":"011","M1K1W3":"011","M1K1W4":"011","M1K1W5":"012","M1K1W6":"011","M1K1W7":"012","M1K1W8":"012","M1K1W9":"012","M1K1X1":"012","M1K1X2":"011","M1K1X3":"012","M1K1X4":"011","M1K1X5":"012","M1K1X6":"012","M1K1X7":"012","M1K1X8":"012","M1K1X9":"012","M1K1Y1":"012","M1K1Y2":"012","M1K1Y3":"012","M1K1Y4":"012","M1K1Y5":"012","M1K1Y6":"012","M1K1Y7":"012","M1K1Y8":"012","M1K1Y9":"012","M1K1Z1":"012","M1K1Z2":"012","M1K1Z3":"012","M1K1Z4":"012","M1K1Z5":"012","M1K1Z6":"012","M1K1Z7":"012","M1K1Z8":"012","M1K2A5":"012","M1K2A6":"012","M1K2B1":"018","M1K2B2":"017","M1K2B4":"015","M1K2B5":"015","M1K2B6":"015","M1K2B7":"016","M1K2B9":"017","M1K2C1":"016","M1K2C2":"016","M1K2C3":"016","M1K2C5":"015","M1K2G4":"015","M1K2G5":"013","M1K2G6":"015","M1K2G7":"015","M1K2G8":"013","M1K2G9":"013","M1K2H1":"015","M1K2H2":"013","M1K2H3":"015","M1K2H4":"015","M1K2H5":"013","M1K2H6":"013","M1K2H7":"013","M1K2H8":"015","M1K2H9":"015","M1K2J1":"013","M1K2J2":"013","M1K2J3":"013","M1K2J4":"013","M1K2J5":"015","M1K2J6":"015","M1K2J7":"013","M1K2J8":"015","M1K2J9":"013","M1K2K1":"015","M1K2K2":"015","M1K2K3":"015","M1K2K4":"015","M1K2K5":"014","M1K2K6":"014","M1K2K7":"014","M1K2K8":"014","M1K2K9":"014","M1K2L1":"014","M1K2L2":"014","M1K2L3":"014","M1K2L4":"014","M1K2L5":"014","M1K2L6":"014","M1K2L7":"014","M1K2L8":"014","M1K2L9":"014","M1K2M1":"014","M1K2M5":"015","M1K2M6":"014","M1K2M7":"014","M1K2M8":"014","M1K2M9":"014","M1K2N1":"014","M1K2N2":"014","M1K2N3":"014","M1K2N4":"014","M1K2N5":"014","M1K2N6":"014","M1K2N7":"015","M1K2S2":"021","M1K3C2":"018","M1K3C3":"018","M1K3C4":"018","M1K3C5":"018","M1K3C6":"018","M1K3C7":"017","M1K3C8":"017","M1K3C9":"018","M1K3E1":"017","M1K3E2":"017","M1K3E3":"018","M1K3E4":"018","M1K3E5":"017","M1K3E6":"017","M1K3E7":"018","M1K3E8":"017","M1K3E9":"017","M1K3G1":"017","M1K3G3":"017","M1K3G4":"017","M1K3G5":"018","M1K3G6":"018","M1K3G7":"017","M1K3G8":"017","M1K3G9":"017","M1K3H1":"018","M1K3H2":"018","M1K3H3":"017","M1K3H4":"017","M1K3H5":"018","M1K3H6":"018","M1K3H7":"018","M1K3H8":"017","M1K3H9":"017","M1K3J1":"017","M1K3J2":"018","M1K3J3":"018","M1K3J4":"018","M1K3J5":"018","M1K3J6":"017","M1K3J7":"017","M1K3J8":"017","M1K3J9":"017","M1K3K1":"018","M1K3K2":"018","M1K3K3":"018","M1K3K4":"018","M1K3K5":"017","M1K3K6":"017","M1K3K7":"017","M1K3K8":"017","M1K3K9":"018","M1K3L2":"018","M1K3L3":"017","M1K3L4":"017","M1K3L5":"018","M1K3L6":"018","M1K3L7":"019","M1K3L8":"019","M1K3L9":"019","M1K3M1":"019","M1K3M2":"019","M1K3M3":"019","M1K3M4":"019","M1K3M5":"016","M1K3M6":"016","M1K3M7":"016","M1K3M8":"016","M1K3M9":"016","M1K3N1":"016","M1K3N2":"016","M1K3N3":"016","M1K3N4":"016","M1K3N5":"016","M1K3N6":"016","M1K3N7":"016","M1K3N8":"016","M1K3N9":"016","M1K3P1":"020","M1K3P2":"020","M1K3P3":"020","M1K3P4":"020","M1K3P5":"020","M1K3P6":"020","M1K3P7":"020","M1K3P8":"020","M1K3P9":"020","M1K3R1":"020","M1K3R2":"020","M1K3R3":"020","M1K3R4":"020","M1K3R5":"020","M1K3R6":"020","M1K3R7":"020","M1K3R8":"020","M1K3R9":"020","M1K3S1":"020","M1K3S2":"020","M1K3S3":"020","M1K4C6":"019","M1K4C7":"019","M1K4C8":"020","M1K4E1":"020","M1K4E2":"020","M1K4E3":"019","M1K4E4":"019","M1K4E5":"021","M1K4E6":"020","M1K4E7":"020","M1K4E8":"020","M1K4H6":"019","M1K4H7":"019","M1K4H8":"019","M1K4H9":"019","M1K4J1":"021","M1K4J2":"021","M1K4J3":"021","M1K4J4":"021","M1K4J5":"021","M1K4J6":"021","M1K4J7":"021","M1K4J8":"019","M1K4J9":"019","M1K4K1":"021","M1K4K2":"019","M1K4K3":"021","M1K4K4":"021","M1K4K5":"021","M1K4K6":"021","M1K4K7":"019","M1K4K8":"019","M1K4K9":"021","M1K4L1":"021","M1K4L2":"021","M1K4L3":"021","M1K4L4":"021","M1K4L5":"021","M1K4L6":"021","M1K4L7":"019","M1K4L8":"021","M1K4L9":"021","M1K4M1":"021","M1K4M2":"021","M1K4M3":"021","M1K4M4":"021","M1K4M5":"021","M1K4M6":"021","M1K4M8":"021","M1K4M9":"021","M1K4N1":"021","M1K4N2":"019","M1K4N3":"019","M1K4N4":"019","M1K4N5":"019","M1K4N6":"019","M1K4N7":"019","M1K4N8":"019","M1K4N9":"019","M1K4P1":"019","M1K4P2":"019","M1K4P3":"019","M1K4P4":"019","M1K5E2":"017","M1K5G6":"020","M1K5H2":"003","M1K5H6":"020","M1K5J3":"019","M1K5J4":"019","M1K5J5":"019","M1K5K1":"014","M1K5L7":"020","M1K5M4":"018","M1L0A1":"008","M1L0A2":"010","M1L0A3":"010","M1L0A4":"010","M1L0A5":"010","M1L0A6":"010","M1L0A7":"010","M1L0A8":"010","M1L0A9":"010","M1L0B1":"010","M1L0B2":"010","M1L0B3":"010","M1L0B4":"010","M1L0B5":"010","M1L0B6":"010","M1L0B7":"010","M1L0B8":"003","M1L0B9":"003","M1L0C1":"003","M1L0C2":"003","M1L0C3":"003","M1L0C4":"003","M1L0C5":"003","M1L0C6":"003","M1L0C7":"003","M1L0C8":"003","M1L0C9":"003","M1L0E1":"002","M1L0E2":"702","M1L0E3":"005","M1L0E4":"004","M1L0E5":"004","M1L0E7":"008","M1L0E8":"008","M1L0E9":"008","M1L0G1":"008","M1L0G2":"008","M1L0G3":"008","M1L0G4":"008","M1L0G5":"008","M1L0G6":"003","M1L0G7":"003","M1L0G8":"003","M1L0G9":"003","M1L0H1":"007","M1L0H2":"002","M1L0H3":"008","M1L0H4":"008","M1L0J2":"002","M1L0J3":"003","M1L0J4":"003","M1L0J6":"007","M1L1A1":"007","M1L1A2":"007","M1L1A3":"007","M1L1A5":"007","M1L1A7":"007","M1L1A9":"007","M1L1B1":"006","M1L1B7":"006","M1L1B8":"007","M1L1C1":"007","M1L1C2":"007","M1L1C3":"007","M1L1C4":"007","M1L1C7":"007","M1L1E1":"007","M1L1E3":"703","M1L1E5":"008","M1L1E9":"007","M1L1G1":"007","M1L1G2":"008","M1L1G5":"007","M1L1G6":"007","M1L1G7":"008","M1L1G8":"008","M1L1G9":"008","M1L1H1":"008","M1L1H2":"008","M1L1H3":"008","M1L1H4":"008","M1L1H5":"008","M1L1H6":"008","M1L1H7":"008","M1L1H8":"007","M1L1H9":"007","M1L1J1":"007","M1L1J2":"007","M1L1J3":"007","M1L1J4":"007","M1L1J5":"007","M1L1J6":"006","M1L1J7":"008","M1L1J8":"008","M1L1J9":"008","M1L1K5":"007","M1L1K6":"007","M1L1K7":"007","M1L1K8":"007","M1L1K9":"006","M1L1L1":"006","M1L1L2":"006","M1L1L3":"006","M1L1L4":"007","M1L1L5":"007","M1L1L6":"007","M1L1L7":"007","M1L1L8":"007","M1L1L9":"008","M1L1M1":"008","M1L1M2":"008","M1L1M3":"008","M1L1M4":"008","M1L1M5":"008","M1L1M9":"008","M1L1N4":"005","M1L1N5":"005","M1L1N6":"008","M1L1N7":"008","M1L1N8":"008","M1L1N9":"008","M1L1P1":"008","M1L1P2":"008","M1L1P3":"005","M1L1P4":"005","M1L1P5":"005","M1L1P6":"005","M1L1P7":"005","M1L1P8":"005","M1L1P9":"005","M1L1R1":"005","M1L1R2":"005","M1L1R3":"005","M1L1R4":"005","M1L1R5":"005","M1L1R6":"005","M1L1R7":"005","M1L1R8":"005","M1L1R9":"010","M1L1S1":"010","M1L1S2":"010","M1L1S3":"010","M1L1S4":"009","M1L1S5":"009","M1L1S6":"009","M1L1S7":"009","M1L1S8":"009","M1L1S9":"009","M1L1T1":"009","M1L1T2":"009","M1L1T3":"009","M1L1T4":"004","M1L1T5":"009","M1L1T6":"009","M1L1T7":"004","M1L1T8":"004","M1L1T9":"004","M1L1V1":"004","M1L1V2":"004","M1L1V3":"005","M1L1V4":"005","M1L1V5":"005","M1L1V6":"004","M1L1V7":"004","M1L1V8":"004","M1L1V9":"004","M1L1W1":"701","M1L1W3":"009","M1L1W4":"009","M1L1W5":"009","M1L1W6":"009","M1L1W7":"004","M1L1W8":"004","M1L1W9":"004","M1L1X1":"004","M1L1X2":"004","M1L1X3":"004","M1L1X4":"004","M1L1X5":"004","M1L1X6":"004","M1L1X7":"004","M1L1X8":"004","M1L1X9":"013","M1L1Y1":"013","M1L1Y2":"013","M1L1Y3":"013","M1L1Y4":"013","M1L1Y5":"013","M1L1Y6":"013","M1L1Y7":"004","M1L1Y8":"004","M1L1Y9":"002","M1L1Z1":"002","M1L1Z2":"001","M1L1Z3":"001","M1L1Z4":"002","M1L1Z5":"002","M1L1Z6":"002","M1L1Z7":"700","M1L1Z8":"002","M1L1Z9":"002","M1L2A2":"001","M1L2A3":"001","M1L2A4":"002","M1L2A5":"002","M1L2A6":"002","M1L2A7":"002","M1L2A8":"001","M1L2A9":"001","M1L2B1":"001","M1L2B2":"001","M1L2B3":"001","M1L2B4":"001","M1L2B5":"002","M1L2B6":"002","M1L2B7":"002","M1L2B8":"003","M1L2C2":"002","M1L2C3":"002","M1L2C4":"002","M1L2C5":"002","M1L2E4":"003","M1L2E5":"001","M1L2E6":"001","M1L2E7":"001","M1L2E8":"001","M1L2E9":"001","M1L2G1":"001","M1L2G2":"001","M1L2G3":"001","M1L2G4":"001","M1L2G5":"001","M1L2H7":"001","M1L2H8":"001","M1L2H9":"001","M1L2J1":"001","M1L2J2":"001","M1L2J3":"001","M1L2J4":"001","M1L2J5":"001","M1L2J6":"001","M1L2J7":"001","M1L2J8":"001","M1L2P7":"007","M1L2P8":"007","M1L2P9":"007","M1L2R1":"005","M1L2R2":"005","M1L2R3":"005","M1L2R4":"005","M1L2R5":"005","M1L2R6":"005","M1L2R7":"004","M1L2R8":"004","M1L2R9":"004","M1L2S1":"001","M1L2S2":"004","M1L2S3":"001","M1L2S4":"001","M1L2S5":"001","M1L2S6":"001","M1L2S7":"001","M1L2S8":"001","M1L2S9":"001","M1L2T1":"001","M1L2T6":"006","M1L2V1":"007","M1L2V2":"006","M1L2V3":"006","M1L2V4":"006","M1L2V5":"006","M1L2V6":"005","M1L2V7":"005","M1L2V8":"005","M1L2V9":"005","M1L2W1":"005","M1L2W2":"005","M1L2W3":"005","M1L2W4":"004","M1L2W5":"004","M1L2W6":"004","M1L2W7":"004","M1L2W8":"001","M1L2W9":"001","M1L2X2":"007","M1L2X3":"007","M1L2X4":"006","M1L2X5":"006","M1L2X6":"006","M1L2X7":"006","M1L2X8":"005","M1L2X9":"005","M1L2Y1":"005","M1L2Y2":"005","M1L2Y3":"005","M1L2Y4":"005","M1L2Y5":"005","M1L2Y6":"005","M1L2Y7":"004","M1L2Y8":"004","M1L2Y9":"004","M1L2Z1":"004","M1L2Z2":"004","M1L2Z3":"004","M1L2Z4":"001","M1L2Z5":"001","M1L2Z6":"001","M1L2Z7":"001","M1L2Z8":"001","M1L2Z9":"001","M1L3A1":"001","M1L3A2":"001","M1L3A3":"001","M1L3A4":"001","M1L3A5":"001","M1L3A6":"001","M1L3A7":"001","M1L3A8":"001","M1L3B1":"007","M1L3B2":"007","M1L3B3":"005","M1L3B4":"005","M1L3B5":"005","M1L3B6":"005","M1L3B7":"005","M1L3B8":"005","M1L3B9":"005","M1L3C1":"005","M1L3C2":"004","M1L3C3":"004","M1L3C4":"004","M1L3C5":"004","M1L3C6":"004","M1L3C7":"004","M1L3C8":"004","M1L3C9":"001","M1L3E1":"001","M1L3E2":"001","M1L3E3":"007","M1L3E5":"006","M1L3E6":"007","M1L3E7":"005","M1L3E8":"005","M1L3E9":"005","M1L3G1":"005","M1L3G2":"005","M1L3G3":"005","M1L3G4":"005","M1L3G5":"005","M1L3G6":"005","M1L3G7":"005","M1L3G8":"005","M1L3G9":"004","M1L3H1":"005","M1L3H2":"004","M1L3H4":"004","M1L3H5":"004","M1L3H6":"004","M1L3H7":"004","M1L3H8":"004","M1L3H9":"004","M1L3J1":"002","M1L3J2":"001","M1L3J3":"002","M1L3J4":"002","M1L3J5":"001","M1L3J6":"001","M1L3J9":"001","M1L3K1":"001","M1L3K2":"002","M1L3L1":"007","M1L3L2":"007","M1L3L3":"007","M1L3L4":"007","M1L3L5":"007","M1L3L6":"007","M1L3L7":"005","M1L3L8":"005","M1L3L9":"005","M1L3M1":"005","M1L3M2":"005","M1L3M3":"005","M1L3M4":"005","M1L3M5":"005","M1L3M6":"002","M1L3M7":"002","M1L3M8":"007","M1L3M9":"007","M1L3N1":"007","M1L3N2":"007","M1L3N3":"007","M1L3N4":"007","M1L3N5":"007","M1L3N6":"007","M1L3N7":"007","M1L3N8":"007","M1L3N9":"007","M1L3P2":"007","M1L3P3":"007","M1L3P4":"005","M1L3P5":"005","M1L3P6":"005","M1L3P7":"005","M1L3P8":"005","M1L3P9":"005","M1L3R1":"005","M1L3R2":"005","M1L3R3":"005","M1L3R4":"004","M1L3R5":"004","M1L3R6":"004","M1L3R7":"004","M1L3R8":"004","M1L3R9":"002","M1L3S1":"002","M1L3S2":"002","M1L3S3":"002","M1L3S5":"002","M1L3S6":"002","M1L3S7":"007","M1L3S8":"007","M1L3S9":"007","M1L3T1":"007","M1L3T2":"007","M1L3T3":"007","M1L3T4":"007","M1L3T5":"007","M1L3T7":"007","M1L3T8":"007","M1L3T9":"007","M1L3V1":"007","M1L3V2":"007","M1L3V3":"007","M1L3V4":"007","M1L3V5":"007","M1L3V6":"007","M1L3V7":"005","M1L3W1":"007","M1L3W2":"007","M1L3W5":"007","M1L3W7":"008","M1L3W8":"008","M1L3W9":"008","M1L3X1":"008","M1L3X2":"008","M1L3Y1":"007","M1L3Y2":"007","M1L3Y3":"007","M1L3Y4":"007","M1L3Y5":"007","M1L3Y6":"007","M1L3Y7":"008","M1L3Y8":"007","M1L3Y9":"008","M1L3Z1":"007","M1L3Z2":"008","M1L3Z3":"008","M1L3Z4":"008","M1L3Z5":"008","M1L3Z9":"008","M1L4A8":"003","M1L4E4":"008","M1L4E5":"008","M1L4E6":"008","M1L4E7":"008","M1L4E8":"008","M1L4E9":"008","M1L4G1":"008","M1L4G2":"008","M1L4G3":"008","M1L4G4":"008","M1L4G5":"008","M1L4G6":"008","M1L4G7":"008","M1L4G8":"008","M1L4G9":"008","M1L4H1":"008","M1L4H2":"008","M1L4H3":"010","M1L4H5":"010","M1L4H6":"009","M1L4H7":"009","M1L4H8":"009","M1L4J7":"003","M1L4K1":"008","M1L4K2":"008","M1L4K3":"008","M1L4K4":"008","M1L4K5":"008","M1L4K6":"008","M1L4K7":"009","M1L4K8":"009","M1L4K9":"009","M1L4L1":"010","M1L4L2":"010","M1L4L3":"009","M1L4L4":"009","M1L4L5":"009","M1L4L6":"009","M1L4L7":"009","M1L4L8":"009","M1L4L9":"009","M1L4M1":"013","M1L4M2":"013","M1L4M3":"013","M1L4M4":"013","M1L4M5":"013","M1L4N5":"008","M1L4P2":"006","M1L4P9":"401","M1L4R3":"008","M1L4R4":"006","M1L4R8":"007","M1L4S5":"008","M1L4T1":"007","M1L4T9":"005","M1L4V1":"005","M1L4V2":"005","M1L4V3":"005","M1L4V4":"005","M1L4V5":"005","M1L4V6":"002","M1L4V7":"002","M1L4W4":"002","M1L4W7":"008","M1M0A1":"028","M1M0A2":"033","M1M0A3":"033","M1M0A4":"033","M1M0A5":"033","M1M0A6":"033","M1M0A7":"033","M1M0A8":"033","M1M0A9":"033","M1M0B1":"033","M1M0B2":"033","M1M0B3":"033","M1M0B4":"033","M1M0B5":"033","M1M0B6":"033","M1M0B7":"029","M1M0B8":"033","M1M0B9":"033","M1M0C1":"033","M1M0C2":"033","M1M0C3":"033","M1M0C4":"033","M1M0C5":"033","M1M0C6":"024","M1M0C8":"029","M1M0E3":"030","M1M1A1":"031","M1M1A2":"031","M1M1A3":"031","M1M1A5":"031","M1M1A6":"031","M1M1A7":"031","M1M1A8":"031","M1M1A9":"031","M1M1B1":"031","M1M1B2":"031","M1M1B3":"031","M1M1B4":"030","M1M1B5":"030","M1M1B6":"030","M1M1B7":"030","M1M1B8":"030","M1M1B9":"030","M1M1C1":"030","M1M1C2":"030","M1M1C3":"027","M1M1C4":"027","M1M1C5":"027","M1M1C6":"030","M1M1C7":"027","M1M1C8":"027","M1M1C9":"027","M1M1E1":"027","M1M1E3":"027","M1M1E4":"027","M1M1E5":"027","M1M1E6":"027","M1M1E7":"027","M1M1E8":"027","M1M1E9":"027","M1M1G1":"027","M1M1G2":"027","M1M1G3":"027","M1M1G4":"027","M1M1G5":"027","M1M1G6":"027","M1M1G8":"027","M1M1G9":"027","M1M1H1":"027","M1M1H2":"025","M1M1H3":"025","M1M1H4":"025","M1M1H5":"025","M1M1H6":"025","M1M1H7":"025","M1M1H9":"025","M1M1L7":"032","M1M1L8":"032","M1M1L9":"032","M1M1M1":"031","M1M1M2":"030","M1M1M3":"031","M1M1M8":"030","M1M1M9":"030","M1M1N2":"030","M1M1N3":"027","M1M1N5":"028","M1M1N6":"027","M1M1N7":"027","M1M1N8":"028","M1M1N9":"027","M1M1P1":"027","M1M1P2":"026","M1M1P3":"027","M1M1P5":"025","M1M1P6":"027","M1M1P8":"025","M1M1P9":"025","M1M1R1":"025","M1M1R2":"024","M1M1R5":"023","M1M1S4":"032","M1M1S5":"032","M1M1S6":"032","M1M1S7":"032","M1M1S8":"032","M1M1S9":"032","M1M1T1":"033","M1M1T2":"033","M1M1T3":"033","M1M1T4":"029","M1M1T5":"033","M1M1T6":"029","M1M1T7":"029","M1M1T8":"029","M1M1T9":"029","M1M1V1":"029","M1M1V2":"029","M1M1V3":"028","M1M1V4":"033","M1M1V5":"029","M1M1V6":"029","M1M1V7":"029","M1M1V8":"029","M1M1V9":"029","M1M1W1":"029","M1M1W2":"029","M1M1W3":"028","M1M1W4":"029","M1M1W5":"028","M1M1W6":"028","M1M1W7":"028","M1M1W8":"028","M1M1W9":"028","M1M1X1":"028","M1M1X2":"028","M1M1X3":"028","M1M1X5":"028","M1M1X6":"028","M1M1X7":"028","M1M1X8":"028","M1M1X9":"026","M1M1Y1":"028","M1M1Y2":"028","M1M1Y3":"026","M1M1Y4":"026","M1M1Y5":"026","M1M1Y6":"026","M1M1Y7":"026","M1M1Y8":"026","M1M1Y9":"026","M1M1Z1":"026","M1M1Z2":"028","M1M1Z3":"026","M1M1Z4":"026","M1M1Z5":"026","M1M1Z6":"026","M1M1Z7":"026","M1M1Z8":"025","M1M1Z9":"025","M1M2A1":"025","M1M2A2":"025","M1M2A3":"028","M1M2A4":"028","M1M2A5":"028","M1M2A6":"028","M1M2A7":"028","M1M2A8":"026","M1M2A9":"026","M1M2B1":"026","M1M2B2":"026","M1M2B3":"025","M1M2B4":"025","M1M2B5":"025","M1M2B6":"026","M1M2B7":"026","M1M2B8":"026","M1M2B9":"025","M1M2C1":"025","M1M2C2":"026","M1M2C3":"026","M1M2C4":"025","M1M2C5":"025","M1M2C6":"025","M1M2C7":"025","M1M2C8":"025","M1M2C9":"025","M1M2E1":"025","M1M2E2":"025","M1M2E3":"025","M1M2E4":"025","M1M2E5":"025","M1M2E6":"025","M1M2E7":"025","M1M2E8":"024","M1M2E9":"023","M1M2G1":"025","M1M2G2":"025","M1M2G3":"025","M1M2G4":"024","M1M2G5":"024","M1M2G6":"024","M1M2G7":"024","M1M2G8":"023","M1M2G9":"023","M1M2H1":"023","M1M2H2":"023","M1M2H3":"023","M1M2H4":"023","M1M2H5":"023","M1M2H6":"023","M1M2H7":"023","M1M2H8":"023","M1M2H9":"023","M1M2J1":"023","M1M2J2":"031","M1M2J3":"031","M1M2J4":"031","M1M2J5":"031","M1M2J6":"031","M1M2J7":"031","M1M2J8":"031","M1M2K1":"031","M1M2K2":"031","M1M2K3":"031","M1M2K4":"031","M1M2K5":"031","M1M2K6":"031","M1M2K7":"031","M1M2K8":"031","M1M2K9":"031","M1M2L1":"031","M1M2L2":"032","M1M2L3":"032","M1M2L4":"032","M1M2L5":"032","M1M2L6":"032","M1M2L7":"032","M1M2L8":"032","M1M2L9":"032","M1M2M2":"030","M1M2M3":"030","M1M2M4":"030","M1M2M5":"030","M1M2M6":"030","M1M2M7":"030","M1M2M8":"030","M1M2M9":"030","M1M2N1":"030","M1M2N2":"030","M1M2N3":"030","M1M2N4":"030","M1M2N6":"030","M1M2N7":"030","M1M2N8":"030","M1M2N9":"030","M1M2P1":"030","M1M2P2":"030","M1M2P3":"030","M1M2P4":"030","M1M2P5":"027","M1M2P6":"030","M1M2P7":"027","M1M2P8":"027","M1M2P9":"030","M1M2R1":"027","M1M2R2":"027","M1M2R3":"027","M1M2R4":"027","M1M2R5":"028","M1M2R6":"028","M1M2R7":"028","M1M2R8":"028","M1M2R9":"028","M1M2S1":"028","M1M2S2":"027","M1M2S3":"027","M1M2S4":"027","M1M2S5":"027","M1M2S6":"027","M1M2S7":"027","M1M2S8":"027","M1M2S9":"027","M1M2T1":"027","M1M2T2":"028","M1M2T3":"028","M1M2T4":"028","M1M2T5":"028","M1M2T6":"027","M1M2T7":"027","M1M2T8":"027","M1M2T9":"027","M1M2V1":"027","M1M2V2":"027","M1M2V3":"027","M1M2V4":"027","M1M2V5":"027","M1M2V6":"027","M1M2V7":"027","M1M2V8":"027","M1M2V9":"027","M1M2W1":"027","M1M2W2":"027","M1M2W3":"027","M1M2W4":"027","M1M2W5":"027","M1M2W6":"027","M1M2W7":"027","M1M2W8":"027","M1M2W9":"027","M1M2X1":"027","M1M2X2":"027","M1M2X3":"027","M1M2X4":"027","M1M2X5":"027","M1M2X6":"027","M1M2X7":"027","M1M2X8":"027","M1M2X9":"027","M1M2Y1":"027","M1M2Y2":"027","M1M2Y3":"025","M1M2Y4":"025","M1M2Y5":"025","M1M2Y6":"025","M1M2Y7":"025","M1M2Y8":"025","M1M2Y9":"025","M1M2Z1":"025","M1M2Z2":"023","M1M2Z3":"023","M1M2Z4":"023","M1M2Z8":"706","M1M2Z9":"023","M1M3C7":"032","M1M3C8":"032","M1M3C9":"032","M1M3E1":"032","M1M3E2":"032","M1M3E3":"032","M1M3E4":"032","M1M3E5":"032","M1M3E6":"032","M1M3E7":"032","M1M3E8":"032","M1M3E9":"033","M1M3G1":"033","M1M3G2":"033","M1M3G3":"033","M1M3G4":"029","M1M3G5":"029","M1M3G6":"029","M1M3G7":"029","M1M3G8":"029","M1M3G9":"029","M1M3H1":"029","M1M3H2":"029","M1M3H3":"029","M1M3H4":"029","M1M3H5":"029","M1M3H6":"029","M1M3H7":"028","M1M3H9":"028","M1M3J1":"028","M1M3J3":"028","M1M3J4":"028","M1M3J5":"028","M1M3J6":"028","M1M3J7":"028","M1M3J8":"028","M1M3J9":"028","M1M3K1":"028","M1M3K2":"028","M1M3K3":"028","M1M3K4":"028","M1M3K5":"028","M1M3K6":"028","M1M3K7":"028","M1M3K8":"028","M1M3K9":"028","M1M3L1":"028","M1M3L2":"026","M1M3L3":"028","M1M3L4":"026","M1M3L5":"028","M1M3L6":"028","M1M3L7":"026","M1M3L8":"028","M1M3L9":"026","M1M3M1":"026","M1M3M2":"026","M1M3M3":"026","M1M3M4":"028","M1M3M5":"026","M1M3M6":"028","M1M3M7":"026","M1M3M8":"026","M1M3M9":"026","M1M3N1":"026","M1M3N2":"025","M1M3N3":"026","M1M3N4":"026","M1M3N5":"025","M1M3N6":"025","M1M3N8":"025","M1M3N9":"025","M1M3P1":"025","M1M3P2":"025","M1M3P3":"025","M1M3P4":"025","M1M3P5":"025","M1M3P6":"024","M1M3P7":"025","M1M3P8":"025","M1M3P9":"024","M1M3R1":"024","M1M3R2":"024","M1M3R3":"023","M1M3R4":"023","M1M3R6":"023","M1M3R7":"023","M1M3R8":"023","M1M3R9":"023","M1M3S1":"023","M1M3S2":"023","M1M3S4":"029","M1M3S5":"023","M1M3S6":"023","M1M3S7":"024","M1M3S8":"024","M1M3S9":"024","M1M3T1":"028","M1M3T2":"028","M1M3T3":"028","M1M3T4":"026","M1M3T6":"025","M1M3T8":"029","M1M3V2":"024","M1M3V3":"028","M1M3V4":"030","M1M3V5":"024","M1M3V6":"030","M1M3V7":"030","M1M3W2":"029","M1M3W3":"030","M1M3W5":"024","M1M3W6":"024","M1M3W7":"024","M1M3W8":"026","M1M3W9":"026","M1M3X1":"026","M1M3X2":"026","M1M3X3":"026","M1M3X5":"025","M1M3X6":"025","M1M3X7":"027","M1M3X8":"027","M1N0A1":"038","M1N0A2":"034","M1N0A3":"039","M1N0A5":"033","M1N0A8":"036","M1N0B3":"038","M1N0B4":"035","M1N0B7":"037","M1N0B8":"032","M1N0C2":"037","M1N0C3":"035","M1N0C5":"034","M1N0C6":"038","M1N1A1":"039","M1N1A2":"039","M1N1A3":"039","M1N1A4":"039","M1N1A5":"039","M1N1A6":"039","M1N1A7":"039","M1N1A8":"039","M1N1A9":"039","M1N1B1":"039","M1N1B2":"039","M1N1B3":"039","M1N1B4":"039","M1N1B5":"039","M1N1B6":"039","M1N1B7":"039","M1N1B8":"039","M1N1B9":"039","M1N1C1":"039","M1N1C2":"039","M1N1C3":"039","M1N1C4":"039","M1N1C5":"039","M1N1C6":"039","M1N1C7":"039","M1N1C8":"039","M1N1C9":"037","M1N1E1":"037","M1N1E2":"037","M1N1E3":"037","M1N1E4":"037","M1N1E5":"037","M1N1E6":"037","M1N1E7":"037","M1N1E8":"037","M1N1E9":"037","M1N1G1":"037","M1N1G2":"037","M1N1G3":"037","M1N1G4":"037","M1N1G5":"037","M1N1G6":"037","M1N1G7":"037","M1N1G8":"037","M1N1G9":"035","M1N1H1":"035","M1N1H2":"035","M1N1H3":"031","M1N1H4":"035","M1N1H5":"031","M1N1H6":"035","M1N1H7":"035","M1N1H8":"035","M1N1H9":"035","M1N1J1":"035","M1N1J2":"035","M1N1J3":"035","M1N1J4":"035","M1N1J5":"035","M1N1J6":"035","M1N1J7":"031","M1N1J8":"031","M1N1J9":"031","M1N1K1":"031","M1N1K2":"031","M1N1K3":"031","M1N1K4":"031","M1N1K5":"031","M1N1K6":"031","M1N1K7":"035","M1N1K8":"035","M1N1K9":"035","M1N1L1":"035","M1N1L2":"035","M1N1L3":"035","M1N1L4":"035","M1N1L5":"035","M1N1L6":"035","M1N1L7":"035","M1N1L8":"035","M1N1L9":"035","M1N1M1":"035","M1N1M2":"035","M1N1M3":"035","M1N1M4":"031","M1N1M5":"035","M1N1M7":"031","M1N1M8":"031","M1N1M9":"031","M1N1N1":"035","M1N1N4":"038","M1N1N5":"038","M1N1N8":"038","M1N1N9":"038","M1N1P1":"038","M1N1P2":"039","M1N1P3":"038","M1N1P4":"039","M1N1P5":"038","M1N1P6":"037","M1N1R1":"039","M1N1R2":"037","M1N1R3":"037","M1N1R4":"037","M1N1R5":"037","M1N1R6":"037","M1N1R7":"037","M1N1R8":"037","M1N1R9":"037","M1N1S1":"037","M1N1S4":"037","M1N1S5":"037","M1N1S6":"037","M1N1S8":"037","M1N1S9":"037","M1N1T1":"033","M1N1T3":"037","M1N1T4":"037","M1N1T5":"709","M1N1T6":"036","M1N1T9":"034","M1N1V1":"035","M1N1V2":"034","M1N1V3":"034","M1N1V5":"038","M1N1V6":"038","M1N1V7":"038","M1N1V8":"038","M1N1V9":"038","M1N1W1":"038","M1N1W2":"038","M1N1W3":"038","M1N1W4":"038","M1N1W5":"038","M1N1W6":"038","M1N1W7":"038","M1N1W9":"038","M1N1X4":"038","M1N1X5":"038","M1N1X6":"038","M1N1X7":"038","M1N1X8":"038","M1N1X9":"038","M1N1Y1":"037","M1N1Y2":"037","M1N1Y3":"037","M1N1Y4":"037","M1N1Y5":"038","M1N1Y6":"038","M1N1Y7":"038","M1N1Y8":"038","M1N1Y9":"038","M1N1Z1":"038","M1N1Z2":"038","M1N1Z3":"038","M1N1Z4":"038","M1N1Z5":"038","M1N1Z6":"038","M1N1Z7":"038","M1N1Z8":"038","M1N1Z9":"037","M1N2A1":"037","M1N2A2":"037","M1N2A3":"037","M1N2A4":"037","M1N2A5":"037","M1N2A6":"037","M1N2A7":"037","M1N2A8":"037","M1N2A9":"037","M1N2B1":"037","M1N2B2":"037","M1N2B3":"037","M1N2B4":"037","M1N2B5":"037","M1N2B6":"037","M1N2B7":"037","M1N2B8":"037","M1N2B9":"037","M1N2C1":"037","M1N2C2":"037","M1N2C3":"037","M1N2C4":"037","M1N2C5":"037","M1N2C6":"037","M1N2C7":"037","M1N2C8":"037","M1N2C9":"037","M1N2E1":"037","M1N2E2":"037","M1N2E3":"033","M1N2E4":"037","M1N2G3":"036","M1N2G4":"036","M1N2G5":"036","M1N2G6":"036","M1N2G7":"036","M1N2G8":"036","M1N2G9":"036","M1N2H2":"036","M1N2H3":"036","M1N2H4":"036","M1N2H5":"036","M1N2H6":"036","M1N2H7":"036","M1N2H8":"036","M1N2H9":"036","M1N2J2":"036","M1N2J3":"036","M1N2J4":"036","M1N2J5":"036","M1N2J6":"036","M1N2J7":"036","M1N2J8":"036","M1N2J9":"036","M1N2K1":"036","M1N2K2":"036","M1N2K3":"036","M1N2K4":"036","M1N2K5":"034","M1N2K6":"034","M1N2K7":"036","M1N2K8":"036","M1N2K9":"036","M1N2L1":"036","M1N2L2":"036","M1N2L3":"036","M1N2L4":"036","M1N2L6":"036","M1N2L7":"036","M1N2L8":"036","M1N2L9":"036","M1N2M1":"034","M1N2M2":"036","M1N2M3":"034","M1N2M4":"036","M1N2M5":"034","M1N2M6":"034","M1N2M7":"708","M1N2M8":"034","M1N2M9":"034","M1N2N1":"034","M1N2N2":"034","M1N2N3":"034","M1N2N4":"034","M1N2N5":"034","M1N2N6":"034","M1N2N7":"034","M1N2N8":"034","M1N2N9":"034","M1N2P1":"034","M1N2P2":"034","M1N2P3":"034","M1N2P4":"034","M1N2P5":"034","M1N2P6":"034","M1N2P7":"034","M1N2P8":"034","M1N2P9":"032","M1N2R1":"033","M1N2R3":"039","M1N2R4":"039","M1N2R5":"039","M1N2R6":"039","M1N2R7":"038","M1N2R8":"038","M1N2R9":"038","M1N2S1":"038","M1N2S2":"038","M1N2S3":"038","M1N2S5":"038","M1N2S6":"038","M1N2S7":"038","M1N2S8":"039","M1N2S9":"039","M1N2T1":"039","M1N2T2":"039","M1N2T4":"039","M1N2T5":"039","M1N2T6":"039","M1N2T7":"039","M1N2T8":"039","M1N2T9":"039","M1N2V1":"039","M1N2V3":"038","M1N2V4":"038","M1N2V5":"038","M1N2V6":"039","M1N2V7":"039","M1N2V8":"039","M1N2V9":"039","M1N2W1":"037","M1N2W2":"037","M1N2W3":"038","M1N2W4":"038","M1N2W5":"038","M1N2W6":"038","M1N2W7":"038","M1N2W8":"038","M1N2W9":"038","M1N2X1":"038","M1N2X2":"038","M1N2X3":"038","M1N2X4":"038","M1N2X5":"038","M1N2X6":"038","M1N2X7":"037","M1N2X8":"037","M1N2X9":"037","M1N2Y1":"037","M1N2Y2":"037","M1N2Y3":"037","M1N2Y4":"037","M1N2Y5":"037","M1N2Y6":"037","M1N2Y7":"037","M1N2Y8":"037","M1N2Y9":"037","M1N2Z1":"037","M1N2Z2":"037","M1N2Z3":"037","M1N2Z4":"037","M1N2Z5":"037","M1N2Z6":"037","M1N2Z7":"037","M1N2Z8":"037","M1N2Z9":"037","M1N3A1":"037","M1N3A2":"037","M1N3A3":"037","M1N3A4":"037","M1N3A5":"037","M1N3A6":"037","M1N3A7":"037","M1N3A8":"037","M1N3A9":"037","M1N3B1":"037","M1N3B2":"037","M1N3B3":"037","M1N3B4":"037","M1N3B5":"037","M1N3B6":"037","M1N3B7":"037","M1N3B8":"037","M1N3B9":"037","M1N3C1":"037","M1N3C2":"037","M1N3C3":"037","M1N3C4":"037","M1N3C5":"037","M1N3C6":"037","M1N3C7":"037","M1N3C8":"037","M1N3C9":"037","M1N3E1":"037","M1N3E2":"037","M1N3E3":"037","M1N3E4":"037","M1N3E5":"037","M1N3E6":"037","M1N3E7":"037","M1N3E8":"037","M1N3E9":"037","M1N3G1":"037","M1N3G2":"037","M1N3G3":"037","M1N3G4":"037","M1N3G5":"037","M1N3G6":"037","M1N3G7":"037","M1N3G8":"037","M1N3G9":"037","M1N3H1":"037","M1N3H2":"037","M1N3H3":"037","M1N3H4":"037","M1N3H5":"037","M1N3H6":"037","M1N3H7":"037","M1N3H8":"037","M1N3H9":"037","M1N3J1":"037","M1N3J2":"037","M1N3J3":"037","M1N3J4":"037","M1N3J5":"037","M1N3J6":"037","M1N3J7":"037","M1N3J8":"037","M1N3J9":"036","M1N3K1":"036","M1N3K2":"036","M1N3K3":"035","M1N3K4":"036","M1N3K5":"036","M1N3K6":"036","M1N3K7":"036","M1N3K8":"036","M1N3K9":"036","M1N3L1":"036","M1N3L2":"036","M1N3L3":"036","M1N3L4":"036","M1N3L5":"036","M1N3L6":"036","M1N3L7":"036","M1N3L8":"036","M1N3L9":"036","M1N3M1":"036","M1N3M2":"036","M1N3M3":"036","M1N3M4":"036","M1N3M5":"036","M1N3M6":"036","M1N3M7":"036","M1N3M8":"036","M1N3M9":"036","M1N3N1":"036","M1N3N2":"036","M1N3N3":"036","M1N3N4":"036","M1N3N5":"036","M1N3N6":"036","M1N3N7":"036","M1N3N8":"036","M1N3N9":"036","M1N3P1":"036","M1N3P2":"036","M1N3P3":"036","M1N3P4":"034","M1N3P5":"036","M1N3P6":"034","M1N3P7":"036","M1N3P8":"036","M1N3P9":"036","M1N3R1":"034","M1N3R2":"034","M1N3R3":"034","M1N3R4":"034","M1N3R5":"034","M1N3R6":"034","M1N3R7":"036","M1N3R8":"036","M1N3R9":"034","M1N3S1":"034","M1N3S2":"034","M1N3S3":"034","M1N3S4":"034","M1N3S5":"034","M1N3S6":"034","M1N3S7":"034","M1N3S8":"034","M1N3S9":"034","M1N3T1":"034","M1N3T2":"034","M1N3T3":"034","M1N3T4":"034","M1N3T5":"034","M1N3T6":"034","M1N3T7":"034","M1N3T8":"034","M1N3T9":"034","M1N3V1":"034","M1N3V2":"034","M1N3V3":"034","M1N3V4":"034","M1N3V5":"034","M1N3V6":"034","M1N3V7":"034","M1N3V8":"034","M1N3V9":"034","M1N3W1":"034","M1N3W2":"034","M1N3W3":"034","M1N3W4":"034","M1N3W5":"034","M1N3W6":"033","M1N3W7":"033","M1N3W8":"034","M1N3W9":"034","M1N3X1":"034","M1N3X2":"034","M1N3X3":"034","M1N3X4":"033","M1N3X5":"033","M1N3X6":"034","M1N3X7":"034","M1N3X8":"032","M1N3X9":"032","M1N3Y1":"033","M1N3Y2":"033","M1N3Y3":"036","M1N3Y4":"036","M1N3Y5":"036","M1N3Y6":"034","M1N3Y7":"034","M1N3Y8":"034","M1N3Y9":"034","M1N3Z1":"034","M1N3Z2":"034","M1N3Z3":"034","M1N3Z4":"034","M1N3Z5":"031","M1N3Z6":"031","M1N3Z7":"031","M1N3Z8":"031","M1N3Z9":"031","M1N4A1":"031","M1N4A2":"031","M1N4A4":"031","M1N4A5":"032","M1N4A6":"032","M1N4A7":"032","M1N4A9":"034","M1N4B3":"034","M1N4B4":"034","M1N4B5":"038","M1N4B6":"038","M1N4B7":"038","M1N4B8":"038","M1N4B9":"038","M1N4C1":"038","M1N4C2":"038","M1N4C7":"033","M1N4C8":"033","M1N4C9":"037","M1N4E1":"037","M1N4E2":"400","M1N4E5":"400","M1N4E6":"707","M1N4E8":"033","M4A2L5":"001","M4A2L6":"001","M4A2L7":"001","M4A2L9":"001","M4B2J1":"005","M4B2J2":"005","M4B2J4":"005","M4B2J7":"005","M4B2J8":"005","M4B2K2":"004","M4B2K5":"004","M4B2K9":"004","M4B2L3":"001","M4B2L5":"001","M4C5H1":"007","M4C5H2":"007","M4C5N8":"006","M4E3S1":"039","M4E3S2":"039","M4E3S3":"038","M4E3S4":"038","M4E3S5":"038","M4E3S6":"038","M4E3S7":"038","M4E3S9":"038","M4E3T1":"038"},"l":{"001":{"n":"Clairlea Public School","a":"25 Rosalind Cres, M1L 2X1"},"002":{"n":"SATEC @ W.A Porter Collegiate Institute","a":"40 Fairfax Cres, M1L 1Z9"},"003":{"n":"Warden Hilltop Community Centre","a":"25 Mendelssohn St, M1L 0G6"},"004":{"n":"Our Lady of Fatima Catholic School","a":"3176 St Clair Ave E, M1L 1V6"},"005":{"n":"West Scarborough Neighbourhood C.C.","a":"313 Pharmacy Ave, M1L 3E7"},"006":{"n":"Oakridge Community Recreation Centre","a":"63 Pharmacy Ave, M1L 4S9"},"007":{"n":"Oakridge Jr. P.S.","a":"110 Byng Ave, M1L 3P1"},"008":{"n":"Taylor Creek Public School","a":"644 Warden Ave, M1L 3Z3"},"009":{"n":"St. Joachim Catholic School","a":"3395 St Clair Ave E, M1L 1W3"},"010":{"n":"Danforth Gardens Public School","a":"20 Santamonica Blvd, M1L 4H4"},"011":{"n":"J.G. Workman Public School","a":"487 Birchmount Rd, M1K 1N7"},"012":{"n":"Konko Church of Toronto","a":"398 Kennedy Rd, M1K 2A6"},"013":{"n":"General Brock Public School","a":"140 Chestnut Cres, M1L 1Y5"},"014":{"n":"Walton Place","a":"835 Birchmount Rd, M1K 5K1"},"015":{"n":"Grace Church Scarborough","a":"700 Kennedy Rd, M1K 2B5"},"016":{"n":"St. Maria Goretti C.S.","a":"21 Kenmark Blvd, M1K 3N8"},"017":{"n":"Corvette Junior Public School","a":"30 Corvette Ave, M1K 3G2"},"018":{"n":"Norman Cook Junior Public School","a":"725 Danforth Rd, M1K 1G4"},"019":{"n":"Robert Service Senior Public School","a":"945 Danforth Rd, M1K 1J2"},"020":{"n":"Don Montgomery Comm. Rec. Ctr.","a":"2467 Eglinton Ave E, M1K 2R1"},"021":{"n":"Walter Perry Junior Public School","a":"45 Falmouth Ave, M1K 4M7"},"022":{"n":"Bic Fortune/Sterling Club Rec. Cen.","a":"320 Mccowan Rd, M1J 3N2"},"023":{"n":"St. Boniface Catholic School","a":"20 Markanna Dr, M1M 2J1"},"024":{"n":"Mason Road Junior Public School","a":"78 Mason Rd, M1M 3R2"},"025":{"n":"Bliss Carman Senior Public School","a":"10 Bellamy Rd S, M1M 3N8"},"026":{"n":"H.A. Halbert Junior Public School","a":"25 Halbert Pl, M1M 0E1"},"027":{"n":"St. Agatha Catholic School","a":"49 Cathedral Bluffs Dr, M1M 2T6"},"028":{"n":"Anson Park Public School","a":"30 Macduff Cres, M1M 1X5"},"029":{"n":"St. Georges Manor","a":"17 Brimley Rd, M1M 3T8"},"030":{"n":"St. John Henry Newman Catholic H.S.","a":"100 Brimley Rd S, M1M 3X4"},"031":{"n":"Chine Drive Public School","a":"51 Chine Dr, M1M 2K8"},"032":{"n":"John A. Leslie Public School","a":"459 Midland Ave, M1N 4A7"},"033":{"n":"Highway Gospel Church","a":"530 Midland Ave, M1N 1T1"},"034":{"n":"St. Paul's United Church","a":"200 Mcintosh St, M1N 3Z3"},"035":{"n":"Cliffside Public School","a":"27 East Haven Dr, M1N 1M1"},"036":{"n":"Birch Cliff Heights Public School","a":"120 Highview Ave, M1N 2J1"},"037":{"n":"Birchmount Community Centre","a":"93 Birchmount Rd, M1N 3J7"},"038":{"n":"Blantyre Public School","a":"290 Blantyre Ave, M1N 2S4"},"039":{"n":"Courcelette Public School","a":"100 Fallingbrook Rd, M1N 2T6"},"400":{"n":"Henley Gardens","a":"1091 Kingston Rd, M1N 4E5"},"401":{"n":"Byng Towers","a":"3330 Danforth Ave, M1L 4P9"},"700":{"n":"Presentation Manor","a":"61 Fairfax Cres, M1L 1Z7"},"701":{"n":"Cardinal Ambrozic Houses of Providence","a":"3276 St Clair Ave E, M1L 1W1"},"702":{"n":"Ina Grafton Gage Home","a":"40 Bell Estate Rd, M1L 0E2"},"703":{"n":"Chester Village","a":"3555 Danforth Ave, M1L 1E3"},"704":{"n":"McCowan Retirement Residence","a":"2881 Eglinton Ave E, M1J 0A2"},"705":{"n":"Agecare Trilogy","a":"340 Mccowan Rd, M1J 3P4"},"706":{"n":"Scarborough Retirement Residence","a":"148 Markham Rd, M1M 2Z8"},"707":{"n":"Midland Gardens Care Community","a":"130 Midland Ave, M1N 4E6"},"708":{"n":"Craiglee Nursing Home","a":"102 Craiglee Dr, M1N 2M7"},"709":{"n":"Retirement Suites by the Lake","a":"2121 Kingston Rd, M1N 1T5"}},"adv":[{"n":"2685 Kingston Rd","a":"2685 Kingston Rd, M1M 1M2","lat":43.716848,"lng":-79.240913},{"n":"Don Montgomery Comm. Rec. Ctr.","a":"2467 Eglinton Ave E, M1K 2R1","lat":43.7326575,"lng":-79.261697},{"n":"Birchmount Community Centre","a":"93 Birchmount Rd, M1N 3J7","lat":43.69542,"lng":-79.26233},{"n":"Cliffcrest Public Library","a":"3017 Kingston Rd, M1M 1P1","lat":43.72527,"lng":-79.23078},{"n":"West Scarborough Neighbourhood","a":"313 Pharmacy Ave, M1L 3E7","lat":43.701293,"lng":-79.2846943}],"f":["M1K1P2","M1K1P7","M1K2G4","M1K2H1","M1K3H8","M1K4C8","M1L1E3","M1L3Y7","M1L4H5","M1M1H9","M1M1M2","M1M1R1","M1M1V4","M1M2G7","M1M2L6","M1M3E8","M1M3P3","M1M3S4","M1M3S8","M1M3S9","M1N1H3","M1N1X9","M1N2M7","M1N3Y7","M4B2J7","M4B2K9"]};
+var I18N = {"en":{"nav_home":"Home","maps":"Open in maps →","kicker":"Scarborough Southwest provincial by-election","h1":"How to vote","lede":"Election day is <strong>Thursday, September&nbsp;3</strong>. You do not have to wait, you can vote right now, and there are three advance voting days before then.","toc_adv":"Advance voting","toc_office":"Vote today","toc_eday":"Election day","toc_find":"Find my polling place","toc_id":"What to bring","toc_ride":"Get a ride","adv_k":"Advance voting","adv_days":"Wednesday Aug&nbsp;26, Thursday Aug&nbsp;27, Friday Aug&nbsp;28","adv_hours":"10:00 a.m. to 8:00 p.m. all three days","adv_any":"<strong>You can vote at any one of these five locations.</strong> On advance voting days you are not tied to a particular polling place, so pick whichever is easiest for you to get to.","adv_note":"<strong>This is the easiest way to vote.</strong> Lines are shorter than on election day, and once you have voted you are done.","off_k":"Vote today, any day","off_h":"Scarborough Southwest election office","off_open":"Open now, through Wednesday Sept&nbsp;2","off_ro":"Elections Ontario returning office","off_hours":"Monday to Saturday <strong>10:00 a.m. to 8:00 p.m.</strong>, Sunday <strong>noon to 5:00 p.m.</strong>","off_last":"<strong>Last chance is Wednesday, September&nbsp;2 at 6:00 p.m.</strong> The office closes earlier than usual on its final day.","ed_k":"Election day","ed_d":"Thursday, September&nbsp;3","ed_hours":"9:00 a.m. to 9:00 p.m.","ed_note":"On election day, unlike the advance days, you must vote at the one polling place assigned to your home address. Look it up below.","find_h":"Find my election day polling place","find_p":"Enter your postal code. This covers the Scarborough Southwest riding only.","find_l":"Your postal code","find_btn":"Find it","r_head":"Your election day polling place","r_poll":"poll","r_ok":"Bring ID showing your name. Polls are open 9:00 a.m. to 9:00 p.m.","r_fuzzy":"<strong>Please double check this one.</strong> Your postal code sits across more than one poll, so confirm on your voter information card or at the official lookup before you travel.","r_inst":"<strong>This is a poll inside a retirement or long term care home, and it serves the people who live there.</strong> If you do not live at this address, this is not your polling place. Check <a href=\"https://voterinformationservice.elections.on.ca\" target=\"_blank\" rel=\"noopener\">elections.on.ca</a>, or call us at <a href=\"tel:+16473132506\">647-313-2506</a> and we will find it for you.","r_alt":"Do not want to wait? You can vote at <a href=\"#advance\">any advance location</a> on Aug 26, 27 or 28, or at the <a href=\"#office\">election office</a> today.","r_short":"Please enter a full six character postal code, for example M1M 1M2.","r_miss":"<strong>We do not have that postal code.</strong> It may be outside Scarborough Southwest, or it may be new. Check <a href=\"https://voterinformationservice.elections.on.ca\" target=\"_blank\" rel=\"noopener\">elections.on.ca</a>, or call us at <a href=\"tel:+16473132506\">647-313-2506</a> and we will look it up for you.","id_h":"What to bring","id_p1":"<strong>Not sure what counts? Use the checklist.</strong> Tick what is already in your wallet and it tells you in ten seconds whether you are ready.","id_cta":"Check my ID →","id_p2":"<strong>The short version.</strong> It depends on one thing: whether you got a voter information card in the mail.","id_vic":"<strong>If you have your voter information card:</strong> bring it, plus any one piece of ID showing your <strong>name</strong>. A health card, passport, credit or debit card, student card, union card, even a blood donor card.","id_novic":"<strong>If you did not get one, or cannot find it:</strong> bring any one document showing your <strong>name and your current address</strong>. Just one, not two.","id_list_h":"Plenty of ordinary things show name and address:","id_1":"Driver’s licence, Ontario Photo Card or vehicle permit","id_2":"Utility bill: hydro, water, gas, phone or cable TV","id_3":"Bank account or credit card statement","id_4":"Pay stub, cheque stub or T4 from your employer","id_5":"Lease, rental or mortgage statement","id_6":"Insurance statement","id_7":"Income tax assessment, Child Tax Benefit, Old Age Security or EI statement","id_8":"Tuition bill, transcript, report card or school admission letter","id_9":"Property tax bill or MPAC assessment notice","id_10":"CNIB card, or a long-term care home residence document","id_11":"Letter of confirmation of residence","id_foot":"<strong>Do not let ID stop you from going.</strong> You do not need photo ID, and if you do show photo ID your appearance does not have to match it. An electronic copy on your phone is accepted. If you are not sure what you have, call us at <a href=\"tel:+16473132506\">647-313-2506</a> and we will work it out with you. Permanent resident cards and international ID are not accepted.","who_h":"Who can vote","who_p":"You can vote if you are a <strong>Canadian citizen</strong>, <strong>18 or older on September&nbsp;3</strong>, and you <strong>live in Scarborough Southwest</strong>. You do not need to be registered in advance. You can register right at the polling place when you go to vote.","ride_h":"Need a ride, or have a question?","ride_p":"Our campaign will drive you to vote, free, on any advance day or on election day. If you cannot get there on your own, tell us and we will sort it out.","ride_call":"Call 647-313-2506","oi_h":"Official information","oi_p":"Everything on this page comes from Elections Ontario. To confirm your registration, find your assigned polling place from the official source, or check anything else, visit <a href=\"https://voterinformationservice.elections.on.ca\" target=\"_blank\" rel=\"noopener\">voterinformationservice.elections.on.ca</a> or call Elections Ontario at <a href=\"tel:+18886688683\">1-888-668-8683</a>. This page is published by the Ahsanul Hafiz campaign, not by Elections Ontario.","f1":"Authorized by the CFO for the Ahsanul Hafiz campaign.","f2":"Polling place data verified against Elections Ontario, August 2026. If something here looks wrong, please tell us at <a href=\"mailto:info@votehafiz.ca\">info@votehafiz.ca</a> so we can fix it.","x_target":""},"bn":{"nav_home":"হোম","maps":"মানচিত্রে দেখুন →","kicker":"স্কারবোরো সাউথওয়েস্ট প্রাদেশিক উপনির্বাচন","h1":"কীভাবে ভোট দেবেন","lede":"নির্বাচনের দিন <strong>বৃহস্পতিবার, ৩ সেপ্টেম্বর</strong>। তবে অপেক্ষা করার দরকার নেই, আপনি এখনই ভোট দিতে পারেন, এবং তার আগে তিন দিন আগাম ভোট রয়েছে।","toc_adv":"আগাম ভোট","toc_office":"আজই ভোট দিন","toc_eday":"নির্বাচনের দিন","toc_find":"আমার ভোটকেন্দ্র খুঁজুন","toc_id":"কী সঙ্গে আনবেন","toc_ride":"যাতায়াতের ব্যবস্থা","adv_k":"আগাম ভোট","adv_days":"বুধবার ২৬ আগস্ট, বৃহস্পতিবার ২৭ আগস্ট, শুক্রবার ২৮ আগস্ট","adv_hours":"তিন দিনই সকাল ১০টা থেকে রাত ৮টা","adv_any":"<strong>আপনি এই পাঁচটি কেন্দ্রের যেকোনো একটিতে ভোট দিতে পারেন।</strong> আগাম ভোটের দিনগুলোতে আপনি নির্দিষ্ট কোনো কেন্দ্রে বাঁধা নন, তাই যেটিতে যেতে আপনার সবচেয়ে সুবিধা হয় সেটিই বেছে নিন।","adv_note":"<strong>এটিই ভোট দেওয়ার সবচেয়ে সহজ উপায়।</strong> নির্বাচনের দিনের তুলনায় লাইন ছোট থাকে, আর একবার ভোট দিয়ে দিলে কাজ শেষ।","off_k":"আজ, যেকোনো দিন ভোট দিন","off_h":"স্কারবোরো সাউথওয়েস্ট নির্বাচন অফিস","off_open":"এখন খোলা, বুধবার ২ সেপ্টেম্বর পর্যন্ত","off_ro":"Elections Ontario রিটার্নিং অফিস","off_hours":"সোমবার থেকে শনিবার <strong>সকাল ১০টা থেকে রাত ৮টা</strong>, রবিবার <strong>দুপুর ১২টা থেকে বিকাল ৫টা</strong>","off_last":"<strong>শেষ সুযোগ বুধবার, ২ সেপ্টেম্বর বিকাল ৬টা পর্যন্ত।</strong> শেষ দিনে অফিস স্বাভাবিকের চেয়ে আগে বন্ধ হয়ে যায়।","ed_k":"নির্বাচনের দিন","ed_d":"বৃহস্পতিবার, ৩ সেপ্টেম্বর","ed_hours":"সকাল ৯টা থেকে রাত ৯টা","ed_note":"আগাম ভোটের দিনগুলোর মতো নয়, নির্বাচনের দিনে আপনাকে আপনার বাড়ির ঠিকানার জন্য নির্ধারিত একটি নির্দিষ্ট কেন্দ্রেই ভোট দিতে হবে। নিচে সেটি খুঁজে নিন।","find_h":"নির্বাচনের দিনের আমার ভোটকেন্দ্র খুঁজুন","find_p":"আপনার পোস্টাল কোড লিখুন। এটি শুধুমাত্র স্কারবোরো সাউথওয়েস্ট আসনের জন্য।","find_l":"আপনার পোস্টাল কোড","find_btn":"খুঁজুন","r_head":"নির্বাচনের দিনে আপনার ভোটকেন্দ্র","r_poll":"পোল","r_ok":"আপনার নাম আছে এমন একটি পরিচয়পত্র আনুন। ভোটকেন্দ্র সকাল ৯টা থেকে রাত ৯টা পর্যন্ত খোলা।","r_fuzzy":"<strong>এটি একটু যাচাই করে নিন।</strong> আপনার পোস্টাল কোড একাধিক পোল এলাকায় পড়েছে, তাই রওনা হওয়ার আগে আপনার ভোটার তথ্য কার্ডে বা সরকারি ওয়েবসাইটে নিশ্চিত হয়ে নিন।","r_inst":"<strong>এটি একটি বৃদ্ধাশ্রম বা দীর্ঘমেয়াদি সেবা কেন্দ্রের ভেতরের ভোটকেন্দ্র, যা শুধু সেখানকার বাসিন্দাদের জন্য।</strong> আপনি যদি এই ঠিকানায় না থাকেন, এটি আপনার ভোটকেন্দ্র নয়। <a href=\"https://voterinformationservice.elections.on.ca\" target=\"_blank\" rel=\"noopener\">elections.on.ca</a> দেখুন, অথবা <a href=\"tel:+16473132506\">647-313-2506</a> নম্বরে আমাদের ফোন করুন, আমরা খুঁজে দেব।","r_alt":"অপেক্ষা করতে চান না? ২৬, ২৭ বা ২৮ আগস্ট <a href=\"#advance\">যেকোনো আগাম ভোটকেন্দ্রে</a>, অথবা আজই <a href=\"#office\">নির্বাচন অফিসে</a> ভোট দিতে পারেন।","r_short":"অনুগ্রহ করে ছয় অক্ষরের পুরো পোস্টাল কোড লিখুন, যেমন M1M 1M2।","r_miss":"<strong>এই পোস্টাল কোডটি আমাদের কাছে নেই।</strong> এটি স্কারবোরো সাউথওয়েস্টের বাইরে হতে পারে, অথবা নতুন হতে পারে। <a href=\"https://voterinformationservice.elections.on.ca\" target=\"_blank\" rel=\"noopener\">elections.on.ca</a> দেখুন, অথবা <a href=\"tel:+16473132506\">647-313-2506</a> নম্বরে ফোন করুন, আমরা খুঁজে দেব।","id_h":"কী সঙ্গে আনবেন","id_p1":"<strong>কোনটি চলবে বুঝতে পারছেন না? চেকলিস্টটি দেখুন।</strong> আপনার কাছে যা আছে টিক দিন, দশ সেকেন্ডেই জেনে যাবেন আপনি প্রস্তুত কি না।","id_cta":"আমার আইডি যাচাই করুন →","id_p2":"<strong>সংক্ষেপে।</strong> এটি একটি বিষয়ের উপর নির্ভর করে: আপনি ডাকযোগে ভোটার তথ্য কার্ড পেয়েছেন কি না।","id_vic":"<strong>আপনার কাছে ভোটার তথ্য কার্ড থাকলে:</strong> সেটি আনুন, সঙ্গে আপনার <strong>নাম</strong> আছে এমন যেকোনো একটি পরিচয়পত্র। হেলথ কার্ড, পাসপোর্ট, ক্রেডিট বা ডেবিট কার্ড, স্টুডেন্ট কার্ড, ইউনিয়ন কার্ড, এমনকি রক্তদাতার কার্ডও চলবে।","id_novic":"<strong>কার্ড না পেয়ে থাকলে বা খুঁজে না পেলে:</strong> আপনার <strong>নাম ও বর্তমান ঠিকানা</strong> আছে এমন যেকোনো একটি কাগজ আনুন। একটিই যথেষ্ট, দুটি লাগবে না।","id_list_h":"সাধারণ অনেক কাগজেই নাম ও ঠিকানা থাকে:","id_1":"ড্রাইভিং লাইসেন্স, Ontario Photo Card বা গাড়ির পারমিট","id_2":"ইউটিলিটি বিল: বিদ্যুৎ, পানি, গ্যাস, ফোন বা কেবল টিভি","id_3":"ব্যাংক অ্যাকাউন্ট বা ক্রেডিট কার্ডের স্টেটমেন্ট","id_4":"বেতনের স্লিপ, চেক স্টাব বা নিয়োগকর্তার দেওয়া T4","id_5":"লিজ, ভাড়া বা মর্টগেজের কাগজ","id_6":"বীমার স্টেটমেন্ট","id_7":"আয়কর অ্যাসেসমেন্ট, Child Tax Benefit, Old Age Security বা EI স্টেটমেন্ট","id_8":"টিউশন বিল, ট্রান্সক্রিপ্ট, রিপোর্ট কার্ড বা স্কুলের ভর্তির চিঠি","id_9":"সম্পত্তি করের বিল বা MPAC অ্যাসেসমেন্ট নোটিশ","id_10":"CNIB কার্ড, অথবা দীর্ঘমেয়াদি সেবা কেন্দ্রে বসবাসের কাগজ","id_11":"বসবাসের নিশ্চিতকরণ চিঠি","id_foot":"<strong>আইডির কারণে ভোট দিতে যাওয়া বন্ধ করবেন না।</strong> ছবিসহ পরিচয়পত্র লাগে না, আর ছবিসহ পরিচয়পত্র দেখালেও চেহারার সঙ্গে মিল থাকতে হবে না। ফোনে রাখা ইলেকট্রনিক কপিও গ্রহণযোগ্য। কী আছে বুঝতে না পারলে <a href=\"tel:+16473132506\">647-313-2506</a> নম্বরে ফোন করুন, আমরা একসঙ্গে বের করব। পার্মানেন্ট রেসিডেন্ট কার্ড ও বিদেশি পরিচয়পত্র গ্রহণযোগ্য নয়।","who_h":"কে ভোট দিতে পারবেন","who_p":"আপনি ভোট দিতে পারবেন যদি আপনি <strong>কানাডার নাগরিক</strong> হন, <strong>৩ সেপ্টেম্বর ১৮ বছর বা তার বেশি</strong> বয়সী হন, এবং <strong>স্কারবোরো সাউথওয়েস্টে বসবাস</strong> করেন। আগে থেকে নিবন্ধন করা লাগবে না। ভোট দিতে গিয়ে ভোটকেন্দ্রেই নিবন্ধন করতে পারবেন।","ride_h":"যাতায়াতের সাহায্য লাগবে, বা কোনো প্রশ্ন আছে?","ride_p":"আমাদের প্রচারদল আপনাকে বিনামূল্যে ভোটকেন্দ্রে পৌঁছে দেবে, যেকোনো আগাম ভোটের দিনে বা নির্বাচনের দিনে। নিজে যেতে না পারলে আমাদের জানান, আমরা ব্যবস্থা করব।","ride_call":"ফোন করুন 647-313-2506","oi_h":"সরকারি তথ্য","oi_p":"এই পাতার সব তথ্য Elections Ontario থেকে নেওয়া। আপনার নিবন্ধন নিশ্চিত করতে, সরকারি সূত্র থেকে নির্ধারিত ভোটকেন্দ্র জানতে, বা অন্য কিছু যাচাই করতে <a href=\"https://voterinformationservice.elections.on.ca\" target=\"_blank\" rel=\"noopener\">voterinformationservice.elections.on.ca</a> দেখুন অথবা Elections Ontario-কে <a href=\"tel:+18886688683\">1-888-668-8683</a> নম্বরে ফোন করুন। এই পাতাটি Ahsanul Hafiz প্রচারদল প্রকাশ করেছে, Elections Ontario নয়।","f1":"Ahsanul Hafiz প্রচারদলের CFO কর্তৃক অনুমোদিত।","f2":"ভোটকেন্দ্রের তথ্য আগস্ট ২০২৬-এ Elections Ontario-র সঙ্গে মিলিয়ে যাচাই করা হয়েছে। এখানে কিছু ভুল মনে হলে <a href=\"mailto:info@votehafiz.ca\">info@votehafiz.ca</a> ঠিকানায় জানান, আমরা ঠিক করে দেব।","x_target":"এই পাতাটি দ্রুত AI দিয়ে অনুবাদ করা হয়েছে এবং এতে ভুল থাকতে পারে। ইংরেজি সংস্করণটিই অফিসিয়াল। কিছু বুঝতে অসুবিধা হলে আমাদের <a href=\"tel:+16473132506\">647-313-2506</a> নম্বরে ফোন করুন।"},"ur":{"nav_home":"ہوم","maps":"نقشے پر دیکھیں ←","kicker":"سکاربورو ساؤتھ ویسٹ صوبائی ضمنی انتخاب","h1":"ووٹ کیسے دیں","lede":"انتخاب کا دن <strong>جمعرات، 3 ستمبر</strong> ہے۔ لیکن انتظار کرنے کی ضرورت نہیں، آپ ابھی ووٹ دے سکتے ہیں، اور اس سے پہلے تین دن قبل از وقت ووٹنگ ہے۔","toc_adv":"قبل از وقت ووٹنگ","toc_office":"آج ووٹ دیں","toc_eday":"انتخاب کا دن","toc_find":"میرا پولنگ سٹیشن","toc_id":"کیا ساتھ لانا ہے","toc_ride":"سواری کی سہولت","adv_k":"قبل از وقت ووٹنگ","adv_days":"بدھ 26 اگست، جمعرات 27 اگست، جمعہ 28 اگست","adv_hours":"تینوں دن صبح 10 بجے سے رات 8 بجے تک","adv_any":"<strong>آپ ان پانچ میں سے کسی بھی مقام پر ووٹ دے سکتے ہیں۔</strong> قبل از وقت ووٹنگ کے دنوں میں آپ کسی ایک مخصوص پولنگ سٹیشن کے پابند نہیں، اس لیے جو آپ کے لیے سب سے آسان ہو وہ چن لیں۔","adv_note":"<strong>ووٹ دینے کا یہ سب سے آسان طریقہ ہے۔</strong> انتخاب کے دن کے مقابلے میں قطاریں چھوٹی ہوتی ہیں، اور ایک بار ووٹ دے دیا تو کام ختم۔","off_k":"آج، کسی بھی دن ووٹ دیں","off_h":"سکاربورو ساؤتھ ویسٹ الیکشن آفس","off_open":"ابھی کھلا ہے، بدھ 2 ستمبر تک","off_ro":"Elections Ontario ریٹرننگ آفس","off_hours":"پیر تا ہفتہ <strong>صبح 10 بجے سے رات 8 بجے تک</strong>، اتوار <strong>دوپہر 12 بجے سے شام 5 بجے تک</strong>","off_last":"<strong>آخری موقع بدھ، 2 ستمبر شام 6 بجے تک ہے۔</strong> آخری دن دفتر معمول سے پہلے بند ہو جاتا ہے۔","ed_k":"انتخاب کا دن","ed_d":"جمعرات، 3 ستمبر","ed_hours":"صبح 9 بجے سے رات 9 بجے تک","ed_note":"قبل از وقت ووٹنگ کے دنوں کے برعکس، انتخاب کے دن آپ کو اپنے گھر کے پتے کے لیے مقرر کردہ ایک ہی پولنگ سٹیشن پر ووٹ دینا ہوگا۔ نیچے اسے تلاش کریں۔","find_h":"انتخاب کے دن کا میرا پولنگ سٹیشن تلاش کریں","find_p":"اپنا پوسٹل کوڈ لکھیں۔ یہ صرف سکاربورو ساؤتھ ویسٹ حلقے کے لیے ہے۔","find_l":"آپ کا پوسٹل کوڈ","find_btn":"تلاش کریں","r_head":"انتخاب کے دن آپ کا پولنگ سٹیشن","r_poll":"پول","r_ok":"اپنے نام والا شناختی کاغذ ساتھ لائیں۔ پولنگ صبح 9 بجے سے رات 9 بجے تک کھلی ہے۔","r_fuzzy":"<strong>براہ کرم اس کی تصدیق کر لیں۔</strong> آپ کا پوسٹل کوڈ ایک سے زیادہ پول کے علاقے میں آتا ہے، اس لیے روانہ ہونے سے پہلے اپنے ووٹر انفارمیشن کارڈ یا سرکاری ویب سائٹ پر تصدیق کر لیں۔","r_inst":"<strong>یہ کسی ریٹائرمنٹ ہوم یا طویل مدتی نگہداشت کے مرکز کے اندر کا پولنگ سٹیشن ہے، جو صرف وہاں رہنے والوں کے لیے ہے۔</strong> اگر آپ اس پتے پر نہیں رہتے تو یہ آپ کا پولنگ سٹیشن نہیں۔ <a href=\"https://voterinformationservice.elections.on.ca\" target=\"_blank\" rel=\"noopener\">elections.on.ca</a> دیکھیں، یا ہمیں <a href=\"tel:+16473132506\">647-313-2506</a> پر فون کریں، ہم تلاش کر دیں گے۔","r_alt":"انتظار نہیں کرنا چاہتے؟ 26، 27 یا 28 اگست کو <a href=\"#advance\">کسی بھی قبل از وقت پولنگ سٹیشن</a> پر، یا آج ہی <a href=\"#office\">الیکشن آفس</a> میں ووٹ دے سکتے ہیں۔","r_short":"براہ کرم مکمل چھ حروف کا پوسٹل کوڈ لکھیں، مثلاً M1M 1M2۔","r_miss":"<strong>یہ پوسٹل کوڈ ہمارے پاس نہیں ہے۔</strong> ہو سکتا ہے یہ سکاربورو ساؤتھ ویسٹ سے باہر ہو، یا نیا ہو۔ <a href=\"https://voterinformationservice.elections.on.ca\" target=\"_blank\" rel=\"noopener\">elections.on.ca</a> دیکھیں، یا ہمیں <a href=\"tel:+16473132506\">647-313-2506</a> پر فون کریں۔","id_h":"کیا ساتھ لانا ہے","id_p1":"<strong>سمجھ نہیں آ رہا کہ کیا چلے گا؟ چیک لسٹ دیکھیں۔</strong> آپ کے پاس جو کچھ ہے اس پر نشان لگائیں، دس سیکنڈ میں پتہ چل جائے گا کہ آپ تیار ہیں یا نہیں۔","id_cta":"میرا شناختی کاغذ دیکھیں ←","id_p2":"<strong>مختصراً۔</strong> یہ ایک بات پر منحصر ہے: کیا آپ کو ڈاک میں ووٹر انفارمیشن کارڈ ملا تھا۔","id_vic":"<strong>اگر آپ کے پاس ووٹر انفارمیشن کارڈ ہے:</strong> وہ ساتھ لائیں، اور اس کے ساتھ اپنے <strong>نام</strong> والا کوئی ایک شناختی کاغذ۔ ہیلتھ کارڈ، پاسپورٹ، کریڈٹ یا ڈیبٹ کارڈ، سٹوڈنٹ کارڈ، یونین کارڈ، حتیٰ کہ خون عطیہ کرنے والے کا کارڈ بھی۔","id_novic":"<strong>اگر کارڈ نہیں ملا یا نہیں مل رہا:</strong> اپنے <strong>نام اور موجودہ پتے</strong> والا کوئی ایک کاغذ لائیں۔ صرف ایک، دو کی ضرورت نہیں۔","id_list_h":"بہت سی عام چیزوں پر نام اور پتہ دونوں ہوتے ہیں:","id_1":"ڈرائیونگ لائسنس، Ontario Photo Card یا گاڑی کا پرمٹ","id_2":"یوٹیلیٹی بل: بجلی، پانی، گیس، فون یا کیبل ٹی وی","id_3":"بینک اکاؤنٹ یا کریڈٹ کارڈ کا سٹیٹمنٹ","id_4":"تنخواہ کی پرچی، چیک سٹب یا آجر کا دیا ہوا T4","id_5":"لیز، کرایہ یا مارگیج کا کاغذ","id_6":"انشورنس سٹیٹمنٹ","id_7":"انکم ٹیکس اسیسمنٹ، Child Tax Benefit، Old Age Security یا EI سٹیٹمنٹ","id_8":"ٹیوشن بل، ٹرانسکرپٹ، رپورٹ کارڈ یا سکول کا داخلہ خط","id_9":"پراپرٹی ٹیکس بل یا MPAC اسیسمنٹ نوٹس","id_10":"CNIB کارڈ، یا طویل مدتی نگہداشت کے مرکز میں رہائش کا کاغذ","id_11":"رہائش کی تصدیق کا خط","id_foot":"<strong>شناختی کاغذ کی وجہ سے ووٹ دینے سے نہ رکیں۔</strong> تصویر والا شناختی کاغذ ضروری نہیں، اور اگر آپ تصویر والا کاغذ دکھائیں تو شکل کا ملنا بھی ضروری نہیں۔ فون پر موجود الیکٹرانک کاپی بھی قبول ہے۔ اگر سمجھ نہ آئے کہ آپ کے پاس کیا ہے تو ہمیں <a href=\"tel:+16473132506\">647-313-2506</a> پر فون کریں، ہم مل کر حل نکالیں گے۔ پرمانینٹ ریزیڈنٹ کارڈ اور غیر ملکی شناختی کاغذات قبول نہیں۔","who_h":"کون ووٹ دے سکتا ہے","who_p":"آپ ووٹ دے سکتے ہیں اگر آپ <strong>کینیڈا کے شہری</strong> ہیں، <strong>3 ستمبر کو 18 سال یا اس سے زیادہ</strong> کے ہیں، اور <strong>سکاربورو ساؤتھ ویسٹ میں رہتے</strong> ہیں۔ پہلے سے رجسٹریشن ضروری نہیں۔ ووٹ دینے جاتے وقت پولنگ سٹیشن پر ہی رجسٹر ہو سکتے ہیں۔","ride_h":"سواری چاہیے، یا کوئی سوال ہے؟","ride_p":"ہماری مہم آپ کو مفت ووٹ ڈلوانے لے جائے گی، کسی بھی قبل از وقت ووٹنگ کے دن یا انتخاب کے دن۔ اگر آپ خود نہیں جا سکتے تو ہمیں بتائیں، ہم بندوبست کر دیں گے۔","ride_call":"فون کریں 647-313-2506","oi_h":"سرکاری معلومات","oi_p":"اس صفحے کی تمام معلومات Elections Ontario سے لی گئی ہیں۔ اپنی رجسٹریشن کی تصدیق، سرکاری ذریعے سے اپنا مقررہ پولنگ سٹیشن معلوم کرنے، یا کسی اور بات کی جانچ کے لیے <a href=\"https://voterinformationservice.elections.on.ca\" target=\"_blank\" rel=\"noopener\">voterinformationservice.elections.on.ca</a> دیکھیں یا Elections Ontario کو <a href=\"tel:+18886688683\">1-888-668-8683</a> پر فون کریں۔ یہ صفحہ Ahsanul Hafiz مہم نے شائع کیا ہے، Elections Ontario نے نہیں۔","f1":"Ahsanul Hafiz مہم کے CFO کی منظوری سے۔","f2":"پولنگ سٹیشن کی معلومات اگست 2026 میں Elections Ontario سے ملا کر تصدیق کی گئی۔ اگر یہاں کچھ غلط لگے تو <a href=\"mailto:info@votehafiz.ca\">info@votehafiz.ca</a> پر بتائیں، ہم درست کر دیں گے۔","x_target":"یہ صفحہ AI کی مدد سے جلدی میں ترجمہ کیا گیا ہے اور اس میں غلطیاں ہو سکتی ہیں۔ انگریزی نسخہ ہی سرکاری ہے۔ اگر کچھ سمجھ نہ آئے تو ہمیں <a href=\"tel:+16473132506\">647-313-2506</a> پر فون کریں۔"},"zh":{"nav_home":"首页","maps":"在地图中打开 →","kicker":"士嘉堡西南区省级补选","h1":"如何投票","lede":"选举日是<strong>9月3日星期四</strong>。但您不必等到那天，现在就可以投票，之前还有三天提前投票。","toc_adv":"提前投票","toc_office":"今天就投票","toc_eday":"选举日","toc_find":"查找投票站","toc_id":"需要带什么","toc_ride":"接送服务","adv_k":"提前投票","adv_days":"8月26日星期三、8月27日星期四、8月28日星期五","adv_hours":"三天均为上午10点至晚上8点","adv_any":"<strong>这五个地点中任意一个都可以投票。</strong>在提前投票日，您不受某个特定投票站的限制，选最方便前往的即可。","adv_note":"<strong>这是最省事的投票方式。</strong>排队比选举日短，而且投完就完成了。","off_k":"今天，任何一天都可以投票","off_h":"士嘉堡西南区选举办公室","off_open":"现已开放，至9月2日星期三","off_ro":"Elections Ontario 选举事务处","off_hours":"周一至周六<strong>上午10点至晚上8点</strong>，周日<strong>中午12点至下午5点</strong>","off_last":"<strong>最后机会是9月2日星期三下午6点。</strong>最后一天办公室会比平时提早关门。","ed_k":"选举日","ed_d":"9月3日星期四","ed_hours":"上午9点至晚上9点","ed_note":"与提前投票日不同，选举日当天您必须到按住址指定的那一个投票站投票。请在下方查询。","find_h":"查找我选举日的投票站","find_p":"请输入您的邮政编码。仅适用于士嘉堡西南选区。","find_l":"您的邮政编码","find_btn":"查询","r_head":"您选举日的投票站","r_poll":"投票区","r_ok":"请带上写有您姓名的证件。投票站上午9点至晚上9点开放。","r_fuzzy":"<strong>请再确认一下。</strong>您的邮政编码横跨不止一个投票区，出发前请在选民信息卡或官方网站上核实。","r_inst":"<strong>这是设在养老院或长期护理院内的投票站，只服务住在那里的居民。</strong>如果您不住在该地址，这不是您的投票站。请查看 <a href=\"https://voterinformationservice.elections.on.ca\" target=\"_blank\" rel=\"noopener\">elections.on.ca</a>，或致电 <a href=\"tel:+16473132506\">647-313-2506</a>，我们帮您查。","r_alt":"不想等？您可以在8月26、27或28日到<a href=\"#advance\">任意提前投票点</a>投票，或今天就去<a href=\"#office\">选举办公室</a>。","r_short":"请输入完整的六位邮政编码，例如 M1M 1M2。","r_miss":"<strong>我们没有这个邮政编码。</strong>它可能在士嘉堡西南区以外，或是新增的。请查看 <a href=\"https://voterinformationservice.elections.on.ca\" target=\"_blank\" rel=\"noopener\">elections.on.ca</a>，或致电 <a href=\"tel:+16473132506\">647-313-2506</a>，我们帮您查。","id_h":"需要带什么","id_p1":"<strong>不确定哪些证件有效？用核对清单。</strong>勾选您钱包里已有的东西，十秒内就知道您是否准备好了。","id_cta":"检查我的证件 →","id_p2":"<strong>简单来说</strong>，只取决于一件事：您有没有收到邮寄的选民信息卡。","id_vic":"<strong>如果您有选民信息卡：</strong>带上它，再加任意一件写有您<strong>姓名</strong>的证件即可。健康卡、护照、信用卡或借记卡、学生证、工会卡，甚至献血卡都行。","id_novic":"<strong>如果没收到或找不到：</strong>带上任意一份同时显示您<strong>姓名和现住址</strong>的文件。一份就够，不需要两份。","id_list_h":"很多日常文件都同时有姓名和地址：","id_1":"驾驶执照、Ontario Photo Card 或车辆登记证","id_2":"水电费账单：电、水、煤气、电话或有线电视","id_3":"银行账户或信用卡对账单","id_4":"工资单、支票存根或雇主开具的 T4","id_5":"租约、租金或按揭对账单","id_6":"保险对账单","id_7":"所得税评估通知、Child Tax Benefit、Old Age Security 或 EI 对账单","id_8":"学费账单、成绩单、成绩报告或学校录取信","id_9":"物业税账单或 MPAC 评估通知","id_10":"CNIB 卡，或长期护理院居住证明","id_11":"居住确认信","id_foot":"<strong>不要因为证件问题而不去投票。</strong>不需要带照片证件，即使出示照片证件，长相也不必与照片相符。手机上的电子版也可以。如果不确定自己有什么，请致电 <a href=\"tel:+16473132506\">647-313-2506</a>，我们一起想办法。永久居民卡和外国证件不被接受。","who_h":"谁可以投票","who_p":"只要您是<strong>加拿大公民</strong>、<strong>9月3日当天年满18岁</strong>、并且<strong>居住在士嘉堡西南区</strong>，就可以投票。不需要提前登记，去投票时可以直接在投票站登记。","ride_h":"需要接送，或有疑问？","ride_p":"我们的竞选团队可以免费开车送您去投票，任何提前投票日或选举日均可。如果您自己去不了，告诉我们，我们来安排。","ride_call":"致电 647-313-2506","oi_h":"官方信息","oi_p":"本页所有内容均来自 Elections Ontario。如需确认您的登记状态、从官方渠道查找指定投票站或核实其他事项，请访问 <a href=\"https://voterinformationservice.elections.on.ca\" target=\"_blank\" rel=\"noopener\">voterinformationservice.elections.on.ca</a> 或致电 Elections Ontario <a href=\"tel:+18886688683\">1-888-668-8683</a>。本页由 Ahsanul Hafiz 竞选团队发布，非 Elections Ontario 发布。","f1":"由 Ahsanul Hafiz 竞选团队财务主管授权。","f2":"投票站数据已于2026年8月与 Elections Ontario 核对。如果发现有误，请发送邮件至 <a href=\"mailto:info@votehafiz.ca\">info@votehafiz.ca</a> 告知我们，我们会更正。","x_target":"本页由 AI 快速翻译，可能存在错误。<strong>英文版本为准。</strong>如有不清楚的地方，请致电 <a href=\"tel:+16473132506\">647-313-2506</a>。"},"tl":{"nav_home":"Home","maps":"Buksan sa mapa →","kicker":"Scarborough Southwest provincial by-election","h1":"Paano bumoto","lede":"Ang araw ng eleksyon ay <strong>Huwebes, Setyembre 3</strong>. Pero hindi kayo kailangang maghintay, puwede na kayong bumoto ngayon, at may tatlong araw ng advance voting bago pa niyan.","toc_adv":"Advance voting","toc_office":"Bumoto ngayon","toc_eday":"Araw ng eleksyon","toc_find":"Hanapin ang botohan","toc_id":"Ano ang dadalhin","toc_ride":"Sundo papuntang botohan","adv_k":"Advance voting","adv_days":"Miyerkules Ago 26, Huwebes Ago 27, Biyernes Ago 28","adv_hours":"10:00 n.u. hanggang 8:00 n.g., lahat ng tatlong araw","adv_any":"<strong>Puwede kayong bumoto sa alinman sa limang lugar na ito.</strong> Sa mga araw ng advance voting, hindi kayo nakatali sa iisang botohan, kaya piliin kung alin ang pinakamadaling puntahan.","adv_note":"<strong>Ito ang pinakamadaling paraan para makaboto.</strong> Mas maikli ang pila kaysa sa araw ng eleksyon, at kapag nakaboto na kayo, tapos na.","off_k":"Bumoto ngayon, kahit anong araw","off_h":"Scarborough Southwest election office","off_open":"Bukas na ngayon, hanggang Miyerkules Set 2","off_ro":"Elections Ontario returning office","off_hours":"Lunes hanggang Sabado <strong>10:00 n.u. hanggang 8:00 n.g.</strong>, Linggo <strong>tanghali hanggang 5:00 n.h.</strong>","off_last":"<strong>Huling pagkakataon ay Miyerkules, Setyembre 2 alas-6:00 n.g.</strong> Mas maagang magsasara ang opisina sa huling araw nito.","ed_k":"Araw ng eleksyon","ed_d":"Huwebes, Setyembre 3","ed_hours":"9:00 n.u. hanggang 9:00 n.g.","ed_note":"Sa araw ng eleksyon, hindi tulad ng advance voting, kailangan ninyong bumoto sa iisang botohan na nakatalaga sa inyong tirahan. Hanapin ito sa ibaba.","find_h":"Hanapin ang botohan ko sa araw ng eleksyon","find_p":"Ilagay ang inyong postal code. Para lamang ito sa Scarborough Southwest riding.","find_l":"Inyong postal code","find_btn":"Hanapin","r_head":"Ang botohan ninyo sa araw ng eleksyon","r_poll":"poll","r_ok":"Magdala ng ID na may pangalan ninyo. Bukas ang botohan mula 9:00 n.u. hanggang 9:00 n.g.","r_fuzzy":"<strong>Pakisuri ito nang mabuti.</strong> Ang postal code ninyo ay sakop ng higit sa isang poll, kaya kumpirmahin sa inyong voter information card o sa opisyal na website bago umalis.","r_inst":"<strong>Ito ay botohan sa loob ng retirement o long-term care home, at para lamang ito sa mga nakatira doon.</strong> Kung hindi kayo nakatira sa address na ito, hindi ito ang botohan ninyo. Tingnan ang <a href=\"https://voterinformationservice.elections.on.ca\" target=\"_blank\" rel=\"noopener\">elections.on.ca</a>, o tawagan kami sa <a href=\"tel:+16473132506\">647-313-2506</a> at hahanapin namin para sa inyo.","r_alt":"Ayaw maghintay? Puwede kayong bumoto sa <a href=\"#advance\">alinmang advance location</a> sa Ago 26, 27 o 28, o sa <a href=\"#office\">election office</a> ngayong araw.","r_short":"Pakilagay ang buong anim na karakter na postal code, halimbawa M1M 1M2.","r_miss":"<strong>Wala sa amin ang postal code na iyan.</strong> Maaaring nasa labas ito ng Scarborough Southwest, o bago pa lamang. Tingnan ang <a href=\"https://voterinformationservice.elections.on.ca\" target=\"_blank\" rel=\"noopener\">elections.on.ca</a>, o tawagan kami sa <a href=\"tel:+16473132506\">647-313-2506</a>.","id_h":"Ano ang dadalhin","id_p1":"<strong>Hindi sigurado kung ano ang tanggap? Gamitin ang checklist.</strong> I-tsek kung ano ang nasa wallet ninyo at sasabihin nito sa loob ng sampung segundo kung handa na kayo.","id_cta":"Suriin ang ID ko →","id_p2":"<strong>Sa madaling salita.</strong> Nakadepende ito sa isang bagay: nakatanggap ba kayo ng voter information card sa koreo.","id_vic":"<strong>Kung nasa inyo ang voter information card:</strong> dalhin ito, kasama ang kahit anong ISANG ID na may <strong>pangalan</strong> ninyo. Health card, pasaporte, credit o debit card, student card, union card, kahit blood donor card.","id_novic":"<strong>Kung wala kayong natanggap, o hindi ninyo makita:</strong> magdala ng kahit anong ISANG dokumento na may <strong>pangalan at kasalukuyang address</strong> ninyo. Isa lang, hindi dalawa.","id_list_h":"Maraming ordinaryong dokumento ang may pangalan at address:","id_1":"Driver's licence, Ontario Photo Card o vehicle permit","id_2":"Utility bill: kuryente, tubig, gas, telepono o cable TV","id_3":"Bank account o credit card statement","id_4":"Pay stub, cheque stub o T4 mula sa employer","id_5":"Lease, rental o mortgage statement","id_6":"Insurance statement","id_7":"Income tax assessment, Child Tax Benefit, Old Age Security o EI statement","id_8":"Tuition bill, transcript, report card o school admission letter","id_9":"Property tax bill o MPAC assessment notice","id_10":"CNIB card, o dokumento ng paninirahan sa long-term care home","id_11":"Letter of confirmation of residence","id_foot":"<strong>Huwag hayaang pigilan kayo ng ID.</strong> Hindi kailangan ng photo ID, at kung magpapakita kayo ng photo ID, hindi kailangang katulad ninyo ang litrato. Tanggap ang electronic copy sa telepono. Kung hindi kayo sigurado kung ano ang meron kayo, tawagan kami sa <a href=\"tel:+16473132506\">647-313-2506</a> at tutulungan namin kayo. Hindi tanggap ang permanent resident card at international ID.","who_h":"Sino ang puwedeng bumoto","who_p":"Puwede kayong bumoto kung kayo ay <strong>Canadian citizen</strong>, <strong>18 taong gulang o higit pa sa Setyembre 3</strong>, at <strong>nakatira sa Scarborough Southwest</strong>. Hindi kailangang magparehistro nang maaga. Puwede kayong magparehistro mismo sa botohan pagpunta ninyo.","ride_h":"Kailangan ng sundo, o may tanong?","ride_p":"Ihahatid kayo ng aming kampanya para bumoto, libre, sa kahit anong advance day o sa araw ng eleksyon. Kung hindi kayo makakapunta nang mag-isa, sabihin ninyo sa amin at aayusin namin.","ride_call":"Tumawag sa 647-313-2506","oi_h":"Opisyal na impormasyon","oi_p":"Lahat ng nasa pahinang ito ay mula sa Elections Ontario. Para kumpirmahin ang inyong pagkarehistro, hanapin ang nakatalagang botohan mula sa opisyal na pinagmulan, o suriin ang iba pa, bisitahin ang <a href=\"https://voterinformationservice.elections.on.ca\" target=\"_blank\" rel=\"noopener\">voterinformationservice.elections.on.ca</a> o tawagan ang Elections Ontario sa <a href=\"tel:+18886688683\">1-888-668-8683</a>. Ang pahinang ito ay inilathala ng kampanya ni Ahsanul Hafiz, hindi ng Elections Ontario.","f1":"Awtorisado ng CFO para sa kampanya ni Ahsanul Hafiz.","f2":"Ang datos ng botohan ay na-verify laban sa Elections Ontario, Agosto 2026. Kung may mali dito, sabihin sa amin sa <a href=\"mailto:info@votehafiz.ca\">info@votehafiz.ca</a> para maitama namin.","x_target":"Mabilis na isinalin ang pahinang ito gamit ang AI at maaaring may mali. Ang bersyong Ingles ang opisyal. Kung may hindi malinaw, tawagan kami sa <a href=\"tel:+16473132506\">647-313-2506</a>."}};
 
 (function(){
-  var adv = DATA.adv || [], ul = document.getElementById('advlist');
-  ul.innerHTML = adv.map(function(a){
-    var q = encodeURIComponent(a.a.replace(/,$/,'') + ', Scarborough, ON');
-    return '<li><div class="pn">' + esc(a.n) + '</div>' +
-           '<div class="pa">' + esc(a.a) + '</div>' +
-           '<div style="margin-top:6px"><a href="https://www.google.com/maps/search/?api=1&query=' + q +
-           '" target="_blank" rel="noopener">Open in maps &rarr;</a></div></li>';
-  }).join('');
+  var body = document.body, sel = document.getElementById('lang');
 
   function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){
     return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 
-  var fuzzy = {};
-  (DATA.f || []).forEach(function(p){ fuzzy[p] = 1; });
+  function T(k){
+    var L = I18N[body.dataset.lang] || {};
+    return (L[k] !== undefined) ? L[k] : (I18N.en[k] !== undefined ? I18N.en[k] : '');
+  }
+
+  function paintAdvance(){
+    var adv = DATA.adv || [];
+    document.getElementById('advlist').innerHTML = adv.map(function(a){
+      var q = encodeURIComponent(a.a.replace(/,$/,'') + ', Scarborough, ON');
+      return '<li><div class="pn">' + esc(a.n) + '</div>'
+           + '<div class="pa">' + esc(a.a) + '</div>'
+           + '<div style="margin-top:6px"><a href="https://www.google.com/maps/search/?api=1&query='
+           + q + '" target="_blank" rel="noopener">' + esc(T('maps')) + '</a></div></li>';
+    }).join('');
+  }
+
+  function apply(lang){
+    if (!I18N[lang]) lang = 'en';
+    body.dataset.lang = lang;
+    body.setAttribute('dir', lang === 'ur' ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', lang);
+    // Every translatable node keeps its English text in the markup, so a key missing from a
+    // dictionary leaves the English in place rather than blanking the page out.
+    Array.prototype.forEach.call(document.querySelectorAll('[data-i18n]'), function(el){
+      var v = (I18N[lang] || {})[el.dataset.i18n];
+      if (v) el.innerHTML = v;
+    });
+    var x = document.getElementById('xlate');
+    if (lang === 'en'){ x.classList.remove('on'); }
+    else { x.classList.add('on'); x.querySelector('.x1').innerHTML = T('x_target'); }
+    paintAdvance();
+    document.getElementById('res').innerHTML = '';
+    try { localStorage.setItem('hafiz_lang', lang); } catch(e){}
+    sel.value = lang;
+  }
 
   function lookup(){
     var raw = (document.getElementById('pc').value || '').toUpperCase().replace(/[^A-Z0-9]/g,'');
     var out = document.getElementById('res');
-    if (raw.length < 6){
-      out.innerHTML = '<div class="miss">Please enter a full six character postal code, for example M1M 1M2.</div>';
-      return;
-    }
+    if (raw.length < 6){ out.innerHTML = '<div class="miss">' + T('r_short') + '</div>'; return; }
     var poll = DATA.p[raw];
-    if (!poll){
-      out.innerHTML = '<div class="miss"><strong>We do not have that postal code.</strong>' +
-        ' It may be outside Scarborough Southwest, or it may be new. Check the official lookup at ' +
-        '<a href="https://voterinformationservice.elections.on.ca" target="_blank" rel="noopener">voterinformationservice.elections.on.ca</a>,' +
-        ' or call us at <a href="tel:+16473132506">647-313-2506</a> and we will look it up for you.</div>';
-      return;
-    }
-    var L = DATA.l[poll];
-    var q = encodeURIComponent(L.a.replace(/,$/,'') + ', Scarborough, ON');
+    if (!poll){ out.innerHTML = '<div class="miss">' + T('r_miss') + '</div>'; return; }
+    var L = DATA.l[poll], q = encodeURIComponent(L.a.replace(/,$/,'') + ', Scarborough, ON');
     var inst = (poll >= '700' && poll <= '709');
-    var warn;
-    if (inst){
-      warn = '<p style="margin:10px 0 0;font-size:15.5px"><strong>This is a poll inside a ' +
-        'retirement or long term care home, and it serves the people who live there.</strong> ' +
-        'If you do not live at this address, this is not your polling place. Check the official ' +
-        'lookup at <a href="https://voterinformationservice.elections.on.ca" target="_blank" ' +
-        'rel="noopener">elections.on.ca</a>, or call us at <a href="tel:+16473132506">647-313-2506</a> ' +
-        'and we will find it for you.</p>';
-    } else if (fuzzy[raw]){
-      warn = '<p style="margin:10px 0 0;font-size:15.5px"><strong>Please double check this one.</strong> ' +
-        'Your postal code sits across more than one poll, so confirm on your voter information card ' +
-        'or at the official lookup before you travel.</p>';
-    } else {
-      warn = '<p style="margin:10px 0 0;font-size:15.5px">Bring ID showing your name. ' +
-        'Polls are open 9:00 a.m. to 9:00 p.m.</p>';
-    }
-    out.innerHTML = '<div class="hit">' +
-      '<div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#525252">' +
-      'Your election day polling place &middot; poll ' + esc(poll) + '</div>' +
-      '<div class="pl">' + esc(L.n) + '</div>' +
-      '<div style="color:#525252">' + esc(L.a) + '</div>' +
-      '<div style="margin-top:8px"><a href="https://www.google.com/maps/search/?api=1&query=' + q +
-      '" target="_blank" rel="noopener" style="color:#0a58ca;font-weight:700">Open in maps &rarr;</a></div>' +
-      warn +
-      '<p style="margin:10px 0 0;font-size:15.5px">Do not want to wait? You can vote at ' +
-      '<a href="#advance">any advance location</a> on Aug 26, 27 or 28, or at the ' +
-      '<a href="#office">election office</a> today.</p>' +
-      '</div>';
+    var fuzzy = (DATA.f || []).indexOf(raw) >= 0;
+    var warn = inst ? T('r_inst') : fuzzy ? T('r_fuzzy') : T('r_ok');
+    out.innerHTML = '<div class="hit">'
+      + '<div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#525252">'
+      + T('r_head') + ' &middot; ' + T('r_poll') + ' ' + esc(poll) + '</div>'
+      + '<div class="pl">' + esc(L.n) + '</div>'
+      + '<div style="color:#525252;direction:ltr">' + esc(L.a) + '</div>'
+      + '<div style="margin-top:8px"><a href="https://www.google.com/maps/search/?api=1&query=' + q
+      + '" target="_blank" rel="noopener" style="color:#0a58ca;font-weight:700">' + esc(T('maps')) + '</a></div>'
+      + '<p style="margin:10px 0 0;font-size:15.5px">' + warn + '</p>'
+      + '<p style="margin:10px 0 0;font-size:15.5px">' + T('r_alt') + '</p></div>';
   }
 
   document.getElementById('go').addEventListener('click', lookup);
   document.getElementById('pc').addEventListener('keydown', function(e){
     if (e.key === 'Enter'){ e.preventDefault(); lookup(); }
   });
+  sel.addEventListener('change', function(){ apply(sel.value); });
+  document.getElementById('x_en').addEventListener('click', function(e){
+    e.preventDefault(); apply('en'); window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem('hafiz_lang'); } catch(e){}
+  if (!saved){
+    var n = (navigator.language || 'en').toLowerCase();
+    if (n.indexOf('bn') === 0) saved = 'bn';
+    else if (n.indexOf('ur') === 0) saved = 'ur';
+    else if (n.indexOf('zh') === 0) saved = 'zh';
+    else if (n.indexOf('tl') === 0 || n.indexOf('fil') === 0) saved = 'tl';
+  }
+  apply(saved || 'en');
 })();
 </script>
 </body>
