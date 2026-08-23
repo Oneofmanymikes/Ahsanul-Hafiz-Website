@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What ID do I need to vote? &mdash; Scarborough Southwest</title>
+<meta name="description" content="Tick what you have in your wallet and find out in ten seconds whether you can vote in the Scarborough Southwest by-election. Advance voting Aug 26-28, election day Sept 3.">
+<link rel="icon" href="/favicon.png">
+<meta property="og:title" content="What ID do I need to vote?">
+<meta property="og:description" content="Tick what you already have. Most people are ready and do not realise it.">
+<style>
+:root{
+  --brand:#E81E25; --brand-hover:#ad1b1e; --accent:#6A0C0D;
+  --ink:#1a1a1a; --mut:#525252; --line:#e3e3e3; --bg:#f7f7f7; --card:#fff;
+  --ok:#137333; --okbg:#e6f4ea; --okline:#b7dfc4;
+  --warn-bg:#fef7e0; --warn:#8a6d00;
+  --radius:12px; --radius-lg:16px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--bg); color:var(--ink);
+  font-family:Inter,"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  font-size:17px; line-height:1.5; -webkit-font-smoothing:antialiased}
+header.top{background:var(--brand); color:#fff; border-bottom:4px solid var(--brand-hover);
+  padding:12px 20px; display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+header.top .name{font-weight:800; font-size:19px}
+header.top .spacer{flex:1}
+header.top a{color:#fff; text-decoration:none; font-weight:700; font-size:15px;
+  border:1.5px solid rgba(255,255,255,.55); border-radius:999px; padding:7px 16px}
+main{max-width:680px; margin:0 auto; padding:20px 16px 90px}
+h1{font-size:clamp(26px,6vw,34px); line-height:1.15; color:var(--accent); margin:6px 0 8px; text-wrap:balance}
+h2{font-size:20px; color:var(--accent); margin:0 0 6px}
+p{margin:0 0 12px}
+.lede{font-size:18px; color:var(--mut)}
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius-lg);
+  padding:18px; box-shadow:0 8px 24px rgba(26,43,68,.06); margin-bottom:16px}
+.step{font-size:12.5px; font-weight:800; letter-spacing:.07em; text-transform:uppercase;
+  color:var(--mut); margin:0 0 6px}
+.pick{display:flex; flex-direction:column; gap:10px; margin-top:12px}
+.pick button{font:inherit; text-align:left; cursor:pointer; background:#fff; color:var(--ink);
+  border:2px solid var(--line); border-radius:var(--radius); padding:14px 16px; font-size:17px;
+  line-height:1.35; min-height:56px}
+.pick button:hover{border-color:var(--brand)}
+.pick button.on{border-color:var(--brand); background:#fdecec}
+.pick button b{display:block; font-size:17.5px; margin-bottom:2px}
+.pick button span{color:var(--mut); font-size:15px}
+.hint{background:var(--warn-bg); border-left:4px solid var(--warn); border-radius:8px;
+  padding:11px 13px; font-size:15.5px; margin:12px 0 0}
+.need{background:var(--okbg); border:1px solid var(--okline); border-radius:var(--radius);
+  padding:12px 14px; margin:0 0 14px; font-size:16.5px}
+.grp{margin:0 0 14px}
+.grp h3{font-size:14px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+  color:var(--mut); margin:0 0 7px; padding-bottom:5px; border-bottom:1px solid var(--line)}
+label.item{display:flex; align-items:flex-start; gap:11px; padding:9px 10px; border-radius:10px;
+  cursor:pointer; font-size:16.5px; line-height:1.35}
+label.item:hover{background:#f4f4f4}
+label.item input{width:22px; height:22px; margin:1px 0 0; flex:0 0 auto; accent-color:var(--brand)}
+label.item.checked{background:var(--okbg)}
+.bar{position:fixed; left:0; right:0; bottom:0; background:#fff; border-top:1px solid var(--line);
+  box-shadow:0 -6px 20px rgba(0,0,0,.08); padding:12px 16px; z-index:50}
+.barin{max-width:680px; margin:0 auto; display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+.verdict{flex:1; min-width:200px; font-weight:700; font-size:17px}
+.verdict.no{color:var(--mut); font-weight:600}
+.verdict.yes{color:var(--ok)}
+.bar a.call{background:var(--brand); color:#fff; text-decoration:none; font-weight:800;
+  border-radius:var(--radius); padding:12px 18px; white-space:nowrap}
+.reset{background:none; border:0; color:var(--mut); font:inherit; text-decoration:underline;
+  cursor:pointer; font-size:15px; padding:6px 2px}
+.hidden{display:none}
+.when{display:flex; gap:10px; flex-wrap:wrap; margin:0 0 16px}
+.when div{flex:1; min-width:150px; border:1px solid var(--line); background:#fff;
+  border-radius:var(--radius); padding:10px 12px}
+.when .k{font-size:11.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--mut)}
+.when .v{font-weight:700; font-size:16px; line-height:1.3}
+a{color:var(--brand-hover)}
+footer{max-width:680px; margin:0 auto; padding:0 16px 40px; color:var(--mut); font-size:14px}
+@media print{ .bar,header.top{position:static} .card{box-shadow:none} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <span class="name">Ahsanul Hafiz</span>
+  <span class="spacer"></span>
+  <a href="/vote/">When &amp; where to vote</a>
+</header>
+
+<main>
+  <p class="step" style="margin-bottom:2px">Scarborough Southwest by-election</p>
+  <h1>What ID do I need to vote?</h1>
+  <p class="lede">Tick what you already have. Most people are ready and do not realise it.</p>
+
+  <div class="when">
+    <div><div class="k">Advance voting</div><div class="v">Aug 26, 27, 28<br>10 a.m. to 8 p.m.</div></div>
+    <div><div class="k">Election day</div><div class="v">Thu Sept 3<br>9 a.m. to 9 p.m.</div></div>
+  </div>
+
+  <!-- STEP 1 -->
+  <section class="card" id="s1">
+    <p class="step">Step 1 of 2</p>
+    <h2>Did you get a voter information card in the mail?</h2>
+    <p style="margin-bottom:0">It is the card Elections Ontario posts out telling you where to vote.
+    Some people call it a VIC.</p>
+    <div class="pick">
+      <button type="button" data-vic="1"><b>Yes, I have it</b><span>I can bring it with me</span></button>
+      <button type="button" data-vic="0"><b>No, or I am not sure</b><span>Never got one, or cannot find it</span></button>
+    </div>
+    <div class="hint">Either answer is fine. You can vote without the card, you just need slightly
+    different ID.</div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="card hidden" id="s2">
+    <p class="step">Step 2 of 2</p>
+    <h2 id="s2h">What do you have?</h2>
+    <div class="need" id="need"></div>
+    <div id="lists"></div>
+    <button class="reset" type="button" id="back">&larr; Change my answer to step 1</button>
+  </section>
+
+  <section class="card hidden" id="help">
+    <h2>Still nothing?</h2>
+    <p>Do not give up, and do not assume you cannot vote. Call us and we will work through it
+    with you, or ask the staff when you get to the polling place.</p>
+    <p style="margin-bottom:0"><strong>Campaign:</strong> <a href="tel:+16473132506">647-313-2506</a>
+    &nbsp;&middot;&nbsp; <strong>Elections Ontario:</strong> <a href="tel:+18886688683">1-888-668-8683</a></p>
+  </section>
+</main>
+
+<div class="bar" id="bar">
+  <div class="barin">
+    <div class="verdict no" id="verdict">Answer step 1 to begin.</div>
+    <a class="call hidden" id="wherebtn" href="/vote/">Where do I vote? &rarr;</a>
+  </div>
+</div>
+
+<footer>
+  <p>Accepted ID is set by Elections Ontario. Full list at
+  <a href="https://www.elections.on.ca/en/voting-in-ontario/by-election/id-to-vote.html" target="_blank" rel="noopener">elections.on.ca</a>.
+  You do not need photo ID, and an electronic copy on your phone is accepted.
+  Permanent resident cards and international ID are not accepted.</p>
+  <p>Published by the Ahsanul Hafiz campaign, not by Elections Ontario.</p>
+</footer>
+
+<script>
+/* Two lists, straight from the Elections Ontario by-election ID page and the
+   Elector Identification Policy (rev 6.2) appendices.
+   NAME_ADDR = one document proving name AND address. Works for everyone.
+   NAME_ONLY = proves who you are. Enough only when paired with the voter information card. */
+var NAME_ADDR = {
+  'Cards and permits': [
+    "Ontario driver's licence",
+    'Ontario Photo Card',
+    'Ontario vehicle permit (plate or vehicle portion)'
+  ],
+  'Bills and statements': [
+    'Utility bill: hydro, water, gas, phone or cable TV',
+    'Bank account or credit card statement',
+    'Insurance statement',
+    'Lease, rental or mortgage statement',
+    'Cancelled personalized cheque',
+    'Signed loan or financial agreement'
+  ],
+  'Work and school': [
+    'Pay stub, cheque stub or T4 from your employer',
+    'School admission letter',
+    'Transcript or report card',
+    'Tuition or fees statement',
+    'Campus residence document'
+  ],
+  'Government letters': [
+    'Income tax assessment notice',
+    'Child Tax Benefit statement',
+    'Old Age Security statement (T4A OAS)',
+    'Employment Insurance statement (T4E)',
+    'Confirmation of SIN letter',
+    'Property tax bill or MPAC assessment notice'
+  ],
+  'Other': [
+    'Letter of confirmation of residence',
+    'CNIB card',
+    'Long-term care home residence document',
+    'Hospital records showing your address',
+    'Document from an Ontario Band Council',
+    'Document from an Ontario court'
+  ]
+};
+var NAME_ONLY = {
+  'Everyday cards': [
+    'Ontario health card',
+    'Credit or debit card',
+    'Student card',
+    'Employee card',
+    'Union card or professional licence',
+    'Blood donor card'
+  ],
+  'Government issued': [
+    'Canadian passport',
+    'Birth certificate',
+    'Certificate of Canadian Citizenship or citizenship card',
+    'Certificate of Indian Status (status card)',
+    'Métis card',
+    'Marriage certificate',
+    'Social Insurance Number card or letter',
+    'Old Age Security card',
+    'Firearms licence',
+    'Nexus or FAST card',
+    'Canadian Armed Forces ID',
+    'Veterans Affairs card'
+  ],
+  'Other': [
+    'Hospital records or hospital bracelet',
+    'Document from an Ontario Band Council'
+  ]
+};
+
+var vic = null, ticked = 0;
+var $ = function(s){ return document.querySelector(s); };
+var esc = function(s){ return String(s).replace(/[&<>"']/g, function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); };
+
+function build(){
+  var lists = vic ? [['Anything showing your name', NAME_ONLY],
+                     ['Or anything showing your name and address', NAME_ADDR]]
+                  : [['One document showing your name AND your address', NAME_ADDR]];
+  $('#need').innerHTML = vic
+    ? '<strong>You need your voter information card, plus any ONE thing below.</strong> '
+      + 'Almost every card in your wallet counts.'
+    : '<strong>You need any ONE document below.</strong> It has to show your name and your '
+      + 'current address together. One is enough, you do not need two.';
+  $('#s2h').textContent = vic ? 'Tick anything you have' : 'Tick anything you have';
+  var out = '', n = 0;
+  lists.forEach(function(pair){
+    if (lists.length > 1) out += '<p class="step" style="margin:14px 0 8px">' + esc(pair[0]) + '</p>';
+    Object.keys(pair[1]).forEach(function(g){
+      out += '<div class="grp"><h3>' + esc(g) + '</h3>';
+      pair[1][g].forEach(function(item){
+        out += '<label class="item"><input type="checkbox" data-i="' + (n++) + '"><span>'
+             + esc(item) + '</span></label>';
+      });
+      out += '</div>';
+    });
+  });
+  $('#lists').innerHTML = out;
+  Array.prototype.forEach.call(document.querySelectorAll('#lists input'), function(cb){
+    cb.addEventListener('change', function(){
+      cb.closest('label').classList.toggle('checked', cb.checked);
+      score();
+    });
+  });
+  ticked = 0; score();
+}
+
+function score(){
+  ticked = document.querySelectorAll('#lists input:checked').length;
+  var v = $('#verdict'), w = $('#wherebtn'), help = $('#help');
+  if (ticked > 0){
+    v.className = 'verdict yes';
+    v.innerHTML = '✅ <strong>You are ready to vote.</strong> Bring '
+      + (vic ? 'your card and that ID.' : 'that with you.');
+    w.classList.remove('hidden');
+    help.classList.add('hidden');
+  } else {
+    v.className = 'verdict no';
+    v.textContent = 'Tick anything you have. One is enough.';
+    w.classList.add('hidden');
+    help.classList.remove('hidden');
+  }
+}
+
+Array.prototype.forEach.call(document.querySelectorAll('.pick button'), function(b){
+  b.addEventListener('click', function(){
+    vic = b.dataset.vic === '1';
+    Array.prototype.forEach.call(document.querySelectorAll('.pick button'), function(x){
+      x.classList.toggle('on', x === b); });
+    $('#s2').classList.remove('hidden');
+    build();
+    $('#s2').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+$('#back').addEventListener('click', function(){
+  $('#s2').classList.add('hidden'); $('#help').classList.add('hidden');
+  $('#verdict').className = 'verdict no';
+  $('#verdict').textContent = 'Answer step 1 to begin.';
+  $('#wherebtn').classList.add('hidden');
+  Array.prototype.forEach.call(document.querySelectorAll('.pick button'), function(x){
+    x.classList.remove('on'); });
+  $('#s1').scrollIntoView({behavior:'smooth', block:'start'});
+});
+</script>
+</body>
+</html>
