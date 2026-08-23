@@ -258,12 +258,23 @@ var DATA = {"p":{"M1J0A2":"704","M1J0B2":"019","M1J0B3":"019","M1J1A5":"019","M1
     }
     var L = DATA.l[poll];
     var q = encodeURIComponent(L.a.replace(/,$/,'') + ', Scarborough, ON');
-    var warn = fuzzy[raw]
-      ? '<p style="margin:10px 0 0;font-size:15.5px"><strong>Please double check this one.</strong> ' +
+    var inst = (poll >= '700' && poll <= '709');
+    var warn;
+    if (inst){
+      warn = '<p style="margin:10px 0 0;font-size:15.5px"><strong>This is a poll inside a ' +
+        'retirement or long term care home, and it serves the people who live there.</strong> ' +
+        'If you do not live at this address, this is not your polling place. Check the official ' +
+        'lookup at <a href="https://voterinformationservice.elections.on.ca" target="_blank" ' +
+        'rel="noopener">elections.on.ca</a>, or call us at <a href="tel:+16473132506">647-313-2506</a> ' +
+        'and we will find it for you.</p>';
+    } else if (fuzzy[raw]){
+      warn = '<p style="margin:10px 0 0;font-size:15.5px"><strong>Please double check this one.</strong> ' +
         'Your postal code sits across more than one poll, so confirm on your voter information card ' +
-        'or at the official lookup before you travel.</p>'
-      : '<p style="margin:10px 0 0;font-size:15.5px">Bring ID showing your name. ' +
+        'or at the official lookup before you travel.</p>';
+    } else {
+      warn = '<p style="margin:10px 0 0;font-size:15.5px">Bring ID showing your name. ' +
         'Polls are open 9:00 a.m. to 9:00 p.m.</p>';
+    }
     out.innerHTML = '<div class="hit">' +
       '<div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#525252">' +
       'Your election day polling place &middot; poll ' + esc(poll) + '</div>' +
