@@ -69,6 +69,29 @@
   [data-bn]{display:none}
   body.bn [data-en]{display:none}
   body.bn [data-bn]{display:revert}
+  .sheetwrap{position:fixed; inset:0; background:rgba(20,16,16,.55); z-index:50;
+             display:flex; align-items:flex-end; justify-content:center; padding:0}
+  .sheetwrap[hidden]{display:none}
+  .sheet{background:var(--card); width:100%; max-width:760px; max-height:94vh;
+         border-radius:var(--radius-lg) var(--radius-lg) 0 0; display:flex; flex-direction:column;
+         box-shadow:0 -8px 40px rgba(0,0,0,.28)}
+  .sheet-head{display:flex; align-items:flex-start; gap:12px; padding:16px 18px 12px;
+              border-bottom:1px solid var(--line)}
+  .sheet-head h2{font-size:20px}
+  .sheet-eyebrow{font-size:12.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+                 color:var(--mut); margin:0 0 2px}
+  .sheet-x{margin-left:auto; font-size:30px; line-height:1; background:none; border:0;
+           color:var(--mut); cursor:pointer; padding:0 6px; min-height:44px; min-width:44px}
+  .sheet-x:hover{color:var(--ink)}
+  .sheet-x:focus-visible{outline:3px solid var(--brand); outline-offset:2px}
+  .sheet iframe{flex:1; width:100%; min-height:60vh; border:0; background:#fff}
+  .sheet-foot{margin:0; padding:10px 18px 16px; font-size:14px; color:var(--mut);
+              border-top:1px solid var(--line)}
+  .sheet-foot a{color:var(--brand); font-weight:600}
+  @media (min-width:640px){
+    .sheetwrap{align-items:center; padding:24px}
+    .sheet{border-radius:var(--radius-lg); max-height:88vh}
+  }
   @media (max-width:520px){
     .slot{gap:8px}
     .slot .time{min-width:100%}
@@ -151,18 +174,8 @@
     </div>
   </section>
 
-  <!-- ADVANCE POLLS -->
-  <section class="card daycard advance">
-    <p class="when"><span data-en>Wednesday 26 &middot; Thursday 27 &middot; Friday 28 August</span>
-       <span data-bn>বুধবার ২৬ &middot; বৃহস্পতিবার ২৭ &middot; শুক্রবার ২৮ আগস্ট</span></p>
-    <h2><span data-en>Advance voting days</span><span data-bn>আগাম ভোটের দিন</span></h2>
-    <p><span data-en>Polls are open 10am–8pm at 2685 Kingston Rd. Our job is to reach our supporters
-      and get them there early, so nothing is left to election day. Pick doors or phones — both matter.</span>
-      <span data-bn>২৬৮৫ কিংস্টন রোডে সকাল ১০টা থেকে রাত ৮টা পর্যন্ত ভোট চলবে। আমাদের কাজ সমর্থকদের
-      কাছে পৌঁছে তাড়াতাড়ি ভোট দেওয়ানো, যাতে নির্বাচনের দিনের জন্য কিছু বাকি না থাকে। দরজা বা ফোন —
-      দুটোই গুরুত্বপূর্ণ।</span></p>
-    <div class="slots" id="advance-slots"></div>
-  </section>
+  <!-- ADVANCE POLLS: one card per day -->
+  <div id="advance-days"></div>
 
   <!-- ELECTION DAY -->
   <section class="card daycard eday">
@@ -195,6 +208,24 @@
   </p>
 </main>
 
+<div class="sheetwrap" id="sheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <div class="sheet-head">
+      <div>
+        <p class="sheet-eyebrow" id="sheet-eyebrow"></p>
+        <h2 id="sheet-title" style="margin:0"></h2>
+      </div>
+      <button class="sheet-x" type="button" onclick="closeSheet()" aria-label="Close">&times;</button>
+    </div>
+    <iframe id="sheet-frame" title="Volunteer sign-up form" src="about:blank"></iframe>
+    <p class="sheet-foot">
+      <span data-en>Form not loading? </span><span data-bn>ফর্ম খুলছে না? </span>
+      <a id="sheet-newtab" href="#" target="_blank" rel="noopener">
+        <span data-en>Open it in a new tab</span><span data-bn>নতুন ট্যাবে খুলুন</span></a>
+    </p>
+  </div>
+</div>
+
 <script>
   // The public sign-up form. `only=1` pins it to the one shift the person picked.
   var FORM = "https://script.google.com/macros/s/AKfycbzSK_126YWEumvmnJmxNmEZ37SfzuN-PrSCJioCRQtfAMnJqFSxoOrCaeF8co7XVESy/exec";
@@ -203,9 +234,15 @@
   }
 
   var ADVANCE = [
-    {date:"2026-08-26", day_en:"Wednesday 26", day_bn:"বুধবার ২৬"},
-    {date:"2026-08-27", day_en:"Thursday 27",  day_bn:"বৃহস্পতিবার ২৭"},
-    {date:"2026-08-28", day_en:"Friday 28",    day_bn:"শুক্রবার ২৮"}
+    {date:"2026-08-26",
+     when_en:"Advance voting &middot; day 1 of 3", when_bn:"আগাম ভোট &middot; ৩ দিনের ১ম দিন",
+     day_en:"Wednesday 26 August",  day_bn:"বুধবার ২৬ আগস্ট"},
+    {date:"2026-08-27",
+     when_en:"Advance voting &middot; day 2 of 3", when_bn:"আগাম ভোট &middot; ৩ দিনের ২য় দিন",
+     day_en:"Thursday 27 August",   day_bn:"বৃহস্পতিবার ২৭ আগস্ট"},
+    {date:"2026-08-28",
+     when_en:"Advance voting &middot; last day", when_bn:"আগাম ভোট &middot; শেষ দিন",
+     day_en:"Friday 28 August",     day_bn:"শুক্রবার ২৮ আগস্ট"}
   ];
   var BLOCKS = [
     {t:"1100", label:"11:00 am – 1:00 pm"},
@@ -231,15 +268,26 @@
     return el;
   }
 
-  var adv = document.getElementById("advance-slots");
+  // One card per advance-poll day, so it is unmistakable which day you are joining.
+  var wrap = document.getElementById("advance-days");
   ADVANCE.forEach(function(d){
+    var card = document.createElement("section");
+    card.className = "card daycard advance";
+    card.innerHTML =
+      '<p class="when"><span data-en>' + d.when_en + '</span><span data-bn>' + d.when_bn + '</span></p>' +
+      '<h2><span data-en>' + d.day_en + '</span><span data-bn>' + d.day_bn + '</span></h2>' +
+      '<p style="margin:0 0 2px">' +
+        '<span data-en>Polls open 10am-8pm at 2685 Kingston Rd. Pick doors or phones - both matter.</span>' +
+        '<span data-bn>সকাল ১০টা - রাত ৮টা, ২৬৮৫ কিংস্টন রোডে ভোট চলবে। দরজা বা ফোন - দুটোই গুরুত্বপূর্ণ।</span></p>' +
+      '<div class="slots"></div>';
+    var holder = card.querySelector(".slots");
     BLOCKS.forEach(function(b, n){
-      var when = '<span data-en>' + d.day_en + '</span><span data-bn>' + d.day_bn + '</span>';
-      adv.appendChild(slot(when + '<br>' + b.label, n === 2
-        ? '<span data-en>Evening — best time to catch people in</span><span data-bn>সন্ধ্যা — মানুষকে বাসায় পাওয়ার সেরা সময়</span>'
+      holder.appendChild(slot(b.label, n === 2
+        ? '<span data-en>Evening - best time to catch people in</span><span data-bn>সন্ধ্যা - মানুষকে বাসায় পাওয়ার সেরা সময়</span>'
         : '<span data-en>&nbsp;</span><span data-bn>&nbsp;</span>',
         d.date + "_" + b.t + "_canvass", d.date + "_" + b.t + "_phonebank"));
     });
+    wrap.appendChild(card);
   });
 
   var ed = document.getElementById("eday-slots");
@@ -252,11 +300,45 @@
       "2026-09-03_" + s.t + "_canvass", "2026-09-03_" + s.t + "_phonebank"));
   });
 
-  // Every sign-up link resolves to the form for its own shift.
+  // ---- sign up without leaving the page ----
+  // The sign-up app sets XFrameOptionsMode.ALLOWALL, so it can be embedded. The
+  // new-tab link stays as a fallback if a browser blocks the frame anyway.
+  var lastFocus = null;
+  function openSheet(id, dayHtml, kindHtml){
+    lastFocus = document.activeElement;
+    document.getElementById("sheet-eyebrow").innerHTML = dayHtml;
+    document.getElementById("sheet-title").innerHTML = kindHtml;
+    document.getElementById("sheet-frame").src = shiftUrl(id);
+    document.getElementById("sheet-newtab").href = shiftUrl(id);
+    document.getElementById("sheet").hidden = false;
+    document.body.style.overflow = "hidden";
+    document.querySelector(".sheet-x").focus();
+  }
+  function closeSheet(){
+    document.getElementById("sheet").hidden = true;
+    document.getElementById("sheet-frame").src = "about:blank";
+    document.body.style.overflow = "";
+    if (lastFocus) lastFocus.focus();
+  }
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && !document.getElementById("sheet").hidden) closeSheet();
+  });
+  document.getElementById("sheet").addEventListener("click", function(e){
+    if (e.target === this) closeSheet();
+  });
+
   Array.prototype.forEach.call(document.querySelectorAll("[data-shift]"), function(a){
-    a.href = shiftUrl(a.getAttribute("data-shift"));
-    a.target = "_blank";
-    a.rel = "noopener";
+    var id = a.getAttribute("data-shift");
+    a.href = shiftUrl(id);                        // real link: middle-click still works
+    a.addEventListener("click", function(e){
+      e.preventDefault();
+      var card = a.closest(".card");
+      var day = card ? card.querySelector(".when").innerHTML : "";
+      var kind = card ? card.querySelector("h2").innerHTML : "";
+      var slotEl = a.closest(".slot");
+      var time = slotEl ? slotEl.querySelector(".time").innerHTML : "";
+      openSheet(id, day, kind + ' &middot; ' + time);
+    });
   });
 
   // Language choice sticks per device.
