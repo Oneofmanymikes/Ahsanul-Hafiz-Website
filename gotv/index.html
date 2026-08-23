@@ -182,10 +182,11 @@
     <p class="when"><span data-en>Thursday 3 September &middot; election day</span>
        <span data-bn>বৃহস্পতিবার ৩ সেপ্টেম্বর &middot; নির্বাচনের দিন</span></p>
     <h2><span data-en>Election day</span><span data-bn>নির্বাচনের দিন</span></h2>
-    <p><span data-en>The big one. <b>Come in as early as you can and stay to the end</b> — polls close
+    <p><span data-en>The big one, and it is <b>all doors</b> — no phone bank runs today.
+      <b>Come in as early as you can and stay to the end</b> — polls close
       at 9pm and the last hour is when we knock on every door that hasn't voted yet. Choose the time
       you can start; every shift runs through to close.</span>
-      <span data-bn>সবচেয়ে বড় দিন। <b>যত তাড়াতাড়ি পারেন আসুন এবং শেষ পর্যন্ত থাকুন</b> — রাত ৯টায় ভোট
+      <span data-bn>সবচেয়ে বড় দিন। এই দিন সব কাজ দরজায় দরজায় — ফোন ব্যাংক নেই। <b>যত তাড়াতাড়ি পারেন আসুন এবং শেষ পর্যন্ত থাকুন</b> — রাত ৯টায় ভোট
       বন্ধ হয়, আর শেষ ঘণ্টায় আমরা প্রতিটি অভোট দরজায় যাই। কখন শুরু করতে পারবেন বেছে নিন; প্রতিটি
       শিফট শেষ পর্যন্ত চলে।</span></p>
     <div class="slots" id="eday-slots"></div>
@@ -290,14 +291,19 @@
     wrap.appendChild(card);
   });
 
+  // Election day is doors only — no phone bank runs that day.
   var ed = document.getElementById("eday-slots");
   EDAY.forEach(function(s){
-    ed.appendChild(slot(
-      '<span data-en>' + s.start_en + '</span><span data-bn>' + s.start_bn + '</span>' +
+    var el = document.createElement("div");
+    el.className = "slot";
+    el.innerHTML =
+      '<span class="time"><span data-en>' + s.start_en + '</span><span data-bn>' + s.start_bn + '</span>' +
         '<br><span style="font-weight:400;color:var(--mut)">' +
-        '<span data-en>to 9:00 pm close</span><span data-bn>রাত ৯টা পর্যন্ত</span></span>',
-      '<span data-en>' + s.note_en + '</span><span data-bn>' + s.note_bn + '</span>',
-      "2026-09-03_" + s.t + "_canvass", "2026-09-03_" + s.t + "_phonebank"));
+        '<span data-en>to 9:00 pm close</span><span data-bn>রাত ৯টা পর্যন্ত</span></span></span>' +
+      '<span class="note"><span data-en>' + s.note_en + '</span><span data-bn>' + s.note_bn + '</span></span>' +
+      '<a class="go" data-shift="2026-09-03_' + s.t + '_canvass" href="#">' +
+        '<span data-en>Sign up</span><span data-bn>সাইন আপ</span></a>';
+    ed.appendChild(el);
   });
 
   // ---- sign up without leaving the page ----
