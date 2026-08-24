@@ -15,6 +15,8 @@
   --ok:#137333; --okbg:#e6f4ea; --warn-bg:#fef7e0; --warn:#8a6d00;
   --blue:#0a58ca; --bluebg:#e8f0fe;
   --radius:12px; --radius-lg:16px;
+  /* Width of the readable column. Widened at 900px+ for the two-column layout. */
+  --wrap:760px; --colgap:22px;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
@@ -35,6 +37,8 @@ body[dir="rtl"] .daycard.advance{border-right-color:var(--brand)}
 body[dir="rtl"] .daycard.eday{border-right-color:var(--blue)}
 header.top{background:var(--brand); color:#fff; border-bottom:4px solid var(--brand-hover);
   padding:12px 20px; display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+/* full-bleed bar, but the name/language/Home line up with the column below it */
+header.top{padding-inline:max(20px, calc((100% - var(--wrap)) / 2))}
 header.top .name{font-weight:800; font-size:19px}
 header.top .spacer{flex:1}
 header.top a{color:#fff; text-decoration:none; font-weight:700; font-size:15px;
@@ -43,7 +47,7 @@ header.top a:hover{background:rgba(255,255,255,.2)}
 #lang{font:inherit; font-size:15px; font-weight:700; border-radius:999px; padding:7px 12px;
   border:1.5px solid rgba(255,255,255,.55); background:rgba(255,255,255,.15); color:#fff; cursor:pointer}
 #lang option{color:#1a1a1a; background:#fff}
-main{max-width:760px; margin:0 auto; padding:20px 16px 72px}
+main{max-width:var(--wrap); margin:0 auto; padding:20px 16px 72px}
 h1{font-size:clamp(27px,6vw,36px); line-height:1.2; color:var(--accent); margin:6px 0 10px; text-wrap:balance}
 h2{font-size:22px; color:var(--accent); margin:0 0 6px}
 p{margin:0 0 12px}
@@ -98,7 +102,7 @@ button:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
   font-size:19px; text-decoration:none; border-radius:var(--radius); padding:16px; margin-top:6px}
 .cta:hover{background:var(--brand-hover)}
 footer{border-top:1px solid var(--line); margin-top:8px; padding:18px 16px 40px;
-  color:var(--mut); font-size:14.5px; max-width:760px; margin-left:auto; margin-right:auto}
+  color:var(--mut); font-size:14.5px; max-width:var(--wrap); margin-left:auto; margin-right:auto}
 footer a{color:var(--brand-hover)}
 .toc{display:flex; gap:8px; flex-wrap:wrap; margin:0 0 18px}
 .toc a{font-size:15px; font-weight:700; text-decoration:none; color:var(--accent);
@@ -129,7 +133,48 @@ p.cons{margin:10px 0 0; font-size:13.5px; line-height:1.45; color:#525252;
 #tgo[disabled]{opacity:.5; cursor:default}
 .tmsg{margin:10px 0 0; font-size:15.5px; font-weight:700}
 .tmsg.ok{color:var(--ok)} .tmsg.bad{color:var(--brand-hover)}
-.hp{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
+/* Spam honeypot. It must stay in the DOM, keep its name and still be submitted, so it is
+   clipped rather than moved off-canvas: left:-9999px is off-screen in LTR but becomes
+   10,000px of real horizontal scroll once the page flips to RTL for Urdu. */
+.hp{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden;
+  clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; border:0}
+/* Below 360px the long Elections Ontario URL is wider than the card. Isolated in its own
+   query so 360px and up stay pixel for pixel what they were. */
+@media (max-width:359px){ a{overflow-wrap:break-word} }
+/* ---------------------------------------------------------------------------
+   Wide screens. Below 900px nothing here applies and the page stays exactly the
+   single mobile-first column it was built as. The .layout wrappers are inert
+   blocks at narrow widths, so the reading order is identical on every device.
+   Print is excluded on purpose: paper is narrower than 900px anyway.
+   --------------------------------------------------------------------------- */
+@media screen and (min-width:900px){
+  :root{--wrap:1240px}
+  main{padding:26px 24px 84px}
+  footer{padding-left:24px; padding-right:24px}
+  footer p{max-width:80ch}
+  /* Stop the intro prose from running the full 1240px. */
+  .lede{max-width:62ch}
+  #xlate{max-width:78ch}
+
+  .layout{display:grid; grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:var(--colgap); align-items:start}
+  /* Each .col is an independent stack, so a tall card in one column does not
+     punch a hole in the other. */
+  .col{display:flex; flex-direction:column; gap:var(--colgap); min-width:0}
+  .layout .card{margin-bottom:0; padding:22px}
+  /* The three short closing cards run across the full width underneath. */
+  .col-more{grid-column:1 / -1; display:grid; gap:var(--colgap);
+    grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); align-items:start}
+
+  /* Advance voting lists five sites: two-up instead of one long ribbon. */
+  #advlist{display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:9px}
+
+  /* Full-width form controls look stretched in a 600px column. */
+  #txt input[type=text], #txt input[type=tel], #tgo{max-width:380px}
+  #res .cta, #id .cta, #ride .cta{max-width:420px; margin-inline:auto}
+  /* safety net: a long URL must never punch out of a grid column */
+  a{overflow-wrap:break-word}
+}
 @media print{ body{background:#fff} .card{box-shadow:none; break-inside:avoid}
   header.top{background:#fff; color:#000; border-bottom:2px solid #000} header.top a,#lang{display:none}
   .cta{border:1px solid #000; color:#000; background:#fff} #txt{display:none} }
@@ -172,6 +217,8 @@ p.cons{margin:10px 0 0; font-size:13.5px; line-height:1.45; color:#525252;
     <a href="#ride" data-i18n="toc_ride">Get a ride</a>
   </div>
 
+  <div class="layout">
+  <div class="col col-when">
   <section class="card daycard advance" id="advance">
     <p class="when" data-i18n="adv_k">Advance voting</p>
     <p class="big" data-i18n="adv_days">Wednesday Aug&nbsp;26, Thursday Aug&nbsp;27, Friday Aug&nbsp;28</p>
@@ -203,6 +250,9 @@ p.cons{margin:10px 0 0; font-size:13.5px; line-height:1.45; color:#525252;
     <p style="margin-bottom:0" data-i18n="ed_note">On election day, unlike the advance days, you must vote at the one polling place assigned to your home address. Look it up below.</p>
   </section>
 
+  </div><!-- /col-when -->
+
+  <div class="col col-act">
   <section class="card" id="find">
     <h2 data-i18n="find_h">Find my election day polling place</h2>
     <p data-i18n="find_p">Enter your postal code. This covers the Scarborough Southwest riding only.</p>
@@ -255,6 +305,9 @@ p.cons{margin:10px 0 0; font-size:13.5px; line-height:1.45; color:#525252;
     <div class="note" data-i18n="id_foot"><strong>Do not let ID stop you from going.</strong> You do not need photo ID, and if you do show photo ID your appearance does not have to match it. An electronic copy on your phone is accepted. If you are not sure what you have, call us at <a href="tel:+16473132506">647-313-2506</a> and we will work it out with you. Permanent resident cards and international ID are not accepted.</div>
   </section>
 
+  </div><!-- /col-act -->
+
+  <div class="col col-more">
   <section class="card">
     <h2 data-i18n="who_h">Who can vote</h2>
     <p style="margin-bottom:0" data-i18n="who_p">You can vote if you are a <strong>Canadian citizen</strong>, <strong>18 or older on September&nbsp;3</strong>, and you <strong>live in Scarborough Southwest</strong>. You do not need to be registered in advance. You can register right at the polling place when you go to vote.</p>
@@ -270,6 +323,8 @@ p.cons{margin:10px 0 0; font-size:13.5px; line-height:1.45; color:#525252;
     <h2 data-i18n="oi_h">Official information</h2>
     <p style="margin-bottom:0" data-i18n="oi_p">Everything on this page comes from Elections Ontario. To confirm your registration, find your assigned polling place from the official source, or check anything else, visit <a href="https://voterinformationservice.elections.on.ca" target="_blank" rel="noopener">voterinformationservice.elections.on.ca</a> or call Elections Ontario at <a href="tel:+18886688683">1-888-668-8683</a>. This page is published by the Ahsanul Hafiz campaign, not by Elections Ontario.</p>
   </section>
+  </div><!-- /col-more -->
+  </div><!-- /layout -->
 </main>
 
 <footer>
