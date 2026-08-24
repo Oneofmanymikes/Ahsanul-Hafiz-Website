@@ -118,6 +118,52 @@
     .slot .note{min-width:100%; margin-bottom:2px}
     .slot .go{flex:1 1 0; min-width:0}      /* two buttons share the row, not one each */
   }
+
+  /* -------------------------------------------------------------------------
+     Wide screens. Nothing below 900px is touched, so phones and small tablets
+     keep the exact single column they had. .daygrid is an inert wrapper at
+     narrow widths and no element moves in the DOM, so the reading order and
+     the screen-reader order are identical on every device.
+     ------------------------------------------------------------------------- */
+  @media screen and (min-width:900px){
+    main{max-width:1240px; padding:26px 24px 84px}
+    .card{padding:20px}
+    .lede{max-width:62ch}                    /* keep the intro at a readable measure */
+    .foot{max-width:90ch; margin-left:auto; margin-right:auto}
+
+    /* "How signing up works": the three steps run across instead of down, so
+       the explainer is a short band and the shift cards start higher up. */
+    .steps{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:22px}
+    .callout p{max-width:92ch}
+
+    /* The shift cards are the point of the page: two across, election day wide.
+       align-items:start keeps each card its own height instead of padding a
+       short card out with empty white. */
+    .daygrid{display:grid; grid-template-columns:repeat(2, minmax(0,1fr));
+             gap:20px; align-items:start}
+    #advance-days{display:contents}          /* its three cards become grid items */
+    .daygrid .card{margin-bottom:0}
+    .daygrid .eday{grid-column:1 / -1}
+
+    .slot .note{min-width:120px}
+
+    /* Election day is the biggest ask and runs the full width, so its five
+       start times go two across instead of down one side. */
+    #eday-slots{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px}
+    .eday > p{max-width:78ch}
+
+    /* A phone number and a first name do not need a 760px-wide box. */
+    .sheet{max-width:560px}
+  }
+  /* Between 900 and 1180 a half-width shift card is too narrow for
+     time + note + two buttons on one line, so the slot falls back to the same
+     stacked shape the phone layout already uses. Tap targets stay full size. */
+  @media screen and (min-width:900px) and (max-width:1179px){
+    .daygrid .slot{gap:8px}
+    .daygrid .slot .time{min-width:100%}
+    .daygrid .slot .note{min-width:100%; margin-bottom:2px}
+    .daygrid .slot .go{flex:1 1 0; min-width:0}
+  }
 </style>
 </head>
 <body>
@@ -171,6 +217,10 @@
     </div>
   </section>
 
+  <!-- All the shift cards. Plain block wrapper below 900px; a two-column grid
+       above it. Nothing inside moves, so the reading order never changes. -->
+  <div class="daygrid">
+
   <!-- TUESDAY -->
   <section class="card daycard">
     <p class="when"><span data-en>Tuesday 25 August &middot; the night before voting opens</span>
@@ -219,6 +269,8 @@
         মানুষকে ভোটকেন্দ্রে পৌঁছে দেন, এটি সবচেয়ে মূল্যবান সাহায্যগুলোর একটি।</span></p>
     </div>
   </section>
+
+  </div><!-- /.daygrid -->
 
   <p class="foot">
     <span data-en>Questions? Call the campaign office on <a href="tel:+16473132506">647-313-2506</a>
