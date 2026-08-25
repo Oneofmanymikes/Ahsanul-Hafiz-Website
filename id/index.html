@@ -6,6 +6,9 @@
 <title>What ID do I need to vote? &mdash; Scarborough Southwest</title>
 <meta name="description" content="Tick what you have in your wallet and find out in ten seconds whether you can vote in the Scarborough Southwest by-election. Advance voting Aug 26-28, election day Sept 3.">
 <link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;600;700&family=Noto+Sans+SC:wght@400;600;700&display=swap">
 <meta property="og:title" content="What ID do I need to vote?">
 <meta property="og:description" content="Tick what you already have. Most people are ready and do not realise it.">
 <style>
@@ -73,6 +76,17 @@ label.item.checked{background:var(--okbg)}
 .when .k{font-size:11.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--mut)}
 .when .v{font-weight:700; font-size:16px; line-height:1.3}
 a{color:var(--brand-hover)}
+header.top select{font:inherit; font-size:15px; font-weight:700; color:#fff; background:transparent;
+  border:1.5px solid rgba(255,255,255,.55); border-radius:999px; padding:6px 10px; cursor:pointer}
+header.top select option{color:#1a1a1a; background:#fff}
+html[dir="rtl"] label.item{flex-direction:row-reverse; text-align:right}
+html[dir="rtl"] .hint{border-left:0; border-right:4px solid var(--warn)}
+html[dir="rtl"] .pick button{text-align:right}
+html[dir="rtl"] .grp h3, html[dir="rtl"] .step{text-align:right}
+body.bn{font-family:"Noto Sans Bengali",Inter,"Segoe UI",system-ui,Arial,sans-serif; line-height:1.75}
+body.ur{font-family:"Noto Nastaliq Urdu","Noto Sans Arabic",Inter,"Segoe UI",Arial,sans-serif; line-height:2}
+body.zh{font-family:"Noto Sans SC","Microsoft YaHei",Inter,"Segoe UI",Arial,sans-serif}
+.docen{color:var(--mut); font-size:.88em}
 footer{max-width:680px; margin:0 auto; padding:0 16px 40px; color:var(--mut); font-size:14px}
 @media print{ .bar,header.top{position:static} .card{box-shadow:none} }
 </style>
@@ -82,64 +96,68 @@ footer{max-width:680px; margin:0 auto; padding:0 16px 40px; color:var(--mut); fo
 <header class="top">
   <span class="name">Ahsanul Hafiz</span>
   <span class="spacer"></span>
-  <a href="/vote/">When &amp; where to vote</a>
+  <a href="/vote/" data-i18n="nav_vote">When &amp; where to vote</a>
+  <select id="lang" aria-label="Choose language">
+    <option value="en">English</option>
+    <option value="bn">বাংলা</option>
+    <option value="ur">اردو</option>
+    <option value="zh">中文</option>
+    <option value="tl">Tagalog</option>
+  </select>
 </header>
 
 <main>
-  <p class="step" style="margin-bottom:2px">Scarborough Southwest by-election</p>
-  <h1>What ID do I need to vote?</h1>
-  <p class="lede">Tick what you already have. Most people are ready and do not realise it.</p>
+  <p class="step" style="margin-bottom:2px" data-i18n="kicker">Scarborough Southwest by-election</p>
+  <h1 data-i18n="h1">What ID do I need to vote?</h1>
+  <p class="lede" data-i18n="lede">Tick what you already have. Most people are ready and do not realise it.</p>
 
   <div class="when">
-    <div><div class="k">Advance voting</div><div class="v">Aug 26, 27, 28<br>10 a.m. to 8 p.m.</div></div>
-    <div><div class="k">Election day</div><div class="v">Thu Sept 3<br>9 a.m. to 9 p.m.</div></div>
+    <div><div class="k" data-i18n="adv_k">Advance voting</div><div class="v" data-i18n="adv_v">Aug 26, 27, 28<br>10 a.m. to 8 p.m.</div></div>
+    <div><div class="k" data-i18n="ed_k">Election day</div><div class="v" data-i18n="ed_v">Thu Sept 3<br>9 a.m. to 9 p.m.</div></div>
   </div>
 
   <!-- STEP 1 -->
   <section class="card" id="s1">
-    <p class="step">Step 1 of 2</p>
-    <h2>Did you get a voter information card in the mail?</h2>
-    <p style="margin-bottom:0">It is the card Elections Ontario posts out telling you where to vote.
-    Some people call it a VIC.</p>
+    <p class="step" data-i18n="step1">Step 1 of 2</p>
+    <h2 data-i18n="q1">Did you get a voter information card in the mail?</h2>
+    <p style="margin-bottom:0" data-i18n="q1sub">It is the card Elections Ontario posts out telling you where to vote. Some people call it a VIC.</p>
     <div class="pick">
-      <button type="button" data-vic="1"><b>Yes, I have it</b><span>I can bring it with me</span></button>
-      <button type="button" data-vic="0"><b>No, or I am not sure</b><span>Never got one, or cannot find it</span></button>
+      <button type="button" data-vic="1"><b data-i18n="yes_b">Yes, I have it</b><span data-i18n="yes_s">I can bring it with me</span></button>
+      <button type="button" data-vic="0"><b data-i18n="no_b">No, or I am not sure</b><span data-i18n="no_s">Never got one, or cannot find it</span></button>
     </div>
-    <div class="hint">Either answer is fine. You can vote without the card, you just need slightly
-    different ID.</div>
+    <div class="hint" data-i18n="hint">Either answer is fine. You can vote without the card, you just need slightly different ID.</div>
   </section>
 
   <!-- STEP 2 -->
   <section class="card hidden" id="s2">
-    <p class="step">Step 2 of 2</p>
-    <h2 id="s2h">What do you have?</h2>
+    <p class="step" data-i18n="step2">Step 2 of 2</p>
+    <h2 id="s2h" data-i18n="tick_h">Tick anything you have</h2>
     <div class="need" id="need"></div>
     <div id="lists"></div>
-    <button class="reset" type="button" id="back">&larr; Change my answer to step 1</button>
+    <button class="reset" type="button" id="back" data-i18n="back">&larr; Change my answer to step 1</button>
   </section>
 
   <section class="card hidden" id="help">
-    <h2>Still nothing?</h2>
-    <p>Do not give up, and do not assume you cannot vote. Call us and we will work through it
-    with you, or ask the staff when you get to the polling place.</p>
-    <p style="margin-bottom:0"><strong>Campaign:</strong> <a href="tel:+16473132506">647-313-2506</a>
-    &nbsp;&middot;&nbsp; <strong>Elections Ontario:</strong> <a href="tel:+18886688683">1-888-668-8683</a></p>
+    <h2 data-i18n="help_h">Still nothing?</h2>
+    <p data-i18n="help_p">Do not give up, and do not assume you cannot vote. Call us and we will work through it with you, or ask the staff when you get to the polling place.</p>
+    <p style="margin-bottom:0"><strong data-i18n="lab_camp">Campaign:</strong> <a href="tel:+16473132506">647-313-2506</a>
+    &nbsp;&middot;&nbsp; <strong data-i18n="lab_eo">Elections Ontario:</strong> <a href="tel:+18886688683">1-888-668-8683</a></p>
   </section>
 </main>
 
 <div class="bar" id="bar">
   <div class="barin">
-    <div class="verdict no" id="verdict">Answer step 1 to begin.</div>
-    <a class="call hidden" id="wherebtn" href="/vote/">Where do I vote? &rarr;</a>
+    <div class="verdict no" id="verdict" data-i18n="v_start">Answer step 1 to begin.</div>
+    <a class="call hidden" id="wherebtn" href="/vote/" data-i18n="where_btn">Where do I vote? &rarr;</a>
   </div>
 </div>
 
 <footer>
-  <p>Accepted ID is set by Elections Ontario. Full list at
+  <p><span data-i18n="foot1">Accepted ID is set by Elections Ontario. Full list at</span>
   <a href="https://www.elections.on.ca/en/voting-in-ontario/by-election/id-to-vote.html" target="_blank" rel="noopener">elections.on.ca</a>.
-  You do not need photo ID, and an electronic copy on your phone is accepted.
-  Permanent resident cards and international ID are not accepted.</p>
-  <p>Published by the Ahsanul Hafiz campaign, not by Elections Ontario.</p>
+  <span data-i18n="foot2">You do not need photo ID, and an electronic copy on your phone is accepted. Permanent resident cards and international ID are not accepted.</span></p>
+  <p id="transnote" data-i18n="trans_note" style="font-style:italic"></p>
+  <p data-i18n="foot3">Published by the Ahsanul Hafiz campaign, not by Elections Ontario.</p>
 </footer>
 
 <script>
@@ -215,28 +233,60 @@ var NAME_ONLY = {
 };
 
 var vic = null, ticked = 0;
+
+/* ---- five-language layer. Same set and same behaviour as /vote. ---- */
+var T = {"nav_vote": {"en": "When & where to vote", "bn": "কখন ও কোথায় ভোট দেবেন", "ur": "کب اور کہاں ووٹ دیں", "zh": "何时何地投票", "tl": "Kailan at saan boboto"}, "kicker": {"en": "Scarborough Southwest by-election", "bn": "স্কারবরো সাউথওয়েস্ট উপনির্বাচন", "ur": "سکاربورو ساؤتھ ویسٹ ضمنی انتخاب", "zh": "士嘉堡西南区补选", "tl": "Halalang pandagdag sa Scarborough Southwest"}, "h1": {"en": "What ID do I need to vote?", "bn": "ভোট দিতে আমার কী আইডি লাগবে?", "ur": "ووٹ ڈالنے کے لیے مجھے کون سی شناخت چاہیے؟", "zh": "投票需要什么身份证明？", "tl": "Anong ID ang kailangan ko para makaboto?"}, "lede": {"en": "Tick what you already have. Most people are ready and do not realise it.", "bn": "আপনার কাছে যা আছে তাতে টিক দিন। বেশিরভাগ মানুষ প্রস্তুত থাকেন, শুধু বুঝতে পারেন না।", "ur": "جو کچھ آپ کے پاس پہلے سے ہے اس پر نشان لگائیں۔ زیادہ تر لوگ تیار ہوتے ہیں مگر انہیں معلوم نہیں ہوتا۔", "zh": "勾选你已经有的东西。大多数人其实已经准备好了，只是自己不知道。", "tl": "Markahan ang mayroon ka na. Karamihan ay handa na pero hindi nila alam."}, "adv_k": {"en": "Advance voting", "bn": "আগাম ভোট", "ur": "قبل از وقت ووٹنگ", "zh": "预先投票", "tl": "Maagang pagboto"}, "adv_v": {"en": "Aug 26, 27, 28<br>10 a.m. to 8 p.m.", "bn": "২৬, ২৭, ২৮ আগস্ট<br>সকাল ১০টা – রাত ৮টা", "ur": "26، 27، 28 اگست<br>صبح 10 تا رات 8 بجے", "zh": "8月26、27、28日<br>上午10点至晚上8点", "tl": "Ago 26, 27, 28<br>10 n.u. hanggang 8 n.g."}, "ed_k": {"en": "Election day", "bn": "নির্বাচনের দিন", "ur": "انتخاب کا دن", "zh": "选举日", "tl": "Araw ng halalan"}, "ed_v": {"en": "Thu Sept 3<br>9 a.m. to 9 p.m.", "bn": "বৃহস্পতিবার ৩ সেপ্টেম্বর<br>সকাল ৯টা – রাত ৯টা", "ur": "جمعرات 3 ستمبر<br>صبح 9 تا رات 9 بجے", "zh": "9月3日（星期四）<br>上午9点至晚上9点", "tl": "Huwebes, Set 3<br>9 n.u. hanggang 9 n.g."}, "step1": {"en": "Step 1 of 2", "bn": "ধাপ ১, মোট ২", "ur": "مرحلہ 1 از 2", "zh": "第 1 步，共 2 步", "tl": "Hakbang 1 ng 2"}, "step2": {"en": "Step 2 of 2", "bn": "ধাপ ২, মোট ২", "ur": "مرحلہ 2 از 2", "zh": "第 2 步，共 2 步", "tl": "Hakbang 2 ng 2"}, "q1": {"en": "Did you get a voter information card in the mail?", "bn": "আপনি কি ডাকে ভোটার তথ্য কার্ড পেয়েছেন?", "ur": "کیا آپ کو ڈاک میں ووٹر انفارمیشن کارڈ ملا؟", "zh": "你有收到邮寄的选民资料卡吗？", "tl": "Nakatanggap ka ba ng voter information card sa koreo?"}, "q1sub": {"en": "It is the card Elections Ontario posts out telling you where to vote. Some people call it a VIC.", "bn": "এটি সেই কার্ড যা Elections Ontario ডাকে পাঠায় এবং যাতে আপনার ভোটকেন্দ্র লেখা থাকে। অনেকে একে VIC বলেন।", "ur": "یہ وہ کارڈ ہے جو Elections Ontario ڈاک سے بھیجتا ہے اور جس پر لکھا ہوتا ہے کہ آپ کہاں ووٹ ڈالیں گے۔ کچھ لوگ اسے VIC کہتے ہیں۔", "zh": "这是 Elections Ontario 邮寄给你、写明投票地点的卡片，有人称它为 VIC。", "tl": "Ito ang kard na ipinapadala ng Elections Ontario na nagsasabi kung saan ka boboto. Tinatawag din itong VIC."}, "yes_b": {"en": "Yes, I have it", "bn": "হ্যাঁ, আমার কাছে আছে", "ur": "ہاں، میرے پاس ہے", "zh": "有，在我手上", "tl": "Oo, nasa akin"}, "yes_s": {"en": "I can bring it with me", "bn": "আমি এটি সঙ্গে নিয়ে যেতে পারব", "ur": "میں اسے ساتھ لے جا سکتا ہوں", "zh": "我可以带着它去", "tl": "Kaya kong dalhin ito"}, "no_b": {"en": "No, or I am not sure", "bn": "না, বা আমি নিশ্চিত নই", "ur": "نہیں، یا مجھے یقین نہیں", "zh": "没有，或者不确定", "tl": "Wala, o hindi ako sigurado"}, "no_s": {"en": "Never got one, or cannot find it", "bn": "কখনও পাইনি, বা খুঁজে পাচ্ছি না", "ur": "کبھی نہیں ملا، یا مل نہیں رہا", "zh": "没收到过，或者找不到了", "tl": "Walang natanggap, o hindi ko makita"}, "hint": {"en": "Either answer is fine. You can vote without the card, you just need slightly different ID.", "bn": "যে উত্তরই হোক, সমস্যা নেই। কার্ড ছাড়াও আপনি ভোট দিতে পারবেন, শুধু একটু আলাদা আইডি লাগবে।", "ur": "دونوں جواب ٹھیک ہیں۔ آپ کارڈ کے بغیر بھی ووٹ ڈال سکتے ہیں، بس تھوڑی مختلف شناخت درکار ہوگی۔", "zh": "两种答案都可以。没有卡也能投票，只是需要的证件稍有不同。", "tl": "Alinman ay ayos lang. Puwede kang bumoto kahit walang kard, bahagya lang naiiba ang ID na kailangan."}, "tick_h": {"en": "Tick anything you have", "bn": "আপনার কাছে যা যা আছে টিক দিন", "ur": "جو کچھ آپ کے پاس ہے اس پر نشان لگائیں", "zh": "勾选你有的任何一项", "tl": "Markahan ang anumang mayroon ka"}, "need_vic": {"en": "<strong>You need your voter information card, plus any ONE thing below.</strong> Almost every card in your wallet counts.", "bn": "<strong>আপনার ভোটার তথ্য কার্ড, আর নিচের যেকোনো একটি জিনিস লাগবে।</strong> আপনার মানিব্যাগের প্রায় প্রতিটি কার্ডই চলে।", "ur": "<strong>آپ کو اپنا ووٹر انفارمیشن کارڈ اور نیچے دی گئی کوئی ایک چیز چاہیے۔</strong> آپ کے بٹوے کا تقریباً ہر کارڈ چلتا ہے۔", "zh": "<strong>你需要选民资料卡，外加下面任意一项。</strong>钱包里几乎每张卡都算数。", "tl": "<strong>Kailangan mo ang voter information card, at kahit ISA sa nasa ibaba.</strong> Halos lahat ng kard sa pitaka mo ay puwede."}, "need_novic": {"en": "<strong>You need any ONE document below.</strong> It has to show your name and your current address together. One is enough, you do not need two.", "bn": "<strong>নিচের যেকোনো একটি কাগজ লাগবে।</strong> তাতে আপনার নাম ও বর্তমান ঠিকানা একসাথে থাকতে হবে। একটিই যথেষ্ট, দুটি লাগবে না।", "ur": "<strong>آپ کو نیچے دی گئی کوئی ایک دستاویز چاہیے۔</strong> اس پر آپ کا نام اور موجودہ پتہ ایک ساتھ ہونا چاہیے۔ ایک ہی کافی ہے، دو کی ضرورت نہیں۔", "zh": "<strong>你只需要下面任意一份文件。</strong>上面要同时有你的姓名和现住址。一份就够，不需要两份。", "tl": "<strong>Kailangan mo ng kahit ISANG dokumento sa ibaba.</strong> Dapat magkasama ang pangalan mo at kasalukuyang address. Isa lang, hindi kailangan ng dalawa."}, "sec_name": {"en": "Anything showing your name", "bn": "আপনার নাম আছে এমন যেকোনো কিছু", "ur": "کوئی بھی چیز جس پر آپ کا نام ہو", "zh": "任何显示你姓名的证件", "tl": "Anumang may pangalan mo"}, "sec_both": {"en": "Or anything showing your name and address", "bn": "অথবা নাম ও ঠিকানা আছে এমন যেকোনো কিছু", "ur": "یا کوئی بھی چیز جس پر آپ کا نام اور پتہ ہو", "zh": "或任何显示你姓名和地址的文件", "tl": "O anumang may pangalan at address mo"}, "sec_one": {"en": "One document showing your name AND your address", "bn": "একটি কাগজ যাতে নাম এবং ঠিকানা দুটোই আছে", "ur": "ایک دستاویز جس پر نام اور پتہ دونوں ہوں", "zh": "一份同时显示姓名和地址的文件", "tl": "Isang dokumento na may pangalan AT address mo"}, "v_start": {"en": "Answer step 1 to begin.", "bn": "শুরু করতে ধাপ ১ এর উত্তর দিন।", "ur": "شروع کرنے کے لیے مرحلہ 1 کا جواب دیں۔", "zh": "请先回答第 1 步。", "tl": "Sagutan ang hakbang 1 para magsimula."}, "v_none": {"en": "Tick anything you have. One is enough.", "bn": "আপনার কাছে যা আছে টিক দিন। একটিই যথেষ্ট।", "ur": "جو کچھ آپ کے پاس ہے اس پر نشان لگائیں۔ ایک ہی کافی ہے۔", "zh": "勾选你有的任何一项，一项就够。", "tl": "Markahan ang mayroon ka. Isa lang, sapat na."}, "v_ok": {"en": "<strong>You are ready to vote.</strong>", "bn": "<strong>আপনি ভোট দেওয়ার জন্য প্রস্তুত।</strong>", "ur": "<strong>آپ ووٹ ڈالنے کے لیے تیار ہیں۔</strong>", "zh": "<strong>你可以去投票了。</strong>", "tl": "<strong>Handa ka nang bumoto.</strong>"}, "v_bring_vic": {"en": "Bring your card and that ID.", "bn": "আপনার কার্ড ও সেই আইডি সঙ্গে নিন।", "ur": "اپنا کارڈ اور وہ شناخت ساتھ لے جائیں۔", "zh": "带上你的卡和那份证件。", "tl": "Dalhin ang kard mo at ang ID na iyon."}, "v_bring": {"en": "Bring that with you.", "bn": "সেটি সঙ্গে নিয়ে যান।", "ur": "وہ اپنے ساتھ لے جائیں۔", "zh": "带上它去投票。", "tl": "Dalhin mo iyon."}, "where_btn": {"en": "Where do I vote? &rarr;", "bn": "আমি কোথায় ভোট দেব? &rarr;", "ur": "میں کہاں ووٹ ڈالوں؟ &rarr;", "zh": "我在哪里投票？ &rarr;", "tl": "Saan ako boboto? &rarr;"}, "back": {"en": "&larr; Change my answer to step 1", "bn": "&larr; ধাপ ১ এর উত্তর বদলান", "ur": "&larr; مرحلہ 1 کا جواب بدلیں", "zh": "&larr; 修改第 1 步的答案", "tl": "&larr; Baguhin ang sagot sa hakbang 1"}, "help_h": {"en": "Still nothing?", "bn": "তবুও কিছু নেই?", "ur": "پھر بھی کچھ نہیں؟", "zh": "还是都没有？", "tl": "Wala pa rin?"}, "help_p": {"en": "Do not give up, and do not assume you cannot vote. Call us and we will work through it with you, or ask the staff when you get to the polling place.", "bn": "হাল ছাড়বেন না, আর ধরে নেবেন না যে আপনি ভোট দিতে পারবেন না। আমাদের ফোন করুন, আমরা আপনার সঙ্গে বসে সমাধান করব, অথবা ভোটকেন্দ্রে গিয়ে কর্মীদের জিজ্ঞাসা করুন।", "ur": "ہمت نہ ہاریں، اور یہ نہ سمجھیں کہ آپ ووٹ نہیں ڈال سکتے۔ ہمیں فون کریں، ہم آپ کے ساتھ مل کر حل نکالیں گے، یا پولنگ اسٹیشن پہنچ کر عملے سے پوچھ لیں۔", "zh": "不要放弃，也不要以为自己不能投票。打给我们，我们会陪你一起想办法，或者到了投票站直接问工作人员。", "tl": "Huwag sumuko, at huwag isipin na hindi ka makakaboto. Tawagan kami at tutulungan ka namin, o magtanong sa staff pagdating mo sa botohan."}, "lab_camp": {"en": "Campaign:", "bn": "ক্যাম্পেইন:", "ur": "مہم:", "zh": "竞选团队：", "tl": "Kampanya:"}, "lab_eo": {"en": "Elections Ontario:", "bn": "Elections Ontario:", "ur": "Elections Ontario:", "zh": "Elections Ontario：", "tl": "Elections Ontario:"}, "foot1": {"en": "Accepted ID is set by Elections Ontario. Full list at", "bn": "গ্রহণযোগ্য আইডি নির্ধারণ করে Elections Ontario। সম্পূর্ণ তালিকা:", "ur": "قابلِ قبول شناخت کا تعین Elections Ontario کرتا ہے۔ مکمل فہرست:", "zh": "可接受的证件由 Elections Ontario 规定。完整清单见", "tl": "Ang tinatanggap na ID ay itinakda ng Elections Ontario. Buong listahan sa"}, "foot2": {"en": "You do not need photo ID, and an electronic copy on your phone is accepted. Permanent resident cards and international ID are not accepted.", "bn": "ছবিসহ আইডি লাগে না, এবং ফোনে থাকা ইলেকট্রনিক কপিও গ্রহণযোগ্য। স্থায়ী বাসিন্দা (PR) কার্ড ও বিদেশি আইডি গ্রহণযোগ্য নয়।", "ur": "تصویر والی شناخت ضروری نہیں، اور فون پر موجود الیکٹرانک کاپی بھی قبول ہے۔ پرمننٹ ریزیڈنٹ کارڈ اور بین الاقوامی شناخت قبول نہیں۔", "zh": "不需要有照片的证件，手机上的电子版也可以。永久居民卡和外国证件不被接受。", "tl": "Hindi kailangan ng may larawang ID, at tanggap ang electronic copy sa telepono mo. Hindi tanggap ang permanent resident card at dayuhang ID."}, "foot3": {"en": "Published by the Ahsanul Hafiz campaign, not by Elections Ontario.", "bn": "প্রকাশক: আহসানুল হাফিজ ক্যাম্পেইন, Elections Ontario নয়।", "ur": "شائع کردہ: احسان الحفیظ مہم، Elections Ontario نہیں۔", "zh": "由 Ahsanul Hafiz 竞选团队发布，非 Elections Ontario 发布。", "tl": "Inilathala ng kampanya ni Ahsanul Hafiz, hindi ng Elections Ontario."}, "trans_note": {"en": "", "bn": "দ্রষ্টব্য: কাগজের নামগুলো ইংরেজিতেও দেওয়া আছে, কারণ কাগজে ওটাই লেখা থাকে।", "ur": "نوٹ: دستاویزات کے نام انگریزی میں بھی دیے گئے ہیں، کیونکہ کاغذ پر یہی لکھا ہوتا ہے۔", "zh": "注：文件名称同时给出英文，因为证件上印的就是英文。", "tl": "Paalala: nakalagay din sa Ingles ang pangalan ng mga dokumento, dahil iyon ang nakasulat sa mga ito."}};
+var GRP_T = {"Cards and permits": {"bn": "কার্ড ও পারমিট", "ur": "کارڈ اور پرمٹ", "zh": "证件与牌照", "tl": "Mga kard at permit"}, "Bills and statements": {"bn": "বিল ও স্টেটমেন্ট", "ur": "بل اور اسٹیٹمنٹ", "zh": "账单与结单", "tl": "Mga bill at statement"}, "Work and school": {"bn": "কাজ ও পড়াশোনা", "ur": "کام اور تعلیم", "zh": "工作与学校", "tl": "Trabaho at paaralan"}, "Government letters": {"bn": "সরকারি চিঠি", "ur": "سرکاری خطوط", "zh": "政府信函", "tl": "Mga sulat ng gobyerno"}, "Everyday cards": {"bn": "প্রতিদিনের কার্ড", "ur": "روزمرہ کے کارڈ", "zh": "日常卡片", "tl": "Pang-araw-araw na kard"}, "Government issued": {"bn": "সরকারি নথি", "ur": "سرکاری جاری کردہ", "zh": "政府签发", "tl": "Ibinigay ng gobyerno"}, "Other": {"bn": "অন্যান্য", "ur": "دیگر", "zh": "其他", "tl": "Iba pa"}};
+var DOC_T = {"Ontario driver's licence": {"bn": "অন্টারিও ড্রাইভিং লাইসেন্স", "ur": "اونٹاریو ڈرائیونگ لائسنس", "zh": "安大略驾驶执照", "tl": "Lisensya sa pagmamaneho ng Ontario"}, "Ontario Photo Card": {"bn": "অন্টারিও ফটো কার্ড", "ur": "اونٹاریو فوٹو کارڈ", "zh": "安大略照片身份卡", "tl": "Ontario Photo Card"}, "Ontario vehicle permit (plate or vehicle portion)": {"bn": "অন্টারিও গাড়ির পারমিট (প্লেট বা গাড়ির অংশ)", "ur": "اونٹاریو گاڑی کا پرمٹ (پلیٹ یا گاڑی والا حصہ)", "zh": "安大略车辆牌照证（车牌或车辆部分）", "tl": "Ontario vehicle permit (bahagi ng plaka o sasakyan)"}, "Utility bill: hydro, water, gas, phone or cable TV": {"bn": "ইউটিলিটি বিল: বিদ্যুৎ, পানি, গ্যাস, ফোন বা কেবল টিভি", "ur": "یوٹیلٹی بل: بجلی، پانی، گیس، فون یا کیبل ٹی وی", "zh": "水电煤账单：电、水、燃气、电话或有线电视", "tl": "Utility bill: kuryente, tubig, gas, telepono o cable TV"}, "Bank account or credit card statement": {"bn": "ব্যাংক অ্যাকাউন্ট বা ক্রেডিট কার্ড স্টেটমেন্ট", "ur": "بینک اکاؤنٹ یا کریڈٹ کارڈ اسٹیٹمنٹ", "zh": "银行账户或信用卡结单", "tl": "Bank account o credit card statement"}, "Insurance statement": {"bn": "বিমার কাগজ", "ur": "انشورنس اسٹیٹمنٹ", "zh": "保险结单", "tl": "Insurance statement"}, "Lease, rental or mortgage statement": {"bn": "লিজ, ভাড়া বা মর্টগেজের কাগজ", "ur": "لیز، کرایہ یا مارگیج اسٹیٹمنٹ", "zh": "租约、租金或按揭结单", "tl": "Lease, upa o mortgage statement"}, "Cancelled personalized cheque": {"bn": "বাতিল করা নিজের নামের চেক", "ur": "منسوخ شدہ ذاتی چیک", "zh": "作废的个人支票", "tl": "Kanseladong personal na tseke"}, "Signed loan or financial agreement": {"bn": "স্বাক্ষরিত ঋণ বা আর্থিক চুক্তি", "ur": "دستخط شدہ قرض یا مالی معاہدہ", "zh": "已签署的贷款或金融协议", "tl": "Nilagdaang loan o kasunduang pinansyal"}, "Pay stub, cheque stub or T4 from your employer": {"bn": "পে স্টাব, চেক স্টাব বা নিয়োগকর্তার দেওয়া T4", "ur": "پے اسٹب، چیک اسٹب یا آجر کی طرف سے T4", "zh": "工资单、支票存根或雇主开的 T4", "tl": "Pay stub, cheque stub o T4 mula sa employer"}, "School admission letter": {"bn": "স্কুলে ভর্তির চিঠি", "ur": "اسکول داخلے کا خط", "zh": "学校录取通知书", "tl": "Sulat ng pagtanggap sa paaralan"}, "Transcript or report card": {"bn": "ট্রান্সক্রিপ্ট বা রিপোর্ট কার্ড", "ur": "ٹرانسکرپٹ یا رپورٹ کارڈ", "zh": "成绩单或成绩报告", "tl": "Transcript o report card"}, "Tuition or fees statement": {"bn": "টিউশন বা ফি-র কাগজ", "ur": "ٹیوشن یا فیس کا اسٹیٹمنٹ", "zh": "学费或杂费单", "tl": "Statement ng matrikula o bayarin"}, "Campus residence document": {"bn": "ক্যাম্পাস আবাসনের কাগজ", "ur": "کیمپس رہائش کی دستاویز", "zh": "校内宿舍证明", "tl": "Dokumento ng campus residence"}, "Income tax assessment notice": {"bn": "আয়কর অ্যাসেসমেন্ট নোটিশ", "ur": "انکم ٹیکس اسیسمنٹ نوٹس", "zh": "所得税评税通知", "tl": "Income tax assessment notice"}, "Child Tax Benefit statement": {"bn": "চাইল্ড ট্যাক্স বেনিফিটের কাগজ", "ur": "چائلڈ ٹیکس بینیفٹ اسٹیٹمنٹ", "zh": "儿童福利金结单", "tl": "Child Tax Benefit statement"}, "Old Age Security statement (T4A OAS)": {"bn": "ওল্ড এজ সিকিউরিটির কাগজ (T4A OAS)", "ur": "اولڈ ایج سیکیورٹی اسٹیٹمنٹ (T4A OAS)", "zh": "养老金结单（T4A OAS）", "tl": "Old Age Security statement (T4A OAS)"}, "Employment Insurance statement (T4E)": {"bn": "এমপ্লয়মেন্ট ইনস্যুরেন্সের কাগজ (T4E)", "ur": "ایمپلائمنٹ انشورنس اسٹیٹمنٹ (T4E)", "zh": "就业保险结单（T4E）", "tl": "Employment Insurance statement (T4E)"}, "Confirmation of SIN letter": {"bn": "SIN নিশ্চিতকরণের চিঠি", "ur": "SIN کی تصدیق کا خط", "zh": "社会保险号确认信", "tl": "Sulat ng kumpirmasyon ng SIN"}, "Property tax bill or MPAC assessment notice": {"bn": "সম্পত্তি করের বিল বা MPAC অ্যাসেসমেন্ট নোটিশ", "ur": "پراپرٹی ٹیکس بل یا MPAC اسیسمنٹ نوٹس", "zh": "房产税单或 MPAC 评估通知", "tl": "Property tax bill o MPAC assessment notice"}, "Letter of confirmation of residence": {"bn": "বসবাস নিশ্চিতকরণের চিঠি", "ur": "رہائش کی تصدیق کا خط", "zh": "居住证明信", "tl": "Sulat ng kumpirmasyon ng tirahan"}, "CNIB card": {"bn": "CNIB কার্ড", "ur": "CNIB کارڈ", "zh": "CNIB 卡", "tl": "CNIB card"}, "Long-term care home residence document": {"bn": "দীর্ঘমেয়াদি সেবা কেন্দ্রে বসবাসের কাগজ", "ur": "لانگ ٹرم کیئر ہوم رہائش کی دستاویز", "zh": "长期护理院居住证明", "tl": "Dokumento ng paninirahan sa long-term care home"}, "Hospital records showing your address": {"bn": "ঠিকানাসহ হাসপাতালের রেকর্ড", "ur": "ہسپتال کے ریکارڈ جن پر آپ کا پتہ ہو", "zh": "载有你地址的医院记录", "tl": "Rekord ng ospital na may address mo"}, "Document from an Ontario Band Council": {"bn": "অন্টারিও ব্যান্ড কাউন্সিলের কাগজ", "ur": "اونٹاریو بینڈ کونسل کی دستاویز", "zh": "安大略原住民议会开具的文件", "tl": "Dokumento mula sa Ontario Band Council"}, "Document from an Ontario court": {"bn": "অন্টারিও আদালতের কাগজ", "ur": "اونٹاریو عدالت کی دستاویز", "zh": "安大略法院开具的文件", "tl": "Dokumento mula sa korte ng Ontario"}, "Ontario health card": {"bn": "অন্টারিও হেলথ কার্ড", "ur": "اونٹاریو ہیلتھ کارڈ", "zh": "安大略健康卡", "tl": "Ontario health card"}, "Credit or debit card": {"bn": "ক্রেডিট বা ডেবিট কার্ড", "ur": "کریڈٹ یا ڈیبٹ کارڈ", "zh": "信用卡或借记卡", "tl": "Credit o debit card"}, "Student card": {"bn": "স্টুডেন্ট কার্ড", "ur": "اسٹوڈنٹ کارڈ", "zh": "学生证", "tl": "Student card"}, "Employee card": {"bn": "কর্মীর পরিচয়পত্র", "ur": "ملازم کارڈ", "zh": "员工证", "tl": "Employee card"}, "Union card or professional licence": {"bn": "ইউনিয়ন কার্ড বা পেশাগত লাইসেন্স", "ur": "یونین کارڈ یا پیشہ ورانہ لائسنس", "zh": "工会卡或专业执照", "tl": "Union card o propesyonal na lisensya"}, "Blood donor card": {"bn": "রক্তদাতা কার্ড", "ur": "خون عطیہ کارڈ", "zh": "献血卡", "tl": "Blood donor card"}, "Canadian passport": {"bn": "কানাডিয়ান পাসপোর্ট", "ur": "کینیڈین پاسپورٹ", "zh": "加拿大护照", "tl": "Pasaporteng Canadian"}, "Birth certificate": {"bn": "জন্ম সনদ", "ur": "پیدائش کا سرٹیفکیٹ", "zh": "出生证明", "tl": "Birth certificate"}, "Certificate of Canadian Citizenship or citizenship card": {"bn": "কানাডিয়ান নাগরিকত্বের সনদ বা সিটিজেনশিপ কার্ড", "ur": "کینیڈین شہریت کا سرٹیفکیٹ یا شہریت کارڈ", "zh": "加拿大公民证书或公民卡", "tl": "Certificate of Canadian Citizenship o citizenship card"}, "Certificate of Indian Status (status card)": {"bn": "ইন্ডিয়ান স্ট্যাটাস সনদ (স্ট্যাটাস কার্ড)", "ur": "انڈین اسٹیٹس سرٹیفکیٹ (اسٹیٹس کارڈ)", "zh": "原住民身份证书（身份卡）", "tl": "Certificate of Indian Status (status card)"}, "Métis card": {"bn": "মেতি (Métis) কার্ড", "ur": "میٹی (Métis) کارڈ", "zh": "梅蒂斯人身份卡", "tl": "Métis card"}, "Marriage certificate": {"bn": "বিবাহ সনদ", "ur": "نکاح نامہ", "zh": "结婚证", "tl": "Marriage certificate"}, "Social Insurance Number card or letter": {"bn": "সোশ্যাল ইনস্যুরেন্স নম্বর (SIN) কার্ড বা চিঠি", "ur": "سوشل انشورنس نمبر (SIN) کارڈ یا خط", "zh": "社会保险号卡或信件", "tl": "Social Insurance Number card o sulat"}, "Old Age Security card": {"bn": "ওল্ড এজ সিকিউরিটি কার্ড", "ur": "اولڈ ایج سیکیورٹی کارڈ", "zh": "养老金卡", "tl": "Old Age Security card"}, "Firearms licence": {"bn": "আগ্নেয়াস্ত্রের লাইসেন্স", "ur": "اسلحہ لائسنس", "zh": "枪械持有证", "tl": "Lisensya sa baril"}, "Nexus or FAST card": {"bn": "Nexus বা FAST কার্ড", "ur": "Nexus یا FAST کارڈ", "zh": "Nexus 或 FAST 卡", "tl": "Nexus o FAST card"}, "Canadian Armed Forces ID": {"bn": "কানাডিয়ান সশস্ত্র বাহিনীর পরিচয়পত্র", "ur": "کینیڈین مسلح افواج کا شناختی کارڈ", "zh": "加拿大军队身份证", "tl": "ID ng Canadian Armed Forces"}, "Veterans Affairs card": {"bn": "ভেটেরানস অ্যাফেয়ার্স কার্ড", "ur": "ویٹرنز افیئرز کارڈ", "zh": "退伍军人事务部卡", "tl": "Veterans Affairs card"}, "Hospital records or hospital bracelet": {"bn": "হাসপাতালের রেকর্ড বা হাসপাতালের ব্রেসলেট", "ur": "ہسپتال کے ریکارڈ یا ہسپتال کا بریسلٹ", "zh": "医院记录或医院手环", "tl": "Rekord ng ospital o hospital bracelet"}};
+var LANG = 'en';
+function t(k){ var e = T[k]; if (!e) return ''; return e[LANG] || e.en || ''; }
+/* Document names: translation first so it is understood, English after so it can be matched
+   against the paper in their hand and said to the poll clerk. */
+function docLabel(en){
+  if (LANG === 'en') return esc(en);
+  var tr = DOC_T[en] && DOC_T[en][LANG];
+  return tr ? esc(tr) + ' <span class="docen">(' + esc(en) + ')</span>' : esc(en);
+}
+function grpLabel(en){
+  if (LANG === 'en') return esc(en);
+  var tr = GRP_T[en] && GRP_T[en][LANG];
+  return tr ? esc(tr) : esc(en);
+}
+function setLang(code){
+  if (!T.h1[code]) code = 'en';
+  LANG = code;
+  document.documentElement.lang = code;
+  document.documentElement.dir = (code === 'ur') ? 'rtl' : 'ltr';
+  document.body.className = (code === 'en' || code === 'tl') ? '' : code;
+  Array.prototype.forEach.call(document.querySelectorAll('[data-i18n]'), function(el){
+    var v = t(el.getAttribute('data-i18n'));
+    if (v !== '') el.innerHTML = v; else if (el.id === 'transnote') el.innerHTML = '';
+  });
+  try { localStorage.setItem('hafiz_id_lang', code); } catch(e){}
+  var sel = document.getElementById('lang'); if (sel) sel.value = code;
+  if (vic !== null) build(); else {
+    document.getElementById('verdict').className = 'verdict no';
+    document.getElementById('verdict').innerHTML = t('v_start');
+  }
+}
+
 var $ = function(s){ return document.querySelector(s); };
 var esc = function(s){ return String(s).replace(/[&<>"']/g, function(c){
   return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); };
 
 function build(){
-  var lists = vic ? [['Anything showing your name', NAME_ONLY],
-                     ['Or anything showing your name and address', NAME_ADDR]]
-                  : [['One document showing your name AND your address', NAME_ADDR]];
-  $('#need').innerHTML = vic
-    ? '<strong>You need your voter information card, plus any ONE thing below.</strong> '
-      + 'Almost every card in your wallet counts.'
-    : '<strong>You need any ONE document below.</strong> It has to show your name and your '
-      + 'current address together. One is enough, you do not need two.';
-  $('#s2h').textContent = vic ? 'Tick anything you have' : 'Tick anything you have';
+  var lists = vic ? [[t('sec_name'), NAME_ONLY], [t('sec_both'), NAME_ADDR]]
+                  : [[t('sec_one'), NAME_ADDR]];
+  $('#need').innerHTML = vic ? t('need_vic') : t('need_novic');
+  $('#s2h').innerHTML = t('tick_h');
   var out = '', n = 0;
   lists.forEach(function(pair){
     if (lists.length > 1) out += '<p class="step" style="margin:14px 0 8px">' + esc(pair[0]) + '</p>';
     Object.keys(pair[1]).forEach(function(g){
-      out += '<div class="grp"><h3>' + esc(g) + '</h3>';
+      out += '<div class="grp"><h3>' + grpLabel(g) + '</h3>';
       pair[1][g].forEach(function(item){
         out += '<label class="item"><input type="checkbox" data-i="' + (n++) + '"><span>'
-             + esc(item) + '</span></label>';
+             + docLabel(item) + '</span></label>';
       });
       out += '</div>';
     });
@@ -256,13 +306,12 @@ function score(){
   var v = $('#verdict'), w = $('#wherebtn'), help = $('#help');
   if (ticked > 0){
     v.className = 'verdict yes';
-    v.innerHTML = '✅ <strong>You are ready to vote.</strong> Bring '
-      + (vic ? 'your card and that ID.' : 'that with you.');
+    v.innerHTML = '✅ ' + t('v_ok') + ' ' + (vic ? t('v_bring_vic') : t('v_bring'));
     w.classList.remove('hidden');
     help.classList.add('hidden');
   } else {
     v.className = 'verdict no';
-    v.textContent = 'Tick anything you have. One is enough.';
+    v.innerHTML = t('v_none');
     w.classList.add('hidden');
     help.classList.remove('hidden');
   }
@@ -278,10 +327,18 @@ Array.prototype.forEach.call(document.querySelectorAll('.pick button'), function
     $('#s2').scrollIntoView({behavior:'smooth', block:'start'});
   });
 });
+document.getElementById('lang').addEventListener('change', function(){ setLang(this.value); });
+(function(){
+  var q = (location.search.match(/[?&]lang=([a-z]{2})/) || [])[1];
+  var saved = null; try { saved = localStorage.getItem('hafiz_id_lang'); } catch(e){}
+  var nav = (navigator.language || '').slice(0,2);
+  setLang(q || saved || (T.h1[nav] ? nav : 'en'));
+})();
+
 $('#back').addEventListener('click', function(){
   $('#s2').classList.add('hidden'); $('#help').classList.add('hidden');
   $('#verdict').className = 'verdict no';
-  $('#verdict').textContent = 'Answer step 1 to begin.';
+  $('#verdict').innerHTML = t('v_start');
   $('#wherebtn').classList.add('hidden');
   Array.prototype.forEach.call(document.querySelectorAll('.pick button'), function(x){
     x.classList.remove('on'); });
