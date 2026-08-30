@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sign up for a GOTV shift — Ahsanul Hafiz</title>
-<meta name="description" content="Sign up to help get out the vote in Scarborough Southwest: flyer night Aug 25, advance polls Aug 26-28, and election day Sept 3.">
+<title>Election day shifts — Ahsanul Hafiz</title>
+<meta name="description" content="Sign up for an election day shift in Scarborough Southwest. Thursday 3 September, polls open 9am to 9pm, all doors.">
 <link rel="icon" href="/apple-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,7 +44,6 @@
   .num{flex:0 0 auto; width:34px; height:34px; border-radius:999px; background:var(--brand);
        color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:16px}
   .daycard{border-left:5px solid var(--brand)}
-  .daycard.advance{border-left-color:var(--accent)}
   .daycard.eday{border-left-color:#0a58ca}
   .when{font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
         color:var(--mut); margin:0 0 2px}
@@ -141,7 +140,6 @@
        short card out with empty white. */
     .daygrid{display:grid; grid-template-columns:repeat(2, minmax(0,1fr));
              gap:20px; align-items:start}
-    #advance-days{display:contents}          /* its three cards become grid items */
     .daygrid .card{margin-bottom:0}
     .daygrid .eday{grid-column:1 / -1}
 
@@ -179,10 +177,11 @@
   <h1><span data-en>Help get out the vote</span><span data-bn>ভোট আনতে সাহায্য করুন</span></h1>
 
   <p class="lede">
-    <span data-en>Voting has already started. Between now and September 3 we need people on doors
-      and on phones — and every shift below is one you can sign up for in about a minute.</span>
-    <span data-bn>ভোট ইতিমধ্যেই শুরু হয়েছে। এখন থেকে ৩ সেপ্টেম্বর পর্যন্ত আমাদের দরজায় দরজায় এবং ফোনে
-      মানুষ দরকার — নিচের প্রতিটি শিফটে আপনি এক মিনিটেই সাইন আপ করতে পারবেন।</span>
+    <span data-en>It all comes down to <b>Thursday 3 September</b>. Polls are open 9am to 9pm
+      and every shift is on doors — pick the time you can start and sign up in about a minute.</span>
+    <span data-bn>সবকিছু নির্ভর করছে <b>বৃহস্পতিবার ৩ সেপ্টেম্বর</b>-এর উপর। সকাল ৯টা থেকে রাত ৯টা
+      পর্যন্ত ভোট চলবে এবং প্রতিটি শিফট দরজায় দরজায় — আপনি কখন শুরু করতে পারবেন বেছে নিন,
+      এক মিনিটেই সাইন আপ করুন।</span>
   </p>
 
   <!-- HOW IT WORKS -->
@@ -220,32 +219,6 @@
   <!-- All the shift cards. Plain block wrapper below 900px; a two-column grid
        above it. Nothing inside moves, so the reading order never changes. -->
   <div class="daygrid">
-
-  <!-- TUESDAY -->
-  <section class="card daycard">
-    <p class="when"><span data-en>Tuesday 25 August &middot; the night before voting opens</span>
-       <span data-bn>মঙ্গলবার ২৫ আগস্ট &middot; ভোট শুরুর আগের রাত</span></p>
-    <h2><span data-en>Flyer night</span><span data-bn>লিফলেট বিতরণের রাত</span></h2>
-    <p style="margin:0"><span data-en>We put a reminder on every door before advance voting opens the
-      next morning. Bring comfortable shoes; we go out in pairs.</span>
-      <span data-bn>পরদিন সকালে আগাম ভোট শুরুর আগে আমরা প্রতিটি দরজায় একটি রিমাইন্ডার পৌঁছে দিই।
-      আরামদায়ক জুতা পরে আসুন; আমরা জোড়ায় জোড়ায় যাই।</span></p>
-    <div class="slots">
-      <div class="slot">
-        <span class="time">8:00 – 10:30 pm</span>
-        <span class="note"><span data-en>Late shift — flyers on doors</span><span data-bn>রাতের শিফট — দরজায় লিফলেট</span></span>
-        <a class="go" href="#" data-shift="2026-08-25_2000_flyers"><span data-en>Sign up</span><span data-bn>সাইন আপ</span></a>
-      </div>
-      <div class="slot">
-        <span class="time">5:30 – 8:00 pm</span>
-        <span class="note"><span data-en>Earlier canvass, if the late shift is too late</span><span data-bn>রাতের শিফট দেরি হলে, আগের ক্যানভাস</span></span>
-        <a class="go alt" href="#" data-shift="2026-08-25_1730_canvass"><span data-en>Sign up</span><span data-bn>সাইন আপ</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ADVANCE POLLS: one card per day -->
-  <div id="advance-days"></div>
 
   <!-- ELECTION DAY -->
   <section class="card daycard eday">
@@ -344,22 +317,6 @@
     return FORM + "?shift=" + encodeURIComponent(id) + "&only=1&source=gotv";
   }
 
-  var ADVANCE = [
-    {date:"2026-08-26",
-     when_en:"Advance voting &middot; day 1 of 3", when_bn:"আগাম ভোট &middot; ৩ দিনের ১ম দিন",
-     day_en:"Wednesday 26 August",  day_bn:"বুধবার ২৬ আগস্ট"},
-    {date:"2026-08-27",
-     when_en:"Advance voting &middot; day 2 of 3", when_bn:"আগাম ভোট &middot; ৩ দিনের ২য় দিন",
-     day_en:"Thursday 27 August",   day_bn:"বৃহস্পতিবার ২৭ আগস্ট"},
-    {date:"2026-08-28",
-     when_en:"Advance voting &middot; last day", when_bn:"আগাম ভোট &middot; শেষ দিন",
-     day_en:"Friday 28 August",     day_bn:"শুক্রবার ২৮ আগস্ট"}
-  ];
-  var BLOCKS = [
-    {t:"1100", label:"11:00 am – 1:00 pm"},
-    {t:"1300", label:"1:00 – 3:00 pm"},
-    {t:"1730", label:"5:30 – 8:00 pm"}
-  ];
   var EDAY = [
     {t:"0800", start_en:"Start 8:00 am", start_bn:"শুরু সকাল ৮টা",  note_en:"Full day — the best shift you can give us", note_bn:"সারাদিন — সবচেয়ে বড় সাহায্য"},
     {t:"1100", start_en:"Start 11:00 am", start_bn:"শুরু সকাল ১১টা", note_en:"Through to close",  note_bn:"শেষ পর্যন্ত"},
@@ -367,39 +324,6 @@
     {t:"1600", start_en:"Start 4:00 pm",  start_bn:"শুরু বিকাল ৪টা",  note_en:"After work — the busiest stretch", note_bn:"কাজের পরে — সবচেয়ে ব্যস্ত সময়"},
     {t:"1800", start_en:"Start 6:00 pm",  start_bn:"শুরু সন্ধ্যা ৬টা", note_en:"Final push to 9pm close", note_bn:"রাত ৯টা পর্যন্ত শেষ ধাপ"}
   ];
-
-  function slot(timeHtml, noteHtml, doorsId, phonesId){
-    var el = document.createElement("div");
-    el.className = "slot";
-    el.innerHTML =
-      '<span class="time">' + timeHtml + '</span>' +
-      '<span class="note">' + noteHtml + '</span>' +
-      '<a class="go" data-shift="' + doorsId + '" href="#"><span data-en>Doors</span><span data-bn>দরজা</span></a>' +
-      '<a class="go alt" data-shift="' + phonesId + '" href="#"><span data-en>Phones</span><span data-bn>ফোন</span></a>';
-    return el;
-  }
-
-  // One card per advance-poll day, so it is unmistakable which day you are joining.
-  var wrap = document.getElementById("advance-days");
-  ADVANCE.forEach(function(d){
-    var card = document.createElement("section");
-    card.className = "card daycard advance";
-    card.innerHTML =
-      '<p class="when"><span data-en>' + d.when_en + '</span><span data-bn>' + d.when_bn + '</span></p>' +
-      '<h2><span data-en>' + d.day_en + '</span><span data-bn>' + d.day_bn + '</span></h2>' +
-      '<p style="margin:0 0 2px">' +
-        '<span data-en>Polls open 10am-8pm at 2685 Kingston Rd. Pick doors or phones - both matter.</span>' +
-        '<span data-bn>সকাল ১০টা - রাত ৮টা, ২৬৮৫ কিংস্টন রোডে ভোট চলবে। দরজা বা ফোন - দুটোই গুরুত্বপূর্ণ।</span></p>' +
-      '<div class="slots"></div>';
-    var holder = card.querySelector(".slots");
-    BLOCKS.forEach(function(b, n){
-      holder.appendChild(slot(b.label, n === 2
-        ? '<span data-en>Evening - best time to catch people in</span><span data-bn>সন্ধ্যা - মানুষকে বাসায় পাওয়ার সেরা সময়</span>'
-        : '<span data-en>&nbsp;</span><span data-bn>&nbsp;</span>',
-        d.date + "_" + b.t + "_canvass", d.date + "_" + b.t + "_phonebank"));
-    });
-    wrap.appendChild(card);
-  });
 
   // Election day is doors only — no phone bank runs that day.
   var ed = document.getElementById("eday-slots");

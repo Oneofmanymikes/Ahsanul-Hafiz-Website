@@ -12,3 +12,7 @@ _olp-donate.html
 _new_*.html
 _carousel_slides.html
 _new_wizard_js.txt
+
+# My dated backups of pages before an edit. Local safety net only -- never publish these:
+# they are complete stale copies of a live page, reachable at a guessable URL if pushed.
+*.bak-*
